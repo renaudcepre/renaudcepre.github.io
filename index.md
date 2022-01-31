@@ -1,7 +1,5 @@
 ### Renaud Cepre 🐍
 
-🐍 Python | Java ☕ | C / C++ 🧬
-
 _Currently work on a personal project, a liquid democracy website for little organizations on Django_
 
 > Initially passionate about electronic music, my steps naturally approached the digital world via sound synthesis and the realization of virtual synthesizers, especially on NI Reaktor.
