@@ -16,10 +16,10 @@ Django + DRF | ⚡ FastAPI  | 🌿  Spring | 🍃 Spring Boot |
 
 > I currently work on a liquid democracy website for little organizations on Django, that I should make public soon.
  
- - Corewar [ 42 ] - A programming game in which programs compete for control of a virtual machine.
- - Lemin [ 42 ] - Graphs and path-finding algorithms.
- - Abstract-Machine [ 42 ] - Stack-machine implementation in C++ (equivalent of the unix `dc` command) 
- - cpp-containers [ personal ] - An attempt to implement the C++ STL containers. Works, but remains a work in progress
+ - `corewar` [ 42 ] - A programming game in which programs compete for control of a virtual machine.
+ - `lemin` [ 42 ] - Graphs and path-finding algorithms.
+ - `abstract-vm` [ 42 ] - Stack-machine implementation in C++ (equivalent of the unix `dc` command) 
+ - `cpp-containers` [ personal ] - An attempt to implement the C++ STL containers. Works, but remains a work in progress
 
 
 ## Me
