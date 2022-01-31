@@ -9,9 +9,14 @@ I decided to go into software development by starting a formation at the 42 scho
 
 ## Skills 
 
-🐍 Python  | ☕ Java | 🧬 C / C++ |
+🐍 Python  | ☕ Java | 🧬 C / C++ | 🖼 Html / CSS / JS
 Django + DRF | ⚡ FastAPI  | 🌿  Spring | 🍃 Spring Boot |
-🛡 PyTest | 🐳 Docker | 💾 Git | 
+🛡 PyTest | 🐳 Docker | 💾 Git | 🐧 Linux 
+
+## Me
+
+Apart from development and computer science, I do a lot of biking, mountain biking, some climbing and skateboarding. I'm still a music lover in general, even if I do less than before since I started developing.
+You can listen to my first album on every platforms
 
 
 
