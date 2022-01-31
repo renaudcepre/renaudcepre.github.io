@@ -10,7 +10,7 @@ I decided to go into software development by starting a formation at the 42 scho
 🐍 Python  | ☕ Java | 🧬 C / C++ | 🖼 Html / CSS / JS
 Django + DRF | ⚡ FastAPI  | 🌿  Spring | 🍃 Spring Boot |
 🛡 PyTest | 🐳 Docker | 💾 Git | 🐧 Linux 
-SQL | Neo4J / Cypher | Gitlab / Gihub / Azure Devops
+📕 SQL | 🐰 Neo4J / Cypher | 📡 Gitlab / Gihub / Azure Devops
 
 ## Projects
 
