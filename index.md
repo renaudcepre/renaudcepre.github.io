@@ -10,7 +10,7 @@ I decided to go into software development by starting a formation at the 42 scho
 ## Skills 
 
 🐍 Python  | ☕ Java | 🧬 C / C++ |
-Django + DRF | ⚡ FastAPI  | 🌿  Spring | 🍃 Spring Boot 
+Django + DRF | ⚡ FastAPI  | 🌿  Spring | 🍃 Spring Boot |
 PyTest | Docker | Git | 
 
 
