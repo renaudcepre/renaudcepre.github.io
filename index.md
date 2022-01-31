@@ -11,7 +11,7 @@ I decided to go into software development by starting a formation at the 42 scho
 
 🐍 Python  | ☕ Java | 🧬 C / C++ |
 Django + DRF | ⚡ FastAPI  | 🌿  Spring | 🍃 Spring Boot |
-PyTest | Docker | Git | 
+🛡 PyTest | 🐳 Docker | 💾 Git | 
 
 
 
