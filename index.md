@@ -27,12 +27,12 @@ The following projects are mainly 42 school projects:
  - [lemin](https://gitlab.com/rcepre/lemin) - Graphs and path-finding algorithms.
  - [abstract-vm](https://gitlab.com/rcepre/abstract-vm) - Stack-machine implementation in C++ (equivalent of the unix `dc` command) 
  - [cpp-containers](https://gitlab.com/rcepre/cpp_containers) - An attempt to implement the C++ STL containers. Works, but remains a work in progress
- - [malloc](https://gitlab.com/rcepre/malloc) - A little implementationof malloc in C
+ - [malloc](https://gitlab.com/rcepre/malloc) - A little implementation of malloc in C
 
 ---
 ## 👤 Me
 
-Apart from development and computer science, I do a lot of biking, mountain biking, some climbing and skateboarding. I'm still a music lover in general, even if I do less than before since I started developing.
+Apart from development and computer science, I do a lot of cycling, mountain biking, some climbing and skateboarding. I'm still a music lover in general, even if I do less than before since I started developing.
 I also have two awesome kids, and a lot of projects. :)
 
 ---
