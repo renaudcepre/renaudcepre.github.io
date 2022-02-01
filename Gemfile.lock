@@ -225,6 +225,8 @@ GEM
     listen (3.7.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
+    louie (0.1.4)
+      jekyll (~> 3.3)
     mercenary (0.3.6)
     minima (2.5.1)
       jekyll (>= 3.5, < 5.0)
@@ -279,6 +281,7 @@ PLATFORMS
 
 DEPENDENCIES
   github-pages
+  louie
 
 BUNDLED WITH
    2.3.6
