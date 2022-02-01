@@ -16,7 +16,7 @@
   <body>
     <div class="wrapper">
       <header>
-        <h1><a href="{{ "/" | absolute_url }}">{{ site.title | default: site.github.repository_name }}</a></h1>
+        <h1><a href="{{ "/" | absolute_url }}">Renaud Cepre</a></h1>
 
         {% if site.logo %}
           <img src="{{site.logo | relative_url}}" alt="Logo" />
@@ -25,6 +25,8 @@
         <p>{{ site.description | default: site.github.project_tagline }}</p>
 
         <p class="view"><a href="{{ site.github.owner.html_url }}">Github <small>{{ site.github.owner.html_url }}</small></a></p>
+        <p class="view"><a href="https://gitlab.com/rcepre">Gitlab <small>gitlab.com/rcepre</small></a></p>
+        <p class="view"><a href="https://gitlab.com/rcepre">LinkedIn <small></small></a></p>
 
       </header>
       <section>
@@ -32,11 +34,11 @@
       {{ content }}
 
 
-          <section id="spotify">
-              <iframe src="https://open.spotify.com/embed/album/1mGBx1HDAwuovz4T2bNfTh?utm_source=generator"
-                      width="100%" height="380" frameBorder="0" allowfullscreen=""
-                      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+          <section>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?list=OLAK5uy_kQ4ZADfTY9DDmj3CIG0HkJ1DDR0TpIHbQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           </section>
+
+
 
 
       </section>
