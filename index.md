@@ -33,7 +33,6 @@ The following projects are mainly 42 school projects:
 ## 👤 Me
 
 Apart from development and computer science, I do a lot of cycling, mountain biking, some climbing and skateboarding. I'm still a music lover in general, even if I do less than before since I started developing.
-I also have two awesome kids, and a lot of projects. :)
 
 ---
 ## 🎹 Music
