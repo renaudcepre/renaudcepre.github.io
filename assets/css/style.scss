@@ -250,12 +250,20 @@ footer {
   }
 }
 
-  #links {
-    display: flex;
-    flex-direction: column;
-  }
+.links {
+  display: flex;
+  flex-direction: column;
 
+}
 
+.link {
+    margin-bottom: 20px;
+}
+
+.social-link-container {
+  display: flex;
+  flex-direction: row;
+}
 
 @media print, screen and (max-width: 720px) {
   body {
@@ -268,10 +276,20 @@ footer {
 
   .link {
     margin-right: 20px;
+
   }
 
-  #links {
+  #description {
+    text-align: center;
+  }
+
+  h1 {
+    text-align: center;
+  }
+
+  .links {
     flex-direction: row;
+    justify-content: space-around;
   }
 
 
@@ -288,17 +306,25 @@ footer {
   }
 }
 
+.logo {
+  height: 16px;
+  width: 16px;
+  margin-right: 10px;
+}
+
 @media print, screen and (max-width: 480px) {
   body {
     padding: 15px;
   }
 
-
-      .link {
+  .link {
     margin-right: 20px;
   }
 
 
+  .social-link-name {
+    display: none;
+  }
 
   .downloads {
     width: 99%;

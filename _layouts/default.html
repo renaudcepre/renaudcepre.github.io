@@ -22,18 +22,43 @@
           <img src="{{site.logo | relative_url}}" alt="Logo" />
         {% endif %}
 
-        <p>{{ site.description | default: site.github.project_tagline }}</p>
+        <p id="description">{{ site.description | default: site.github.project_tagline }}</p>
 
-        <div id="links">
-          <p class="view link"><a href="{{ site.github.owner.html_url }}">Github
-            <small class="link_display">github.com/renaudcepre</small></a>
-          </p>
-          <p class="view link"><a href="https://gitlab.com/rcepre">Gitlab
-            <small class="link_display">gitlab.com/rcepre</small></a>
-          </p>
-          <p class="view link"><a href="https://www.linkedin.com/in/renaud-cepre-060179103/">LinkedIn
-            <small class="link_display">renaud-cepre</small></a>
-          </p>
+        <div class="links">
+
+          <div class="view link">
+            <a href="{{ site.github.owner.html_url }}">
+              <div class="social-link-container">
+              <img class="logo" src="assets/img/GitHub-Mark-32px.png">
+              <div class="social-link-name">Github</div>
+              </div>
+              <small class="link_display">github.com/renaudcepre</small>
+            </a>
+          </div>
+          <div class="view link">
+            <a href="https://gitlab.com/rcepre">
+              <div class="social-link-container">
+              <img class="logo" src="assets/img/gitlab-icon-rgb.png">
+              <div class="social-link-name">Gitlab</div>
+              </div>
+              <small class="link_display">gitlab.com/rcepre</small></a>
+          </div>
+          <div class="view link">
+            <a href="https://stackoverflow.com/users/12107239/rcepre">
+              <div class="social-link-container">
+              <img class="logo" src="assets/img/logo-stackoverflow.png">
+              <div class="social-link-name">Stack Overflow</div>
+              </div>
+              <small class="link_display">stackoverflow.com/users/12107239</small></a>
+          </div>
+          <div class="view link">
+            <a href="https://www.linkedin.com/in/renaud-cepre-060179103">
+              <div class="social-link-container">
+              <img class="logo" src="assets/img/LI-In-Bug.png">
+              <div class="social-link-name"> LinkedIn</div>
+              </div>
+              <small class="link_display">renaud-cepre</small></a>
+          </div>
         </div>
       </header>
       <section>

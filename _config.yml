@@ -3,16 +3,3 @@ theme: jekyll-theme-minimal
 title: Renaud Cepre
 description: Junior Back-End Developer
 
-#show_downloads: ["true" or "false" (unquoted) to indicate whether to provide a download URL]
-#google_analytics: [Your Google Analytics tracking ID]
-
-minima:
-  date_format: "%b %-d, %Y"
-
-social_links:
-  github:  renaudcepre
-
-  linkedin: renaudcepre
-
-  gitlab:
-   - username: rcepre
