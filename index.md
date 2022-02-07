@@ -12,11 +12,12 @@ I'm constantly learning and getting better, it's one of the things I like in dev
 I'm currently improving on Python (advanced topics, threads, async ..) and Django (complex models, REST .. )
 
 **Python**  | Java | **C** / **C++** | Html / CSS / JS
-**Django + DRF** | FastAPI  | Spring | Spring Boot |
+**Django + DRF** | FastAPI  | Spring / S. Boot | Struts |
 PyTest | Docker | **Git** | **Linux** 
 SQL | Neo4J / Cypher | Gitlab / Gihub | Bash |
+REST | TDD | Devops | Vue |
 
-------
+
 ## 💡 Projects
 
 > I currently work on a [liquid democracy](https://en.wikipedia.org/wiki/Liquid_democracy) project manager for little organizations on Django, that I should make public soon.
