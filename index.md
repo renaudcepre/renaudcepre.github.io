@@ -20,7 +20,8 @@ REST | TDD | Devops | Vue |
 
 ## 💡 Projects
 
-> I currently work on a [liquid democracy](https://en.wikipedia.org/wiki/Liquid_democracy) project manager for little organizations on Django, that I should make public soon.
+> I currently work on a [liquid democracy](https://en.wikipedia.org/wiki/Liquid_democracy) project manager for little organizations on Django.
+> This project is now paused, but you can it [here](https://github.com/renaudcepre/liquidemos-api)
 
 The following projects are mainly 42 school projects:
  
