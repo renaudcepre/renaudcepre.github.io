@@ -34,9 +34,9 @@ document.addEventListener("DOMContentLoaded", function () {
     // Quand l'utilisateur clique sur "Copier", copie l'email dans le presse-papier
     copyBtn.addEventListener('click', function () {
         navigator.clipboard.writeText('renaudcepre-dev@gmail.com').then(() => {
-            alert('E-mail copié dans le presse-papier');
+            copyBtn.innerHTML = "👌"
         }).catch(err => {
-            alert('Impossible de copier l\'e-mail');
+            console.log('Impossible de copier l\'e-mail');
         });
     });
 });

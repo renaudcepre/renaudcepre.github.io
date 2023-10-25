@@ -84,10 +84,15 @@ p {
     max-width: 768px;
     margin: auto;
     padding: 20px;
+        margin-top: 64px;
 }
 
+button {
+    background-color: #fff0;
+  color: #fff;
+}
 .content {
-    margin-top: 60px;
+
 }
 
 header h1, header p {
