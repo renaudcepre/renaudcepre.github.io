@@ -23,9 +23,17 @@
     "fr": "Copier",
     "en": "Copy"
   },
-    "corewar-legend": {
+  "corewar-legend": {
     "fr": "Projet Corewar de l'école 42.",
     "en": "42 school Corewar project."
+  },
+  "audio-title": {
+    "fr": "Audio",
+    "en": "Audio"
+  },
+  "audio-text": {
+    "en": "In addition to my work as a developer, I am also a passionate musician with a focus on audio synthesis. I have hands-on experience with a variety of software including VCV Rack and Reaktor. Beyond just being a hobby, I have formal training in sound engineering and studio recording techniques, enriching my skill set and allowing me to blend technology with creativity.",
+    "fr": "En plus de mon travail en tant que développeur, je suis également un musicien passionné avec un intérêt particulier pour la synthèse audio. J'ai une expérience pratique avec divers logiciels, notamment VCV Rack et Reaktor. Au-delà d'un simple passe-temps, j'ai également une formation formelle en techniques du son en studio d'enregistrement, ce qui enrichit mon ensemble de compétences et me permet de mêler technologie et créativité."
   }
 }
 
