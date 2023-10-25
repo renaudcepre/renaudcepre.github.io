@@ -14,6 +14,26 @@ function applyFadeEffect(element, callback) {
         }, 100);
     }, 100);
 }
+let quotesData = [];
+
+function updateQuote(language) {
+    const quoteElement = document.getElementById('quote');
+    if (quotesData.length > 0) {
+        const randomIndex = Math.floor(Math.random() * quotesData.length);
+        const quoteText = quotesData[randomIndex][language];
+        applyFadeEffect(quoteElement, () => {
+            quoteElement.textContent = quoteText;
+        });
+    }
+}
+
+fetch('quotes.json')
+    .then(response => response.json())
+    .then(data => {
+        quotesData = data;
+        // updateQuote(currentLang);
+    })
+    .catch(error => console.error('Erreur lors de la récupération du fichier quotes.json:', error));
 
 document.addEventListener("DOMContentLoaded", function () {
     let translationData = {};
@@ -29,7 +49,7 @@ function translateText(language) {
         let translatedText = translationData[key][language];
         if (translatedText) {
             applyFadeEffect(element, () => {
-                element.textContent = translatedText;
+                element.innerHTML = translatedText;
             });
         }
     });
@@ -45,12 +65,15 @@ function translateText(language) {
         .then(data => {
             translationData = data;
             translateText(currentLang);
+            updateQuote(currentLang);
             updateButtonText();
+            document.body.style.opacity = '1';
         })
         .catch(error => console.error('Erreur lors de la récupération du fichier i18n.json:', error));
 
     btnToggle.addEventListener('click', function () {
         currentLang = (currentLang === 'fr') ? 'en' : 'fr';
+        updateQuote(currentLang);
         translateText(currentLang);
         updateButtonText();
     });

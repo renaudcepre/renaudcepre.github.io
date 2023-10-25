@@ -1,6 +1,6 @@
 .fade-out {
     opacity: 0;
-    transition: opacity 0.1s ease-in-out;
+    /*transition: opacity 0.1s ease-in-out;*/
 }
 
 .fade-in {
@@ -9,10 +9,9 @@
 }
 
 
-
 .text-focus-in {
-	-webkit-animation: text-focus-in 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
-	        animation: text-focus-in 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+    -webkit-animation: text-focus-in 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+    animation: text-focus-in 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
 }
 
 @-webkit-keyframes text-focus-in {
@@ -43,21 +42,21 @@
 
 
 .gradient-background {
-  background: linear-gradient(135deg,#1e1e1e, #0c2100);
-  background-size: 120% 120%;
-  animation: gradient-animation 5s ease infinite;
+    background: linear-gradient(135deg, #1e1e1e, #0c2100);
+    background-size: 120% 120%;
+    animation: gradient-animation 5s ease infinite;
 }
 
 @keyframes gradient-animation {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 .box {

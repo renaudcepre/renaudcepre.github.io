@@ -3,9 +3,20 @@
     src: url('ressources/fonts/JetBrainsMono-Regular.woff2') format('woff2');
 }
 
+.logo-in-text {
 
+    height: 1em;
+    width: auto;
+}
+
+/*.audio-logos {*/
+/*    width: 200px;*/
+/*    margin-bottom: 20px;*/
+/*}*/
 
 body {
+    opacity: 0;
+    transition: opacity 2s ease-in-out;
     font-family: 'JetBrains Mono', monospace;
     background-color: #1e1e1e;
     color: #FFFFFF;
@@ -142,4 +153,20 @@ a {
     width: 200px;
 }
 
+.audio-title-container {
+    display: flex;
+    align-items: center; /* aligne verticalement le texte et les images */
+    justify-content: space-between; /* maximise l'espace entre le titre et les logos */
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* espace entre les logos */
+}
+
+.tech-logo {
+    height: 24px;
+    width: auto;
+}
 
