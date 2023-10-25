@@ -94,20 +94,13 @@ a {
 }
 
 .float-video {
-    float: right;
-    margin-left: 20px;
-    margin-bottom: 20px;
-    width: 50%;  /* Ajustez selon vos besoins */
-    padding-top: 28%;  /* Cette valeur est pour maintenir le ratio d'aspect, ajustez selon vos besoins */
-    position: relative;
 }
 
 .float-video iframe {
-    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 400px;
 }
 
 
