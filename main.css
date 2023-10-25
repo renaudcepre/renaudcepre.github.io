@@ -3,6 +3,8 @@
     src: url('ressources/fonts/JetBrainsMono-Regular.woff2') format('woff2');
 }
 
+
+
 body {
     font-family: 'JetBrains Mono', monospace;
     background-color: #1e1e1e;
@@ -139,11 +141,5 @@ a {
     margin-right: 30px;
     width: 200px;
 }
-
-.text-container {
-    text-align: justify;
-}
-
-
 
 

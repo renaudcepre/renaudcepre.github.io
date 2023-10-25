@@ -34,6 +34,22 @@
   "audio-text": {
     "en": "In addition to my work as a developer, I am also a passionate musician with a focus on audio synthesis. I have hands-on experience with a variety of software including VCV Rack and Reaktor. Beyond just being a hobby, I have formal training in sound engineering and studio recording techniques, enriching my skill set and allowing me to blend technology with creativity.",
     "fr": "En plus de mon travail en tant que développeur, je suis également un musicien passionné avec un intérêt particulier pour la synthèse audio. J'ai une expérience pratique avec divers logiciels, notamment VCV Rack et Reaktor. Au-delà d'un simple passe-temps, j'ai également une formation formelle en techniques du son en studio d'enregistrement, ce qui enrichit mon ensemble de compétences et me permet de mêler technologie et créativité."
+  },
+  "freelance-title": {
+    "fr": "Freelance",
+    "en": "Freelance"
+  },
+  "freelance-text": {
+    "fr": "Je suis disponible pour des missions en freelance. Vous pouvez me retrouver sur Malt où mon profil est à votre disposition pour plus de détails. Je propose des services de développement pour des durées variées, qu'il s'agisse de projets courts ou à long terme. Mon expertise s'étend du backend en Python, C et C++, aux architectures complexes et à la maintenance de systèmes. Si votre projet nécessite une solution full-stack, cette option est également envisageable. N'hésitez pas à me contacter pour un accompagnement professionnel sur vos projets.",
+    "en": "I am available for freelance gigs. You can find me on Malt where my profile provides further details about my skills and services. I offer development services for both short-term and long-term projects. My expertise spans from backend development in Python, C, and C++, to intricate architecture and system maintenance. If your project requires a full-stack solution, that is also an option. Feel free to reach out for professional guidance on your projects."
+  },
+  "experience-title": {
+    "fr": "Experience",
+    "en": "Experience"
+  },
+  "experience-text": {
+    "fr": "Fort d'une expérience variée, j'ai travaillé en tant que développeur back-end avec le Groupe Bernard et le Groupe Charles Andre, principalement sur des projets Java en logistique et gestion d'entreprise. Chez Markem-Imaje, j'ai endossé le rôle d'architecte, concevant une infrastructure de tests fonctionnels complexes en Python, ainsi qu'une API REST pour le monitoring des usages CPU/RAM sur des machines externes. J'ai également contribué à la maintenance, l'optimisation et la mise à jour d'une base de code en C++. Parallèlement à ces expériences professionnelles, j'ai travaillé sur des projets personnels, qui m'ont permis de me familiariser en profondeur avec Django, FastAPI, la base de données Neo4J, NuxtJS et Docker, entre autres.",
+    "en": "With a diverse range of experience, I've worked as a back-end developer with Groupe Bernard and Groupe Charles Andre, primarily focusing on Java projects in logistics and enterprise management. At Markem-Imaje, I took on the role of architect, designing a complex functional testing infrastructure in Python, as well as a REST API for monitoring CPU/RAM usage on external hardware. I've also contributed to the maintenance, optimization, and updating of a C++ codebase. Alongside these professional experiences, I have worked on personal projects that have deepened my familiarity with Django, FastAPI, the Neo4J database, NuxtJS, and Docker, among others."
   }
 }
 
