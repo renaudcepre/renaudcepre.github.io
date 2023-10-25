@@ -3,12 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title>Renaud Cepre</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="main.css">
     <link rel="stylesheet" type="text/css" href="animations.css">
+    <link rel="stylesheet" type="text/css" href="email.css  ">
     <script src="i18n.js" defer></script>
+    <script src="email.js" defer></script>
 </head>
 
-<body>
+<body class="gradient-background">
+
+
+<div id="emailModal" class="modal">
+    <div class="modal-content">
+        <div class="close" id="closeModal">&times;</div>
+        <p>renaudcepre-dev@gmail.com</p>
+        <button id="copyEmail" data-translate-key="copy"></button>
+    </div>
+</div>
+
 <div class="main-content text-focus-in">
 
     <header>
@@ -16,7 +29,17 @@
             <h1>Renaud Cepre</h1>
             <button id="toggle-translate"></button>
         </div>
-        <p data-translate-key="subtitle"></p>
+        <div class="subtitle-flex">
+            <p data-translate-key="subtitle"></p>
+            <div class="icon-container">
+                <a href="https://github.com/renaudcepre" target="_blank" rel="noopener">
+                    <img src="ressources/images/github-mark-white.svg" alt="github">
+                </a>
+                <a id="showEmail">
+                    <img src="ressources/images/email-svgrepo-com.svg" alt="email">
+                </a>
+            </div>
+        </div>
     </header>
 
 
@@ -41,13 +64,17 @@
 
 
         <!--EDUCATION-->
-        <h2 data-translate-key="education-title"></h2>
+        <div class="box">
+            <h2 data-translate-key="education-title"></h2>
 
-        <div class="text-container">
-            <img alt="" class="school-logo float-image" src="ressources/images/42_Logo.svg">
-            <p data-translate-key="education-text">
-
-            </p>
+            <div class="text-container">
+                <img alt="" class="school-logo float-image" src="ressources/images/42_Logo.svg">
+                <div class="float-video">
+                    <iframe src="https://www.youtube.com/embed/J5r7GInOLNQ?rel=0&amp;controls=0&amp;showinfo=0&amp;modestbranding=1&amp;autoplay=1&amp;mute=1"
+                            allowfullscreen></iframe>
+                </div>
+                <p data-translate-key="education-text"></p>
+            </div>
         </div>
 
 

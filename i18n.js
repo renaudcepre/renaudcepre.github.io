@@ -37,7 +37,7 @@ function translateText(language) {
 
 
     function updateButtonText() {
-        btnToggle.textContent = (currentLang === 'fr') ? 'EN' : 'FR';
+        btnToggle.textContent = (currentLang === 'fr') ? 'FR' : 'EN';
     }
 
     fetch('i18n.json')
