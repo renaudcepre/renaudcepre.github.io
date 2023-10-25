@@ -22,5 +22,10 @@
   "copy": {
     "fr": "Copier",
     "en": "Copy"
+  },
+    "corewar-legend": {
+    "fr": "Projet Corewar de l'école 42.",
+    "en": "42 school Corewar project."
   }
 }
+

@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let browserLang = navigator.language.substr(0, 2).toLowerCase();
     let currentLang = ['fr', 'en'].includes(browserLang) ? browserLang : 'en';
 
-    const btnToggle = document.getElementById('toggle-translate');  // Déplacé ici
+    const btnToggle = document.getElementById('toggle-translate');
 
 function translateText(language) {
     document.querySelectorAll('[data-translate-key]').forEach(element => {
