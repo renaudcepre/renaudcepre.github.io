@@ -3,10 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <title>Renaud Cepre</title>
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <link rel="stylesheet" type="text/css" href="animations.css">
+    <script src="i18n.js" defer></script>
 </head>
+
 <body>
+<div class="main-content text-focus-in">
+
+    <header>
+        <div class="header-flex">
+            <h1>Renaud Cepre</h1>
+            <button id="toggle-translate"></button>
+        </div>
+        <p data-translate-key="subtitle"></p>
+    </header>
 
 
-Hey, I'm Renaud !
+    <div class="content">
+
+        <!--SKILLS-->
+        <div class="box">
+            <h2 data-translate-key="skills-title"></h2>
+
+            <div class="tech-logos">
+                <img alt="" class="tech-logo" src="ressources/images/python-logo-only.svg">
+                <img alt="" class="tech-logo" src="ressources/images/C_Programming_Language.svg">
+                <img alt="" class="tech-logo" src="ressources/images/C++_Programming_Language.svg">
+                <img alt="" class="tech-logo" src="ressources/images/Git-Icon-1788C.svg">
+                <img alt="" class="tech-logo" src="ressources/images/github-mark-white.svg">
+                <img alt="" class="tech-logo" src="ressources/images/04-symbol_light-blue-docker-logo.svg">
+                <img alt="" class="tech-logo" src="ressources/images/sql.svg">
+            </div>
+
+            <p data-translate-key="skills-text"></p>
+        </div>
+
+
+        <!--EDUCATION-->
+        <h2 data-translate-key="education-title"></h2>
+
+        <div class="text-container">
+            <img alt="" class="school-logo float-image" src="ressources/images/42_Logo.svg">
+            <p data-translate-key="education-text">
+
+            </p>
+        </div>
+
+
+    </div>
+</div>
 </body>
 </html>
+

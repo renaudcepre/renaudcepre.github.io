@@ -1,8 +1,84 @@
 @font-face {
-  font-family: 'JetBrains Mono';
-  src: url('ressources/JetBrainsMono-Regular.woff2') format('woff2');
+    font-family: 'JetBrains Mono';
+    src: url('ressources/fonts/JetBrainsMono-Regular.woff2') format('woff2');
 }
 
 body {
-  font-family: 'JetBrains Mono', monospace;
+    font-family: 'JetBrains Mono', monospace;
+    background-color: #1e1e1e;
+    color: #FFFFFF;
+    font-size: 1.2em;
 }
+.header-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+p {
+    text-align: justify;
+
+}
+.main-content {
+    max-width: 768px;
+    margin: auto;
+    padding: 20px;
+}
+
+header h1, header p {
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    padding-bottom: 20px;
+    border-bottom: 1px solid #FFFFFF; /* Choisir la couleur qui te convient */
+}
+
+h2::before {
+    content: "> ";
+}
+
+.tech-logos {
+    display: flex;
+    justify-content: space-between; /* ou space-around pour un espacement égal de tous les côtés */
+    align-items: center; /* pour centrer verticalement */
+    width: 100%; /* utilise toute la largeur disponible */
+}
+
+.tech-logo {
+    max-width: 30px;
+    height: auto;
+}
+
+.school-logo {
+    max-width: 80px;
+    height: auto;
+}
+
+a {
+    color: antiquewhite;
+    text-decoration: None;
+}
+
+.prompt::before {
+    content: "$ ";
+    color: #00FF00;
+}
+
+
+.float-image {
+    float: left;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    margin-right: 30px;
+    width: 200px;
+}
+
+.text-container {
+    text-align: justify;
+}
+
+
+
+
