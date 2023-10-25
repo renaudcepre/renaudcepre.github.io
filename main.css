@@ -96,6 +96,10 @@ h2::before {
     height: auto;
 }
 
+#showEmail:hover {
+    cursor: pointer;
+}
+
 .school-logo {
     max-width: 80px;
     height: auto;
