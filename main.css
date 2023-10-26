@@ -180,6 +180,18 @@ a {
     }
 }
 
+.footer p {
+    font-size: 0.6em !important;
+    text-align: right;
+}
+
+.footer {
+    border-top: white 1px solid;
+    margin-top: 30px;
+
+
+}
+
 
 .text-legend {
     font-size: 0.6em;
