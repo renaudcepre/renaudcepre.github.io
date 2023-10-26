@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="email.css  ">
     <script src="i18n.js" defer></script>
     <script src="email.js" defer></script>
+    <script src="youtube.js" defer></script>
 </head>
 
 <body class="gradient-background">
@@ -100,8 +101,7 @@
 
             <!-- YOUTUBE COREWAR -->
             <div class="float-video">
-                <iframe src="https://www.youtube.com/embed/J5r7GInOLNQ?rel=0&amp;controls=0&amp;showinfo=0&amp;modestbranding=1&amp;autoplay=1&amp;mute=1"
-                        allowfullscreen></iframe>
+                <div id="video1"></div>
                 <p data-translate-key="corewar-legend" class="text-legend"></p>
             </div>
         </div>
@@ -120,7 +120,7 @@
                     </a>
                 </div>
             </div>
-
+            <div is="test"></div>
 
             <!-- SOUNDCLOUD -->
             <iframe width="100%" height="100" allow="autoplay"
@@ -134,10 +134,9 @@
 
             <p data-translate-key="audio-text"></p>
             <!-- YOUTUBE VCV RACK -->
-            <div class="float-video">
-                <iframe src="https://www.youtube.com/embed/tjgnPGscfCk?rel=0&amp;controls=0&amp;showinfo=0&amp;modestbranding=1&amp;autoplay=1&amp;mute=1"
-                        allowfullscreen></iframe>
-            </div>
+                <div class="float-video">
+                    <div id="video2"></div>
+                </div>
         </div>
 
 
