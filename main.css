@@ -1,14 +1,10 @@
+/* ----------- FONTS --------------*/
 @font-face {
     font-family: 'JetBrains Mono';
     src: url('ressources/fonts/JetBrainsMono-Regular.woff2') format('woff2');
 }
 
-.logo-in-text {
-
-    height: 1em;
-    width: auto;
-}
-
+/* ----------- GLOBAL --------------*/
 body {
     opacity: 0;
     transition: opacity 2s ease-in-out;
@@ -18,11 +14,92 @@ body {
     font-size: 1.2em;
 }
 
+.box {
+    padding: 1em;
+}
+
+@media (max-width: 850px) {
+    .main-content {
+        margin-top: 100px !important;
+    }
+}
+
+.main-content {
+    max-width: 768px;
+    padding: 20px;
+    margin: 64px auto auto;
+}
+
+button {
+    background-color: #fff0;
+    color: #fff;
+}
+
+.content {
+
+}
+
+/* ----------- TEXT --------------*/
+p {
+    text-align: justify;
+
+}
+
+a {
+    color: antiquewhite;
+    text-decoration: None;
+}
+
+.prompt::before {
+    content: "$ ";
+    color: #00FF00;
+}
+
+
 h1, h2 {
     color: #fff;
     text-shadow: 0 0 7px #888888,
     0 0 151px #0fa;
 }
+
+.logo-in-text {
+
+    height: 1em;
+    width: auto;
+}
+
+h2::before {
+    content: "> ";
+}
+
+.text-legend {
+    font-size: 0.5em;
+    text-align: right;
+
+}
+
+.audio-title-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.text-light {
+    font-style: italic;
+    color: #4c8513;
+}
+
+#quote {
+    text-transform: lowercase;
+}
+
+@media (max-width: 850px) {
+    .text-legend {
+        text-align: center !important;
+    }
+}
+
+/* ----------- HEADER --------------*/
 
 .header-flex {
     display: flex;
@@ -35,8 +112,43 @@ h1, h2 {
     align-items: center;
 }
 
-.icon-container {
+
+.icon-link-container {
     margin: auto;
+}
+
+.icon-link-container img {
+    margin-left: 10px;
+    height: 30px;
+    width: 30px;
+}
+
+header h1, header p {
+    margin: 0;
+    padding: 0;
+}
+
+.header-container {
+    max-width: 768px;
+    margin: auto; /* Centrage horizontal */
+    border-bottom: 1px solid #FFFFFF;
+    background-color: rgba(30, 30, 30, 0.95);
+}
+
+header {
+
+    margin-left: auto;
+    margin-bottom: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+
+}
+
+#showEmail:hover {
+    cursor: pointer;
 }
 
 @media (max-width: 850px) {
@@ -51,87 +163,26 @@ h1, h2 {
         text-align: center;
     }
 
-    .icon-container {
+    .icon-link-container {
         margin-top: 10px;
     }
 
-    .icon-container img {
+    .icon-link-container img {
         height: 20px;
         width: 20px;
     }
 
-    .main-content {
-        margin-top: 60px !important;
-    }
-
-    .text-legend {
-        text-align: center !important;
-    }
-}
-
-.icon-container img {
-    margin-left: 10px;
-    height: 30px;
-    width: 30px;
-}
-
-
-p {
-    text-align: justify;
 
 }
 
-.main-content {
-    max-width: 768px;
-    margin: auto;
-    padding: 20px;
-    margin-top: 64px;
-}
+/* ----------- LOGOS / IMG --------------*/
 
-button {
-    background-color: #fff0;
-    color: #fff;
-}
-
-.content {
-
-}
-
-header h1, header p {
-    margin: 0;
-    padding: 0;
-}
-
-.header-container {
-    max-width: 768px;
-    margin: auto; /* Centrage horizontal */
-    border-bottom: 1px solid #FFFFFF;
-    background-color: #1e1e1e;
-}
-
-header {
-
-    margin-left: auto;
-    margin-bottom: 20px;
-    /*padding-: 20px;*/
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 999; /* pour s'assurer que le header est au-dessus des autres éléments */
-
-}
-
-
-h2::before {
-    content: "> ";
-}
 
 .tech-logos {
     display: flex;
-    justify-content: space-between; /* ou space-around pour un espacement égal de tous les côtés */
-    align-items: center; /* pour centrer verticalement */
-    width: 100%; /* utilise toute la largeur disponible */
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
 }
 
 .tech-logo {
@@ -139,24 +190,33 @@ h2::before {
     height: auto;
 }
 
-#showEmail:hover {
-    cursor: pointer;
-}
 
 .school-logo {
     max-width: 80px;
     height: auto;
 }
 
-a {
-    color: antiquewhite;
-    text-decoration: None;
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
 }
 
-.prompt::before {
-    content: "$ ";
-    color: #00FF00;
+.tech-logo {
+    height: 24px;
+    width: auto;
 }
+
+.float-image {
+    float: left;
+    margin-bottom: 10px;
+    margin-right: 30px;
+    width: 200px;
+}
+
+/* ----------- VIDEOS --------------*/
+
 
 .float-video {
     display: flex;
@@ -180,6 +240,9 @@ a {
     }
 }
 
+
+/* ----------- FOOTER --------------*/
+
 .footer p {
     font-size: 0.6em !important;
     text-align: right;
@@ -188,39 +251,9 @@ a {
 .footer {
     border-top: white 1px solid;
     margin-top: 30px;
-
-
 }
 
 
-.text-legend {
-    font-size: 0.6em;
-    text-align: right;
 
-}
 
-.float-image {
-    float: left;
-    margin-right: 10px;
-    margin-bottom: 10px;
-    margin-right: 30px;
-    width: 200px;
-}
-
-.audio-title-container {
-    display: flex;
-    align-items: center; /* aligne verticalement le texte et les images */
-    justify-content: space-between; /* maximise l'espace entre le titre et les logos */
-}
-
-.logo-container {
-    display: flex;
-    align-items: center;
-    gap: 20px; /* espace entre les logos */
-}
-
-.tech-logo {
-    height: 24px;
-    width: auto;
-}
 

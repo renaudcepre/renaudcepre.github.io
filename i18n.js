@@ -1,9 +1,9 @@
 
 function applyFadeEffect(element, callback) {
+    console.log("apply")
     element.classList.add('fade-out');
 
     setTimeout(() => {
-        // Appliquer la mise à jour du texte ou autres choses
         callback();
 
         element.classList.remove('fade-out');
@@ -18,14 +18,20 @@ let quotesData = [];
 
 function updateQuote(language) {
     const quoteElement = document.getElementById('quote');
+    const quoteAuthorElement = document.getElementById('quote-author');
     if (quotesData.length > 0) {
         const randomIndex = Math.floor(Math.random() * quotesData.length);
-        const quoteText = quotesData[randomIndex][language];
+        const quoteData = quotesData[randomIndex];
+        const quoteText = quoteData["quote"];
+        const quoteAuthor = quoteData["author"] || "";  // utiliser une chaîne vide si "author" est indéfini
+
         applyFadeEffect(quoteElement, () => {
             quoteElement.textContent = quoteText;
+            quoteAuthorElement.textContent = quoteAuthor ? quoteAuthor : ""; // Ajoute une virgule seulement si l'auteur existe
         });
     }
 }
+
 
 fetch('quotes.json')
     .then(response => response.json())
@@ -73,7 +79,6 @@ function translateText(language) {
 
     btnToggle.addEventListener('click', function () {
         currentLang = (currentLang === 'fr') ? 'en' : 'fr';
-        updateQuote(currentLang);
         translateText(currentLang);
         updateButtonText();
     });
