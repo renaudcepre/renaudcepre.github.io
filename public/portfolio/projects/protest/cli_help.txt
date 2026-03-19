@@ -1,0 +1,37 @@
+usage: protest run [-h] [--app-dir APP_DIR] [-n N] [--collect-only]
+                     [-x] [-s] [-q] [-v] [--lf] [--cache-clear]
+                     [-t TAGS] [--no-tag TAG] [-k KW]
+                     [--no-color] [--ctrf-output PATH] target
+
+Run tests
+
+positional arguments:
+  target                module:session (e.g. 'demo:session')
+
+options:
+  -n, --concurrency    Number of concurrent tests (default: 1)
+  --collect-only        Only list tests, don't run them
+  -x, --exitfirst      Exit after first failure
+  -s, --no-capture     Show print output
+  -q, --quiet          Progress bar only
+  -v, --verbose        -v lifecycle, -vv fixtures
+
+cache:
+  --lf                  Re-run only last failed tests
+  --cache-clear         Clear cache before run
+
+tag-filter:
+  -t, --tag TAG        Include tag (OR logic, repeatable)
+  --no-tag TAG          Exclude tag
+
+keyword-filter:
+  -k, --keyword KW     Match pattern (OR logic, repeatable)
+
+rich-reporter:
+  --no-color            Plain ASCII output
+
+ctrf:
+  --ctrf-output PATH    JSON report for CI/CD
+
+log-file:
+  --no-log-file         Disable .protest/last_run.log

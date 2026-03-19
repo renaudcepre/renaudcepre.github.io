@@ -1,41 +1,4 @@
-filename: projects/protest/cli_help.ansi
-lang: ansi
+filename: projects/protest/cli_help.txt
+lang: txt
 order: 10
-content: |
-  \e[1musage:\e[0m protest run \e[90m[-h]\e[0m \e[90m[--app-dir APP_DIR]\e[0m \e[90m[-n N]\e[0m \e[90m[--collect-only]\e[0m
-                       \e[90m[-x] [-s] [-q] [-v] [--lf] [--cache-clear]\e[0m
-                       \e[90m[-t TAGS] [--no-tag TAG] [-k KW]\e[0m
-                       \e[90m[--no-color] [--ctrf-output PATH]\e[0m \e[33mtarget\e[0m
-
-  \e[1mRun tests\e[0m
-
-  \e[1;32mpositional arguments:\e[0m
-    \e[33mtarget\e[0m                module:session \e[90m(e.g. 'demo:session')\e[0m
-
-  \e[1;32moptions:\e[0m
-    \e[36m-n\e[0m, \e[36m--concurrency\e[0m    Number of concurrent tests \e[90m(default: 1)\e[0m
-    \e[36m--collect-only\e[0m        Only list tests, don't run them
-    \e[36m-x\e[0m, \e[36m--exitfirst\e[0m      Exit after first failure
-    \e[36m-s\e[0m, \e[36m--no-capture\e[0m     Show print output
-    \e[36m-q\e[0m, \e[36m--quiet\e[0m          Progress bar only
-    \e[36m-v\e[0m, \e[36m--verbose\e[0m        -v lifecycle, -vv fixtures
-
-  \e[1;32mcache:\e[0m
-    \e[36m--lf\e[0m                  Re-run only last failed tests
-    \e[36m--cache-clear\e[0m         Clear cache before run
-
-  \e[1;32mtag-filter:\e[0m
-    \e[36m-t\e[0m, \e[36m--tag\e[0m TAG        Include tag \e[90m(OR logic, repeatable)\e[0m
-    \e[36m--no-tag\e[0m TAG          Exclude tag
-
-  \e[1;32mkeyword-filter:\e[0m
-    \e[36m-k\e[0m, \e[36m--keyword\e[0m KW     Match pattern \e[90m(OR logic, repeatable)\e[0m
-
-  \e[1;32mrich-reporter:\e[0m
-    \e[36m--no-color\e[0m            Plain ASCII output
-
-  \e[1;32mctrf:\e[0m
-    \e[36m--ctrf-output\e[0m PATH    JSON report for CI/CD
-
-  \e[1;32mlog-file:\e[0m
-    \e[36m--no-log-file\e[0m         Disable .protest/last_run.log
+path: /portfolio/projects/protest/cli_help.txt

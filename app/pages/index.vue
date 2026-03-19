@@ -1,19 +1,26 @@
 <script setup lang="ts">
 import { C } from '~/utils/portfolio'
 
-const { fileList, filesMap } = usePortfolioFiles()
+const { fileList, filesMap, loadContent } = usePortfolioFiles()
 
 const activeFile = ref('README.md')
 const openTabs = ref(['README.md'])
 const showNetrw = ref(true)
 const loaded = ref(false)
 
-function openFile(name: string) {
+async function openFile(name: string) {
   activeFile.value = name
   if (!openTabs.value.includes(name)) {
     openTabs.value = [...openTabs.value, name]
   }
+  await loadContent(name)
 }
+
+watch(fileList, async (list) => {
+  if (list.length) {
+    await loadContent('README.md')
+  }
+}, { immediate: true })
 
 onMounted(() => {
   loaded.value = true

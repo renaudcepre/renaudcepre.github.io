@@ -1,18 +1,4 @@
 filename: projects/protest/architecture.txt
 lang: txt
 order: 9
-content: |
-  ProTest -- Architecture (Hexagonal)
-
-       Adapters            Ports              Domain
-    ┌───────────┐    ┌─────────────┐    ┌──────────────┐
-    │ CLI       │───>│ run_session │───>│ Session      │
-    │ Loader    │───>│ collect     │───>│  └ Suite     │
-    │ Reporters │<───│ EventBus    │<───│    └ Runner  │
-    └───────────┘    └─────────────┘    └──────────────┘
-
-  Scope = where you bind, not how you decorate.
-
-    session.bind(fx)  =>  lives for the session
-    suite.bind(fx)    =>  lives for the suite
-    (no bind)         =>  fresh each test
+path: /portfolio/projects/protest/architecture.txt

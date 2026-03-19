@@ -1,48 +1,4 @@
 filename: projects/protest/README.md
 lang: md
 order: 7
-content: |
-  # ProTest
-
-  > Async-first testing framework for Python 3.10+
-  > Explicit DI, native concurrency, smart scoping.
-
-  ```bash
-  $ pip install protest
-  $ protest run tests:session -n 4
-  ```
-
-  ## Why
-
-  On discutait souvent avec un collegue du cote
-  un peu magique de pytest. On adore le framework,
-  mais les fixtures resolues par nom, pas de types,
-  pas de Ctrl+Click.
-
-  J'avais envie d'un truc plus declaratif, plus
-  proche de ce que FastAPI fait avec la DI.
-
-  ## Ce que j'ai appris
-
-  Le projet a vite grossi. Pools de threads,
-  async exit stacks, bus d'evenements, scoping
-  en arbre... C'est de l'async bas niveau qu'on
-  touche jamais quand on fait des APIs.
-
-
-  ## Benchmarks
-
-  Pour valider le truc, j'ai re-code une grosse partie des suites
-  de tests de pydantic, httpx et starlette avec
-  ProTest. Resultat : sur httpx et starlette,
-  les tests passent 20 a 30% plus vite que les
-  suites officielles, grace a l'async natif.
-
-  ## Ou ca en est
-
-  v0.1.0 alpha. L'archi est modulaire, on peut
-  ecrire des plugins proprement. J'ai un reporter
-  WebSocket temps reel et un plugin PyCharm
-  en cours.
-
-  > https://github.com/renaudcepre/protest
+path: /portfolio/projects/protest/README.md
