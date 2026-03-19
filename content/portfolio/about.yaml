@@ -1,0 +1,37 @@
+filename: about.py
+lang: py
+order: 2
+content: |
+  """Senior Python/Backend Developer."""
+
+
+  from dataclasses import dataclass, field
+
+
+  @dataclass
+  class Developer:
+      name: str = "Renaud"
+      location: str = "Dieulefit, Drome, France"
+      role: str = "Senior Python/Backend Developer"
+      experience: str = "6+ years"
+
+      passions: list[str] = field(default_factory=lambda: [
+          "Scalable backend architectures",
+          "Electronic music production",
+          "Open source tooling",
+          "Local-first, privacy-respecting software",
+      ])
+
+      currently_building: dict[str, str] = field(
+          default_factory=lambda: {
+              "ProTest": "Modern Python testing framework",
+              "Antres 808": "Electronic / bass music project",
+              "Nabu": "AI-powered answer engine",
+          }
+      )
+
+      def __repr__(self) -> str:
+          return f"<{self.name} | {self.role}>"
+
+
+  me = Developer()

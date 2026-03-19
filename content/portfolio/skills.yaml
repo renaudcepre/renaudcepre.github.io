@@ -1,0 +1,45 @@
+filename: skills.py
+lang: py
+order: 3
+content: |
+  """Technical stack & expertise."""
+
+
+  LANGUAGES: dict[str, str] = {
+      "Python":     "████████████████████  Expert",
+      "C/C++":      "████████████░░░░░░░░  Familiar",
+      "TypeScript": "██████████░░░░░░░░░░  Proficient",
+      "SQL":        "████████████████░░░░  Advanced",
+  }
+
+  BACKEND: list[str] = [
+      "FastAPI",
+      "Celery",
+      "Pydantic",
+      "Alembic",
+      "SQLAlchemy",
+  ]
+
+  INFRASTRUCTURE: list[str] = [
+      "Docker",
+      "Kubernetes",
+      "AWS (AmazonMQ, ECS, S3)",
+      "RabbitMQ",
+      "PostgreSQL",
+      "Redis",
+  ]
+
+  AI_AND_LLM: list[str] = [
+      "LLM integration & RAG pipelines",
+      "vLLM serving (Qwen, etc.)",
+      "Pydantic AI",
+      "ChromaDB",
+      "LM Studio",
+  ]
+
+  TOOLING: list[str] = [
+      "Neovim",
+      "Git",
+      "Linux",
+      "CI/CD (GitHub Actions)",
+  ]

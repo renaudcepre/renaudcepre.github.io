@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import { C, FONT, FILES } from '~/utils/portfolio'
+import { C, FONT } from '~/utils/portfolio'
 
 const props = defineProps<{
   file: string
+  filesMap: Record<string, { lang: string, content: string }>
 }>()
 
-const data = computed(() => FILES[props.file])
+const data = computed(() => props.filesMap[props.file])
 const lines = computed(() => data.value?.content.split('\n') ?? [])
 const emptyRows = computed(() => Math.max(0, 40 - lines.value.length))
 </script>

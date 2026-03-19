@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import { C, FONT, FILES } from '~/utils/portfolio'
+import { C, FONT } from '~/utils/portfolio'
 
 const props = defineProps<{
   file: string
+  filesMap: Record<string, { lang: string, content: string }>
 }>()
 
-const data = computed(() => FILES[props.file])
+const data = computed(() => props.filesMap[props.file])
 const lineCount = computed(() => data.value ? data.value.content.split('\n').length : 0)
 const langLabel = computed(() => data.value?.lang === 'py' ? 'python' : 'markdown')
 </script>

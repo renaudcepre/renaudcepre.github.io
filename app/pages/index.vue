@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { C } from '~/utils/portfolio'
 
+const { fileList, filesMap } = usePortfolioFiles()
+
 const activeFile = ref('README.md')
 const openTabs = ref(['README.md'])
 const showNetrw = ref(true)
@@ -54,13 +56,14 @@ onMounted(() => {
       <Netrw
         :active-file="activeFile"
         :visible="showNetrw"
+        :file-list="fileList"
         @select="openFile"
       />
       <div :style="{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden' }">
-        <EditorPane :file="activeFile" />
+        <EditorPane :file="activeFile" :files-map="filesMap" />
       </div>
     </div>
-    <StatusLine :file="activeFile" />
+    <StatusLine :file="activeFile" :files-map="filesMap" />
     <TmuxBar />
   </div>
 </template>

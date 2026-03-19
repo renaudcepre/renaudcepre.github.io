@@ -1,0 +1,28 @@
+filename: projects/protest.py
+lang: py
+order: 7
+content: |
+  """ProTest -- Modern Python testing framework."""
+
+
+  from dataclasses import dataclass, field
+
+
+  @dataclass
+  class Project:
+      name: str = "ProTest"
+      description: str = "Modern Python testing framework"
+      stack: list[str] = field(default_factory=lambda: [
+          "Python",
+          "AST manipulation",
+          "Plugin architecture",
+      ])
+      status: str = "In development"
+      goals: list[str] = field(default_factory=lambda: [
+          "Simpler test discovery",
+          "Better assertion introspection",
+          "First-class async support",
+      ])
+
+
+  protest = Project()

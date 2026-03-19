@@ -1,30 +1,74 @@
 <script setup lang="ts">
-import { C, FONT, FILE_LIST } from '~/utils/portfolio'
+import { C, FONT } from '~/utils/portfolio'
 
-defineProps<{
+const props = defineProps<{
   activeFile: string
   visible: boolean
+  fileList: string[]
 }>()
 
 const emit = defineEmits<{
   select: [name: string]
 }>()
 
-const hoveredFile = ref<string | null>(null)
+const hoveredEntry = ref<string | null>(null)
+const currentDir = ref('')
 
-const netrwLines = [
+const netrwPath = computed(() => `~/portfolio/${currentDir.value}`)
+
+const netrwLines = computed(() => [
   { t: '" ============================================', c: C.comment },
-  { t: '"   netrw v173: ~/portfolio', c: C.comment },
+  { t: `"   netrw v173: ${netrwPath.value}`, c: C.comment },
   { t: '"   Sorted by      name', c: C.comment },
   { t: '"   Sort sequence:  [\\/]$,\\<core\\%', c: C.comment },
   { t: '"   Quick Help: <F1>:help  -:go up', c: C.comment },
-  { t: '" ============================================', c: C.comment },
-  { t: '../', c: C.cyan }
-]
+  { t: '" ============================================', c: C.comment }
+])
 
-function fileBackground(file: string, isActive: boolean): string {
-  if (isActive) return C.blue
-  if (hoveredFile.value === file) return C.visual
+const entries = computed(() => {
+  const dirs = new Set<string>()
+  const files: string[] = []
+  const prefix = currentDir.value
+
+  for (const f of props.fileList) {
+    if (!f.startsWith(prefix)) continue
+    const rest = f.slice(prefix.length)
+    const slashIdx = rest.indexOf('/')
+    if (slashIdx !== -1) {
+      dirs.add(rest.slice(0, slashIdx + 1))
+    } else {
+      files.push(rest)
+    }
+  }
+
+  return [
+    ...Array.from(dirs).sort(),
+    ...files.sort()
+  ]
+})
+
+function handleClick(entry: string) {
+  if (entry === '../') {
+    const parts = currentDir.value.slice(0, -1).split('/')
+    parts.pop()
+    currentDir.value = parts.length ? parts.join('/') + '/' : ''
+  } else if (entry.endsWith('/')) {
+    currentDir.value += entry
+  } else {
+    emit('select', currentDir.value + entry)
+  }
+}
+
+function entryColor(entry: string): string {
+  if (entry === '../' || entry.endsWith('/')) return C.cyan
+  const fullPath = currentDir.value + entry
+  return fullPath === props.activeFile ? C.bg : C.fg
+}
+
+function entryBackground(entry: string): string {
+  const fullPath = currentDir.value + entry
+  if (fullPath === props.activeFile) return C.blue
+  if (hoveredEntry.value === entry) return C.visual
   return 'transparent'
 }
 </script>
@@ -53,20 +97,34 @@ function fileBackground(file: string, isActive: boolean): string {
       {{ l.t }}
     </div>
     <div
-      v-for="f in FILE_LIST"
-      :key="f"
       :style="{
         padding: '0 10px',
         cursor: 'pointer',
         whiteSpace: 'pre',
-        color: f === activeFile ? C.bg : C.fg,
-        background: fileBackground(f, f === activeFile),
+        color: C.cyan,
+        background: hoveredEntry === '../' ? C.visual : 'transparent',
       }"
-      @click="emit('select', f)"
-      @mouseenter="hoveredFile = f"
-      @mouseleave="hoveredFile = null"
+      @click="handleClick('../')"
+      @mouseenter="hoveredEntry = '../'"
+      @mouseleave="hoveredEntry = null"
     >
-      {{ f }}
+      ../
+    </div>
+    <div
+      v-for="entry in entries"
+      :key="entry"
+      :style="{
+        padding: '0 10px',
+        cursor: 'pointer',
+        whiteSpace: 'pre',
+        color: entryColor(entry),
+        background: entryBackground(entry),
+      }"
+      @click="handleClick(entry)"
+      @mouseenter="hoveredEntry = entry"
+      @mouseleave="hoveredEntry = null"
+    >
+      {{ entry }}
     </div>
     <div
       v-for="i in 30"

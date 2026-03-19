@@ -1,0 +1,34 @@
+filename: music.py
+lang: py
+order: 4
+content: |
+  """Antres 808 -- Electronic music project."""
+
+
+  from dataclasses import dataclass, field
+
+
+  @dataclass
+  class Artist:
+      name: str = "Antres 808"
+      genres: list[str] = field(default_factory=lambda: [
+          "Electronic",
+          "Bass Music",
+          "Electro Oriental",
+      ])
+      tools: list[str] = field(default_factory=lambda: [
+          "u-he Diva",
+          "Hardware synthesizers",
+          "Ableton Live",
+          "d&b audiotechnik systems",
+      ])
+      links: dict[str, str] = field(default_factory=lambda: {
+          "soundcloud": "https://soundcloud.com/...",
+          "bandcamp": "https://antres808.bandcamp.com",
+      })
+
+      def play(self) -> None:
+          print("Now playing Antres 808...")
+
+
+  antres = Artist()

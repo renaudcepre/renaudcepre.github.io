@@ -1,0 +1,16 @@
+import { defineCollection, defineContentConfig, z } from '@nuxt/content'
+
+export default defineContentConfig({
+  collections: {
+    portfolio: defineCollection({
+      type: 'data',
+      source: 'portfolio/**/*.yaml',
+      schema: z.object({
+        filename: z.string(),
+        lang: z.enum(['py', 'md']),
+        order: z.number(),
+        content: z.string()
+      })
+    })
+  }
+})
