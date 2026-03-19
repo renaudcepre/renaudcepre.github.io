@@ -12,65 +12,105 @@ const emit = defineEmits<{
 }>()
 
 const hoveredEntry = ref<string | null>(null)
-const currentDir = ref('')
+const expandedDirs = ref<Set<string>>(new Set())
 
-const netrwPath = computed(() => `~/portfolio/${currentDir.value}`)
+interface TreeNode {
+  name: string
+  path: string
+  isDir: boolean
+  children?: TreeNode[]
+  depth: number
+}
 
-const netrwLines = computed(() => [
-  { t: '" ============================================', c: C.comment },
-  { t: `"   netrw v173: ${netrwPath.value}`, c: C.comment },
-  { t: '"   Sorted by      name', c: C.comment },
-  { t: '"   Sort sequence:  [\\/]$,\\<core\\%', c: C.comment },
-  { t: '"   Quick Help: <F1>:help  -:go up', c: C.comment },
-  { t: '" ============================================', c: C.comment }
-])
+const tree = computed<TreeNode[]>(() => {
+  const root: TreeNode[] = []
 
-const entries = computed(() => {
-  const dirs = new Set<string>()
-  const files: string[] = []
-  const prefix = currentDir.value
+  for (const filePath of [...props.fileList].sort()) {
+    const parts = filePath.split('/')
+    let current = root
+    let currentPath = ''
 
-  for (const f of props.fileList) {
-    if (!f.startsWith(prefix)) continue
-    const rest = f.slice(prefix.length)
-    const slashIdx = rest.indexOf('/')
-    if (slashIdx !== -1) {
-      dirs.add(rest.slice(0, slashIdx + 1))
-    } else {
-      files.push(rest)
+    for (let i = 0; i < parts.length; i++) {
+      const part = parts[i]
+      const isLast = i === parts.length - 1
+      currentPath += (i > 0 ? '/' : '') + part
+
+      if (isLast) {
+        current.push({ name: part, path: filePath, isDir: false, depth: i })
+      } else {
+        let dir = current.find(n => n.isDir && n.name === part)
+        if (!dir) {
+          dir = { name: part, path: currentPath, isDir: true, children: [], depth: i }
+          current.push(dir)
+        }
+        current = dir.children!
+      }
     }
   }
 
-  return [
-    ...Array.from(dirs).sort(),
-    ...files.sort()
-  ]
+  return root
 })
 
-function handleClick(entry: string) {
-  if (entry === '../') {
-    const parts = currentDir.value.slice(0, -1).split('/')
-    parts.pop()
-    currentDir.value = parts.length ? parts.join('/') + '/' : ''
-  } else if (entry.endsWith('/')) {
-    currentDir.value += entry
+function flatten(nodes: TreeNode[]): TreeNode[] {
+  const result: TreeNode[] = []
+  for (const node of nodes) {
+    result.push(node)
+    if (node.isDir && node.children && expandedDirs.value.has(node.path)) {
+      result.push(...flatten(node.children))
+    }
+  }
+  return result
+}
+
+const flatTree = computed(() => flatten(tree.value))
+
+function toggleDir(path: string) {
+  const s = new Set(expandedDirs.value)
+  if (s.has(path)) {
+    s.delete(path)
   } else {
-    emit('select', currentDir.value + entry)
+    s.add(path)
+  }
+  expandedDirs.value = s
+}
+
+function handleClick(node: TreeNode) {
+  if (node.isDir) {
+    toggleDir(node.path)
+  } else {
+    emit('select', node.path)
   }
 }
 
-function entryColor(entry: string): string {
-  if (entry === '../' || entry.endsWith('/')) return C.cyan
-  const fullPath = currentDir.value + entry
-  return fullPath === props.activeFile ? C.bg : C.fg
+function entryColor(node: TreeNode): string {
+  if (node.isDir) return C.cyan
+  return node.path === props.activeFile ? C.bg : C.fg
 }
 
-function entryBackground(entry: string): string {
-  const fullPath = currentDir.value + entry
-  if (fullPath === props.activeFile) return C.blue
-  if (hoveredEntry.value === entry) return C.visual
+function entryBg(node: TreeNode): string {
+  if (node.path === props.activeFile) return C.blue
+  if (hoveredEntry.value === node.path) return C.visual
   return 'transparent'
 }
+
+function indent(node: TreeNode): string {
+  if (node.depth === 0) return ''
+  return '·'.repeat(node.depth * 2) + ' '
+}
+
+// expand all dirs on mount
+onMounted(() => {
+  const dirs = new Set<string>()
+  for (const f of props.fileList) {
+    const parts = f.split('/')
+    let p = ''
+    for (let i = 0; i < parts.length - 1; i++) {
+      p += (i > 0 ? '/' : '') + parts[i]
+      dirs.add(p)
+    }
+  }
+  expandedDirs.value = dirs
+})
 </script>
 
 <template>
@@ -89,43 +129,37 @@ function entryBackground(entry: string): string {
       flexDirection: 'column',
     }"
   >
-    <div
-      v-for="(l, i) in netrwLines"
-      :key="i"
-      :style="{ padding: '0 10px', color: l.c, whiteSpace: 'pre' }"
-    >
-      {{ l.t }}
+    <div :style="{ padding: '0 10px', color: C.comment, whiteSpace: 'pre' }">
+      " ============================================
+    </div>
+    <div :style="{ padding: '0 10px', color: C.comment, whiteSpace: 'pre' }">
+      "   netrw v173: ~/portfolio/
+    </div>
+    <div :style="{ padding: '0 10px', color: C.comment, whiteSpace: 'pre' }">
+      "   Sorted by      name
+    </div>
+    <div :style="{ padding: '0 10px', color: C.comment, whiteSpace: 'pre' }">
+      "   Quick Help: &lt;F1&gt;:help
+    </div>
+    <div :style="{ padding: '0 10px', color: C.comment, whiteSpace: 'pre' }">
+      " ============================================
     </div>
     <div
+      v-for="node in flatTree"
+      :key="node.path"
       :style="{
         padding: '0 10px',
+        paddingLeft: '10px',
         cursor: 'pointer',
         whiteSpace: 'pre',
-        color: C.cyan,
-        background: hoveredEntry === '../' ? C.visual : 'transparent',
+        color: entryColor(node),
+        background: entryBg(node),
+        userSelect: 'none',
       }"
-      @click="handleClick('../')"
-      @mouseenter="hoveredEntry = '../'"
+      @click="handleClick(node)"
+      @mouseenter="hoveredEntry = node.path"
       @mouseleave="hoveredEntry = null"
-    >
-      ../
-    </div>
-    <div
-      v-for="entry in entries"
-      :key="entry"
-      :style="{
-        padding: '0 10px',
-        cursor: 'pointer',
-        whiteSpace: 'pre',
-        color: entryColor(entry),
-        background: entryBackground(entry),
-      }"
-      @click="handleClick(entry)"
-      @mouseenter="hoveredEntry = entry"
-      @mouseleave="hoveredEntry = null"
-    >
-      {{ entry }}
-    </div>
+    ><span :style="{ color: C.gutter }">{{ indent(node) }}</span>{{ node.isDir ? (expandedDirs.has(node.path) ? 'v ' : '> ') : '' }}{{ node.name }}{{ node.isDir ? '/' : '' }}</div>
     <div
       v-for="i in 30"
       :key="`pad${i}`"
