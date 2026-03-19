@@ -1,14 +1,22 @@
 <script setup lang="ts">
-import { tokPy, tokMd } from '~/utils/portfolio'
+import { tokPy, tokMd, tokAnsi, tokTxt } from '~/utils/portfolio'
 import type { Token } from '~/utils/portfolio'
+
+const tokenizers: Record<string, (line: string) => Token[]> = {
+  py: tokPy,
+  md: tokMd,
+  ansi: tokAnsi,
+  txt: tokTxt
+}
 
 const props = defineProps<{
   line: string
-  lang: 'py' | 'md'
+  lang: string
 }>()
 
 const tokens = computed<Token[]>(() => {
-  return props.lang === 'py' ? tokPy(props.line) : tokMd(props.line)
+  const fn = tokenizers[props.lang] ?? tokTxt
+  return fn(props.line)
 })
 </script>
 
@@ -18,6 +26,7 @@ const tokens = computed<Token[]>(() => {
     :key="i"
     :style="{
       color: tok.c,
+      background: tok.bg,
       fontWeight: tok.b ? 700 : 400,
       fontStyle: tok.i ? 'italic' : 'normal',
     }"

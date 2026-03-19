@@ -32,6 +32,7 @@ export const FONT = "'JetBrains Mono', 'Cascadia Mono', 'SF Mono', 'Consolas', m
 export interface Token {
   t: string
   c: string
+  bg?: string
   b?: boolean
   i?: boolean
 }
@@ -61,6 +62,72 @@ export function tokPy(line: string): Token[] {
     toks.push({ t, c })
   }
   return toks
+}
+
+const ANSI_16 = [
+  '#000000', '#800000', '#008000', '#808000', '#000080', '#800080', '#008080', '#c0c0c0',
+  '#808080', '#ff0000', '#00ff00', '#ffff00', '#0000ff', '#ff00ff', '#00ffff', '#ffffff'
+]
+
+const ANSI_FG: Record<number, string> = {
+  30: '#000000', 31: '#e06c75', 32: '#98c379', 33: '#e5c07b',
+  34: '#61afef', 35: '#c678dd', 36: '#56b6c2', 37: '#abb2bf',
+  90: '#5c6370', 91: '#e06c75', 92: '#98c379', 93: '#e5c07b',
+  94: '#61afef', 95: '#c678dd', 96: '#56b6c2', 97: '#ffffff'
+}
+
+function ansi256(n: number): string {
+  if (n < 16) return ANSI_16[n]
+  if (n >= 232) {
+    const v = 8 + (n - 232) * 10
+    const h = v.toString(16).padStart(2, '0')
+    return `#${h}${h}${h}`
+  }
+  const idx = n - 16
+  const vals = [0, 95, 135, 175, 215, 255]
+  const r = vals[Math.floor(idx / 36)]
+  const g = vals[Math.floor((idx % 36) / 6)]
+  const b = vals[idx % 6]
+  return `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`
+}
+
+export function tokAnsi(line: string): Token[] {
+  const toks: Token[] = []
+  const re = /\\e\[([0-9;]*)m/g
+  let fg = C.fg
+  let bg: string | undefined
+  let bold = false
+  let lastIdx = 0
+  let m
+
+  while ((m = re.exec(line)) !== null) {
+    if (m.index > lastIdx) {
+      toks.push({ t: line.slice(lastIdx, m.index), c: fg, bg, b: bold || undefined })
+    }
+    const codes = m[1].split(';').map(Number)
+    let i = 0
+    while (i < codes.length) {
+      const code = codes[i]
+      if (code === 0 || Number.isNaN(code)) { fg = C.fg; bg = undefined; bold = false }
+      else if (code === 1) bold = true
+      else if (code === 38 && codes[i + 1] === 5) { fg = ansi256(codes[i + 2] ?? 0); i += 2 }
+      else if (code === 48 && codes[i + 1] === 5) { bg = ansi256(codes[i + 2] ?? 0); i += 2 }
+      else if (code === 39) fg = C.fg
+      else if (code === 49) bg = undefined
+      else if (ANSI_FG[code]) fg = ANSI_FG[code]
+      i++
+    }
+    lastIdx = re.lastIndex
+  }
+
+  if (lastIdx < line.length) {
+    toks.push({ t: line.slice(lastIdx), c: fg, bg, b: bold || undefined })
+  }
+  return toks.length ? toks : [{ t: line, c: C.fg }]
+}
+
+export function tokTxt(line: string): Token[] {
+  return [{ t: line, c: C.fg }]
 }
 
 export function tokMd(line: string): Token[] {

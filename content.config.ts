@@ -7,7 +7,7 @@ export default defineContentConfig({
       source: 'portfolio/**/*.yaml',
       schema: z.object({
         filename: z.string(),
-        lang: z.enum(['py', 'md']),
+        lang: z.enum(['py', 'md', 'img', 'ansi', 'txt']),
         order: z.number(),
         content: z.string()
       })

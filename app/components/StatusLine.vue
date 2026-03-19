@@ -8,7 +8,14 @@ const props = defineProps<{
 
 const data = computed(() => props.filesMap[props.file])
 const lineCount = computed(() => data.value ? data.value.content.split('\n').length : 0)
-const langLabel = computed(() => data.value?.lang === 'py' ? 'python' : 'markdown')
+const LANG_LABELS: Record<string, string> = {
+  py: 'python',
+  md: 'markdown',
+  img: 'image',
+  ansi: 'ansi',
+  txt: 'text'
+}
+const langLabel = computed(() => LANG_LABELS[data.value?.lang ?? ''] ?? data.value?.lang ?? '')
 </script>
 
 <template>

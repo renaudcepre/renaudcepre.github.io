@@ -1,45 +1,44 @@
-filename: skills.py
-lang: py
+filename: skills.md
+lang: md
 order: 3
 content: |
-  """Technical stack & expertise."""
+  # Skills
 
+  ## Languages
 
-  LANGUAGES: dict[str, str] = {
-      "Python":     "████████████████████  Expert",
-      "C/C++":      "████████████░░░░░░░░  Familiar",
-      "TypeScript": "██████████░░░░░░░░░░  Proficient",
-      "SQL":        "████████████████░░░░  Advanced",
-  }
+    Python ............ ████████████████████ Expert
+    C/C++ ............. ████████████░░░░░░░░ Familiar
+    TypeScript ........ ██████████░░░░░░░░░░ Proficient
+    SQL ............... ████████████████░░░░ Advanced
 
-  BACKEND: list[str] = [
-      "FastAPI",
-      "Celery",
-      "Pydantic",
-      "Alembic",
-      "SQLAlchemy",
-  ]
+  ## Backend
 
-  INFRASTRUCTURE: list[str] = [
-      "Docker",
-      "Kubernetes",
-      "AWS (AmazonMQ, ECS, S3)",
-      "RabbitMQ",
-      "PostgreSQL",
-      "Redis",
-  ]
+  - FastAPI
+  - Celery
+  - Pydantic
+  - Alembic
+  - SQLAlchemy
 
-  AI_AND_LLM: list[str] = [
-      "LLM integration & RAG pipelines",
-      "vLLM serving (Qwen, etc.)",
-      "Pydantic AI",
-      "ChromaDB",
-      "LM Studio",
-  ]
+  ## Infrastructure
 
-  TOOLING: list[str] = [
-      "Neovim",
-      "Git",
-      "Linux",
-      "CI/CD (GitHub Actions)",
-  ]
+  - Docker
+  - Kubernetes
+  - AWS (AmazonMQ, ECS, S3)
+  - RabbitMQ
+  - PostgreSQL
+  - Redis
+
+  ## AI & LLM
+
+  - LLM integration & RAG pipelines
+  - vLLM serving (Qwen, etc.)
+  - Pydantic AI
+  - ChromaDB
+  - LM Studio
+
+  ## Tooling
+
+  - Neovim
+  - Git
+  - Linux
+  - CI/CD (GitHub Actions)

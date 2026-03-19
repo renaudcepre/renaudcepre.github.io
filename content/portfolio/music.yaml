@@ -1,34 +1,19 @@
-filename: music.py
-lang: py
+filename: music.md
+lang: md
 order: 4
 content: |
-  """Antres 808 -- Electronic music project."""
+  # Antres 808
 
+  > Electronic / Bass Music / Electro Oriental
 
-  from dataclasses import dataclass, field
+  ## Tools
 
+  - u-he Diva
+  - Hardware synthesizers
+  - Ableton Live
+  - d&b audiotechnik systems
 
-  @dataclass
-  class Artist:
-      name: str = "Antres 808"
-      genres: list[str] = field(default_factory=lambda: [
-          "Electronic",
-          "Bass Music",
-          "Electro Oriental",
-      ])
-      tools: list[str] = field(default_factory=lambda: [
-          "u-he Diva",
-          "Hardware synthesizers",
-          "Ableton Live",
-          "d&b audiotechnik systems",
-      ])
-      links: dict[str, str] = field(default_factory=lambda: {
-          "soundcloud": "https://soundcloud.com/...",
-          "bandcamp": "https://antres808.bandcamp.com",
-      })
+  ## Links
 
-      def play(self) -> None:
-          print("Now playing Antres 808...")
-
-
-  antres = Artist()
+    soundcloud ........ https://soundcloud.com/...
+    bandcamp .......... https://antres808.bandcamp.com
