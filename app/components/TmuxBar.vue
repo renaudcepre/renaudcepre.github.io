@@ -12,6 +12,7 @@ const emit = defineEmits<{
   cycleTheme: []
 }>()
 
+const { quote } = useQuote()
 const currentTime = ref('')
 
 onMounted(() => {
@@ -66,6 +67,20 @@ onMounted(() => {
         }"
       >github.com/renaudcepre</a>
     </div>
+    <span
+      v-if="!isMobile"
+      :style="{
+        color: C.bg,
+        fontStyle: 'italic',
+        opacity: 0.7,
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+        whiteSpace: 'nowrap',
+        flex: 1,
+        textAlign: 'center',
+        padding: '0 12px',
+      }"
+    >{{ quote }}</span>
     <div :style="{ display: 'flex', alignItems: 'center', gap: '12px', padding: '0 8px' }">
       <span
         :style="{ cursor: 'pointer', opacity: 0.7 }"

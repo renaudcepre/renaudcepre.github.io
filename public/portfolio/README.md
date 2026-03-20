@@ -1,22 +1,21 @@
-# Salut
+# Hey
 
-> Dev Python senior, passionné d'audio et de musique électronique.
+> Senior Python dev, into audio and electronic music.
 
-Ici tu trouveras des infos sur ce que je fais,
-ce que je construis, et ce qui m'intéresse.
+Here you'll find what I do,
+what I build, and what I care about.
 
-## Parcours
+## Background
 
-J'ai commencé par l'école 42 — Corewar en C,
-théorie des graphes, tout le tronc commun.
-Aujourd'hui je fais du backend Python, de
-l'architecture logicielle, et de la musique
-électronique.
+Started at 42 school — Corewar in C,
+graph theory, the whole common core.
+Now I do Python backend, software
+architecture, and electronic music.
 
-## Ce qu'il y a ici
+## What's here
 
-- [about.md](about.md) — Qui je suis
-- [skills.md](skills.md) — Stack technique
+- [about.md](about.md) — Who I am
+- [skills.md](skills.md) — Tech stack
 - [music.md](music.md) — Antres 808
-- [contact.md](contact.md) — Me contacter
-- [projects/](projects/) — Mes projets
+- [contact.md](contact.md) — Get in touch
+- [projects/](projects/) — My projects

@@ -10,35 +10,33 @@ $ protest run tests:session -n 4
 
 ## Why
 
-On discutait souvent avec un collegue du cote
-un peu magique de pytest. On adore le framework,
-mais les fixtures resolues par nom, pas de types,
-pas de Ctrl+Click.
+A colleague and I kept talking about the
+magic side of pytest. We love the framework,
+but fixtures resolved by name, no types,
+no Ctrl+Click.
 
-J'avais envie d'un truc plus declaratif, plus
-proche de ce que FastAPI fait avec la DI.
+I wanted something more declarative, closer
+to what FastAPI does with DI.
 
-## Ce que j'ai appris
+## What I learned
 
-Le projet a vite grossi. Pools de threads,
-async exit stacks, bus d'evenements, scoping
-en arbre... C'est de l'async bas niveau qu'on
-touche jamais quand on fait des APIs.
-
+The project grew fast. Thread pools,
+async exit stacks, event bus, tree-based
+scoping... Low-level async stuff you never
+touch when building APIs.
 
 ## Benchmarks
 
-Pour valider le truc, j'ai re-code une grosse partie des suites
-de tests de pydantic, httpx et starlette avec
-ProTest. Resultat : sur httpx et starlette,
-les tests passent 20 a 30% plus vite que les
-suites officielles, grace a l'async natif.
+To validate the approach, I rewrote large parts of
+pydantic, httpx and starlette test suites with
+ProTest. Result: on httpx and starlette,
+tests run 20-30% faster than the official
+suites, thanks to native async.
 
-## Ou ca en est
+## Status
 
-v0.1.0 alpha. L'archi est modulaire, on peut
-ecrire des plugins proprement. J'ai un reporter
-WebSocket temps reel et un plugin PyCharm
-en cours.
+v0.1.0 alpha. Modular architecture, clean
+plugin system. Working on a real-time
+WebSocket reporter and a PyCharm plugin.
 
 > https://github.com/renaudcepre/protest
