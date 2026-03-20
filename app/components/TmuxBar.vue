@@ -16,7 +16,7 @@ const currentTime = ref('')
 
 onMounted(() => {
   const update = () => {
-    currentTime.value = new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })
+    currentTime.value = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })
   }
   update()
   const interval = setInterval(update, 60_000)

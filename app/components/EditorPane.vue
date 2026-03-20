@@ -132,7 +132,7 @@ function handleMdClick(e: MouseEvent) {
       fontSize: '13px',
     }"
   >
-    <!-- Mini tmux bar pour les fichiers markdown -->
+    <!-- Mini tmux bar for markdown files -->
     <div
       v-if="isMd"
       :style="{
@@ -250,7 +250,7 @@ function handleMdClick(e: MouseEvent) {
 
       <!-- Code / text mode -->
       <template v-else>
-        <!-- ANSI: centré dans le pane -->
+        <!-- ANSI: centered in pane -->
         <div
           v-if="isAnsi"
           :style="{
@@ -274,7 +274,7 @@ function handleMdClick(e: MouseEvent) {
           </div>
         </div>
 
-        <!-- Code / texte normal -->
+        <!-- Code / plain text -->
         <template v-else>
           <div
             v-for="(line, i) in lines"

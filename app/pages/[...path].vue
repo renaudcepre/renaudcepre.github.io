@@ -30,13 +30,13 @@ async function openFile(name: string) {
   if (isMobile.value) showNetrw.value = false
 }
 
-// Sync depuis l'URL (navigation externe, lien partagé)
+// Sync from URL (external navigation, shared link)
 watch(fileFromRoute, async (name) => {
   if (name === activeFile.value) return
   await openFile(name)
 })
 
-// Chargement initial une fois la liste disponible
+// Initial load once file list is available
 watch(fileList, async (list) => {
   if (!list.length) return
   const target = fileFromRoute.value
@@ -44,7 +44,7 @@ watch(fileList, async (list) => {
   if (!list.includes(target)) activeFile.value = 'README.md'
 }, { immediate: true })
 
-// Restore sidebar quand on repasse en desktop
+// Restore sidebar when switching back to desktop
 watch(isMobile, (val) => {
   if (!val) showNetrw.value = true
 })
