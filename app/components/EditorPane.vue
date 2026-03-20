@@ -5,7 +5,7 @@ import { C, FONT } from '~/utils/portfolio'
 const mdRenderer = new Renderer()
 
 mdRenderer.heading = function ({ tokens, depth }) {
-  const colors = [C.red, C.yellow, C.cyan, C.magenta, C.green, C.blue]
+  const colors = [C.green, C.magenta, C.cyan, C.yellow, C.blue, C.func]
   const color = colors[depth - 1] || C.fg
   const content = this.parser.parseInline(tokens)
   return `<div class="md-heading md-h${depth}" style="color:${color}">${content}</div>`
@@ -30,12 +30,13 @@ mdRenderer.link = function ({ href, tokens }) {
   return `<a href="${href}" style="color:${C.cyan};text-decoration:none;border-bottom:1px dashed ${C.cyan}55">${content}</a>`
 }
 
-mdRenderer.list = function ({ body, ordered }) {
+mdRenderer.list = function ({ items, ordered }) {
+  const body = items.map((item: any) => this.listitem(item)).join('')
   return `<div class="md-list ${ordered ? 'md-list-ordered' : ''}">${body}</div>`
 }
 
 mdRenderer.listitem = function (item) {
-  const content = this.parser.parse(item.tokens)
+  const content = this.parser.parseInline(item.tokens[0]?.tokens || item.tokens)
   return `<div class="md-list-item"><span class="md-bullet">▸</span><span>${content}</span></div>`
 }
 
@@ -145,7 +146,7 @@ function handleMdClick(e: MouseEvent) {
         userSelect: 'none',
       }"
     >
-      <span :style="{ background: '#1a2d3d', color: C.blue, padding: '0 6px', fontWeight: 700, height: '100%', display: 'flex', alignItems: 'center' }">[1]</span>
+      <span :style="{ background: C.statusBg, color: C.blue, padding: '0 6px', fontWeight: 700, height: '100%', display: 'flex', alignItems: 'center' }">[1]</span>
       <span
         :style="{
           padding: '0 6px',
@@ -154,7 +155,7 @@ function handleMdClick(e: MouseEvent) {
           alignItems: 'center',
           cursor: 'pointer',
           fontWeight: !renderedMode ? 700 : 400,
-          background: !renderedMode ? '#1a2d3d' : 'transparent',
+          background: !renderedMode ? C.statusBg : 'transparent',
           color: !renderedMode ? C.blue : C.bg,
         }"
         @click="renderedMode = false"
@@ -167,7 +168,7 @@ function handleMdClick(e: MouseEvent) {
           alignItems: 'center',
           cursor: 'pointer',
           fontWeight: renderedMode ? 700 : 400,
-          background: renderedMode ? '#1a2d3d' : 'transparent',
+          background: renderedMode ? C.statusBg : 'transparent',
           color: renderedMode ? C.blue : C.bg,
         }"
         @click="renderedMode = true"
@@ -223,7 +224,26 @@ function handleMdClick(e: MouseEvent) {
       <div
         v-else-if="isMd && renderedMode"
         class="md-rendered"
-        :style="{ padding: '24px 32px', maxWidth: '800px', color: C.fg }"
+        :style="{
+          padding: '24px 32px',
+          maxWidth: '800px',
+          color: C.fg,
+          '--md-code-bg': C.codeBg,
+          '--md-code-fg': C.codeFg,
+          '--md-code-border': C.border,
+          '--md-codeblock-bg': C.codeBlockBg,
+          '--md-codeblock-border': C.codeBlockBorder,
+          '--md-codeblock-fg': C.white,
+          '--md-bq-border': C.bqBorder,
+          '--md-bq-text': C.bqText,
+          '--md-bullet': C.bullet,
+          '--md-ol-num': C.olNum,
+          '--md-hr': C.hr,
+          '--md-border': C.border,
+          '--md-th-bg': C.thBg,
+          '--md-th-fg': C.thFg,
+          '--md-tr-even': C.trEvenBg,
+        } as any"
         v-html="renderedHtml"
         @click="handleMdClick"
       />
@@ -328,13 +348,13 @@ function handleMdClick(e: MouseEvent) {
 
 /* Inline code */
 .md-rendered code {
-  background: #1a1d26;
-  color: #98c379;
+  background: var(--md-code-bg);
+  color: var(--md-code-fg);
   padding: 2px 7px;
   border-radius: 3px;
   font-family: inherit;
   font-size: 0.95em;
-  border: 1px solid #2c313a;
+  border: 1px solid var(--md-code-border);
 }
 
 /* Code blocks */
@@ -352,8 +372,8 @@ function handleMdClick(e: MouseEvent) {
   user-select: none;
 }
 .md-rendered .md-codeblock pre {
-  background: #13161e;
-  border-left: 2px solid #61afef44;
+  background: var(--md-codeblock-bg);
+  border-left: 2px solid var(--md-codeblock-border);
   padding: 12px 16px;
   overflow-x: auto;
   margin: 0;
@@ -362,7 +382,7 @@ function handleMdClick(e: MouseEvent) {
   background: none;
   border: none;
   padding: 0;
-  color: #abb2bf;
+  color: var(--md-codeblock-fg);
   font-size: 12px;
   line-height: 1.7;
 }
@@ -374,13 +394,13 @@ function handleMdClick(e: MouseEvent) {
   margin: 0.8em 0;
 }
 .md-rendered .md-bq-border {
-  color: #56b6c2;
+  color: var(--md-bq-border);
   user-select: none;
   flex-shrink: 0;
   line-height: 1.9;
 }
 .md-rendered .md-blockquote p {
-  color: #5c6370;
+  color: var(--md-bq-text);
   font-style: italic;
   margin: 0;
 }
@@ -396,7 +416,7 @@ function handleMdClick(e: MouseEvent) {
   margin: 0.2em 0;
 }
 .md-rendered .md-bullet {
-  color: #c678dd;
+  color: var(--md-bullet);
   user-select: none;
   flex-shrink: 0;
 }
@@ -405,14 +425,14 @@ function handleMdClick(e: MouseEvent) {
 .md-rendered .md-list-ordered .md-list-item::before {
   counter-increment: md-counter;
   content: counter(md-counter) ".";
-  color: #d19a66;
+  color: var(--md-ol-num);
   flex-shrink: 0;
   min-width: 1.5em;
 }
 
 /* HR */
 .md-rendered .md-hr {
-  color: #3e4452;
+  color: var(--md-hr);
   margin: 1.5em 0;
   user-select: none;
   overflow: hidden;
@@ -425,14 +445,14 @@ function handleMdClick(e: MouseEvent) {
   border-radius: 4px;
   margin: 1em 0;
   display: block;
-  border: 1px solid #2c313a;
+  border: 1px solid var(--md-border);
 }
 .md-rendered video {
   max-width: 100%;
   border-radius: 4px;
   margin: 1em 0;
   display: block;
-  border: 1px solid #2c313a;
+  border: 1px solid var(--md-border);
 }
 
 /* Tables */
@@ -443,14 +463,14 @@ function handleMdClick(e: MouseEvent) {
   font-size: 12px;
 }
 .md-rendered th, .md-rendered td {
-  border: 1px solid #2c313a;
+  border: 1px solid var(--md-border);
   padding: 6px 12px;
   text-align: left;
 }
 .md-rendered th {
-  background: #13161e;
-  color: #e5c07b;
+  background: var(--md-th-bg);
+  color: var(--md-th-fg);
   font-weight: 600;
 }
-.md-rendered tr:nth-child(even) { background: #12141c; }
+.md-rendered tr:nth-child(even) { background: var(--md-tr-even); }
 </style>

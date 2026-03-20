@@ -4,10 +4,12 @@ import { C, FONT } from '~/utils/portfolio'
 defineProps<{
   isMobile: boolean
   showNetrw?: boolean
+  themeName?: string
 }>()
 
 const emit = defineEmits<{
   toggleNetrw: []
+  cycleTheme: []
 }>()
 
 const currentTime = ref('')
@@ -41,7 +43,7 @@ onMounted(() => {
       <span
         v-if="isMobile"
         :style="{
-          background: '#2d4f2d',
+          background: C.statusBg,
           color: C.green,
           padding: '0 12px',
           fontWeight: 700,
@@ -64,7 +66,12 @@ onMounted(() => {
         }"
       >github.com/renaudcepre</a>
     </div>
-    <div :style="{ padding: '0 8px' }">
+    <div :style="{ display: 'flex', alignItems: 'center', gap: '12px', padding: '0 8px' }">
+      <span
+        :style="{ cursor: 'pointer', opacity: 0.7 }"
+        :title="'Theme: ' + themeName + ' (Ctrl+T)'"
+        @click="emit('cycleTheme')"
+      >{{ themeName }}</span>
       <ClientOnly>{{ currentTime }}</ClientOnly>
     </div>
   </div>

@@ -168,7 +168,6 @@ onMounted(() => {
     <div :style="{ padding: '0 10px', color: C.comment, whiteSpace: 'pre' }"> " ==========================================</div>
     <div :style="{ padding: '0 10px', color: C.comment, whiteSpace: 'pre' }"> "   rcepre / portfolio</div>
     <div :style="{ padding: '0 10px', color: C.comment, whiteSpace: 'pre' }"> "   last release: 2025</div>
-    <div :style="{ padding: '0 10px', color: C.comment, whiteSpace: 'pre' }"> "   ^e  toggle explorer  ^r  render</div>
     <div :style="{ padding: '0 10px', color: C.comment, whiteSpace: 'pre' }"> " ==========================================</div>
     <div
       v-for="node in flatTree"

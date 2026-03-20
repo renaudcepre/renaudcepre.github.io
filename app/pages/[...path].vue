@@ -7,6 +7,7 @@ const route = useRoute()
 const router = useRouter()
 const { fileList, filesMap, loadContent } = usePortfolioFiles()
 const { isMobile } = useBreakpoint()
+const { themeName, cycle: cycleTheme } = useTheme()
 
 const fileFromRoute = computed(() => {
   const segments = route.params.path
@@ -105,7 +106,9 @@ onMounted(() => {
     <TmuxBar
       :is-mobile="isMobile"
       :show-netrw="showNetrw"
+      :theme-name="themeName"
       @toggle-netrw="showNetrw = !showNetrw"
+      @cycle-theme="cycleTheme()"
     />
   </div>
 </template>

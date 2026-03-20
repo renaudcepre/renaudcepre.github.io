@@ -56,6 +56,14 @@ const langLabel = computed(() => LANG_LABELS[data.value?.lang ?? ''] ?? data.val
       >{{ file }}</span>
       <span :style="{ color: C.comment, padding: '0 6px' }">[+]</span>
     </div>
+    <div :style="{ display: 'flex', alignItems: 'center', height: '100%', gap: '4px', color: C.comment, padding: '0 8px' }">
+      <span><span :style="{ color: C.yellow }">^E</span> explorer</span>
+      <span :style="{ color: C.gutter }">│</span>
+      <span><span :style="{ color: C.yellow }">^R</span> render</span>
+      <span :style="{ color: C.gutter }">│</span>
+      <span><span :style="{ color: C.yellow }">^T</span> theme</span>
+    </div>
+
     <div :style="{ display: 'flex', alignItems: 'center', height: '100%' }">
       <span :style="{ color: C.comment, padding: '0 8px' }">{{ langLabel }}</span>
       <span

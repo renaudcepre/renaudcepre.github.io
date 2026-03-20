@@ -12,5 +12,5 @@ html { touch-action: manipulation; }
 }
 
 ::-webkit-scrollbar { width: 6px; height: 6px; }
-::-webkit-scrollbar-track { background: #0e1019; }
-::-webkit-scrollbar-thumb { background: #3b4048; }
+::-webkit-scrollbar-track { background: var(--c-bg, #1e1e2e); }
+::-webkit-scrollbar-thumb { background: var(--c-gutter, #45475a); }
