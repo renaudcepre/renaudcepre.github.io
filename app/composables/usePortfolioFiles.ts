@@ -19,6 +19,10 @@ export function usePortfolioFiles() {
     if (fileContents.value[filename]) return
     const entry = data.value?.find(f => f.filename === filename)
     if (!entry) return
+    if (entry.lang === 'img' || entry.lang === 'video') {
+      fileContents.value = { ...fileContents.value, [filename]: entry.path }
+      return
+    }
     const content = await $fetch<string>(entry.path, { responseType: 'text' })
     fileContents.value = { ...fileContents.value, [filename]: content }
   }
