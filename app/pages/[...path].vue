@@ -8,6 +8,7 @@ const router = useRouter()
 const { fileList, filesMap, loadContent } = usePortfolioFiles()
 const { isMobile } = useBreakpoint()
 const { themeName, cycle: cycleTheme } = useTheme()
+useScrambleHover()
 
 const fileFromRoute = computed(() => {
   const segments = route.params.path

@@ -73,6 +73,9 @@ const isMd = computed(() => data.value?.lang === 'md')
 const lines = computed(() => (isImage.value || isVideo.value) ? [] : (data.value?.content.split('\n') ?? []))
 const emptyRows = computed(() => (isImage.value || isVideo.value) ? 0 : Math.max(0, 40 - lines.value.length))
 
+const contentRef = ref<HTMLElement | null>(null)
+const { reveal } = useScrambleReveal()
+
 const renderedMode = useState('md-rendered-mode', () => false)
 
 onMounted(() => {
@@ -84,6 +87,10 @@ onMounted(() => {
   }
   window.addEventListener('keydown', handler)
   onUnmounted(() => window.removeEventListener('keydown', handler))
+})
+
+watch(data, () => {
+  nextTick(() => reveal(contentRef.value))
 })
 
 const renderedHtml = computed(() => {
@@ -176,6 +183,7 @@ function handleMdClick(e: MouseEvent) {
     </div>
 
     <div
+      ref="contentRef"
       :style="{
         flex: 1,
         overflowY: 'auto',

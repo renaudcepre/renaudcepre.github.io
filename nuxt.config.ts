@@ -12,8 +12,9 @@ export default defineNuxtConfig({
   },
 
   app: {
+    buildAssetsDir: 'assets',
     head: {
-      htmlAttrs: { lang: 'fr' },
+      htmlAttrs: { lang: 'en' },
       title: 'Renaud — Senior Python Developer',
       meta: [
         { name: 'description', content: 'Portfolio — Neovim style' },
