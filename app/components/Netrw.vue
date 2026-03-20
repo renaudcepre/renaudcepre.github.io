@@ -15,6 +15,23 @@ const emit = defineEmits<{
 
 const hoveredEntry = ref<string | null>(null)
 const expandedDirs = ref<Set<string>>(new Set())
+const sidebarWidth = ref(280)
+
+function startResize(e: MouseEvent) {
+  e.preventDefault()
+  const startX = e.clientX
+  const startWidth = sidebarWidth.value
+
+  function onMove(e: MouseEvent) {
+    sidebarWidth.value = Math.max(160, Math.min(600, startWidth + e.clientX - startX))
+  }
+  function onUp() {
+    document.removeEventListener('mousemove', onMove)
+    document.removeEventListener('mouseup', onUp)
+  }
+  document.addEventListener('mousemove', onMove)
+  document.addEventListener('mouseup', onUp)
+}
 
 interface TreeNode {
   name: string
@@ -133,18 +150,25 @@ onMounted(() => {
       display: 'flex',
       flexDirection: 'column',
     } : {
-      width: '280px',
+      width: sidebarWidth + 'px',
       background: C.netrw,
-      borderRight: `1px solid ${C.border}`,
-      fontFamily: FONT,
-      fontSize: '13px',
-      lineHeight: '21px',
-      overflowY: 'auto',
       flexShrink: '0',
-      display: 'flex',
-      flexDirection: 'column',
+      position: 'relative',
+      overflow: 'hidden',
     }"
   >
+    <div
+      :style="{
+        fontFamily: FONT,
+        fontSize: '13px',
+        lineHeight: '21px',
+        overflowY: 'auto',
+        overflowX: 'hidden',
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+      }"
+    >
     <div
       v-if="isMobile"
       :style="{
@@ -185,12 +209,20 @@ onMounted(() => {
       @mouseenter="hoveredEntry = node.path"
       @mouseleave="hoveredEntry = null"
     ><span :style="{ color: C.gutter }">{{ indent(node) }}</span>{{ node.isDir ? (expandedDirs.has(node.path) ? 'v ' : '> ') : '' }}<span v-if="node.name.endsWith('.antres')" :style="{ color: C.green }">♪ </span>{{ node.name }}{{ node.isDir ? '/' : '' }}</div>
-    <div
-      v-for="i in 30"
-      :key="`pad${i}`"
-      :style="{ padding: '0 10px', color: C.blue, whiteSpace: 'pre' }"
-    >
-      ~
     </div>
+    <!-- Resize handle -->
+    <div
+      v-if="!isMobile"
+      data-resize-handle
+      :style="{
+        position: 'absolute',
+        top: 0,
+        right: '-4px',
+        width: '9px',
+        height: '100%',
+        zIndex: 10,
+      }"
+      @mousedown="startResize"
+    />
   </div>
 </template>

@@ -1,16 +1,16 @@
 <script setup lang="ts">
 import { C, FONT } from '~/utils/portfolio'
 
-const { state, togglePlay, seek, skipNext, skipPrev } = useAudioPlayer()
+const { album, trackIndex, playing, currentTime, duration, togglePlay, seek, skipNext, skipPrev } = useAudioPlayer()
 
 const track = computed(() => {
-  if (!state.value.album || state.value.trackIndex < 0) return null
-  return state.value.album.tracks[state.value.trackIndex]
+  if (!album.value || trackIndex.value < 0) return null
+  return album.value.tracks[trackIndex.value]
 })
 
 const progress = computed(() => {
-  if (!state.value.duration) return 0
-  return (state.value.currentTime / state.value.duration) * 100
+  if (!duration.value) return 0
+  return (currentTime.value / duration.value) * 100
 })
 
 function formatTime(s: number) {
@@ -40,35 +40,32 @@ function onSeek(e: MouseEvent) {
       fontSize: '11px',
       flexShrink: 0,
       color: C.fg,
-      gap: '0',
       userSelect: 'none',
     }"
   >
     <!-- Controls -->
-    <div :style="{ display: 'flex', alignItems: 'center', height: '100%' }">
-      <span
-        :style="{
-          background: C.green,
-          color: C.bg,
-          padding: '0 6px',
-          fontWeight: 700,
-          height: '100%',
-          display: 'flex',
-          alignItems: 'center',
-          fontSize: '9px',
-          gap: '6px',
-        }"
-      >
-        <span :style="{ cursor: 'pointer' }" @click="skipPrev">⏮</span>
-        <span :style="{ cursor: 'pointer', fontSize: '11px' }" @click="togglePlay">{{ state.playing ? '⏸' : '▶' }}</span>
-        <span :style="{ cursor: 'pointer' }" @click="skipNext">⏭</span>
-      </span>
-    </div>
+    <span
+      :style="{
+        background: C.green,
+        color: C.bg,
+        padding: '0 6px',
+        fontWeight: 700,
+        height: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        fontSize: '9px',
+        gap: '6px',
+      }"
+    >
+      <span :style="{ cursor: 'pointer' }" @click="skipPrev">⏮</span>
+      <span :style="{ cursor: 'pointer', fontSize: '11px' }" @click="togglePlay">{{ playing ? '⏸' : '▶' }}</span>
+      <span :style="{ cursor: 'pointer' }" @click="skipNext">⏭</span>
+    </span>
 
     <!-- Track info -->
-    <span :style="{ color: C.comment, padding: '0 8px', whiteSpace: 'nowrap' }">
+    <span :style="{ padding: '0 8px', whiteSpace: 'nowrap' }">
       <span :style="{ color: C.green }">{{ track.title }}</span>
-      <span v-if="state.album"> · {{ state.album.title }}</span>
+      <span v-if="album" :style="{ color: C.comment }"> · {{ album.title }}</span>
     </span>
 
     <!-- Progress bar -->
@@ -99,7 +96,7 @@ function onSeek(e: MouseEvent) {
 
     <!-- Time -->
     <span :style="{ color: C.comment, padding: '0 8px', whiteSpace: 'nowrap' }">
-      {{ formatTime(state.currentTime) }} / {{ formatTime(state.duration) }}
+      {{ formatTime(currentTime) }} / {{ formatTime(duration) }}
     </span>
   </div>
 </template>

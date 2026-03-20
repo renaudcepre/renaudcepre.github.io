@@ -16,6 +16,5 @@ architecture, and electronic music.
 
 - [about.md](about.md) — Who I am
 - [skills.md](skills.md) — Tech stack
-- [music.md](music.md) — Antres 808
-- [contact.md](contact.md) — Get in touch
+- [audio/README.md](audio/README.md) — Antres 808
 - [projects/](projects/) — My projects

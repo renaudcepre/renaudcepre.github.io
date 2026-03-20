@@ -18,17 +18,17 @@ interface Album {
   tracks: Track[]
 }
 
-const album = computed<Album | null>(() => {
+const albumData = computed<Album | null>(() => {
   if (!props.content) return null
   try { return JSON.parse(props.content) } catch { return null }
 })
 
-const { state, playTrack } = useAudioPlayer()
+const { album: activeAlbum, trackIndex, playing, playTrack } = useAudioPlayer()
 
 const durations = ref<Record<number, number>>({})
 
 const baseDir = computed(() => {
-  const slug = album.value?.title.toLowerCase().replace(/\s+/g, '_') ?? ''
+  const slug = albumData.value?.title.toLowerCase().replace(/\s+/g, '_') ?? ''
   return `/portfolio/audio/${slug}`
 })
 
@@ -40,11 +40,11 @@ function formatTime(s: number) {
 }
 
 function isActiveTrack(i: number) {
-  return state.value.album?.title === album.value?.title && state.value.trackIndex === i
+  return activeAlbum.value?.title === albumData.value?.title && trackIndex.value === i
 }
 
 // Preload durations
-watch(album, (a) => {
+watch(albumData, (a) => {
   if (!a) return
   a.tracks.forEach((track, i) => {
     const el = new Audio()
@@ -61,7 +61,7 @@ watch(album, (a) => {
 
 <template>
   <div
-    v-if="album"
+    v-if="albumData"
     :style="{
       padding: '24px 32px',
       fontFamily: FONT,
@@ -72,12 +72,12 @@ watch(album, (a) => {
     }"
   >
     <!-- Header -->
-    <div :style="{ color: C.blue, marginBottom: '4px' }">╭─ <span :style="{ color: C.green, fontWeight: 700 }">{{ album.title }}</span> <span :style="{ color: C.comment }">─ {{ album.type }}, {{ album.year }}</span></div>
+    <div :style="{ color: C.blue, marginBottom: '4px' }">╭─ <span :style="{ color: C.green, fontWeight: 700 }">{{ albumData.title }}</span> <span :style="{ color: C.comment }">─ {{ albumData.type }}, {{ albumData.year }}</span></div>
     <div :style="{ color: C.blue }">│</div>
 
     <!-- Tracks -->
     <div
-      v-for="(track, i) in album.tracks"
+      v-for="(track, i) in albumData.tracks"
       :key="i"
       :style="{
         display: 'flex',
@@ -86,11 +86,11 @@ watch(album, (a) => {
         color: isActiveTrack(i) ? C.green : C.fg,
         gap: '8px',
       }"
-      @click="playTrack(album!, i)"
+      @click="playTrack(albumData!, i)"
     >
       <span :style="{ color: C.blue }">│</span>
-      <span :style="{ width: '24px', textAlign: 'center', color: isActiveTrack(i) && state.playing ? C.green : C.comment }">
-        {{ isActiveTrack(i) && state.playing ? '▶' : isActiveTrack(i) && !state.playing ? '⏸' : '·' }}
+      <span :style="{ width: '24px', textAlign: 'center', color: isActiveTrack(i) && playing ? C.green : C.comment }">
+        {{ isActiveTrack(i) && playing ? '▶' : isActiveTrack(i) && !playing ? '⏸' : '·' }}
       </span>
       <span :style="{ width: '24px', textAlign: 'right', color: C.gutter }">{{ String(i + 1).padStart(2, '0') }}</span>
       <span :style="{ flex: 1, color: isActiveTrack(i) ? C.green : C.fg }">{{ track.title }}</span>
@@ -99,7 +99,7 @@ watch(album, (a) => {
 
     <!-- Footer -->
     <div :style="{ color: C.blue, marginTop: '4px' }">│</div>
-    <div v-if="album.link" :style="{ color: C.blue }">╰─ <a :href="album.link" target="_blank" rel="noopener" :style="{ color: C.cyan, textDecoration: 'none', borderBottom: '1px dashed ' + C.cyan + '55' }">{{ album.link.replace('https://', '') }}</a></div>
+    <div v-if="albumData.link" :style="{ color: C.blue }">╰─ <a :href="albumData.link" target="_blank" rel="noopener" :style="{ color: C.cyan, textDecoration: 'none', borderBottom: '1px dashed ' + C.cyan + '55' }">{{ albumData.link.replace('https://', '') }}</a></div>
     <div v-else :style="{ color: C.blue }">╰─</div>
   </div>
 </template>
