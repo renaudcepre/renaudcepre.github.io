@@ -12,9 +12,10 @@
     "typecheck": "nuxt typecheck"
   },
   "dependencies": {
-    "better-sqlite3": "^12.6.2",
     "@nuxt/content": "^3.11.2",
     "@nuxt/fonts": "^0.13.0",
+    "better-sqlite3": "^12.6.2",
+    "marked": "^17.0.4",
     "nuxt": "^4.3.0"
   },
   "devDependencies": {

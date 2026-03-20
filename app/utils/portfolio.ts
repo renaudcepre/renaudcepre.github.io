@@ -35,6 +35,7 @@ export interface Token {
   bg?: string
   b?: boolean
   i?: boolean
+  href?: string
 }
 
 const PY_KW = new Set(['class', 'def', 'return', 'import', 'from', 'for', 'in', 'if', 'else', 'elif', 'while', 'with', 'as', 'try', 'except', 'raise', 'pass', 'not', 'and', 'or', 'is', 'yield', 'lambda', 'finally', 'del', 'global', 'assert'])
@@ -141,10 +142,18 @@ export function tokMd(line: string): Token[] {
     return parts.map(p => ({ t: p, c: p.startsWith('.') ? C.comment : C.func }))
   }
   const toks: Token[] = []
-  const re = /(`[^`]+`|[^`]+)/g
+  const re = /(\[([^\]]+)\]\(([^)]+)\)|`[^`]+`|[^`\[]+)/g
   let mm
   while ((mm = re.exec(line)) !== null) {
-    toks.push({ t: mm[0], c: mm[0].startsWith('`') ? C.string : C.fg })
+    if (mm[0].startsWith('[') && mm[2] && mm[3]) {
+      toks.push({ t: mm[0], c: C.func, href: mm[3] })
+    }
+    else if (mm[0].startsWith('`')) {
+      toks.push({ t: mm[0], c: C.string })
+    }
+    else {
+      toks.push({ t: mm[0], c: C.fg })
+    }
   }
   return toks
 }

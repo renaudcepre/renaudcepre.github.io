@@ -1,21 +1,22 @@
-# Renaud -- Senior Python Developer
+# Salut
 
-> Backend architect, electronic music producer,
-> open source enthusiast.
+> Dev Python senior, passionné d'audio et de musique électronique.
 
-```bash
-$ python -m about
-<Developer: Renaud | Senior Python/Backend>
+Ici tu trouveras des infos sur ce que je fais,
+ce que je construis, et ce qui m'intéresse.
 
-$ uptime
-6+ years building scalable backend systems
-```
+## Parcours
 
-Based in Dieulefit, Drome, France.
+J'ai commencé par l'école 42 — Corewar en C,
+théorie des graphes, tout le tronc commun.
+Aujourd'hui je fais du backend Python, de
+l'architecture logicielle, et de la musique
+électronique.
 
-## Navigate
+## Ce qu'il y a ici
 
-  about.py ......... Who I am
-  skills.py ........ Technical stack
-  music.py ......... Antres 808
-  contact.py ....... Get in touch
+- [about.md](about.md) — Qui je suis
+- [skills.md](skills.md) — Stack technique
+- [music.md](music.md) — Antres 808
+- [contact.md](contact.md) — Me contacter
+- [projects/](projects/) — Mes projets

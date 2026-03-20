@@ -11,5 +11,5 @@
 
 ## Links
 
-  soundcloud ........ https://soundcloud.com/...
-  bandcamp .......... https://antres808.bandcamp.com
+[soundcloud](https://soundcloud.com/...)
+[bandcamp](https://antres808.bandcamp.com)
