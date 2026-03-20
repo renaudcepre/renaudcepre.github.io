@@ -1,6 +1,63 @@
 <script setup lang="ts">
-import { marked } from 'marked'
+import { marked, Renderer } from 'marked'
 import { C, FONT } from '~/utils/portfolio'
+
+const mdRenderer = new Renderer()
+
+mdRenderer.heading = function ({ tokens, depth }) {
+  const colors = [C.red, C.yellow, C.cyan, C.magenta, C.green, C.blue]
+  const color = colors[depth - 1] || C.fg
+  const content = this.parser.parseInline(tokens)
+  return `<div class="md-heading md-h${depth}" style="color:${color}">${content}</div>`
+}
+
+mdRenderer.image = function ({ href, text }) {
+  return `<img src="${href}" alt="${text || ''}" />`
+}
+
+mdRenderer.blockquote = function ({ tokens }) {
+  const inner = this.parser.parse(tokens)
+  return `<div class="md-blockquote"><span class="md-bq-border">│</span><div>${inner}</div></div>`
+}
+
+mdRenderer.code = function ({ text, lang }) {
+  const langLabel = lang || 'text'
+  return `<div class="md-codeblock"><div class="md-codeblock-header"><span style="color:${C.blue}">╭─</span> <span style="color:${C.cyan}">${langLabel}</span></div><pre><code>${text}</code></pre><div class="md-codeblock-footer"><span style="color:${C.blue}">╰─</span></div></div>`
+}
+
+mdRenderer.link = function ({ href, tokens }) {
+  const content = this.parser.parseInline(tokens)
+  return `<a href="${href}" style="color:${C.cyan};text-decoration:none;border-bottom:1px dashed ${C.cyan}55">${content}</a>`
+}
+
+mdRenderer.list = function ({ body, ordered }) {
+  return `<div class="md-list ${ordered ? 'md-list-ordered' : ''}">${body}</div>`
+}
+
+mdRenderer.listitem = function (item) {
+  const content = this.parser.parse(item.tokens)
+  return `<div class="md-list-item"><span class="md-bullet">▸</span><span>${content}</span></div>`
+}
+
+mdRenderer.paragraph = function ({ tokens }) {
+  return `<p>${this.parser.parseInline(tokens)}</p>`
+}
+
+mdRenderer.codespan = function ({ text }) {
+  return `<code>${text}</code>`
+}
+
+mdRenderer.hr = function () {
+  return `<div class="md-hr">─────────────────────────────────────────</div>`
+}
+
+mdRenderer.strong = function ({ tokens }) {
+  return `<span style="color:${C.yellow};font-weight:700">${this.parser.parseInline(tokens)}</span>`
+}
+
+mdRenderer.em = function ({ tokens }) {
+  return `<span style="color:${C.comment};font-style:italic">${this.parser.parseInline(tokens)}</span>`
+}
 
 const props = defineProps<{
   file: string
@@ -15,9 +72,7 @@ const isMd = computed(() => data.value?.lang === 'md')
 const lines = computed(() => (isImage.value || isVideo.value) ? [] : (data.value?.content.split('\n') ?? []))
 const emptyRows = computed(() => (isImage.value || isVideo.value) ? 0 : Math.max(0, 40 - lines.value.length))
 
-const renderedMode = ref(false)
-
-watch(() => props.file, () => { renderedMode.value = false })
+const renderedMode = useState('md-rendered-mode', () => false)
 
 onMounted(() => {
   const handler = (e: KeyboardEvent) => {
@@ -32,7 +87,7 @@ onMounted(() => {
 
 const renderedHtml = computed(() => {
   if (!isMd.value || !data.value?.content) return ''
-  let html = marked(data.value.content) as string
+  let html = marked(data.value.content, { renderer: mdRenderer }) as string
   const fileDir = props.file.includes('/')
     ? 'portfolio/' + props.file.split('/').slice(0, -1).join('/')
     : 'portfolio'
@@ -244,28 +299,158 @@ function handleMdClick(e: MouseEvent) {
 
 <style>
 .md-rendered {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  font-size: 15px;
+  font-family: 'JetBrains Mono', 'Cascadia Mono', 'SF Mono', 'Consolas', monospace;
+  font-size: 13px;
+  line-height: 1.9;
+  letter-spacing: 0.01em;
+}
+
+/* Headings */
+.md-rendered .md-heading {
+  margin: 1.8em 0 0.6em;
+  font-weight: 700;
+}
+.md-rendered .md-h1 { font-size: 1.5em; }
+.md-rendered .md-h2 { font-size: 1.25em; }
+.md-rendered .md-h3 { font-size: 1.1em; }
+.md-rendered .md-h4, .md-rendered .md-h5, .md-rendered .md-h6 { font-size: 1em; }
+.md-rendered .md-heading-hash {
+  user-select: none;
+  margin-right: 2px;
+  font-weight: 400;
+}
+
+/* Paragraphs */
+.md-rendered p { margin: 0.7em 0; }
+
+/* Links */
+.md-rendered a:hover { border-bottom-style: solid !important; }
+
+/* Inline code */
+.md-rendered code {
+  background: #1a1d26;
+  color: #98c379;
+  padding: 2px 7px;
+  border-radius: 3px;
+  font-family: inherit;
+  font-size: 0.95em;
+  border: 1px solid #2c313a;
+}
+
+/* Code blocks */
+.md-rendered .md-codeblock {
+  margin: 1.2em 0;
+}
+.md-rendered .md-codeblock-header {
+  font-size: 11px;
+  padding: 0 0 2px;
+  user-select: none;
+}
+.md-rendered .md-codeblock-footer {
+  font-size: 11px;
+  padding: 2px 0 0;
+  user-select: none;
+}
+.md-rendered .md-codeblock pre {
+  background: #13161e;
+  border-left: 2px solid #61afef44;
+  padding: 12px 16px;
+  overflow-x: auto;
+  margin: 0;
+}
+.md-rendered .md-codeblock pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  color: #abb2bf;
+  font-size: 12px;
   line-height: 1.7;
 }
-.md-rendered h1, .md-rendered h2, .md-rendered h3 { color: #e06c75; margin: 1.5em 0 0.5em; font-weight: 600; }
-.md-rendered h1 { font-size: 1.8em; border-bottom: 1px solid #3e4452; padding-bottom: 0.3em; }
-.md-rendered h2 { font-size: 1.4em; border-bottom: 1px solid #3e4452; padding-bottom: 0.2em; }
-.md-rendered h3 { font-size: 1.1em; color: #e5c07b; }
-.md-rendered p { margin: 0.8em 0; }
-.md-rendered a { color: #61afef; text-decoration: none; }
-.md-rendered a:hover { text-decoration: underline; }
-.md-rendered code { background: #21252b; color: #98c379; padding: 2px 6px; border-radius: 3px; font-family: 'JetBrains Mono', monospace; font-size: 0.88em; }
-.md-rendered pre { background: #21252b; border: 1px solid #3e4452; border-radius: 6px; padding: 16px; overflow-x: auto; margin: 1em 0; }
-.md-rendered pre code { background: none; padding: 0; font-size: 0.85em; color: #abb2bf; }
-.md-rendered blockquote { border-left: 3px solid #56b6c2; margin: 0; padding: 4px 16px; color: #5c6370; font-style: italic; }
-.md-rendered ul, .md-rendered ol { padding-left: 1.5em; margin: 0.5em 0; }
-.md-rendered li { margin: 0.3em 0; }
-.md-rendered img { max-width: 100%; border-radius: 6px; margin: 1em 0; display: block; }
-.md-rendered video { max-width: 100%; border-radius: 6px; margin: 1em 0; display: block; }
-.md-rendered hr { border: none; border-top: 1px solid #3e4452; margin: 1.5em 0; }
-.md-rendered table { border-collapse: collapse; width: 100%; margin: 1em 0; }
-.md-rendered th, .md-rendered td { border: 1px solid #3e4452; padding: 8px 12px; text-align: left; }
-.md-rendered th { background: #21252b; color: #e5c07b; }
-.md-rendered tr:nth-child(even) { background: #1a1d23; }
+
+/* Blockquotes */
+.md-rendered .md-blockquote {
+  display: flex;
+  gap: 12px;
+  margin: 0.8em 0;
+}
+.md-rendered .md-bq-border {
+  color: #56b6c2;
+  user-select: none;
+  flex-shrink: 0;
+  line-height: 1.9;
+}
+.md-rendered .md-blockquote p {
+  color: #5c6370;
+  font-style: italic;
+  margin: 0;
+}
+
+/* Lists */
+.md-rendered .md-list {
+  margin: 0.5em 0;
+  padding-left: 0;
+}
+.md-rendered .md-list-item {
+  display: flex;
+  gap: 8px;
+  margin: 0.2em 0;
+}
+.md-rendered .md-bullet {
+  color: #c678dd;
+  user-select: none;
+  flex-shrink: 0;
+}
+.md-rendered .md-list-ordered { counter-reset: md-counter; }
+.md-rendered .md-list-ordered .md-bullet { display: none; }
+.md-rendered .md-list-ordered .md-list-item::before {
+  counter-increment: md-counter;
+  content: counter(md-counter) ".";
+  color: #d19a66;
+  flex-shrink: 0;
+  min-width: 1.5em;
+}
+
+/* HR */
+.md-rendered .md-hr {
+  color: #3e4452;
+  margin: 1.5em 0;
+  user-select: none;
+  overflow: hidden;
+  letter-spacing: -1px;
+}
+
+/* Images & video */
+.md-rendered img {
+  max-width: 100%;
+  border-radius: 4px;
+  margin: 1em 0;
+  display: block;
+  border: 1px solid #2c313a;
+}
+.md-rendered video {
+  max-width: 100%;
+  border-radius: 4px;
+  margin: 1em 0;
+  display: block;
+  border: 1px solid #2c313a;
+}
+
+/* Tables */
+.md-rendered table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1em 0;
+  font-size: 12px;
+}
+.md-rendered th, .md-rendered td {
+  border: 1px solid #2c313a;
+  padding: 6px 12px;
+  text-align: left;
+}
+.md-rendered th {
+  background: #13161e;
+  color: #e5c07b;
+  font-weight: 600;
+}
+.md-rendered tr:nth-child(even) { background: #12141c; }
 </style>
