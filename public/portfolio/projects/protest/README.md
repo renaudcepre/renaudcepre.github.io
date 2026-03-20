@@ -3,8 +3,14 @@
 > Async-first testing framework for Python 3.10+
 > Explicit DI, native concurrency, smart scoping.
 
+
+[![CI](https://github.com/renaudcepre/protest/actions/workflows/ci.yml/badge.svg)](https://github.com/renaudcepre/protest/actions/workflows/ci.yml)
+[![codecov](https://codecov.io/gh/renaudcepre/protest/graph/badge.svg?token=V0MLGEE5UZ)](https://codecov.io/gh/renaudcepre/protest)
+[![docs](https://img.shields.io/badge/docs-GitHub%20Pages-blue)](https://renaudcepre.github.io/protest/)
+[![Github](https://img.shields.io/badge/github-repo-blue?logo=github)](https://github.com/renaudcepre/protest)
+
+
 ```bash
-$ pip install protest
 $ protest run tests:session -n 4
 ```
 
@@ -39,4 +45,4 @@ v0.1.0 alpha. Modular architecture, clean
 plugin system. Working on a real-time
 WebSocket reporter and a PyCharm plugin.
 
-> https://github.com/renaudcepre/protest
+

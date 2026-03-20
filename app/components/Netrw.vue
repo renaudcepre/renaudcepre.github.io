@@ -184,7 +184,7 @@ onMounted(() => {
       @click="handleClick(node)"
       @mouseenter="hoveredEntry = node.path"
       @mouseleave="hoveredEntry = null"
-    ><span :style="{ color: C.gutter }">{{ indent(node) }}</span>{{ node.isDir ? (expandedDirs.has(node.path) ? 'v ' : '> ') : '' }}{{ node.name }}{{ node.isDir ? '/' : '' }}</div>
+    ><span :style="{ color: C.gutter }">{{ indent(node) }}</span>{{ node.isDir ? (expandedDirs.has(node.path) ? 'v ' : '> ') : '' }}<span v-if="node.name.endsWith('.antres')" :style="{ color: C.green }">♪ </span>{{ node.name }}{{ node.isDir ? '/' : '' }}</div>
     <div
       v-for="i in 30"
       :key="`pad${i}`"

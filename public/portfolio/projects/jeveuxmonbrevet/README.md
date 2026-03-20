@@ -11,6 +11,8 @@ being condescending.
 
 ![](dashboard_screenshot.webp)
 
+![](card.webm)
+
 ## Features
 
 - **Spaced repetition** — SM-2 algorithm, Anki-style 4-button rating

@@ -1,0 +1,14 @@
+{
+  "title": "Space Dust",
+  "year": 2024,
+  "type": "EP",
+  "link": "https://soundcloud.com/antres808/sets/space-dust",
+  "tracks": [
+    { "title": "Postcards From EGSY8p7", "file": "postcards_from_egsy8p7.webm" },
+    { "title": "Tabernanthe Iboga", "file": "tabernanthe_iboga.webm" },
+    { "title": "The Midranan Empire's Downfall", "file": "the_midranan_empires_downfall.webm" },
+    { "title": "Cypress Shadows", "file": "cypress_shadows.webm" },
+    { "title": "Aeolian Currents", "file": "aeolian_currents.webm" },
+    { "title": "Crispy Crackles", "file": "crispy_crackles.webm" }
+  ]
+}

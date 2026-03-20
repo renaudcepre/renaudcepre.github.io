@@ -1,0 +1,11 @@
+{
+  "title": "The Junkyard of the Jettisoned",
+  "year": 2024,
+  "type": "EP",
+  "link": "https://soundcloud.com/antres808/sets/the-junkyard-of-the-jettisoned",
+  "tracks": [
+    { "title": "Oram GNZ11", "file": "oram_gnz11.webm" },
+    { "title": "Laplacian 535", "file": "laplacian_535.webm" },
+    { "title": "Nyquist N-2A0", "file": "nyquist_n2a0.webm" }
+  ]
+}

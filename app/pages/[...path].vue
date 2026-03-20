@@ -103,6 +103,7 @@ onMounted(() => {
         <EditorPane :file="activeFile" :files-map="filesMap" />
       </div>
     </div>
+    <PlayerBar />
     <StatusLine v-if="!isMobile" :file="activeFile" :files-map="filesMap" />
     <TmuxBar
       :is-mobile="isMobile"

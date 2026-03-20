@@ -13,7 +13,9 @@ const LANG_LABELS: Record<string, string> = {
   md: 'markdown',
   img: 'image',
   ansi: 'ansi',
-  txt: 'text'
+  txt: 'text',
+  audio: 'antres',
+  video: 'video'
 }
 const langLabel = computed(() => LANG_LABELS[data.value?.lang ?? ''] ?? data.value?.lang ?? '')
 </script>

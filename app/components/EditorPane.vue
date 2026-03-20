@@ -12,6 +12,9 @@ mdRenderer.heading = function ({ tokens, depth }) {
 }
 
 mdRenderer.image = function ({ href, text }) {
+  if (/\.(webm|mp4|mov|ogg)$/i.test(href)) {
+    return `<video src="${href}" controls loop muted playsinline></video>`
+  }
   return `<img src="${href}" alt="${text || ''}" />`
 }
 
@@ -69,6 +72,7 @@ const data = computed(() => props.filesMap[props.file])
 const isImage = computed(() => data.value?.lang === 'img')
 const isVideo = computed(() => data.value?.lang === 'video')
 const isAnsi = computed(() => data.value?.lang === 'ansi')
+const isAudio = computed(() => data.value?.lang === 'audio')
 const isMd = computed(() => data.value?.lang === 'md')
 const lines = computed(() => (isImage.value || isVideo.value) ? [] : (data.value?.content.split('\n') ?? []))
 const emptyRows = computed(() => (isImage.value || isVideo.value) ? 0 : Math.max(0, 40 - lines.value.length))
@@ -99,9 +103,9 @@ const renderedHtml = computed(() => {
   const fileDir = props.file.includes('/')
     ? 'portfolio/' + props.file.split('/').slice(0, -1).join('/')
     : 'portfolio'
-  html = html.replace(/<img([^>]*?)src="([^"]+)"([^>]*)>/g, (_match, pre, src, post) => {
+  html = html.replace(/<(img|video)([^>]*?)src="([^"]+)"([^>]*)>/g, (_match, tag, pre, src, post) => {
     if (src.startsWith('http') || src.startsWith('/')) return _match
-    return `<img${pre}src="/${fileDir}/${src}"${post}>`
+    return `<${tag}${pre}src="/${fileDir}/${src}"${post}>`
   })
   return html
 })
@@ -191,9 +195,15 @@ function handleMdClick(e: MouseEvent) {
         lineHeight: isAnsi ? '13px' : '21px',
       }"
     >
+      <!-- Audio player mode -->
+      <AudioPlayer
+        v-if="isAudio"
+        :content="data.content"
+      />
+
       <!-- Video mode -->
       <div
-        v-if="isVideo"
+        v-else-if="isVideo"
         :style="{
           display: 'flex',
           alignItems: 'center',
