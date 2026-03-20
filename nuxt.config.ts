@@ -5,7 +5,7 @@ export default defineNuxtConfig({
     '@nuxt/fonts'
   ],
 
-  ssr: true,
+  ssr: false,
 
   devtools: {
     enabled: true

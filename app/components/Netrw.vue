@@ -5,10 +5,12 @@ const props = defineProps<{
   activeFile: string
   visible: boolean
   fileList: string[]
+  isMobile: boolean
 }>()
 
 const emit = defineEmits<{
   select: [name: string]
+  close: []
 }>()
 
 const hoveredEntry = ref<string | null>(null)
@@ -116,7 +118,21 @@ onMounted(() => {
 <template>
   <div
     v-if="visible"
-    :style="{
+    :style="isMobile ? {
+      position: 'fixed',
+      top: '0',
+      left: '0',
+      width: '100%',
+      height: '100%',
+      zIndex: '50',
+      background: C.netrw,
+      fontFamily: FONT,
+      fontSize: '13px',
+      lineHeight: '36px',
+      overflowY: 'auto',
+      display: 'flex',
+      flexDirection: 'column',
+    } : {
       width: '280px',
       background: C.netrw,
       borderRight: `1px solid ${C.border}`,
@@ -124,11 +140,31 @@ onMounted(() => {
       fontSize: '13px',
       lineHeight: '21px',
       overflowY: 'auto',
-      flexShrink: 0,
+      flexShrink: '0',
       display: 'flex',
       flexDirection: 'column',
     }"
   >
+    <div
+      v-if="isMobile"
+      :style="{
+        display: 'flex',
+        justifyContent: 'flex-end',
+        padding: '8px 12px',
+        borderBottom: `1px solid ${C.border}`,
+      }"
+    >
+      <span
+        :style="{
+          cursor: 'pointer',
+          color: C.fg,
+          fontSize: '20px',
+          lineHeight: '1',
+          padding: '4px 8px',
+        }"
+        @click="emit('close')"
+      >✕</span>
+    </div>
     <div :style="{ padding: '0 10px', color: C.comment, whiteSpace: 'pre' }"> " ==========================================</div>
     <div :style="{ padding: '0 10px', color: C.comment, whiteSpace: 'pre' }"> "   rcepre / portfolio</div>
     <div :style="{ padding: '0 10px', color: C.comment, whiteSpace: 'pre' }"> "   last release: 2025</div>

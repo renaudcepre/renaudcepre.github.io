@@ -4,6 +4,7 @@ import { C, FONT } from '~/utils/portfolio'
 defineProps<{
   openTabs: string[]
   activeFile: string
+  isMobile: boolean
 }>()
 
 const emit = defineEmits<{
@@ -16,24 +17,26 @@ const emit = defineEmits<{
     :style="{
       display: 'flex',
       background: C.tabBg,
-      minHeight: '21px',
-      maxHeight: '21px',
+      minHeight: isMobile ? '32px' : '21px',
+      maxHeight: isMobile ? '32px' : '21px',
       borderBottom: `1px solid ${C.border}`,
       flexShrink: 0,
       fontFamily: FONT,
       fontSize: '12px',
-      overflow: 'hidden',
+      overflowX: isMobile ? 'auto' : 'hidden',
     }"
   >
     <div
       v-for="(tab, i) in openTabs"
       :key="tab"
       :style="{
-        padding: '2px 10px',
+        padding: isMobile ? '4px 14px' : '2px 10px',
         cursor: 'pointer',
         background: tab === activeFile ? C.tabActive : C.tabBg,
         color: tab === activeFile ? C.fg : C.comment,
         borderRight: `1px solid ${C.border}`,
+        whiteSpace: 'nowrap',
+        flexShrink: 0,
       }"
       @click="emit('tabClick', tab)"
     >

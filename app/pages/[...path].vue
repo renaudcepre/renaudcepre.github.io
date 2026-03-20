@@ -6,6 +6,7 @@ definePageMeta({ key: 'main' })
 const route = useRoute()
 const router = useRouter()
 const { fileList, filesMap, loadContent } = usePortfolioFiles()
+const { isMobile } = useBreakpoint()
 
 const fileFromRoute = computed(() => {
   const segments = route.params.path
@@ -25,6 +26,7 @@ async function openFile(name: string) {
   }
   await loadContent(name)
   router.replace('/' + name)
+  if (isMobile.value) showNetrw.value = false
 }
 
 // Sync depuis l'URL (navigation externe, lien partagé)
@@ -40,6 +42,13 @@ watch(fileList, async (list) => {
   await loadContent(list.includes(target) ? target : 'README.md')
   if (!list.includes(target)) activeFile.value = 'README.md'
 }, { immediate: true })
+
+// Restore sidebar quand on repasse en desktop
+watch(isMobile, (val) => {
+  if (!val) showNetrw.value = true
+})
+
+if (isMobile.value) showNetrw.value = false
 
 onMounted(() => {
   loaded.value = true
@@ -76,20 +85,27 @@ onMounted(() => {
     <VimTabs
       :open-tabs="openTabs"
       :active-file="activeFile"
+      :is-mobile="isMobile"
       @tab-click="openFile($event)"
     />
-    <div :style="{ display: 'flex', flex: 1, overflow: 'hidden' }">
+    <div :style="{ display: 'flex', flex: 1, overflow: 'hidden', position: 'relative' }">
       <Netrw
         :active-file="activeFile"
         :visible="showNetrw"
         :file-list="fileList"
+        :is-mobile="isMobile"
         @select="openFile"
+        @close="showNetrw = false"
       />
       <div :style="{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden' }">
         <EditorPane :file="activeFile" :files-map="filesMap" />
       </div>
     </div>
-    <StatusLine :file="activeFile" :files-map="filesMap" />
-    <TmuxBar />
+    <StatusLine v-if="!isMobile" :file="activeFile" :files-map="filesMap" />
+    <TmuxBar
+      :is-mobile="isMobile"
+      :show-netrw="showNetrw"
+      @toggle-netrw="showNetrw = !showNetrw"
+    />
   </div>
 </template>

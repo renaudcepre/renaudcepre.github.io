@@ -116,7 +116,7 @@ function handleMdClick(e: MouseEvent) {
           color: renderedMode ? C.blue : C.bg,
         }"
         @click="renderedMode = true"
-      >1:✨render{{ renderedMode ? '*' : '' }}</span>
+      >1:render{{ renderedMode ? '*' : '' }}</span>
     </div>
 
     <div

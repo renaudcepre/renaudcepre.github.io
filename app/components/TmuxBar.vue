@@ -1,6 +1,15 @@
 <script setup lang="ts">
 import { C, FONT } from '~/utils/portfolio'
 
+defineProps<{
+  isMobile: boolean
+  showNetrw?: boolean
+}>()
+
+const emit = defineEmits<{
+  toggleNetrw: []
+}>()
+
 const currentTime = ref('')
 
 onMounted(() => {
@@ -16,7 +25,7 @@ onMounted(() => {
 <template>
   <div
     :style="{
-      height: '19px',
+      height: isMobile ? '32px' : '19px',
       background: C.green,
       display: 'flex',
       alignItems: 'center',
@@ -29,13 +38,34 @@ onMounted(() => {
     }"
   >
     <div :style="{ display: 'flex', alignItems: 'center', height: '100%' }">
-      <span :style="{ background: '#2d4f2d', color: C.green, padding: '0 6px', fontWeight: 700 }">[0]</span>
-      <span :style="{ padding: '0 6px', fontWeight: 700, background: '#1a3d1a', color: C.green }">0:nvim*</span>
-      <span :style="{ padding: '0 6px' }">1:zsh</span>
-      <span :style="{ padding: '0 6px' }">2:htop</span>
+      <span
+        v-if="isMobile"
+        :style="{
+          background: '#2d4f2d',
+          color: C.green,
+          padding: '0 12px',
+          fontWeight: 700,
+          fontSize: '18px',
+          height: '100%',
+          display: 'flex',
+          alignItems: 'center',
+          cursor: 'pointer',
+        }"
+        @click="emit('toggleNetrw')"
+      >≡</span>
+      <a
+        href="https://github.com/renaudcepre"
+        target="_blank"
+        rel="noopener"
+        :style="{
+          padding: '0 8px',
+          color: C.bg,
+          textDecoration: 'none',
+        }"
+      >github.com/renaudcepre</a>
     </div>
     <div :style="{ padding: '0 8px' }">
-      <ClientOnly>"renaud@dieulefit" {{ currentTime }}</ClientOnly>
+      <ClientOnly>{{ currentTime }}</ClientOnly>
     </div>
   </div>
 </template>
