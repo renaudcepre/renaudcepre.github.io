@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { marked } from 'marked'
-import { C, FONT } from '~/utils/portfolio'
+import { C, FONT, tokAnsi } from '~/utils/portfolio'
 
 const props = defineProps<{
   file: string
@@ -20,9 +20,33 @@ watch(() => props.file, () => {
   renderedMode.value = false
 })
 
+function ansiToHtml(content: string): string {
+  const lines = content.split('\n')
+  const linesHtml = lines.map((line) => {
+    const toks = tokAnsi(line)
+    const spans = toks.map((tok) => {
+      const s = [`color:${tok.c}`]
+      if (tok.bg) s.push(`background:${tok.bg}`)
+      if (tok.b) s.push('font-weight:700')
+      return `<span style="${s.join(';')}">${tok.t.replace(/&/g, '&amp;').replace(/</g, '&lt;')}</span>`
+    }).join('')
+    return `<div style="display:flex;min-height:13px;line-height:13px">${spans}</div>`
+  }).join('')
+  return `<div style="font-family:${FONT};font-size:13px;background:${C.bg};padding:12px;border-radius:4px;overflow-x:auto;margin:1em 0">${linesHtml}</div>`
+}
+
 const renderedHtml = computed(() => {
   if (!isMd.value || !data.value?.content) return ''
-  return marked(data.value.content) as string
+  let html = marked(data.value.content) as string
+  // Remplace <img src="*.ansi"> par le rendu ANSI inline
+  html = html.replace(/<img[^>]*src="([^"]+\.ansi)"[^>]*>/g, (_match, src) => {
+    // src peut être relatif ex: "me.ansi" → chercher dans filesMap
+    const filename = src.replace(/^.*\//, '') // prendre juste le nom de fichier
+    const ansiFile = Object.entries(props.filesMap).find(([name]) => name.endsWith(filename))
+    if (!ansiFile || !ansiFile[1].content) return `<code>${src}</code>`
+    return ansiToHtml(ansiFile[1].content)
+  })
+  return html
 })
 
 const router = useRouter()

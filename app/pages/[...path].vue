@@ -25,6 +25,11 @@ async function openFile(name: string) {
   }
   await loadContent(name)
   router.replace('/' + name)
+  // Précharge les fichiers ANSI référencés dans un markdown
+  if (name.endsWith('.md') && filesMap.value[name]?.content) {
+    const refs = [...filesMap.value[name].content.matchAll(/!\[[^\]]*\]\(([^)]+\.ansi)\)/g)]
+    await Promise.all(refs.map(m => loadContent(m[1].replace(/^.*\//, ''))))
+  }
 }
 
 // Sync depuis l'URL (navigation externe, lien partagé)

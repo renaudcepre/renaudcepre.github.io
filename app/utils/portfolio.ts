@@ -142,10 +142,13 @@ export function tokMd(line: string): Token[] {
     return parts.map(p => ({ t: p, c: p.startsWith('.') ? C.comment : C.func }))
   }
   const toks: Token[] = []
-  const re = /(\[([^\]]+)\]\(([^)]+)\)|`[^`]+`|[^`\[]+)/g
+  const re = /(!\[[^\]]*\]\([^)]*\)|\[([^\]]*)\]\(([^)]+)\)|`[^`]+`|[^`\[!]+|[!](?!\[)|[`\[])/g
   let mm
   while ((mm = re.exec(line)) !== null) {
-    if (mm[0].startsWith('[') && mm[2] && mm[3]) {
+    if (mm[0].startsWith('![')) {
+      toks.push({ t: mm[0], c: C.magenta })
+    }
+    else if (mm[0].startsWith('[') && mm[3]) {
       toks.push({ t: mm[0], c: C.func, href: mm[3] })
     }
     else if (mm[0].startsWith('`')) {

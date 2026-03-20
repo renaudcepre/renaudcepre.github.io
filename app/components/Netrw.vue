@@ -129,21 +129,11 @@ onMounted(() => {
       flexDirection: 'column',
     }"
   >
-    <div :style="{ padding: '0 10px', color: C.comment, whiteSpace: 'pre' }">
-      " ============================================
-    </div>
-    <div :style="{ padding: '0 10px', color: C.comment, whiteSpace: 'pre' }">
-      "   netrw v173: ~/portfolio/
-    </div>
-    <div :style="{ padding: '0 10px', color: C.comment, whiteSpace: 'pre' }">
-      "   Sorted by      name
-    </div>
-    <div :style="{ padding: '0 10px', color: C.comment, whiteSpace: 'pre' }">
-      "   Quick Help: &lt;F1&gt;:help
-    </div>
-    <div :style="{ padding: '0 10px', color: C.comment, whiteSpace: 'pre' }">
-      " ============================================
-    </div>
+    <div :style="{ padding: '0 10px', color: C.comment, whiteSpace: 'pre' }"> " ==========================================</div>
+    <div :style="{ padding: '0 10px', color: C.comment, whiteSpace: 'pre' }"> "   rcepre / portfolio</div>
+    <div :style="{ padding: '0 10px', color: C.comment, whiteSpace: 'pre' }"> "   last release: 2025</div>
+    <div :style="{ padding: '0 10px', color: C.comment, whiteSpace: 'pre' }"> "   ^e  toggle explorer</div>
+    <div :style="{ padding: '0 10px', color: C.comment, whiteSpace: 'pre' }"> " ==========================================</div>
     <div
       v-for="node in flatTree"
       :key="node.path"
