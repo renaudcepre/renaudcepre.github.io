@@ -14,7 +14,7 @@ const emit = defineEmits<{
 }>()
 
 const hoveredEntry = ref<string | null>(null)
-const expandedDirs = ref<Set<string>>(new Set())
+const expandedDirs = ref<Record<string, boolean>>({})
 const sidebarWidth = ref(280)
 
 function startResize(e: MouseEvent) {
@@ -74,7 +74,7 @@ function flatten(nodes: TreeNode[]): TreeNode[] {
   const result: TreeNode[] = []
   for (const node of nodes) {
     result.push(node)
-    if (node.isDir && node.children && expandedDirs.value.has(node.path)) {
+    if (node.isDir && node.children && expandedDirs.value[node.path]) {
       result.push(...flatten(node.children))
     }
   }
@@ -84,13 +84,10 @@ function flatten(nodes: TreeNode[]): TreeNode[] {
 const flatTree = computed(() => flatten(tree.value))
 
 function toggleDir(path: string) {
-  const s = new Set(expandedDirs.value)
-  if (s.has(path)) {
-    s.delete(path)
-  } else {
-    s.add(path)
-  }
-  expandedDirs.value = s
+  const was = expandedDirs.value[path]
+  expandedDirs.value[path] = !was
+  console.log('[Netrw] toggleDir', path, was, '->', expandedDirs.value[path])
+  console.log('[Netrw] expandedDirs now:', JSON.stringify(expandedDirs.value))
 }
 
 function handleClick(node: TreeNode) {
@@ -117,19 +114,41 @@ function indent(node: TreeNode): string {
   return '·'.repeat(node.depth * 2) + ' '
 }
 
-// expand all dirs on mount
-onMounted(() => {
-  const dirs = new Set<string>()
-  for (const f of props.fileList) {
+function fileIcon(name: string): string | null {
+  const ext = name.slice(name.lastIndexOf('.'))
+  const icons: Record<string, string> = {
+    '.md': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><rect x="1" y="1" width="6" height="8" fill="#a0a0a0"/><polygon points="7,1 7,3 9,3" fill="#a0a0a0"/><rect x="7" y="3" width="2" height="6" fill="#a0a0a0"/><rect x="1" y="1" width="8" height="2" fill="none" stroke="#000" stroke-width="0.5"/><rect x="3" y="4" width="4" height="1" fill="#000"/><rect x="3" y="6" width="4" height="1" fill="#000"/></svg>`,
+    '.py': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><rect x="1" y="3" width="2" height="2" fill="#a0a0a0"/><rect x="3" y="5" width="2" height="2" fill="#a0a0a0"/><rect x="5" y="3" width="2" height="2" fill="#000"/><rect x="7" y="5" width="2" height="2" fill="#000"/></svg>`,
+    '.txt': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><rect x="1" y="1" width="6" height="8" fill="#a0a0a0"/><polygon points="7,1 7,3 9,3" fill="#a0a0a0"/><rect x="7" y="3" width="2" height="6" fill="#a0a0a0"/><rect x="3" y="4" width="4" height="1" fill="#000"/><rect x="3" y="6" width="3" height="1" fill="#000"/><rect x="3" y="8" width="4" height="1" fill="#000"/></svg>`,
+    '.ansi': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><rect x="1" y="1" width="2" height="2" fill="#000"/><rect x="3" y="1" width="2" height="2" fill="#a0a0a0"/><rect x="5" y="1" width="2" height="2" fill="#000"/><rect x="7" y="1" width="2" height="2" fill="#a0a0a0"/><rect x="1" y="3" width="2" height="2" fill="#a0a0a0"/><rect x="3" y="3" width="2" height="2" fill="#000"/><rect x="5" y="3" width="2" height="2" fill="#a0a0a0"/><rect x="7" y="3" width="2" height="2" fill="#000"/><rect x="1" y="5" width="2" height="2" fill="#000"/><rect x="3" y="5" width="2" height="2" fill="#a0a0a0"/><rect x="5" y="5" width="2" height="2" fill="#000"/><rect x="7" y="5" width="2" height="2" fill="#a0a0a0"/><rect x="1" y="7" width="2" height="2" fill="#a0a0a0"/><rect x="3" y="7" width="2" height="2" fill="#000"/><rect x="5" y="7" width="2" height="2" fill="#a0a0a0"/><rect x="7" y="7" width="2" height="2" fill="#000"/></svg>`,
+    '.antres': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><rect x="5" y="1" width="2" height="6" fill="#000"/><rect x="3" y="1" width="2" height="2" fill="#a0a0a0"/><rect x="7" y="1" width="2" height="2" fill="#a0a0a0"/><circle cx="4" cy="8" r="1.5" fill="#a0a0a0"/><circle cx="4" cy="8" r="1.5" stroke="#000" stroke-width="0.5" fill="#a0a0a0"/></svg>`,
+    '.webp': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><rect x="1" y="1" width="8" height="8" fill="#a0a0a0" stroke="#000" stroke-width="0.5"/><polygon points="2,8 5,4 8,8" fill="#000"/><circle cx="7" cy="3" r="1" fill="#000"/></svg>`,
+    '.webm': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><rect x="1" y="2" width="8" height="6" fill="#a0a0a0" stroke="#000" stroke-width="0.5"/><polygon points="4,4 4,7 7,5.5" fill="#000"/></svg>`,
+  }
+  const svg = icons[ext]
+  if (!svg) return null
+  return `data:image/svg+xml,${encodeURIComponent(svg)}`
+}
+
+// expand all dirs when fileList is available
+watch(() => props.fileList, (list) => {
+  const expanded: Record<string, boolean> = {}
+  for (const f of list) {
     const parts = f.split('/')
     let p = ''
     for (let i = 0; i < parts.length - 1; i++) {
       p += (i > 0 ? '/' : '') + parts[i]
-      dirs.add(p)
+      expanded[p] = true
     }
   }
-  expandedDirs.value = dirs
-})
+  console.log('[Netrw] watch fileList fired, dirs to expand:', Object.keys(expanded))
+  expandedDirs.value = expanded
+  console.log('[Netrw] expandedDirs after set:', JSON.stringify(expandedDirs.value))
+}, { immediate: true })
+
+watch(expandedDirs, (val) => {
+  console.log('[Netrw] expandedDirs changed:', JSON.stringify(val))
+}, { deep: true })
 </script>
 
 <template>
@@ -208,7 +227,7 @@ onMounted(() => {
       @click="handleClick(node)"
       @mouseenter="hoveredEntry = node.path"
       @mouseleave="hoveredEntry = null"
-    ><span :style="{ color: C.gutter }">{{ indent(node) }}</span>{{ node.isDir ? (expandedDirs.has(node.path) ? 'v ' : '> ') : '' }}<span v-if="node.name.endsWith('.antres')" :style="{ color: C.green }">♪ </span>{{ node.name }}{{ node.isDir ? '/' : '' }}</div>
+    ><span :style="{ color: C.gutter }">{{ indent(node) }}</span><span v-if="node.isDir">{{ expandedDirs[node.path] ? '▾ ' : '▸ ' }}</span><img v-if="!node.isDir && fileIcon(node.name)" :src="fileIcon(node.name)!" :style="{ width: '10px', height: '10px', marginRight: '4px', verticalAlign: 'middle', imageRendering: 'pixelated', display: 'inline-block' }">{{ node.name }}{{ node.isDir ? '/' : '' }}</div>
     </div>
     <!-- Resize handle -->
     <div
