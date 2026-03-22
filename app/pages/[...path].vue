@@ -24,7 +24,7 @@ onMounted(() => {
 
 const fileFromRoute = computed(() => {
   const segments = route.params.path
-  if (!segments || (Array.isArray(segments) && segments.length === 0)) return 'README.md'
+  if (!segments || (Array.isArray(segments) && segments.length === 0)) return 'hello-world.html'
   return Array.isArray(segments) ? segments.join('/') : segments
 })
 
@@ -53,8 +53,8 @@ watch(fileFromRoute, async (name) => {
 watch(fileList, async (list) => {
   if (!list.length) return
   const target = fileFromRoute.value
-  await loadContent(list.includes(target) ? target : 'README.md')
-  if (!list.includes(target)) activeFile.value = 'README.md'
+  await loadContent(list.includes(target) ? target : 'hello-world.html')
+  if (!list.includes(target)) activeFile.value = 'hello-world.html'
 }, { immediate: true })
 
 // Restore sidebar when switching back to desktop

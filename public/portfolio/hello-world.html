@@ -1,51 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+  .hw { display: flex; align-items: center; justify-content: center; min-height: 100%; letter-spacing: normal; }
+  .hw-container { text-align: center; padding: 2rem; }
 
-  body {
-    background: #0a0e14;
-    color: #bfbdb6;
-    font-family: 'JetBrains Mono', 'Cascadia Mono', 'SF Mono', monospace;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    overflow: hidden;
-  }
-
-  .container {
-    text-align: center;
-    padding: 2rem;
-  }
-
-  h1 {
+  .hw h1 {
     font-size: 2.4rem;
     font-weight: 700;
+    line-height: 1.2;
     margin-bottom: 0.6rem;
     background: linear-gradient(135deg, #73d0ff, #dfbfff, #f29e74);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    animation: shift 4s ease-in-out infinite alternate;
+    animation: hw-shift 4s ease-in-out infinite alternate;
     background-size: 200% 200%;
   }
 
-  @keyframes shift {
+  @keyframes hw-shift {
     0%   { background-position: 0% 50%; }
     100% { background-position: 100% 50%; }
   }
 
-  .subtitle {
-    color: #acb6bf88;
-    font-size: 0.85rem;
-    margin-bottom: 2rem;
-  }
+  .hw-subtitle { color: #acb6bf88; font-size: 0.85rem; margin-bottom: 2rem; }
 
-  .prompt {
+  .hw-prompt {
     font-size: 0.9rem;
     color: #bfbdb6;
     line-height: 1.8;
@@ -53,26 +30,24 @@
     display: inline-block;
   }
 
-  .prompt .c { color: #acb6bf55; }
-  .prompt .g { color: #aad94c; }
-  .prompt .y { color: #e6b450; }
-  .prompt .b { color: #73d0ff; }
-  .prompt .m { color: #dfbfff; }
+  .hw-prompt .c { color: #acb6bf55; }
+  .hw-prompt .g { color: #aad94c; }
+  .hw-prompt .y { color: #e6b450; }
+  .hw-prompt .b { color: #73d0ff; }
+  .hw-prompt .m { color: #dfbfff; }
 
-  .cursor {
+  .hw-cursor {
     display: inline-block;
     width: 8px;
     height: 1.1em;
     background: #e6b450;
     vertical-align: text-bottom;
-    animation: blink 1s step-end infinite;
+    animation: hw-blink 1s step-end infinite;
   }
 
-  @keyframes blink {
-    50% { opacity: 0; }
-  }
+  @keyframes hw-blink { 50% { opacity: 0; } }
 
-  .links {
+  .hw-links {
     margin-top: 2rem;
     display: flex;
     gap: 1.2rem;
@@ -80,7 +55,7 @@
     flex-wrap: wrap;
   }
 
-  .links a {
+  .hw-links a {
     color: #73d0ff;
     text-decoration: none;
     font-size: 0.8rem;
@@ -88,32 +63,29 @@
     transition: border-color 0.2s;
   }
 
-  .links a:hover {
-    border-color: #73d0ff;
-  }
+  .hw-links a:hover { border-color: #73d0ff; }
 </style>
-</head>
-<body>
-  <div class="container">
-    <h1>Hello, World</h1>
-    <div class="subtitle">senior python dev &middot; audio &middot; electronic music</div>
 
-    <div class="prompt">
+<div class="hw">
+  <div class="hw-container">
+    <h1>Hello, World</h1>
+    <div class="hw-subtitle">senior python dev &middot; audio &middot; electronic music</div>
+
+    <div class="hw-prompt">
       <span class="c"># </span><span class="g">whoami</span><br>
       <span class="m">Started at 42</span> <span class="c">&mdash;</span> Corewar in C, graph theory, the whole common core.<br>
       <span class="c"># </span><span class="g">now</span><br>
       Python backend, software architecture, and electronic music.<br>
       <span class="c"># </span><span class="g">ls</span> <span class="y">portfolio/</span><br>
       <span class="b">about.md</span> &nbsp; <span class="b">skills.md</span> &nbsp; <span class="b">audio/</span> &nbsp; <span class="b">projects/</span><br>
-      <span class="c">&gt;</span> <span class="cursor"></span>
+      <span class="c">&gt;</span> <span class="hw-cursor">&nbsp;</span>
     </div>
 
-    <div class="links">
+    <div class="hw-links">
       <a href="/about">about.md</a>
       <a href="/skills">skills.md</a>
       <a href="/audio">audio/</a>
       <a href="/projects">projects/</a>
     </div>
   </div>
-</body>
-</html>
+</div>

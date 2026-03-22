@@ -186,13 +186,13 @@ function handleMdClick(e: MouseEvent) {
         background: C.blue,
         display: 'flex',
         alignItems: 'center',
+        justifyContent: 'center',
         fontFamily: FONT,
         fontSize: '11px',
         flexShrink: 0,
         userSelect: 'none',
       }"
     >
-      <span :style="{ background: C.statusBg, color: C.blue, padding: '0 6px', fontWeight: 700, height: '100%', display: 'flex', alignItems: 'center' }">[1]</span>
       <span
         :style="{
           padding: '0 6px',
@@ -310,17 +310,12 @@ function handleMdClick(e: MouseEvent) {
         @click="handleMdClick"
       />
 
-      <!-- Rendered HTML mode (iframe sandbox) -->
-      <iframe
+      <!-- Rendered HTML mode -->
+      <div
         v-else-if="isHtml && renderedMode"
-        :srcdoc="data.content"
-        sandbox="allow-scripts"
-        :style="{
-          width: '100%',
-          height: '100%',
-          border: 'none',
-          background: 'transparent',
-        }"
+        class="html-rendered"
+        :style="{ height: '100%', overflow: 'auto' }"
+        v-html="data.content"
       />
 
       <!-- Code / text mode -->
