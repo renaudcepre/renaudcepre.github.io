@@ -184,6 +184,39 @@ export function tokTxt(line: string): Token[] {
   return [{ t: line, c: C.fg }]
 }
 
+export function tokJson(line: string): Token[] {
+  const toks: Token[] = []
+  const re = /("(?:[^"\\]|\\.)*"\s*:\s*|"(?:[^"\\]|\\.)*"|\b(?:true|false|null)\b|-?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?|[{}\[\]:,]|\s+)/g
+  let m
+  while ((m = re.exec(line)) !== null) {
+    const t = m[0]
+    if (t.match(/^".*":\s*$/)) toks.push({ t, c: C.cyan })
+    else if (t.startsWith('"')) toks.push({ t, c: C.string })
+    else if (/^-?\d/.test(t)) toks.push({ t, c: C.number })
+    else if (t === 'true' || t === 'false' || t === 'null') toks.push({ t, c: C.keyword })
+    else if (/^[{}\[\]]$/.test(t)) toks.push({ t, c: C.yellow })
+    else toks.push({ t, c: C.fg })
+  }
+  return toks
+}
+
+export function tokHtml(line: string): Token[] {
+  const toks: Token[] = []
+  const re = /(<!--[\s\S]*?-->|<\/?\w[\w-]*|\/?>|"[^"]*"|'[^']*'|[a-zA-Z][\w-]*(?==)|&\w+;|[^<>"'&]+|[<>"'&])/g
+  let m
+  while ((m = re.exec(line)) !== null) {
+    const t = m[0]
+    if (t.startsWith('<!--')) toks.push({ t, c: C.comment })
+    else if (t.startsWith('</') || t.startsWith('<')) toks.push({ t, c: C.red })
+    else if (t === '/>' || t === '>') toks.push({ t, c: C.red })
+    else if ((t.startsWith('"') || t.startsWith("'")) && t.length > 1) toks.push({ t, c: C.string })
+    else if (/^[a-zA-Z][\w-]*$/.test(t) && line.charAt(m.index + t.length) === '=') toks.push({ t, c: C.yellow })
+    else if (t.startsWith('&') && t.endsWith(';')) toks.push({ t, c: C.number })
+    else toks.push({ t, c: C.fg })
+  }
+  return toks
+}
+
 export function tokMd(line: string): Token[] {
   if (line.startsWith('# ')) return [{ t: line, c: C.red, b: true }]
   if (line.startsWith('## ')) return [{ t: line, c: C.yellow, b: true }]

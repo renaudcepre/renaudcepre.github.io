@@ -1,10 +1,12 @@
 <script setup lang="ts">
-import { tokPy, tokMd, tokAnsi, tokTxt } from '~/utils/portfolio'
+import { tokPy, tokMd, tokHtml, tokJson, tokAnsi, tokTxt } from '~/utils/portfolio'
 import type { Token } from '~/utils/portfolio'
 
 const tokenizers: Record<string, (line: string) => Token[]> = {
   py: tokPy,
   md: tokMd,
+  html: tokHtml,
+  audio: tokJson,
   ansi: tokAnsi,
   txt: tokTxt
 }

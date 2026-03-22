@@ -90,17 +90,36 @@ const isVideo = computed(() => data.value?.lang === 'video')
 const isAnsi = computed(() => data.value?.lang === 'ansi')
 const isAudio = computed(() => data.value?.lang === 'audio')
 const isMd = computed(() => data.value?.lang === 'md')
+const isHtml = computed(() => data.value?.lang === 'html')
+const hasRenderMode = computed(() => isMd.value || isHtml.value || isAudio.value)
 const lines = computed(() => (isImage.value || isVideo.value) ? [] : (data.value?.content.split('\n') ?? []))
 const emptyRows = computed(() => (isImage.value || isVideo.value) ? 0 : Math.max(0, 40 - lines.value.length))
 
 const contentRef = ref<HTMLElement | null>(null)
 const { reveal } = useScrambleReveal()
 
-const renderedMode = useState('md-rendered-mode', () => false)
+const renderModePerFile = reactive<Record<string, boolean | undefined>>({})
+
+const renderedMode = computed({
+  get: () => renderModePerFile[props.file] ?? false,
+  set: (val: boolean) => { renderModePerFile[props.file] = val }
+})
+
+const defaultRenderLangs = new Set(['audio', 'html'])
+
+function initRenderDefault(file: string) {
+  if (renderModePerFile[file] != null) return
+  const entry = props.filesMap[file]
+  if (!entry?.lang) return
+  renderModePerFile[file] = defaultRenderLangs.has(entry.lang)
+}
+
+watch(() => props.file, (file) => initRenderDefault(file), { immediate: true })
+watch(() => data.value?.lang, () => initRenderDefault(props.file))
 
 onMounted(() => {
   const handler = (e: KeyboardEvent) => {
-    if (e.key === 'r' && e.ctrlKey && isMd.value) {
+    if (e.key === 'r' && e.ctrlKey && hasRenderMode.value) {
       e.preventDefault()
       renderedMode.value = !renderedMode.value
     }
@@ -159,9 +178,9 @@ function handleMdClick(e: MouseEvent) {
       fontSize: '13px',
     }"
   >
-    <!-- Mini tmux bar for markdown files -->
+    <!-- Mini tmux bar for renderable files -->
     <div
-      v-if="isMd"
+      v-if="hasRenderMode"
       :style="{
         height: '19px',
         background: C.blue,
@@ -220,9 +239,9 @@ function handleMdClick(e: MouseEvent) {
           lineHeight: isAnsi ? '13px' : '21px',
         }"
       >
-      <!-- Audio player mode -->
+      <!-- Audio player mode (render) -->
       <AudioPlayer
-        v-if="isAudio"
+        v-if="isAudio && renderedMode"
         :content="data.content"
       />
 
@@ -289,6 +308,19 @@ function handleMdClick(e: MouseEvent) {
         } as any"
         v-html="renderedHtml"
         @click="handleMdClick"
+      />
+
+      <!-- Rendered HTML mode (iframe sandbox) -->
+      <iframe
+        v-else-if="isHtml && renderedMode"
+        :srcdoc="data.content"
+        sandbox="allow-scripts"
+        :style="{
+          width: '100%',
+          height: '100%',
+          border: 'none',
+          background: 'transparent',
+        }"
       />
 
       <!-- Code / text mode -->
