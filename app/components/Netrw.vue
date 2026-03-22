@@ -84,10 +84,7 @@ function flatten(nodes: TreeNode[]): TreeNode[] {
 const flatTree = computed(() => flatten(tree.value))
 
 function toggleDir(path: string) {
-  const was = expandedDirs.value[path]
-  expandedDirs.value[path] = !was
-  console.log('[Netrw] toggleDir', path, was, '->', expandedDirs.value[path])
-  console.log('[Netrw] expandedDirs now:', JSON.stringify(expandedDirs.value))
+  expandedDirs.value[path] = !expandedDirs.value[path]
 }
 
 function handleClick(node: TreeNode) {
@@ -141,14 +138,8 @@ watch(() => props.fileList, (list) => {
       expanded[p] = true
     }
   }
-  console.log('[Netrw] watch fileList fired, dirs to expand:', Object.keys(expanded))
   expandedDirs.value = expanded
-  console.log('[Netrw] expandedDirs after set:', JSON.stringify(expandedDirs.value))
 }, { immediate: true })
-
-watch(expandedDirs, (val) => {
-  console.log('[Netrw] expandedDirs changed:', JSON.stringify(val))
-}, { deep: true })
 </script>
 
 <template>

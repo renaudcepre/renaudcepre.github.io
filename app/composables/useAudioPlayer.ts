@@ -113,6 +113,10 @@ export function useAudioPlayer() {
     }
   }
 
+  function getAudioElement(): HTMLAudioElement | null {
+    return audio
+  }
+
   return {
     album: readonly(album),
     trackIndex: readonly(trackIndex),
@@ -124,5 +128,6 @@ export function useAudioPlayer() {
     seek,
     skipNext,
     skipPrev,
+    getAudioElement,
   }
 }

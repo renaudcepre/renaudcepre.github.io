@@ -2,6 +2,22 @@
 import { marked, Renderer } from 'marked'
 import { C, FONT } from '~/utils/portfolio'
 
+const { playing, getAudioElement } = useAudioPlayer()
+const { bands, connect } = useSpectrumAnalyser()
+const spectrumActive = ref(false)
+
+watch(playing, (val) => {
+  if (val) {
+    const el = getAudioElement()
+    if (el) {
+      connect(el, playing)
+      spectrumActive.value = true
+    }
+  } else {
+    spectrumActive.value = false
+  }
+})
+
 const mdRenderer = new Renderer()
 
 mdRenderer.heading = function ({ tokens, depth }) {
@@ -186,15 +202,24 @@ function handleMdClick(e: MouseEvent) {
       >1:render{{ renderedMode ? '*' : '' }}</span>
     </div>
 
-    <div
-      ref="contentRef"
-      :style="{
-        flex: 1,
-        overflowY: 'auto',
-        overflowX: 'auto',
-        lineHeight: isAnsi ? '13px' : '21px',
-      }"
-    >
+    <div :style="{ flex: 1, position: 'relative', overflow: 'hidden' }">
+      <SpectrumOverlay
+        v-if="spectrumActive"
+        :bands="bands"
+        :color="C.green"
+        :opacity="0.07"
+      />
+      <div
+        ref="contentRef"
+        :style="{
+          position: 'relative',
+          zIndex: 1,
+          height: '100%',
+          overflowY: 'auto',
+          overflowX: 'auto',
+          lineHeight: isAnsi ? '13px' : '21px',
+        }"
+      >
       <!-- Audio player mode -->
       <AudioPlayer
         v-if="isAudio"
@@ -331,6 +356,7 @@ function handleMdClick(e: MouseEvent) {
           </div>
         </template>
       </template>
+    </div>
     </div>
   </div>
 </template>
