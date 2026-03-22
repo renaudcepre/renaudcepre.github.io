@@ -25,6 +25,12 @@ export default defineNuxtConfig({
 
   css: ['~/assets/css/main.css'],
 
+  fonts: {
+    families: [
+      { name: 'JetBrainsMono Nerd Font', local: 'JetBrainsMono Nerd Font' }
+    ]
+  },
+
   compatibilityDate: '2025-03-19',
 
   eslint: {

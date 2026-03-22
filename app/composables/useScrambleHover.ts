@@ -44,6 +44,14 @@ export function useScrambleHover() {
     }, 40)
   }
 
+  function getWordBounds(text: string, charIndex: number): [number, number] {
+    let start = charIndex
+    let end = charIndex
+    while (start > 0 && text[start - 1].trim() !== '') start--
+    while (end < text.length && text[end].trim() !== '') end++
+    return [start, end]
+  }
+
   function processNode(node: Text, mx: number, my: number) {
     if (isScrambleProtected(node)) return
     const text = active.has(node) ? active.get(node)!.original : node.textContent || ''
@@ -52,6 +60,8 @@ export function useScrambleHover() {
     const range = document.createRange()
     const scrambled = new Array(text.length).fill(false)
     let anyHit = false
+    let closestIdx = -1
+    let closestDist = Infinity
 
     for (let i = 0; i < text.length; i++) {
       if (text[i].trim() === '') continue
@@ -62,9 +72,24 @@ export function useScrambleHover() {
       const cy = rect.top + rect.height / 2
       const dx = (mx - cx) / RADIUS_X
       const dy = (my - cy) / RADIUS_Y
-      if (dx * dx + dy * dy < 1) {
+      const dist = dx * dx + dy * dy
+      if (dist < 1) {
         scrambled[i] = true
         anyHit = true
+      }
+      // Track the closest character to cursor (raw pixel distance)
+      const rawDist = (mx - cx) ** 2 + (my - cy) ** 2
+      if (rawDist < closestDist) {
+        closestDist = rawDist
+        closestIdx = i
+      }
+    }
+
+    // Protect the word directly under the cursor
+    if (closestIdx >= 0 && closestDist < (RADIUS_Y * RADIUS_Y)) {
+      const [wordStart, wordEnd] = getWordBounds(text, closestIdx)
+      for (let i = wordStart; i < wordEnd; i++) {
+        scrambled[i] = false
       }
     }
 
@@ -73,9 +98,16 @@ export function useScrambleHover() {
     const entry = active.get(node)
     if (entry) {
       if (entry.timer) clearInterval(entry.timer)
-      // Merge new scrambled chars with existing
+      // Merge new scrambled chars with existing, and unscramble protected word
       for (let i = 0; i < scrambled.length; i++) {
         if (scrambled[i]) entry.scrambled[i] = true
+      }
+      // Clear the word under cursor from existing scramble state too
+      if (closestIdx >= 0 && closestDist < (RADIUS_Y * RADIUS_Y)) {
+        const [wordStart, wordEnd] = getWordBounds(text, closestIdx)
+        for (let i = wordStart; i < wordEnd; i++) {
+          entry.scrambled[i] = false
+        }
       }
     } else {
       active.set(node, { original: text, scrambled, timer: null })

@@ -83,7 +83,7 @@ export function currentThemeName(): ThemeName {
   return THEME_NAMES.find(n => THEMES[n].bg === C.bg) || THEME_NAMES[0]
 }
 
-export const FONT = "'JetBrains Mono', 'Cascadia Mono', 'SF Mono', 'Consolas', monospace"
+export const FONT = "'JetBrainsMono Nerd Font', 'JetBrains Mono', 'Cascadia Mono', 'SF Mono', 'Consolas', monospace"
 
 export interface Token {
   t: string
