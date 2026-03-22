@@ -8,7 +8,19 @@ const router = useRouter()
 const { fileList, filesMap, loadContent } = usePortfolioFiles()
 const { isMobile } = useBreakpoint()
 const { themeName, cycle: cycleTheme } = useTheme()
+const { togglePlay: audioToggle, album: audioAlbum } = useAudioPlayer()
 useScrambleHover()
+
+onMounted(() => {
+  const onKey = (e: KeyboardEvent) => {
+    if (e.code === 'Space' && audioAlbum.value && !['INPUT', 'TEXTAREA'].includes((e.target as HTMLElement)?.tagName)) {
+      e.preventDefault()
+      audioToggle()
+    }
+  }
+  window.addEventListener('keydown', onKey)
+  onUnmounted(() => window.removeEventListener('keydown', onKey))
+})
 
 const fileFromRoute = computed(() => {
   const segments = route.params.path
