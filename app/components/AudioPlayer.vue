@@ -26,6 +26,7 @@ const albumData = computed<Album | null>(() => {
 const { album: activeAlbum, trackIndex, playing, playTrack } = useAudioPlayer()
 
 const durations = ref<Record<number, number>>({})
+const hoveredTrack = ref(-1)
 
 const baseDir = computed(() => {
   const slug = albumData.value?.title.toLowerCase().replace(/\s+/g, '_') ?? ''
@@ -83,17 +84,19 @@ watch(albumData, (a) => {
         display: 'flex',
         alignItems: 'center',
         cursor: 'pointer',
-        color: isActiveTrack(i) ? C.green : C.fg,
+        color: isActiveTrack(i) ? C.green : hoveredTrack === i ? C.fg : C.fg,
         gap: '8px',
       }"
       @click="playTrack(albumData!, i)"
+      @mouseenter="hoveredTrack = i"
+      @mouseleave="hoveredTrack = -1"
     >
       <span :style="{ color: C.blue }">│</span>
-      <span :style="{ width: '24px', textAlign: 'center', color: isActiveTrack(i) && playing ? C.green : C.comment }">
-        {{ isActiveTrack(i) && playing ? '▶' : isActiveTrack(i) && !playing ? '⏸' : '·' }}
+      <span data-no-scramble :style="{ width: '24px', textAlign: 'center', color: isActiveTrack(i) && playing ? C.green : hoveredTrack === i ? C.green : C.comment }">
+        {{ isActiveTrack(i) && playing ? '⏸' : isActiveTrack(i) && !playing ? '▶' : hoveredTrack === i ? '▷' : '·' }}
       </span>
       <span :style="{ width: '24px', textAlign: 'right', color: C.gutter }">{{ String(i + 1).padStart(2, '0') }}</span>
-      <span :style="{ flex: 1, color: isActiveTrack(i) ? C.green : C.fg }">{{ track.title }}</span>
+      <span :style="{ flex: 1, color: isActiveTrack(i) ? C.green : hoveredTrack === i ? C.green : C.fg }">{{ track.title }}</span>
       <span :style="{ color: C.gutter, minWidth: '40px', textAlign: 'right' }">{{ durations[i] ? formatTime(durations[i]) : '' }}</span>
     </div>
 

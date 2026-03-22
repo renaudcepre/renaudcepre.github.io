@@ -57,9 +57,9 @@ function onSeek(e: MouseEvent) {
         gap: '6px',
       }"
     >
-      <span :style="{ cursor: 'pointer' }" @click="skipPrev">⏮</span>
-      <span :style="{ cursor: 'pointer', fontSize: '11px' }" @click="togglePlay">{{ playing ? '⏸' : '▶' }}</span>
-      <span :style="{ cursor: 'pointer' }" @click="skipNext">⏭</span>
+      <span data-no-scramble :style="{ cursor: 'pointer' }" @click="skipPrev">⏮</span>
+      <span data-no-scramble :style="{ cursor: 'pointer', fontSize: '11px' }" @click="togglePlay">{{ playing ? '⏸' : '▶' }}</span>
+      <span data-no-scramble :style="{ cursor: 'pointer' }" @click="skipNext">⏭</span>
     </span>
 
     <!-- Track info -->

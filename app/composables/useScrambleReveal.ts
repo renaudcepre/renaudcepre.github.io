@@ -1,3 +1,5 @@
+import { isScrambleProtected } from '~/utils/scramble'
+
 const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%&*<>/'
 const TOTAL_STEPS = 8
 const STEP_MS = 30
@@ -15,7 +17,7 @@ export function useScrambleReveal() {
     const nodes: { node: Text, original: string }[] = []
     let node
     while ((node = walker.nextNode())) {
-      if (node.textContent?.trim()) {
+      if (node.textContent?.trim() && !isScrambleProtected(node)) {
         nodes.push({ node: node as Text, original: node.textContent! })
       }
     }

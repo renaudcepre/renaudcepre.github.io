@@ -1,3 +1,5 @@
+import { isScrambleProtected } from '~/utils/scramble'
+
 const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%&*<>/'
 const RADIUS_X = 120
 const RADIUS_Y = 20
@@ -43,6 +45,7 @@ export function useScrambleHover() {
   }
 
   function processNode(node: Text, mx: number, my: number) {
+    if (isScrambleProtected(node)) return
     const text = active.has(node) ? active.get(node)!.original : node.textContent || ''
     if (!text.trim()) return
 
