@@ -1,0 +1,184 @@
+<style>
+  .sk {
+    letter-spacing: normal;
+    font-family: 'JetBrains Mono', 'Cascadia Mono', 'SF Mono', monospace;
+    max-width: 600px;
+    padding: 2rem;
+    margin: 0 auto;
+    font-size: 0.82rem;
+    line-height: 1.9;
+    color: #bfbdb6cc;
+  }
+
+  .sk h1 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #bfbdb6;
+    margin-bottom: 2rem;
+  }
+
+  .sk section { margin-bottom: 2rem; }
+
+  .sk h2 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #e6b450;
+    margin-bottom: 0.5rem;
+  }
+
+  .sk p { margin: 0 0 0.8rem; }
+
+  .sk .dim { color: #acb6bf55; }
+
+  .sk .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 0.6rem;
+  }
+
+  .sk .tag {
+    font-size: 0.72rem;
+    padding: 2px 8px;
+    border: 1px solid #acb6bf22;
+    border-radius: 3px;
+    color: #73d0ff;
+    white-space: nowrap;
+  }
+</style>
+
+<div class="sk">
+  <h1 data-no-scramble>Skills</h1>
+
+  <section>
+    <h2>Python, strictly</h2>
+    <p>
+      My daily language for 6+ years. I write everything typed
+      and run mypy in strict mode. I like Python when it's treated
+      as a serious language <span class="dim">&mdash;</span> type hints,
+      dataclasses, protocols. I don't do magic imports
+      or untyped dicts passed around.
+    </p>
+    <div class="tags">
+      <span class="tag">Python</span>
+      <span class="tag">mypy</span>
+      <span class="tag">FastAPI</span>
+      <span class="tag">Pydantic</span>
+      <span class="tag">SQLAlchemy</span>
+      <span class="tag">Celery</span>
+      <span class="tag">Alembic</span>
+    </div>
+  </section>
+
+  <section>
+    <h2>Testing</h2>
+    <p>
+      I aim for high coverage not as a metric but because
+      I don't trust code that isn't tested. That's also why I'm
+      building <a href="/dev/projects/protest/README.md" style="color:#73d0ff;text-decoration:none;border-bottom:1px dashed #73d0ff44">ProTest</a>
+      <span class="dim">&mdash;</span> I wanted DI in tests to be explicit and typed,
+      not resolved by name in the dark.
+    </p>
+    <div class="tags">
+      <span class="tag">pytest</span>
+      <span class="tag">ProTest</span>
+    </div>
+  </section>
+
+  <section>
+    <h2>Data &amp; graphs</h2>
+    <p>
+      PostgreSQL for relational work, comfortable with raw SQL
+      when ORMs get in the way. But what really excites me is
+      graph databases <span class="dim">&mdash;</span> not just as a
+      storage alternative, but for what you can do with them:
+      shortest path, community detection, and the algorithms
+      that come with thinking in graphs. Currently exploring
+      neuro-symbolic approaches and world models on a
+      personal project (Felix), where graph structure meets
+      scenario extraction.
+    </p>
+    <div class="tags">
+      <span class="tag">PostgreSQL</span>
+      <span class="tag">Neo4j</span>
+      <span class="tag">Cypher</span>
+      <span class="tag">Kuzu</span>
+      <span class="tag">ChromaDB</span>
+      <span class="tag">Weaviate</span>
+    </div>
+  </section>
+
+  <section>
+    <h2>Infrastructure</h2>
+    <p>
+      I deploy and maintain what I build. Docker everywhere,
+      Kubernetes when the project calls for it. Mostly AWS
+      in production.
+    </p>
+    <div class="tags">
+      <span class="tag">Docker</span>
+      <span class="tag">Kubernetes</span>
+      <span class="tag">AWS</span>
+      <span class="tag">RabbitMQ</span>
+      <span class="tag">GitHub Actions</span>
+    </div>
+  </section>
+
+  <section>
+    <h2>AI &amp; LLMs</h2>
+    <p>
+      I orchestrate, build agents, and pick the right model
+      for the job <span class="dim">&mdash;</span> RAG pipelines,
+      structured extraction, knowledge bases.
+      What I'm most excited about right now is making AI
+      systems that run on a normal computer: small, focused
+      models with targeted tools and a lot of heuristics
+      behind them, rather than throwing everything at a
+      giant model. It reminds me of writing C
+      <span class="dim">&mdash;</span> you can't brute force it,
+      you have to be clever.
+    </p>
+    <div class="tags">
+      <span class="tag">vLLM</span>
+      <span class="tag">Pydantic AI</span>
+      <span class="tag">LM Studio</span>
+    </div>
+  </section>
+
+  <section>
+    <h2>Frontend</h2>
+    <p>
+      I don't love it. I don't love JS, I don't get why
+      anyone would run it on a backend, and the layers of
+      retro-compatibility annoy me. And yet
+      <span class="dim">&mdash;</span> web technologies work
+      remarkably well. The ecosystem is a genuine success
+      on many levels, and I respect that.
+      This is where I vibe-code: I want a result, not a
+      journey. The opposite of how I approach Python or C.
+      I still try to follow good practices, even if
+      sometimes I end up writing text scrambling effects
+      under the user's cursor.
+    </p>
+    <div class="tags">
+      <span class="tag">TypeScript</span>
+      <span class="tag">Vue</span>
+      <span class="tag">Nuxt</span>
+    </div>
+  </section>
+
+  <section>
+    <h2>The rest</h2>
+    <p>
+      C and C++ from 42 <span class="dim">&mdash;</span> I don't write them
+      daily but they shaped how I think about memory and performance.
+      Comfortable in Linux. PyCharm for everything Python.
+    </p>
+    <div class="tags">
+      <span class="tag">C</span>
+      <span class="tag">C++</span>
+      <span class="tag">Linux</span>
+      <span class="tag">PyCharm</span>
+    </div>
+  </section>
+</div>

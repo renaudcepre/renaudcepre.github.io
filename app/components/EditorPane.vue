@@ -129,6 +129,7 @@ onMounted(() => {
 })
 
 watch(data, () => {
+  if (isHtml.value && renderedMode.value) return
   nextTick(() => reveal(contentRef.value))
 })
 

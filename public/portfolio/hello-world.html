@@ -1,12 +1,22 @@
 <style>
-  .hw { display: flex; align-items: center; justify-content: center; min-height: 100%; letter-spacing: normal; }
-  .hw-container { text-align: center; padding: 2rem; }
+  .hw {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100%;
+    letter-spacing: normal;
+    font-family: 'JetBrains Mono', 'Cascadia Mono', 'SF Mono', monospace;
+  }
+
+  .hw-container {
+    padding: 2.5rem 2rem;
+    max-width: 540px;
+  }
 
   .hw h1 {
-    font-size: 2.4rem;
+    font-size: 2rem;
     font-weight: 700;
-    line-height: 1.2;
-    margin-bottom: 0.6rem;
+    margin-bottom: 0.3rem;
     background: linear-gradient(135deg, #73d0ff, #dfbfff, #f29e74);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -20,72 +30,84 @@
     100% { background-position: 100% 50%; }
   }
 
-  .hw-subtitle { color: #acb6bf88; font-size: 0.85rem; margin-bottom: 2rem; }
-
-  .hw-prompt {
-    font-size: 0.9rem;
-    color: #bfbdb6;
-    line-height: 1.8;
-    text-align: left;
-    display: inline-block;
+  .hw-tagline {
+    color: #acb6bf66;
+    font-size: 0.8rem;
+    margin-bottom: 2.4rem;
   }
 
-  .hw-prompt .c { color: #acb6bf55; }
-  .hw-prompt .g { color: #aad94c; }
-  .hw-prompt .y { color: #e6b450; }
-  .hw-prompt .b { color: #73d0ff; }
-  .hw-prompt .m { color: #dfbfff; }
-
-  .hw-cursor {
-    display: inline-block;
-    width: 8px;
-    height: 1.1em;
-    background: #e6b450;
-    vertical-align: text-bottom;
-    animation: hw-blink 1s step-end infinite;
+  .hw-body {
+    font-size: 0.82rem;
+    color: #bfbdb6cc;
+    line-height: 1.9;
   }
 
-  @keyframes hw-blink { 50% { opacity: 0; } }
+  .hw-body p {
+    margin: 0 0 1.2rem;
+  }
 
-  .hw-links {
+  .hw-body .hw-dim { color: #acb6bf55; }
+  .hw-body .hw-hl { color: #e6b450; }
+  .hw-body .hw-link {
+    color: #73d0ff;
+    text-decoration: none;
+    border-bottom: 1px dashed #73d0ff44;
+    transition: border-color 0.2s;
+  }
+  .hw-body .hw-link:hover { border-color: #73d0ff; }
+
+  .hw-nav {
     margin-top: 2rem;
+    padding-top: 1.2rem;
+    border-top: 1px solid #acb6bf15;
     display: flex;
-    gap: 1.2rem;
-    justify-content: center;
+    gap: 1.4rem;
     flex-wrap: wrap;
   }
 
-  .hw-links a {
+  .hw-nav a {
     color: #73d0ff;
     text-decoration: none;
-    font-size: 0.8rem;
+    font-size: 0.78rem;
     border-bottom: 1px dashed #73d0ff44;
     transition: border-color 0.2s;
   }
 
-  .hw-links a:hover { border-color: #73d0ff; }
+  .hw-nav a:hover { border-color: #73d0ff; }
 </style>
 
 <div class="hw">
   <div class="hw-container">
-    <h1>Hello, World</h1>
-    <div class="hw-subtitle">senior python dev &middot; audio &middot; electronic music</div>
+    <h1 data-no-scramble>Renaud Cepr&eacute;</h1>
+    <div class="hw-tagline">python backend &middot; electronic music &middot; maker</div>
 
-    <div class="hw-prompt">
-      <span class="c"># </span><span class="g">whoami</span><br>
-      <span class="m">Started at 42</span> <span class="c">&mdash;</span> Corewar in C, graph theory, the whole common core.<br>
-      <span class="c"># </span><span class="g">now</span><br>
-      Python backend, software architecture, and electronic music.<br>
-      <span class="c"># </span><span class="g">ls</span> <span class="y">portfolio/</span><br>
-      <span class="b">about.md</span> &nbsp; <span class="b">skills.md</span> &nbsp; <span class="b">audio/</span> &nbsp; <span class="b">projects/</span><br>
-      <span class="c">&gt;</span> <span class="hw-cursor">&nbsp;</span>
+    <div class="hw-body">
+      <p>
+        Senior Python developer. Strictly typed, test-oriented.
+        I build backend systems and make
+        <a class="hw-link" href="/audio/README.md">electronic music</a>.
+      </p>
+
+      <p>
+        I came to code through sound design <span class="hw-dim">&mdash;</span>
+        patching modular synths in <span class="hw-hl">Reaktor</span>
+        until the signal flow became actual programming.
+        That led me to <span class="hw-hl">42</span>,
+        a peer-to-peer software engineering school,
+        where I picked up C, graph theory, and a real obsession for code.
+      </p>
+
+      <p>
+        Before all of this I worked in agriculture, warehouses, factories.
+        I still renovate my house with lime and stone.
+        The through line is the same: I like building things.
+      </p>
     </div>
 
-    <div class="hw-links">
-      <a href="/about">about.md</a>
-      <a href="/skills">skills.md</a>
-      <a href="/audio">audio/</a>
-      <a href="/projects">projects/</a>
+    <div class="hw-nav">
+      <a href="/dev/skills.html">skills</a>
+      <a href="/audio/README.md">audio</a>
+      <a href="/dev/projects/protest/README.md">protest</a>
     </div>
   </div>
 </div>
