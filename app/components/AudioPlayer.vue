@@ -96,7 +96,7 @@ watch(albumData, (a) => {
         {{ isActiveTrack(i) && playing ? '⏸' : isActiveTrack(i) && !playing ? '▶' : hoveredTrack === i ? '▷' : '·' }}
       </span>
       <span :style="{ width: '24px', textAlign: 'right', color: C.gutter }">{{ String(i + 1).padStart(2, '0') }}</span>
-      <span :style="{ flex: 1, color: isActiveTrack(i) ? C.green : hoveredTrack === i ? C.green : C.fg }">{{ track.title }}</span>
+      <span :class="{ 'holo-text': isActiveTrack(i) && playing }" :style="{ flex: 1, color: isActiveTrack(i) ? C.green : hoveredTrack === i ? C.green : C.fg }">{{ track.title }}</span>
       <span :style="{ color: C.gutter, minWidth: '40px', textAlign: 'right' }">{{ durations[i] ? formatTime(durations[i]) : '' }}</span>
     </div>
 
