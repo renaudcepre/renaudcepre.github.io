@@ -236,6 +236,7 @@ watch(() => props.fileList, (list) => {
       >
         <span :style="{ color: C.gutter }">{{ indent(node) }}</span><span v-if="node.isDir">{{ expandedDirs[node.path] ? '▾ ' : '▸ ' }}</span><img
           v-if="node.icon"
+          alt=""
           :src="node.icon"
           :style="{ width: '10px', height: '10px', marginRight: '4px', verticalAlign: 'middle', imageRendering: 'pixelated', display: 'inline-block' }"
         >{{ node.name }}{{ node.isDir ? '/' : '' }}
