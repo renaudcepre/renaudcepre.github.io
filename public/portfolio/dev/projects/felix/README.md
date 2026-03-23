@@ -28,10 +28,19 @@ Drop scene files in, Felix handles the rest:
 Then ask anything: "Where was Marie in March 1942?",
 "Which scenes mention the letter?", "Show me Paul's character arc."
 
+## The challenge
+
+The main constraint: everything must run **locally on a Mac M4**.
+The only model I found that handles the task and fits the hardware
+is **Qwen2.5-7B-Instruct** via LM Studio. That's what makes this
+project interesting — with Claude Sonnet it would be much simpler,
+but less fun as a prototype. Making a 7B model do reliable entity
+extraction and narrative reasoning is where the real work is.
+
 ## Stack
 
 - FastAPI + Neo4j 5 (async) + ChromaDB
-- Pydantic AI agents (Mistral / Together / LM Studio)
+- Pydantic AI agents + **Qwen2.5-7B-Instruct** (local, LM Studio)
 - sentence-transformers (BAAI/bge-m3) for embeddings
 - Nuxt 3 + Nuxt UI + Tailwind (web dashboard)
 - Rich + Typer (CLI chat)
@@ -48,8 +57,16 @@ The ingest pipeline taught me a lot about orchestrating
 multiple LLM calls with shared state, idempotent writes,
 and streaming progress to the frontend via SSE.
 
+Getting a 7B model to produce structured, reliable output
+required careful prompt engineering and a lot of guardrails
+that a bigger model wouldn't need.
+
 ## Status
 
 Working prototype — used on a real 80+ scene screenplay.
 Actively improving the eval suite (89 test cases across
 4 suites using pydantic-evals).
+
+Current boss fight: ingesting the Lord of the Rings screenplay
+without too many errors. Hundreds of characters, locations across
+three ages, and a 7B model trying to keep it all straight.
