@@ -31,6 +31,10 @@ mdRenderer.image = function ({ href, text }) {
   if (/\.(webm|mp4|mov|ogg)$/i.test(href)) {
     return `<video src="${href}" controls loop muted playsinline></video>`
   }
+  const isBadge = /badge|shields\.io|codecov\.io.*badge|github\.com.*badge/i.test(href)
+  if (isBadge) {
+    return `<img class="md-badge" src="${href}" alt="${text || ''}" />`
+  }
   return `<img src="${href}" alt="${text || ''}" />`
 }
 
@@ -46,6 +50,13 @@ mdRenderer.code = function ({ text, lang }) {
 
 mdRenderer.link = function ({ href, tokens }) {
   const content = this.parser.parseInline(tokens)
+  const isExternal = href.startsWith('http')
+  const isImageLink = content.includes('<img')
+  if (isExternal) {
+    const arrow = isImageLink ? '' : `<span style="font-size:0.7em;margin-left:4px;opacity:0.5">↗</span>`
+    const style = isImageLink ? '' : `style="color:${C.cyan};text-decoration:none;border-bottom:1px dashed ${C.cyan}55"`
+    return `<a href="${href}" target="_blank" rel="noopener noreferrer" ${style}>${content}${arrow}</a>`
+  }
   return `<a href="${href}" style="color:${C.cyan};text-decoration:none;border-bottom:1px dashed ${C.cyan}55">${content}</a>`
 }
 
@@ -535,6 +546,13 @@ function handleInternalClick(e: MouseEvent) {
   margin: 1em 0;
   display: block;
   border: 1px solid var(--md-border);
+}
+.md-rendered img.md-badge {
+  display: inline;
+  margin: 0 4px 0 0;
+  border: none;
+  border-radius: 2px;
+  vertical-align: middle;
 }
 .md-rendered video {
   max-width: 100%;

@@ -1,83 +1,86 @@
 <style>
+    /* === BASE === */
     .hw {
         display: flex;
         align-items: center;
         justify-content: center;
         min-height: 100%;
         letter-spacing: normal;
-        
+        overflow: hidden;
+        position: relative;
     }
 
     .hw-container {
         padding: 2.5rem 2rem;
         max-width: 540px;
+        position: relative;
+        z-index: 2;
     }
 
+    /* === RAINBOW HEADING === */
     .hw h1 {
-        font-size: 2rem;
+        font-size: 2.4rem;
         font-weight: 700;
         margin-bottom: 0.3rem;
-        background: linear-gradient(135deg, #73d0ff, #dfbfff, #f29e74);
+        line-height: 1.3;
+        padding: 0.1em 0;
+        background: linear-gradient(
+            90deg,
+            #ff6b6b, #ffa06b, #ffd96b,
+            #6bffa0, #6bd4ff, #a06bff,
+            #ff6bd4, #ff6b6b
+        );
+        background-size: 400% 100%;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
-        animation: hw-shift 4s ease-in-out infinite alternate;
-        background-size: 200% 200%;
+        animation: hw-rainbow 3s linear infinite;
+        text-shadow: none;
     }
 
-    @keyframes hw-shift {
-        0% {
-            background-position: 0% 50%;
-        }
-        100% {
-            background-position: 100% 50%;
-        }
+    @keyframes hw-rainbow {
+        0%   { background-position: 0% 50%; }
+        100% { background-position: 400% 50%; }
     }
 
+    /* === TAGLINE with sparkle === */
     .hw-tagline {
-        color: #acb6bf66;
+        color: #acb6bf88;
         font-size: 0.8rem;
         margin-bottom: 2.4rem;
     }
-
+    /* === BODY TEXT === */
     .hw-body {
         font-size: 0.82rem;
         color: #bfbdb6cc;
         line-height: 1.9;
     }
-
-    .hw-body p {
-        margin: 0 0 1.2rem;
-    }
-
-    .hw-body .hw-dim {
-        color: #acb6bf55;
-    }
-
+    .hw-body p { margin: 0 0 1.2rem; }
+    .hw-body .hw-dim { color: #acb6bf55; }
     .hw-body .hw-hl {
         color: #e6b450;
+        font-weight: 600;
     }
-
     .hw-body .hw-link {
-        color: #73d0ff;
+        color: #ff9de2;
         text-decoration: none;
-        border-bottom: 1px dashed #73d0ff44;
-        transition: border-color 0.2s;
+        border-bottom: 1px dashed #ff9de244;
+        transition: border-color 0.2s, color 0.2s;
     }
-
     .hw-body .hw-link:hover {
-        border-color: #73d0ff;
+        border-color: #ff9de2;
+        color: #ffd4f1;
     }
 
+    /* === NAV LINKS === */
     .hw-nav {
         margin-top: 2rem;
         padding-top: 1.2rem;
         border-top: 1px solid #acb6bf15;
         display: flex;
-        gap: 1.4rem;
+        justify-content: space-around;
         flex-wrap: wrap;
     }
-
     .hw-nav a {
         color: #73d0ff;
         text-decoration: none;
@@ -85,20 +88,111 @@
         border-bottom: 1px dashed #73d0ff44;
         transition: border-color 0.2s;
     }
-
     .hw-nav a:hover {
         border-color: #73d0ff;
     }
+
+    /* === SPARKLES / STARS === */
+    .sparkles {
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        pointer-events: none;
+        z-index: 0;
+    }
+
+    .star {
+        position: absolute;
+        animation: hw-twinkle 2s ease-in-out infinite alternate;
+        font-size: 0.8rem;
+        opacity: 0;
+    }
+
+    @keyframes hw-twinkle {
+        0%   { opacity: 0;   transform: scale(0.5) rotate(0deg); }
+        50%  { opacity: 1;   transform: scale(1.2) rotate(180deg); }
+        100% { opacity: 0.2; transform: scale(0.8) rotate(360deg); }
+    }
+
+    .star:nth-child(1)  { top:  5%; left:  8%; animation-delay: 0.0s; color: #ff6b6b; }
+    .star:nth-child(2)  { top: 15%; left: 85%; animation-delay: 0.3s; color: #ffd96b; }
+    .star:nth-child(3)  { top: 25%; left: 20%; animation-delay: 0.7s; color: #6bffa0; }
+    .star:nth-child(4)  { top: 35%; left: 70%; animation-delay: 1.1s; color: #6bd4ff; }
+    .star:nth-child(5)  { top: 50%; left: 40%; animation-delay: 0.5s; color: #ff9de2; }
+    .star:nth-child(6)  { top: 60%; left: 92%; animation-delay: 1.4s; color: #a06bff; }
+    .star:nth-child(7)  { top: 70%; left: 15%; animation-delay: 0.9s; color: #ffa06b; }
+    .star:nth-child(8)  { top: 80%; left: 55%; animation-delay: 1.7s; color: #ff6bd4; }
+    .star:nth-child(9)  { top: 90%; left: 78%; animation-delay: 0.2s; color: #6bffa0; }
+    .star:nth-child(10) { top: 10%; left: 50%; animation-delay: 1.0s; color: #ffd96b; }
+    .star:nth-child(11) { top: 42%; left:  5%; animation-delay: 0.6s; color: #6bd4ff; }
+    .star:nth-child(12) { top: 88%; left: 30%; animation-delay: 1.3s; color: #ff6b6b; }
+
+    /* === RAINBOW BORDER GLOW === */
+    .hw::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border: 2px solid transparent;
+        border-image: linear-gradient(
+            45deg,
+            #ff6b6b, #ffa06b, #ffd96b,
+            #6bffa0, #6bd4ff, #a06bff,
+            #ff6bd4, #ff6b6b
+        ) 1;
+        animation: hw-border-glow 4s linear infinite;
+        background-size: 400% 400%;
+        pointer-events: none;
+        z-index: 10;
+        opacity: 0.5;
+    }
+
+    @keyframes hw-border-glow {
+        0%   { opacity: 0.3; }
+        50%  { opacity: 0.7; }
+        100% { opacity: 0.3; }
+    }
+
+    /* === YORKIE === */
+    .hw-yorkie {
+        position: absolute;
+        bottom: 1rem;
+        left: 1rem;
+        width: 70px;
+        z-index: 3;
+        pointer-events: none;
+        opacity: 0.8;
+    }
+
 </style>
 
 <div class="hw">
+
+    <!-- Sparkles background -->
+    <div class="sparkles">
+        <span class="star">&#10022;</span>
+        <span class="star">&#10023;</span>
+        <span class="star">&#10022;</span>
+        <span class="star">&#10023;</span>
+        <span class="star">&#10022;</span>
+        <span class="star">&#10023;</span>
+        <span class="star">&#10022;</span>
+        <span class="star">&#10023;</span>
+        <span class="star">&#10022;</span>
+        <span class="star">&#10023;</span>
+        <span class="star">&#10022;</span>
+        <span class="star">&#10023;</span>
+    </div>
+
+    <img class="hw-yorkie" src="/yorkie.webp" alt="">
+
+    <!-- Content -->
     <div class="hw-container">
-        <h1 data-no-scramble>Renaud Cepr&eacute;</h1>
+        <h1 data-no-scramble>Renaud Cepre</h1>
         <div class="hw-tagline">python backend &middot; electronic music &middot; maker</div>
 
         <div class="hw-body">
             <p>
-                Senior Python developer. Strictly typed, test-oriented.
+                Senior <span class="hw-hl">Python</span> developer. Strictly typed, test-oriented.
                 I build backend systems and make
                 <a class="hw-link" href="/audio/README.md">electronic music</a>.
             </p>
@@ -109,7 +203,7 @@
                 until the signal flow became actual programming.
                 That led me to <span class="hw-hl">42</span>,
                 a peer-to-peer software engineering school,
-                where I picked up C, graph theory, and a real obsession for code.
+                where I picked up <span class="hw-hl">C</span>, graph theory, and a real obsession for code.
             </p>
 
             <p>
@@ -123,6 +217,7 @@
             <a href="/dev/skills.html">skills</a>
             <a href="/audio/README.md">audio</a>
             <a href="/dev/projects/protest/README.md">protest</a>
+            <a href="/dev/projects/jeveuxmonbrevet/README.md">jeveuxmonbrevet</a>
         </div>
     </div>
 </div>
