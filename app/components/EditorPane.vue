@@ -148,25 +148,36 @@ const renderedHtml = computed(() => {
 
 const router = useRouter()
 
+function resolveHref(href: string): string {
+  if (href.startsWith('/')) return href
+
+  const dir = props.file.includes('/') ? props.file.split('/').slice(0, -1).join('/') : ''
+  const raw = dir ? `${dir}/${href}` : href
+  const parts = raw.split('/')
+  const resolved: string[] = []
+  for (const p of parts) {
+    if (p === '..') resolved.pop()
+    else if (p !== '.') resolved.push(p)
+  }
+  const path = resolved.join('/')
+
+  // If not found, try dot-file version
+  if (!props.filesMap[path]) {
+    const last = resolved.pop()!
+    const dotPath = [...resolved, '.' + last].join('/')
+    if (props.filesMap[dotPath]) return '/' + dotPath
+  }
+
+  return '/' + path
+}
+
 function handleInternalClick(e: MouseEvent) {
   const anchor = (e.target as HTMLElement).closest('a')
   if (!anchor) return
   const href = anchor.getAttribute('href')
   if (!href || href.startsWith('http') || href.startsWith('#') || href.startsWith('mailto:')) return
   e.preventDefault()
-  if (href.startsWith('/')) {
-    router.push(href)
-  } else {
-    const dir = props.file.includes('/') ? props.file.split('/').slice(0, -1).join('/') : ''
-    const raw = dir ? `${dir}/${href}` : href
-    const parts = raw.split('/')
-    const resolved: string[] = []
-    for (const p of parts) {
-      if (p === '..') resolved.pop()
-      else if (p !== '.') resolved.push(p)
-    }
-    router.push('/' + resolved.join('/'))
-  }
+  router.push(resolveHref(href))
 }
 </script>
 

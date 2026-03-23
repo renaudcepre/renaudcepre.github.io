@@ -5,6 +5,7 @@ const props = defineProps<{
   activeFile: string
   visible: boolean
   fileList: string[]
+  openTabs: string[]
   isMobile: boolean
 }>()
 
@@ -41,10 +42,16 @@ interface TreeNode {
   depth: number
 }
 
+function isHidden(filePath: string): boolean {
+  const name = filePath.split('/').pop() || ''
+  return name.startsWith('.')
+}
+
 const tree = computed<TreeNode[]>(() => {
   const root: TreeNode[] = []
+  const visibleFiles = props.fileList.filter(f => !isHidden(f) || props.openTabs.includes(f))
 
-  for (const filePath of [...props.fileList].sort()) {
+  for (const filePath of [...visibleFiles].sort()) {
     const parts = filePath.split('/')
     let current = root
     let currentPath = ''
@@ -97,6 +104,7 @@ function handleClick(node: TreeNode) {
 
 function entryColor(node: TreeNode): string {
   if (node.isDir) return C.cyan
+  if (isHidden(node.path)) return C.gutter
   return node.path === props.activeFile ? C.bg : C.fg
 }
 

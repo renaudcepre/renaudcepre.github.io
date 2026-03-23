@@ -107,6 +107,7 @@ onMounted(() => {
         :active-file="activeFile"
         :visible="showNetrw"
         :file-list="fileList"
+        :open-tabs="openTabs"
         :is-mobile="isMobile"
         @select="openFile"
         @close="showNetrw = false"
