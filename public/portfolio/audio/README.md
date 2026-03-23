@@ -22,11 +22,13 @@ over with the palette.
 
 I have a tendency to not finish things. Working on that.
 
-## EPs
+## Releases
 
-Open the .antres files to listen.
+[Reterraform](/audio/reterraform.antres) — EP, 2025
 
-## Older releases
+[Space Dust](/audio/space_dust.antres) — EP, 2024
+
+[The Junkyard of the Jettisoned](/audio/the_junkyard_of_the_jettisoned.antres) — EP, 2024
 
 **2060** — Single, 2023 · [soundcloud](https://soundcloud.com/antres808/2060)
 
@@ -34,13 +36,16 @@ Open the .antres files to listen.
 
 **Escape From Work** — Album, 2016 · [soundcloud](https://soundcloud.com/antres808/sets/escape-from-work)
 
-These are older. I've changed a lot since then, but they're
-still out there and I don't disown them.
-
 ## Tools
 
 - Ableton Live
 - u-he Diva (my favorite synth by far)
+- [RSO](https://lperron.com/projects/rso) — a chaotic navigator synth
+  built by a friend. I was the sole beta tester for a while
+  and decided to make an entire album using nothing but RSO
+  as a sound source — no samples, no other synths, just
+  effects on top. Even the drums. It was a good sound design
+  challenge. (album not out yet)
 - Reaktor — this is actually what got me into code
 - Sampling, a lot of it
 

@@ -105,7 +105,7 @@ const renderedMode = computed({
   set: (val: boolean) => { renderModePerFile[props.file] = val }
 })
 
-const defaultRenderLangs = new Set(['audio', 'html'])
+const defaultRenderLangs = new Set(['audio', 'html', 'md'])
 
 function initRenderDefault(file: string) {
   if (renderModePerFile[file] != null) return
@@ -305,6 +305,7 @@ function handleInternalClick(e: MouseEvent) {
         :style="{
           padding: '24px 32px',
           maxWidth: '800px',
+          margin: '0 auto',
           color: C.fg,
           '--md-code-bg': C.codeBg,
           '--md-code-fg': C.codeFg,

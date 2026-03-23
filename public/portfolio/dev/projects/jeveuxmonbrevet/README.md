@@ -4,6 +4,14 @@
 
 ## Overview
 
+I built this for my daughter who's about to take the Brevet
+— the French end-of-middle-school exam.
+It was supposed to be a small thing. But I tend to get carried away
+when I'm having fun building something — so it turned into a real
+deployed app with actual users. I even caught myself using it
+regularly because it's honestly a decent way to brush up on
+general knowledge.
+
 Spaced repetition learning tool covering all Brevet subjects — History, Geography,
 Math, French, Sciences, Civic Education. Built around a "Chill UI / Savage Copy"
 philosophy: minimal zen interface, witty copy that speaks to teenagers without
