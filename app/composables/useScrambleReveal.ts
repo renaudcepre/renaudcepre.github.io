@@ -1,6 +1,4 @@
-import { isScrambleProtected } from '~/utils/scramble'
-
-const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%&*<>/'
+import { isScrambleProtected, SCRAMBLE_CHARS } from '~/utils/scramble'
 const TOTAL_STEPS = 8
 const STEP_MS = 30
 
@@ -47,7 +45,7 @@ export function useScrambleReveal() {
           .map((ch, i) => {
             if (ch.trim() === '') return ch
             if (step >= locks[i]) return ch
-            return CHARS[Math.floor(Math.random() * CHARS.length)]
+            return SCRAMBLE_CHARS[Math.floor(Math.random() * SCRAMBLE_CHARS.length)]
           })
           .join('')
       }

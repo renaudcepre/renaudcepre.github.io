@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { C, FONT } from '~/utils/portfolio'
+import { formatTime } from '~/utils/format'
 
 const { album, trackIndex, playing, currentTime, duration, togglePlay, seek, skipNext, skipPrev } = useAudioPlayer()
 
@@ -12,13 +13,6 @@ const progress = computed(() => {
   if (!duration.value) return 0
   return (currentTime.value / duration.value) * 100
 })
-
-function formatTime(s: number) {
-  if (!s || !isFinite(s)) return '0:00'
-  const m = Math.floor(s / 60)
-  const sec = Math.floor(s % 60)
-  return `${m}:${sec.toString().padStart(2, '0')}`
-}
 
 function onSeek(e: MouseEvent) {
   const bar = e.currentTarget as HTMLElement

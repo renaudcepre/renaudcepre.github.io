@@ -1,15 +1,4 @@
-interface Track {
-  title: string
-  file: string
-}
-
-interface Album {
-  title: string
-  year: number
-  type: string
-  link?: string
-  tracks: Track[]
-}
+import type { Track, Album } from '~/types/audio'
 
 const album = ref<Album | null>(null)
 const trackIndex = ref(-1)

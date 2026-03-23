@@ -11,7 +11,8 @@ const quotes = [
   { quote: 'Wake up, sfgljkfzwrkuim make up, apiuofhisau table.', author: 'Serj Tankian' }
 ]
 
-const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%&*'
+import { SCRAMBLE_CHARS } from '~/utils/scramble'
+
 const SCRAMBLE_DURATION = 1500
 const SCRAMBLE_INTERVAL = 30
 const CYCLE_INTERVAL = 10_000
@@ -21,7 +22,7 @@ function formatQuote(q: typeof quotes[number]) {
 }
 
 function randomChar() {
-  return CHARS[Math.floor(Math.random() * CHARS.length)]
+  return SCRAMBLE_CHARS[Math.floor(Math.random() * SCRAMBLE_CHARS.length)]
 }
 
 export function useQuote() {

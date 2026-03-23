@@ -1,22 +1,11 @@
 <script setup lang="ts">
 import { C, FONT } from '~/utils/portfolio'
+import type { Album } from '~/types/audio'
+import { formatTime } from '~/utils/format'
 
 const props = defineProps<{
   content: string
 }>()
-
-interface Track {
-  title: string
-  file: string
-}
-
-interface Album {
-  title: string
-  year: number
-  type: string
-  link?: string
-  tracks: Track[]
-}
 
 const albumData = computed<Album | null>(() => {
   if (!props.content) return null
@@ -36,13 +25,6 @@ const baseDir = computed(() => {
   const slug = albumData.value?.title.toLowerCase().replace(/\s+/g, '_') ?? ''
   return `/portfolio/audio/${slug}`
 })
-
-function formatTime(s: number) {
-  if (!s || !isFinite(s)) return '0:00'
-  const m = Math.floor(s / 60)
-  const sec = Math.floor(s % 60)
-  return `${m}:${sec.toString().padStart(2, '0')}`
-}
 
 function isActiveTrack(i: number) {
   return activeAlbum.value?.title === albumData.value?.title && trackIndex.value === i

@@ -1,3 +1,5 @@
+export const SCRAMBLE_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%&*<>/'
+
 export function isScrambleProtected(node: Node): boolean {
   let el = node.parentElement
   while (el) {

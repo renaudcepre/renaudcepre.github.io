@@ -1,6 +1,4 @@
-import { isScrambleProtected } from '~/utils/scramble'
-
-const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%&*<>/'
+import { isScrambleProtected, SCRAMBLE_CHARS } from '~/utils/scramble'
 const RADIUS_X = 120
 const RADIUS_Y = 20
 
@@ -32,7 +30,7 @@ export function useScrambleHover() {
         .split('')
         .map((ch, idx) => {
           if (ch.trim() === '' || locked[idx] || !entry.scrambled[idx]) return ch
-          return CHARS[Math.floor(Math.random() * CHARS.length)]
+          return SCRAMBLE_CHARS[Math.floor(Math.random() * SCRAMBLE_CHARS.length)]
         })
         .join('')
 
@@ -118,7 +116,7 @@ export function useScrambleHover() {
       .split('')
       .map((ch, idx) => {
         if (ch.trim() === '' || !current.scrambled[idx]) return ch
-        return CHARS[Math.floor(Math.random() * CHARS.length)]
+        return SCRAMBLE_CHARS[Math.floor(Math.random() * SCRAMBLE_CHARS.length)]
       })
       .join('')
 
