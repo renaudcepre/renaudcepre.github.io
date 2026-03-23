@@ -127,15 +127,13 @@ function fileIcon(name: string): string | null {
   return `data:image/svg+xml,${encodeURIComponent(svg)}`
 }
 
-// expand all dirs when fileList is available
+// expand only top-level dirs by default
 watch(() => props.fileList, (list) => {
   const expanded: Record<string, boolean> = {}
   for (const f of list) {
     const parts = f.split('/')
-    let p = ''
-    for (let i = 0; i < parts.length - 1; i++) {
-      p += (i > 0 ? '/' : '') + parts[i]
-      expanded[p] = true
+    if (parts.length > 1) {
+      expanded[parts[0]] = true
     }
   }
   expandedDirs.value = expanded

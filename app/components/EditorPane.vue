@@ -148,21 +148,25 @@ const renderedHtml = computed(() => {
 
 const router = useRouter()
 
-function handleMdClick(e: MouseEvent) {
+function handleInternalClick(e: MouseEvent) {
   const anchor = (e.target as HTMLElement).closest('a')
   if (!anchor) return
   const href = anchor.getAttribute('href')
   if (!href || href.startsWith('http') || href.startsWith('#') || href.startsWith('mailto:')) return
   e.preventDefault()
-  const dir = props.file.includes('/') ? props.file.split('/').slice(0, -1).join('/') : ''
-  const raw = dir ? `${dir}/${href}` : href
-  const parts = raw.split('/')
-  const resolved: string[] = []
-  for (const p of parts) {
-    if (p === '..') resolved.pop()
-    else if (p !== '.') resolved.push(p)
+  if (href.startsWith('/')) {
+    router.push(href)
+  } else {
+    const dir = props.file.includes('/') ? props.file.split('/').slice(0, -1).join('/') : ''
+    const raw = dir ? `${dir}/${href}` : href
+    const parts = raw.split('/')
+    const resolved: string[] = []
+    for (const p of parts) {
+      if (p === '..') resolved.pop()
+      else if (p !== '.') resolved.push(p)
+    }
+    router.push('/' + resolved.join('/'))
   }
-  router.push('/' + resolved.join('/'))
 }
 </script>
 
@@ -308,7 +312,7 @@ function handleMdClick(e: MouseEvent) {
           '--md-tr-even': C.trEvenBg,
         } as any"
         v-html="renderedHtml"
-        @click="handleMdClick"
+        @click="handleInternalClick"
       />
 
       <!-- Rendered HTML mode -->
@@ -317,6 +321,7 @@ function handleMdClick(e: MouseEvent) {
         class="html-rendered"
         :style="{ height: '100%', overflow: 'auto' }"
         v-html="data.content"
+        @click="handleInternalClick"
       />
 
       <!-- Code / text mode -->
