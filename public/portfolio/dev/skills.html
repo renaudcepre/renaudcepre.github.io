@@ -21,6 +21,21 @@
         margin-bottom: 2rem;
     }
 
+    .sk .sk-aside {
+        margin-top: 2.5rem;
+        padding: 1.2rem 1.4rem;
+        border-left: 2px solid #e6b45033;
+        background: #e6b45008;
+        border-radius: 0 4px 4px 0;
+        font-style: italic;
+        color: #bfbdb6aa;
+    }
+
+    .sk .sk-aside h2 {
+        font-style: normal;
+        color: #e6b450aa;
+    }
+
     .sk h2 {
         font-size: 0.9rem;
         font-weight: 700;
@@ -118,9 +133,10 @@
     <section>
         <h2>Infrastructure</h2>
         <p>
-            I deploy and maintain what I build. Docker everywhere,
-            Kubernetes when the project calls for it. Mostly AWS
-            in production.
+            Docker for everything local, Kubernetes and AWS
+            in production at work. My personal projects stay
+            simple <span class="dim">&mdash;</span> a static Nuxt front
+            and Supabase is usually enough.
         </p>
         <div class="tags">
             <span class="tag"> Docker</span>
@@ -165,7 +181,7 @@
             journey. The opposite of how I approach Python or C.
             I still try to follow good practices, even if
             sometimes I end up writing text scrambling effects
-            under the user's cursor.
+            under the user's cursor 😉.
         </p>
         <div class="tags">
             <span class="tag"> TypeScript</span>
@@ -187,5 +203,23 @@
             <span class="tag"> Linux</span>
             <span class="tag"> PyCharm</span>
         </div>
+    </section>
+
+    <section class="sk-aside">
+        <h2 class="holo-text" data-no-scramble>Want to get better at</h2>
+        <p>
+            Graph databases <span class="dim">&mdash;</span> I use Neo4j and Kuzu
+            but I want to write Cypher more fluently and go deeper.
+            Rust <span class="dim">&mdash;</span> I've wanted to learn it for
+            a while but never had the right project for it.
+            Networking and systems <span class="dim">&mdash;</span> I know the
+            basics but it's not where I'm efficient yet.
+            The internals of AI <span class="dim">&mdash;</span> I orchestrate
+            models daily but I want to understand what happens
+            under the hood, neural networks for real.
+            And English <span class="dim">&mdash;</span> I can write it
+            (with some help) but I can't hold a conversation
+            comfortably. Working on that by end of 2026.
+        </p>
     </section>
 </div>
