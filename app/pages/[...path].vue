@@ -3,62 +3,17 @@ import { C } from '~/utils/portfolio'
 
 definePageMeta({ key: 'main' })
 
-const route = useRoute()
-const router = useRouter()
 const { fileList, filesMap, loadContent } = usePortfolioFiles()
 const { isMobile } = useBreakpoint()
 const { themeName, cycle: cycleTheme } = useTheme()
 const { togglePlay: audioToggle, album: audioAlbum } = useAudioPlayer()
+const { activeFile, openTabs, showNetrw, loaded, openFile } = usePortfolioNavigation({ fileList, loadContent, isMobile })
 useScrambleHover()
 
 useKeyboardShortcuts({
   'Space': () => { if (audioAlbum.value) audioToggle() },
   'Ctrl+KeyE': () => { showNetrw.value = !showNetrw.value }
 })
-
-const fileFromRoute = computed(() => {
-  const segments = route.params.path
-  if (!segments || (Array.isArray(segments) && segments.length === 0)) return 'hello-world.html'
-  return Array.isArray(segments) ? segments.join('/') : segments
-})
-
-const activeFile = ref(fileFromRoute.value)
-const openTabs = ref([fileFromRoute.value])
-const showNetrw = ref(true)
-const loaded = ref(false)
-
-async function openFile(name: string) {
-  activeFile.value = name
-  if (!openTabs.value.includes(name)) {
-    openTabs.value = [...openTabs.value, name]
-  }
-  await loadContent(name)
-  router.replace('/' + name)
-  if (isMobile.value) showNetrw.value = false
-}
-
-// Sync from URL (external navigation, shared link)
-watch(fileFromRoute, async (name) => {
-  if (name === activeFile.value) return
-  await openFile(name)
-})
-
-// Initial load once file list is available
-watch(fileList, async (list) => {
-  if (!list.length) return
-  const target = fileFromRoute.value
-  await loadContent(list.includes(target) ? target : 'hello-world.html')
-  if (!list.includes(target)) activeFile.value = 'hello-world.html'
-}, { immediate: true })
-
-// Restore sidebar when switching back to desktop
-watch(isMobile, (val) => {
-  if (!val) showNetrw.value = true
-})
-
-if (isMobile.value) showNetrw.value = false
-
-onMounted(() => { loaded.value = true })
 </script>
 
 <template>
@@ -82,7 +37,7 @@ onMounted(() => { loaded.value = true })
       @tab-click="openFile($event)"
     />
     <div :style="{ display: 'flex', flex: 1, overflow: 'hidden', position: 'relative' }">
-      <Netrw
+      <NetrwExplorer
         :active-file="activeFile"
         :visible="showNetrw"
         :file-list="fileList"
@@ -91,6 +46,7 @@ onMounted(() => { loaded.value = true })
         @select="openFile"
         @close="showNetrw = false"
       />
+
       <div :style="{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden' }">
         <EditorPane
           :file="activeFile"

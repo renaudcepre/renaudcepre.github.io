@@ -1,5 +1,7 @@
 import type { Track, Album } from '~/types/audio'
 
+// Module-level singleton state — intentional: a single global audio player
+// shared across all components. SSR is disabled so there is no hydration issue.
 const album = ref<Album | null>(null)
 const trackIndex = ref(-1)
 const playing = ref(false)

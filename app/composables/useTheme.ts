@@ -23,8 +23,10 @@ export function useTheme() {
 
   const updateCssVars = () => {
     const root = document.documentElement
-    root.style.setProperty('--c-bg', C.bg)
-    root.style.setProperty('--c-gutter', C.gutter)
+    const { ansi: _, ...colors } = C
+    for (const [key, value] of Object.entries(colors)) {
+      root.style.setProperty(`--c-${key}`, value as string)
+    }
   }
 
   onMounted(() => { init() })

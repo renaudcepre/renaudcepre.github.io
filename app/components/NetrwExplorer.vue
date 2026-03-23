@@ -1,4 +1,3 @@
-<!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
 import { C, FONT } from '~/utils/portfolio'
 
@@ -39,6 +38,7 @@ interface TreeNode {
   name: string
   path: string
   isDir: boolean
+  icon: string | null
   children?: TreeNode[]
   depth: number
 }
@@ -63,11 +63,11 @@ const tree = computed<TreeNode[]>(() => {
       currentPath += (i > 0 ? '/' : '') + part
 
       if (isLast) {
-        current.push({ name: part, path: filePath, isDir: false, depth: i })
+        current.push({ name: part, path: filePath, isDir: false, icon: fileIcon(part), depth: i })
       } else {
         let dir = current.find(n => n.isDir && n.name === part)
         if (!dir) {
-          dir = { name: part, path: currentPath, isDir: true, children: [], depth: i }
+          dir = { name: part, path: currentPath, isDir: true, icon: null, children: [], depth: i }
           current.push(dir)
         }
         current = dir.children!
@@ -235,8 +235,8 @@ watch(() => props.fileList, (list) => {
         @mouseleave="hoveredEntry = null"
       >
         <span :style="{ color: C.gutter }">{{ indent(node) }}</span><span v-if="node.isDir">{{ expandedDirs[node.path] ? '▾ ' : '▸ ' }}</span><img
-          v-if="!node.isDir && fileIcon(node.name)"
-          :src="fileIcon(node.name)!"
+          v-if="node.icon"
+          :src="node.icon"
           :style="{ width: '10px', height: '10px', marginRight: '4px', verticalAlign: 'middle', imageRendering: 'pixelated', display: 'inline-block' }"
         >{{ node.name }}{{ node.isDir ? '/' : '' }}
       </div>

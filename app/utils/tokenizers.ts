@@ -34,7 +34,7 @@ const ANSI_16 = [
 ]
 
 function getAnsiFg(): Record<number, string> {
-  return C.ansi as unknown as Record<number, string>
+  return C.ansi
 }
 
 function ansi256(n: number): string {

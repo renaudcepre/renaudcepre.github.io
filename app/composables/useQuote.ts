@@ -27,7 +27,7 @@ function randomChar() {
 
 export function useQuote() {
   const display = ref('')
-  let frameId: ReturnType<typeof setInterval> | null = null
+  let scrambleId: ReturnType<typeof setInterval> | null = null
   let cycleId: ReturnType<typeof setInterval> | null = null
   let lastIndex = -1
 
@@ -41,7 +41,7 @@ export function useQuote() {
   }
 
   function scrambleTo(target: string) {
-    if (frameId) clearInterval(frameId)
+    if (scrambleId) clearInterval(scrambleId)
 
     const totalSteps = Math.floor(SCRAMBLE_DURATION / SCRAMBLE_INTERVAL)
     const locked = new Array(target.length).fill(false)
@@ -52,7 +52,7 @@ export function useQuote() {
       Math.floor(Math.random() * totalSteps * 0.6) + Math.floor(totalSteps * 0.3)
     )
 
-    frameId = setInterval(() => {
+    scrambleId = setInterval(() => {
       step++
       const chars = []
       for (let i = 0; i < target.length; i++) {
@@ -71,8 +71,8 @@ export function useQuote() {
 
       if (step >= totalSteps) {
         display.value = target
-        if (frameId) clearInterval(frameId)
-        frameId = null
+        if (scrambleId) clearInterval(scrambleId)
+        scrambleId = null
       }
     }, SCRAMBLE_INTERVAL)
   }
@@ -83,7 +83,7 @@ export function useQuote() {
   })
 
   onUnmounted(() => {
-    if (frameId) clearInterval(frameId)
+    if (scrambleId) clearInterval(scrambleId)
     if (cycleId) clearInterval(cycleId)
   })
 

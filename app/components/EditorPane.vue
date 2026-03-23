@@ -303,35 +303,38 @@ function handleInternalClick(e: MouseEvent) {
         </div>
 
         <!-- Rendered markdown mode -->
+        <!-- v-html: safe — content is static portfolio files (not user input).
+             HTML is produced by marked with a controlled custom renderer. -->
         <div
           v-else-if="isMd && renderedMode"
           class="md-rendered"
-          :style="{
-            'padding': '24px 32px',
-            'maxWidth': '800px',
-            'margin': '0 auto',
-            'color': C.fg,
-            '--md-code-bg': C.codeBg,
-            '--md-code-fg': C.codeFg,
-            '--md-code-border': C.border,
-            '--md-codeblock-bg': C.codeBlockBg,
-            '--md-codeblock-border': C.codeBlockBorder,
-            '--md-codeblock-fg': C.white,
-            '--md-bq-border': C.bqBorder,
-            '--md-bq-text': C.bqText,
-            '--md-bullet': C.bullet,
-            '--md-ol-num': C.olNum,
-            '--md-hr': C.hr,
-            '--md-border': C.border,
-            '--md-th-bg': C.thBg,
-            '--md-th-fg': C.thFg,
-            '--md-tr-even': C.trEvenBg
-          } as any"
+          :style="[
+            { padding: '24px 32px', maxWidth: '800px', margin: '0 auto', color: C.fg },
+            {
+              '--md-code-bg': C.codeBg,
+              '--md-code-fg': C.codeFg,
+              '--md-code-border': C.border,
+              '--md-codeblock-bg': C.codeBlockBg,
+              '--md-codeblock-border': C.codeBlockBorder,
+              '--md-codeblock-fg': C.white,
+              '--md-bq-border': C.bqBorder,
+              '--md-bq-text': C.bqText,
+              '--md-bullet': C.bullet,
+              '--md-ol-num': C.olNum,
+              '--md-hr': C.hr,
+              '--md-border': C.border,
+              '--md-th-bg': C.thBg,
+              '--md-th-fg': C.thFg,
+              '--md-tr-even': C.trEvenBg
+            } as Record<string, string>
+          ]"
           @click="handleInternalClick"
           v-html="renderedHtml"
         />
 
         <!-- Rendered HTML mode -->
+        <!-- v-html: safe — content is static portfolio .html files bundled at build time.
+             Do NOT pipe user-supplied or remote content through this path. -->
         <div
           v-else-if="isHtml && renderedMode"
           class="html-rendered"
@@ -416,7 +419,7 @@ function handleInternalClick(e: MouseEvent) {
   </div>
 </template>
 
-<style>
+<style scoped>
 .md-rendered {
   font-family: 'JetBrains Mono', 'Cascadia Mono', 'SF Mono', 'Consolas', monospace;
   font-size: 13px;
@@ -425,28 +428,28 @@ function handleInternalClick(e: MouseEvent) {
 }
 
 /* Headings */
-.md-rendered .md-heading {
+.md-rendered :deep(.md-heading) {
   margin: 1.8em 0 0.6em;
   font-weight: 700;
 }
-.md-rendered .md-h1 { font-size: 1.5em; }
-.md-rendered .md-h2 { font-size: 1.25em; }
-.md-rendered .md-h3 { font-size: 1.1em; }
-.md-rendered .md-h4, .md-rendered .md-h5, .md-rendered .md-h6 { font-size: 1em; }
-.md-rendered .md-heading-hash {
+.md-rendered :deep(.md-h1) { font-size: 1.5em; }
+.md-rendered :deep(.md-h2) { font-size: 1.25em; }
+.md-rendered :deep(.md-h3) { font-size: 1.1em; }
+.md-rendered :deep(.md-h4), .md-rendered :deep(.md-h5), .md-rendered :deep(.md-h6) { font-size: 1em; }
+.md-rendered :deep(.md-heading-hash) {
   user-select: none;
   margin-right: 2px;
   font-weight: 400;
 }
 
 /* Paragraphs */
-.md-rendered p { margin: 0.7em 0; }
+.md-rendered :deep(p) { margin: 0.7em 0; }
 
 /* Links */
-.md-rendered a:hover { border-bottom-style: solid !important; }
+.md-rendered :deep(a:hover) { border-bottom-style: solid !important; }
 
 /* Inline code */
-.md-rendered code {
+.md-rendered :deep(code) {
   background: var(--md-code-bg);
   color: var(--md-code-fg);
   padding: 2px 7px;
@@ -457,27 +460,27 @@ function handleInternalClick(e: MouseEvent) {
 }
 
 /* Code blocks */
-.md-rendered .md-codeblock {
+.md-rendered :deep(.md-codeblock) {
   margin: 1.2em 0;
 }
-.md-rendered .md-codeblock-header {
+.md-rendered :deep(.md-codeblock-header) {
   font-size: 11px;
   padding: 0 0 2px;
   user-select: none;
 }
-.md-rendered .md-codeblock-footer {
+.md-rendered :deep(.md-codeblock-footer) {
   font-size: 11px;
   padding: 2px 0 0;
   user-select: none;
 }
-.md-rendered .md-codeblock pre {
+.md-rendered :deep(.md-codeblock pre) {
   background: var(--md-codeblock-bg);
   border-left: 2px solid var(--md-codeblock-border);
   padding: 12px 16px;
   overflow-x: auto;
   margin: 0;
 }
-.md-rendered .md-codeblock pre code {
+.md-rendered :deep(.md-codeblock pre code) {
   background: none;
   border: none;
   padding: 0;
@@ -487,41 +490,41 @@ function handleInternalClick(e: MouseEvent) {
 }
 
 /* Blockquotes */
-.md-rendered .md-blockquote {
+.md-rendered :deep(.md-blockquote) {
   display: flex;
   gap: 12px;
   margin: 0.8em 0;
 }
-.md-rendered .md-bq-border {
+.md-rendered :deep(.md-bq-border) {
   color: var(--md-bq-border);
   user-select: none;
   flex-shrink: 0;
   line-height: 1.9;
 }
-.md-rendered .md-blockquote p {
+.md-rendered :deep(.md-blockquote p) {
   color: var(--md-bq-text);
   font-style: italic;
   margin: 0;
 }
 
 /* Lists */
-.md-rendered .md-list {
+.md-rendered :deep(.md-list) {
   margin: 0.5em 0;
   padding-left: 0;
 }
-.md-rendered .md-list-item {
+.md-rendered :deep(.md-list-item) {
   display: flex;
   gap: 8px;
   margin: 0.2em 0;
 }
-.md-rendered .md-bullet {
+.md-rendered :deep(.md-bullet) {
   color: var(--md-bullet);
   user-select: none;
   flex-shrink: 0;
 }
-.md-rendered .md-list-ordered { counter-reset: md-counter; }
-.md-rendered .md-list-ordered .md-bullet { display: none; }
-.md-rendered .md-list-ordered .md-list-item::before {
+.md-rendered :deep(.md-list-ordered) { counter-reset: md-counter; }
+.md-rendered :deep(.md-list-ordered .md-bullet) { display: none; }
+.md-rendered :deep(.md-list-ordered .md-list-item::before) {
   counter-increment: md-counter;
   content: counter(md-counter) ".";
   color: var(--md-ol-num);
@@ -530,7 +533,7 @@ function handleInternalClick(e: MouseEvent) {
 }
 
 /* HR */
-.md-rendered .md-hr {
+.md-rendered :deep(.md-hr) {
   color: var(--md-hr);
   margin: 1.5em 0;
   user-select: none;
@@ -539,21 +542,21 @@ function handleInternalClick(e: MouseEvent) {
 }
 
 /* Images & video */
-.md-rendered img {
+.md-rendered :deep(img) {
   max-width: 100%;
   border-radius: 4px;
   margin: 1em 0;
   display: block;
   border: 1px solid var(--md-border);
 }
-.md-rendered img.md-badge {
+.md-rendered :deep(img.md-badge) {
   display: inline;
   margin: 0 4px 0 0;
   border: none;
   border-radius: 2px;
   vertical-align: middle;
 }
-.md-rendered video {
+.md-rendered :deep(video) {
   max-width: 100%;
   border-radius: 4px;
   margin: 1em 0;
@@ -562,21 +565,21 @@ function handleInternalClick(e: MouseEvent) {
 }
 
 /* Tables */
-.md-rendered table {
+.md-rendered :deep(table) {
   border-collapse: collapse;
   width: 100%;
   margin: 1em 0;
   font-size: 12px;
 }
-.md-rendered th, .md-rendered td {
+.md-rendered :deep(th), .md-rendered :deep(td) {
   border: 1px solid var(--md-border);
   padding: 6px 12px;
   text-align: left;
 }
-.md-rendered th {
+.md-rendered :deep(th) {
   background: var(--md-th-bg);
   color: var(--md-th-fg);
   font-weight: 600;
 }
-.md-rendered tr:nth-child(even) { background: var(--md-tr-even); }
+.md-rendered :deep(tr:nth-child(even)) { background: var(--md-tr-even); }
 </style>

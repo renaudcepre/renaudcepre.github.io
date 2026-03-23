@@ -20,6 +20,7 @@ const { album: activeAlbum, trackIndex, playing, playTrack } = useAudioPlayer()
 
 const durations = ref<Record<number, number>>({})
 const hoveredTrack = ref(-1)
+const preloadElements: HTMLAudioElement[] = []
 
 const baseDir = computed(() => {
   const slug = albumData.value?.title.toLowerCase().replace(/\s+/g, '_') ?? ''
@@ -32,6 +33,8 @@ function isActiveTrack(i: number) {
 
 // Preload durations
 watch(albumData, (a) => {
+  preloadElements.forEach(el => { el.src = '' })
+  preloadElements.length = 0
   if (!a) return
   a.tracks.forEach((track, i) => {
     const el = new Audio()
@@ -42,8 +45,14 @@ watch(albumData, (a) => {
         durations.value = { ...durations.value, [i]: el.duration }
       }
     })
+    preloadElements.push(el)
   })
 }, { immediate: true })
+
+onUnmounted(() => {
+  preloadElements.forEach(el => { el.src = '' })
+  preloadElements.length = 0
+})
 </script>
 
 <template>

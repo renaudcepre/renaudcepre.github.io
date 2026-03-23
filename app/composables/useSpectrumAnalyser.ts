@@ -1,3 +1,5 @@
+// Module-level — tracks which audio elements are already connected to the
+// AudioContext to avoid creating duplicate MediaElementSourceNodes.
 const connectedElements = new WeakSet<HTMLAudioElement>()
 
 export function useSpectrumAnalyser() {
