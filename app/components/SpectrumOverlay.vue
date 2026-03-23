@@ -7,7 +7,7 @@ const props = withDefaults(defineProps<{
   opacity?: number
 }>(), {
   color: '#98c379',
-  opacity: 0.07,
+  opacity: 0.07
 })
 
 const canvasRef = ref<HTMLCanvasElement | null>(null)
@@ -104,7 +104,7 @@ function draw() {
       pointerEvents: 'none',
       opacity: props.opacity,
       width: '100%',
-      height: '100%',
+      height: '100%'
     }"
   />
 </template>

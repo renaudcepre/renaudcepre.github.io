@@ -40,7 +40,7 @@ function onSeek(e: MouseEvent) {
       fontSize: '11px',
       flexShrink: 0,
       color: C.fg,
-      userSelect: 'none',
+      userSelect: 'none'
     }"
   >
     <!-- Controls -->
@@ -54,18 +54,33 @@ function onSeek(e: MouseEvent) {
         display: 'flex',
         alignItems: 'center',
         fontSize: '9px',
-        gap: '6px',
+        gap: '6px'
       }"
     >
-      <span data-no-scramble :style="{ cursor: 'pointer' }" @click="skipPrev">⏮</span>
-      <span data-no-scramble :style="{ cursor: 'pointer', fontSize: '11px' }" @click="togglePlay">{{ playing ? '⏸' : '▶' }}</span>
-      <span data-no-scramble :style="{ cursor: 'pointer' }" @click="skipNext">⏭</span>
+      <span
+        data-no-scramble
+        :style="{ cursor: 'pointer' }"
+        @click="skipPrev"
+      >⏮</span>
+      <span
+        data-no-scramble
+        :style="{ cursor: 'pointer', fontSize: '11px' }"
+        @click="togglePlay"
+      >{{ playing ? '⏸' : '▶' }}</span>
+      <span
+        data-no-scramble
+        :style="{ cursor: 'pointer' }"
+        @click="skipNext"
+      >⏭</span>
     </span>
 
     <!-- Track info -->
     <span :style="{ padding: '0 8px', whiteSpace: 'nowrap' }">
       <span :style="{ color: C.green }">{{ track.title }}</span>
-      <span v-if="album" :style="{ color: C.comment }"> · {{ album.title }}</span>
+      <span
+        v-if="album"
+        :style="{ color: C.comment }"
+      > · {{ album.title }}</span>
     </span>
 
     <!-- Progress bar -->
@@ -77,7 +92,7 @@ function onSeek(e: MouseEvent) {
         cursor: 'pointer',
         position: 'relative',
         margin: '0 8px',
-        borderRadius: '1px',
+        borderRadius: '1px'
       }"
       @click="onSeek"
     >
@@ -89,7 +104,7 @@ function onSeek(e: MouseEvent) {
           height: '100%',
           width: progress + '%',
           background: C.green,
-          borderRadius: '1px',
+          borderRadius: '1px'
         }"
       />
     </div>

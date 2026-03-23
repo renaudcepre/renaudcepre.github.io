@@ -37,7 +37,7 @@ onMounted(() => {
       fontFamily: FONT,
       fontSize: '11px',
       flexShrink: 0,
-      color: C.bg,
+      color: C.bg
     }"
   >
     <div :style="{ display: 'flex', alignItems: 'center', height: '100%' }">
@@ -52,7 +52,7 @@ onMounted(() => {
           height: '100%',
           display: 'flex',
           alignItems: 'center',
-          cursor: 'pointer',
+          cursor: 'pointer'
         }"
         @click="emit('toggleNetrw')"
       >≡</span>
@@ -63,7 +63,7 @@ onMounted(() => {
         :style="{
           padding: '0 8px',
           color: C.bg,
-          textDecoration: 'none',
+          textDecoration: 'none'
         }"
       >github.com/renaudcepre</a>
     </div>
@@ -78,7 +78,7 @@ onMounted(() => {
         whiteSpace: 'nowrap',
         flex: 1,
         textAlign: 'center',
-        padding: '0 12px',
+        padding: '0 12px'
       }"
     >{{ quote }}</span>
     <div :style="{ display: 'flex', alignItems: 'center', gap: '12px', padding: '0 8px' }">

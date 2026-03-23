@@ -125,7 +125,7 @@ function initRenderDefault(file: string) {
   renderModePerFile[file] = defaultRenderLangs.has(entry.lang)
 }
 
-watch(() => props.file, (file) => initRenderDefault(file), { immediate: true })
+watch(() => props.file, file => initRenderDefault(file), { immediate: true })
 watch(() => data.value?.lang, () => initRenderDefault(props.file))
 
 onMounted(() => {
@@ -202,7 +202,7 @@ function handleInternalClick(e: MouseEvent) {
       overflow: 'hidden',
       background: C.bg,
       fontFamily: FONT,
-      fontSize: '13px',
+      fontSize: '13px'
     }"
   >
     <!-- Mini tmux bar for renderable files -->
@@ -217,7 +217,7 @@ function handleInternalClick(e: MouseEvent) {
         fontFamily: FONT,
         fontSize: '11px',
         flexShrink: 0,
-        userSelect: 'none',
+        userSelect: 'none'
       }"
     >
       <span
@@ -229,7 +229,7 @@ function handleInternalClick(e: MouseEvent) {
           cursor: 'pointer',
           fontWeight: !renderedMode ? 700 : 400,
           background: !renderedMode ? C.statusBg : 'transparent',
-          color: !renderedMode ? C.blue : C.bg,
+          color: !renderedMode ? C.blue : C.bg
         }"
         @click="renderedMode = false"
       >0:raw{{ !renderedMode ? '*' : '' }}</span>
@@ -242,7 +242,7 @@ function handleInternalClick(e: MouseEvent) {
           cursor: 'pointer',
           fontWeight: renderedMode ? 700 : 400,
           background: renderedMode ? C.statusBg : 'transparent',
-          color: renderedMode ? C.blue : C.bg,
+          color: renderedMode ? C.blue : C.bg
         }"
         @click="renderedMode = true"
       >1:render{{ renderedMode ? '*' : '' }}</span>
@@ -263,156 +263,162 @@ function handleInternalClick(e: MouseEvent) {
           height: '100%',
           overflowY: 'auto',
           overflowX: 'auto',
-          lineHeight: isAnsi ? '13px' : '21px',
+          lineHeight: isAnsi ? '13px' : '21px'
         }"
       >
-      <!-- Audio player mode (render) -->
-      <AudioPlayer
-        v-if="isAudio && renderedMode"
-        :content="data.content"
-      />
-
-      <!-- Video mode -->
-      <div
-        v-else-if="isVideo"
-        :style="{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          height: '100%',
-          padding: '24px',
-        }"
-      >
-        <video
-          :src="data.content.trim()"
-          controls
-          loop
-          :style="{ maxWidth: '100%', maxHeight: '100%', borderRadius: '4px' }"
+        <!-- Audio player mode (render) -->
+        <AudioPlayer
+          v-if="isAudio && renderedMode"
+          :content="data.content"
         />
-      </div>
 
-      <!-- Image mode -->
-      <div
-        v-else-if="isImage"
-        :style="{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          height: '100%',
-          padding: '24px',
-        }"
-      >
-        <img
-          :src="data.content.trim()"
-          :alt="file"
-          :style="{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain', borderRadius: '4px' }"
-        >
-      </div>
-
-      <!-- Rendered markdown mode -->
-      <div
-        v-else-if="isMd && renderedMode"
-        class="md-rendered"
-        :style="{
-          padding: '24px 32px',
-          maxWidth: '800px',
-          margin: '0 auto',
-          color: C.fg,
-          '--md-code-bg': C.codeBg,
-          '--md-code-fg': C.codeFg,
-          '--md-code-border': C.border,
-          '--md-codeblock-bg': C.codeBlockBg,
-          '--md-codeblock-border': C.codeBlockBorder,
-          '--md-codeblock-fg': C.white,
-          '--md-bq-border': C.bqBorder,
-          '--md-bq-text': C.bqText,
-          '--md-bullet': C.bullet,
-          '--md-ol-num': C.olNum,
-          '--md-hr': C.hr,
-          '--md-border': C.border,
-          '--md-th-bg': C.thBg,
-          '--md-th-fg': C.thFg,
-          '--md-tr-even': C.trEvenBg,
-        } as any"
-        v-html="renderedHtml"
-        @click="handleInternalClick"
-      />
-
-      <!-- Rendered HTML mode -->
-      <div
-        v-else-if="isHtml && renderedMode"
-        class="html-rendered"
-        :style="{ height: '100%', overflow: 'auto' }"
-        v-html="data.content"
-        @click="handleInternalClick"
-      />
-
-      <!-- Code / text mode -->
-      <template v-else>
-        <!-- ANSI: centered in pane -->
+        <!-- Video mode -->
         <div
-          v-if="isAnsi"
+          v-else-if="isVideo"
           :style="{
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            minHeight: '100%',
-            padding: '24px',
+            height: '100%',
+            padding: '24px'
           }"
         >
-          <div>
+          <video
+            :src="data.content.trim()"
+            controls
+            loop
+            :style="{ maxWidth: '100%', maxHeight: '100%', borderRadius: '4px' }"
+          />
+        </div>
+
+        <!-- Image mode -->
+        <div
+          v-else-if="isImage"
+          :style="{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            height: '100%',
+            padding: '24px'
+          }"
+        >
+          <img
+            :src="data.content.trim()"
+            :alt="file"
+            :style="{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain', borderRadius: '4px' }"
+          >
+        </div>
+
+        <!-- Rendered markdown mode -->
+        <div
+          v-else-if="isMd && renderedMode"
+          class="md-rendered"
+          :style="{
+            'padding': '24px 32px',
+            'maxWidth': '800px',
+            'margin': '0 auto',
+            'color': C.fg,
+            '--md-code-bg': C.codeBg,
+            '--md-code-fg': C.codeFg,
+            '--md-code-border': C.border,
+            '--md-codeblock-bg': C.codeBlockBg,
+            '--md-codeblock-border': C.codeBlockBorder,
+            '--md-codeblock-fg': C.white,
+            '--md-bq-border': C.bqBorder,
+            '--md-bq-text': C.bqText,
+            '--md-bullet': C.bullet,
+            '--md-ol-num': C.olNum,
+            '--md-hr': C.hr,
+            '--md-border': C.border,
+            '--md-th-bg': C.thBg,
+            '--md-th-fg': C.thFg,
+            '--md-tr-even': C.trEvenBg
+          } as any"
+          @click="handleInternalClick"
+          v-html="renderedHtml"
+        />
+
+        <!-- Rendered HTML mode -->
+        <div
+          v-else-if="isHtml && renderedMode"
+          class="html-rendered"
+          :style="{ height: '100%', overflow: 'auto' }"
+          @click="handleInternalClick"
+          v-html="data.content"
+        />
+
+        <!-- Code / text mode -->
+        <template v-else>
+          <!-- ANSI: centered in pane -->
+          <div
+            v-if="isAnsi"
+            :style="{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              minHeight: '100%',
+              padding: '24px'
+            }"
+          >
+            <div>
+              <div
+                v-for="(line, i) in lines"
+                :key="i"
+                :style="{ display: 'flex', minHeight: '13px' }"
+              >
+                <span :style="{ whiteSpace: 'pre' }">
+                  <RenderLine
+                    :line="line"
+                    :lang="data.lang"
+                  />
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Code / plain text -->
+          <template v-else>
             <div
               v-for="(line, i) in lines"
               :key="i"
-              :style="{ display: 'flex', minHeight: '13px' }"
+              :style="{ display: 'flex', minHeight: '21px' }"
             >
+              <span
+                :style="{
+                  width: '48px',
+                  textAlign: 'right',
+                  paddingRight: '12px',
+                  color: C.gutter,
+                  userSelect: 'none',
+                  flexShrink: 0
+                }"
+              >{{ i + 1 }}</span>
               <span :style="{ whiteSpace: 'pre' }">
-                <RenderLine :line="line" :lang="data.lang" />
+                <RenderLine
+                  :line="line"
+                  :lang="data.lang"
+                />
               </span>
             </div>
-          </div>
-        </div>
-
-        <!-- Code / plain text -->
-        <template v-else>
-          <div
-            v-for="(line, i) in lines"
-            :key="i"
-            :style="{ display: 'flex', minHeight: '21px' }"
-          >
-            <span
-              :style="{
-                width: '48px',
-                textAlign: 'right',
-                paddingRight: '12px',
-                color: C.gutter,
-                userSelect: 'none',
-                flexShrink: 0,
-              }"
-            >{{ i + 1 }}</span>
-            <span :style="{ whiteSpace: 'pre' }">
-              <RenderLine :line="line" :lang="data.lang" />
-            </span>
-          </div>
-          <div
-            v-for="i in emptyRows"
-            :key="`e${i}`"
-            :style="{ display: 'flex', minHeight: '21px' }"
-          >
-            <span
-              :style="{
-                width: '48px',
-                textAlign: 'right',
-                paddingRight: '12px',
-                color: C.blue,
-                userSelect: 'none',
-                flexShrink: 0,
-              }"
-            >~</span>
-          </div>
+            <div
+              v-for="i in emptyRows"
+              :key="`e${i}`"
+              :style="{ display: 'flex', minHeight: '21px' }"
+            >
+              <span
+                :style="{
+                  width: '48px',
+                  textAlign: 'right',
+                  paddingRight: '12px',
+                  color: C.blue,
+                  userSelect: 'none',
+                  flexShrink: 0
+                }"
+              >~</span>
+            </div>
+          </template>
         </template>
-      </template>
-    </div>
+      </div>
     </div>
   </div>
 </template>

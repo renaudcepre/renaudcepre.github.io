@@ -93,7 +93,7 @@ onMounted(() => {
       flexDirection: 'column',
       opacity: loaded ? 1 : 0,
       transition: 'opacity 0.3s',
-      overflow: 'hidden',
+      overflow: 'hidden'
     }"
   >
     <VimTabs
@@ -113,11 +113,18 @@ onMounted(() => {
         @close="showNetrw = false"
       />
       <div :style="{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden' }">
-        <EditorPane :file="activeFile" :files-map="filesMap" />
+        <EditorPane
+          :file="activeFile"
+          :files-map="filesMap"
+        />
       </div>
     </div>
     <PlayerBar />
-    <StatusLine v-if="!isMobile" :file="activeFile" :files-map="filesMap" />
+    <StatusLine
+      v-if="!isMobile"
+      :file="activeFile"
+      :files-map="filesMap"
+    />
     <TmuxBar
       :is-mobile="isMobile"
       :show-netrw="showNetrw"

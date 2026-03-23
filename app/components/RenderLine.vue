@@ -27,8 +27,7 @@ function handleLinkClick(e: MouseEvent, href: string) {
   e.preventDefault()
   if (href.startsWith('http') || href.startsWith('mailto:')) {
     window.open(href, '_blank')
-  }
-  else {
+  } else {
     router.push('/' + href)
   }
 }
@@ -47,7 +46,7 @@ function handleLinkClick(e: MouseEvent, href: string) {
         fontWeight: tok.b ? 700 : 400,
         fontStyle: tok.i ? 'italic' : 'normal',
         textDecoration: 'underline',
-        cursor: 'pointer',
+        cursor: 'pointer'
       }"
       @click="handleLinkClick($event, tok.href)"
     >{{ tok.t }}</a>
@@ -57,7 +56,7 @@ function handleLinkClick(e: MouseEvent, href: string) {
         color: tok.c,
         background: tok.bg,
         fontWeight: tok.b ? 700 : 400,
-        fontStyle: tok.i ? 'italic' : 'normal',
+        fontStyle: tok.i ? 'italic' : 'normal'
       }"
     >{{ tok.t }}</span>
   </template>

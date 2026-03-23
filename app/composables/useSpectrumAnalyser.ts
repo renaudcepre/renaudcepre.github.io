@@ -4,7 +4,7 @@ export function useSpectrumAnalyser() {
   if (import.meta.server) {
     return {
       bands: readonly(ref<number[]>([])),
-      connect: (_el: HTMLAudioElement, _playing: Ref<boolean>) => {},
+      connect: (_el: HTMLAudioElement, _playing: Ref<boolean>) => {}
     }
   }
 
@@ -73,6 +73,6 @@ export function useSpectrumAnalyser() {
 
   return {
     bands: readonly(bands),
-    connect,
+    connect
   }
 }

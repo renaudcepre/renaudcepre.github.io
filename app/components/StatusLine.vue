@@ -31,7 +31,7 @@ const langLabel = computed(() => LANG_LABELS[data.value?.lang ?? ''] ?? data.val
       fontFamily: FONT,
       fontSize: '12px',
       flexShrink: 0,
-      background: C.statusBg,
+      background: C.statusBg
     }"
   >
     <div :style="{ display: 'flex', alignItems: 'center', height: '100%' }">
@@ -43,7 +43,7 @@ const langLabel = computed(() => LANG_LABELS[data.value?.lang ?? ''] ?? data.val
           fontWeight: 700,
           height: '100%',
           display: 'flex',
-          alignItems: 'center',
+          alignItems: 'center'
         }"
       >NORMAL</span>
       <span
@@ -53,7 +53,7 @@ const langLabel = computed(() => LANG_LABELS[data.value?.lang ?? ''] ?? data.val
           padding: '0 8px',
           height: '100%',
           display: 'flex',
-          alignItems: 'center',
+          alignItems: 'center'
         }"
       >{{ file }}</span>
       <span :style="{ color: C.comment, padding: '0 6px' }">[+]</span>
@@ -75,7 +75,7 @@ const langLabel = computed(() => LANG_LABELS[data.value?.lang ?? ''] ?? data.val
           padding: '0 8px',
           height: '100%',
           display: 'flex',
-          alignItems: 'center',
+          alignItems: 'center'
         }"
       >{{ lineCount }}L</span>
       <span
@@ -86,7 +86,7 @@ const langLabel = computed(() => LANG_LABELS[data.value?.lang ?? ''] ?? data.val
           fontWeight: 700,
           height: '100%',
           display: 'flex',
-          alignItems: 'center',
+          alignItems: 'center'
         }"
       >1:1</span>
     </div>

@@ -20,8 +20,8 @@ export const THEMES = {
       30: '#000000', 31: '#e06c75', 32: '#98c379', 33: '#e5c07b',
       34: '#61afef', 35: '#c678dd', 36: '#56b6c2', 37: '#abb2bf',
       90: '#5c6370', 91: '#e06c75', 92: '#98c379', 93: '#e5c07b',
-      94: '#61afef', 95: '#c678dd', 96: '#56b6c2', 97: '#ffffff',
-    },
+      94: '#61afef', 95: '#c678dd', 96: '#56b6c2', 97: '#ffffff'
+    }
   },
   'catppuccin': {
     bg: '#1e1e2e', fg: '#cdd6f4', comment: '#6c7086', keyword: '#cba6f7',
@@ -39,8 +39,8 @@ export const THEMES = {
       30: '#45475a', 31: '#f38ba8', 32: '#a6e3a1', 33: '#f9e2af',
       34: '#89b4fa', 35: '#cba6f7', 36: '#94e2d5', 37: '#bac2de',
       90: '#6c7086', 91: '#f38ba8', 92: '#a6e3a1', 93: '#f9e2af',
-      94: '#89b4fa', 95: '#cba6f7', 96: '#94e2d5', 97: '#cdd6f4',
-    },
+      94: '#89b4fa', 95: '#cba6f7', 96: '#94e2d5', 97: '#cdd6f4'
+    }
   },
   'gruvbox': {
     bg: '#282828', fg: '#ebdbb2', comment: '#928374', keyword: '#fb4934',
@@ -58,9 +58,9 @@ export const THEMES = {
       30: '#282828', 31: '#fb4934', 32: '#b8bb26', 33: '#fabd2f',
       34: '#83a598', 35: '#d3869b', 36: '#8ec07c', 37: '#ebdbb2',
       90: '#928374', 91: '#fb4934', 92: '#b8bb26', 93: '#fabd2f',
-      94: '#83a598', 95: '#d3869b', 96: '#8ec07c', 97: '#ebdbb2',
-    },
-  },
+      94: '#83a598', 95: '#d3869b', 96: '#8ec07c', 97: '#ebdbb2'
+    }
+  }
 } as const
 
 const THEME_NAMES: ThemeName[] = ['one-dark', 'catppuccin', 'gruvbox']
@@ -83,7 +83,7 @@ export function currentThemeName(): ThemeName {
   return THEME_NAMES.find(n => THEMES[n].bg === C.bg) || THEME_NAMES[0]
 }
 
-export const FONT = "'JetBrainsMono Nerd Font', 'JetBrains Mono', 'Cascadia Mono', 'SF Mono', 'Consolas', monospace"
+export const FONT = '\'JetBrainsMono Nerd Font\', \'JetBrains Mono\', \'Cascadia Mono\', \'SF Mono\', \'Consolas\', monospace'
 
 export interface Token {
   t: string
@@ -105,7 +105,7 @@ export function tokPy(line: string): Token[] {
     const t = m[0]
     let c = C.fg
     if (t.startsWith('#')) c = C.comment
-    else if (t.startsWith('"') || t.startsWith("'")) c = C.string
+    else if (t.startsWith('"') || t.startsWith('\'')) c = C.string
     else if (t.startsWith('@')) c = C.yellow
     else if (/^\d/.test(t)) c = C.number
     else if (PY_KW.has(t)) c = C.keyword
@@ -162,11 +162,8 @@ export function tokAnsi(line: string): Token[] {
     let i = 0
     while (i < codes.length) {
       const code = codes[i]
-      if (code === 0 || Number.isNaN(code)) { fg = C.fg; bg = undefined; bold = false }
-      else if (code === 1) bold = true
-      else if (code === 38 && codes[i + 1] === 5) { fg = ansi256(codes[i + 2] ?? 0); i += 2 }
-      else if (code === 48 && codes[i + 1] === 5) { bg = ansi256(codes[i + 2] ?? 0); i += 2 }
-      else if (code === 39) fg = C.fg
+      if (code === 0 || Number.isNaN(code)) { fg = C.fg; bg = undefined; bold = false } else if (code === 1) bold = true
+      else if (code === 38 && codes[i + 1] === 5) { fg = ansi256(codes[i + 2] ?? 0); i += 2 } else if (code === 48 && codes[i + 1] === 5) { bg = ansi256(codes[i + 2] ?? 0); i += 2 } else if (code === 39) fg = C.fg
       else if (code === 49) bg = undefined
       else if (getAnsiFg()[code]) fg = getAnsiFg()[code]
       i++
@@ -209,7 +206,7 @@ export function tokHtml(line: string): Token[] {
     if (t.startsWith('<!--')) toks.push({ t, c: C.comment })
     else if (t.startsWith('</') || t.startsWith('<')) toks.push({ t, c: C.red })
     else if (t === '/>' || t === '>') toks.push({ t, c: C.red })
-    else if ((t.startsWith('"') || t.startsWith("'")) && t.length > 1) toks.push({ t, c: C.string })
+    else if ((t.startsWith('"') || t.startsWith('\'')) && t.length > 1) toks.push({ t, c: C.string })
     else if (/^[a-zA-Z][\w-]*$/.test(t) && line.charAt(m.index + t.length) === '=') toks.push({ t, c: C.yellow })
     else if (t.startsWith('&') && t.endsWith(';')) toks.push({ t, c: C.number })
     else toks.push({ t, c: C.fg })
@@ -233,14 +230,11 @@ export function tokMd(line: string): Token[] {
   while ((mm = re.exec(line)) !== null) {
     if (mm[0].startsWith('![')) {
       toks.push({ t: mm[0], c: C.magenta })
-    }
-    else if (mm[0].startsWith('[') && mm[3]) {
+    } else if (mm[0].startsWith('[') && mm[3]) {
       toks.push({ t: mm[0], c: C.func, href: mm[3] })
-    }
-    else if (mm[0].startsWith('`')) {
+    } else if (mm[0].startsWith('`')) {
       toks.push({ t: mm[0], c: C.string })
-    }
-    else {
+    } else {
       toks.push({ t: mm[0], c: C.fg })
     }
   }

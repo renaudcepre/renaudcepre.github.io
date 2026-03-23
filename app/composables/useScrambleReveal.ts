@@ -30,8 +30,8 @@ export function useScrambleReveal() {
     // Each character gets a random step to lock in
     const lockSteps = nodes.map(({ original }) =>
       Array.from({ length: original.length }, () =>
-        Math.floor(Math.random() * TOTAL_STEPS * 0.5) + Math.floor(TOTAL_STEPS * 0.3),
-      ),
+        Math.floor(Math.random() * TOTAL_STEPS * 0.5) + Math.floor(TOTAL_STEPS * 0.3)
+      )
     )
 
     let step = 0

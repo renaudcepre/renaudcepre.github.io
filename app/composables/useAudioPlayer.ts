@@ -128,6 +128,6 @@ export function useAudioPlayer() {
     seek,
     skipNext,
     skipPrev,
-    getAudioElement,
+    getAudioElement
   }
 }

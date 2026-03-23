@@ -128,7 +128,7 @@ function fileIcon(name: string): string | null {
     '.ansi': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><rect x="1" y="1" width="2" height="2" fill="#000"/><rect x="3" y="1" width="2" height="2" fill="#a0a0a0"/><rect x="5" y="1" width="2" height="2" fill="#000"/><rect x="7" y="1" width="2" height="2" fill="#a0a0a0"/><rect x="1" y="3" width="2" height="2" fill="#a0a0a0"/><rect x="3" y="3" width="2" height="2" fill="#000"/><rect x="5" y="3" width="2" height="2" fill="#a0a0a0"/><rect x="7" y="3" width="2" height="2" fill="#000"/><rect x="1" y="5" width="2" height="2" fill="#000"/><rect x="3" y="5" width="2" height="2" fill="#a0a0a0"/><rect x="5" y="5" width="2" height="2" fill="#000"/><rect x="7" y="5" width="2" height="2" fill="#a0a0a0"/><rect x="1" y="7" width="2" height="2" fill="#a0a0a0"/><rect x="3" y="7" width="2" height="2" fill="#000"/><rect x="5" y="7" width="2" height="2" fill="#a0a0a0"/><rect x="7" y="7" width="2" height="2" fill="#000"/></svg>`,
     '.antres': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><rect x="5" y="1" width="2" height="6" fill="#000"/><rect x="3" y="1" width="2" height="2" fill="#a0a0a0"/><rect x="7" y="1" width="2" height="2" fill="#a0a0a0"/><circle cx="4" cy="8" r="1.5" fill="#a0a0a0"/><circle cx="4" cy="8" r="1.5" stroke="#000" stroke-width="0.5" fill="#a0a0a0"/></svg>`,
     '.webp': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><rect x="1" y="1" width="8" height="8" fill="#a0a0a0" stroke="#000" stroke-width="0.5"/><polygon points="2,8 5,4 8,8" fill="#000"/><circle cx="7" cy="3" r="1" fill="#000"/></svg>`,
-    '.webm': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><rect x="1" y="2" width="8" height="6" fill="#a0a0a0" stroke="#000" stroke-width="0.5"/><polygon points="4,4 4,7 7,5.5" fill="#000"/></svg>`,
+    '.webm': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><rect x="1" y="2" width="8" height="6" fill="#a0a0a0" stroke="#000" stroke-width="0.5"/><polygon points="4,4 4,7 7,5.5" fill="#000"/></svg>`
   }
   const svg = icons[ext]
   if (!svg) return null
@@ -164,13 +164,13 @@ watch(() => props.fileList, (list) => {
       lineHeight: '36px',
       overflowY: 'auto',
       display: 'flex',
-      flexDirection: 'column',
+      flexDirection: 'column'
     } : {
       width: sidebarWidth + 'px',
       background: C.netrw,
       flexShrink: '0',
       position: 'relative',
-      overflow: 'hidden',
+      overflow: 'hidden'
     }"
   >
     <div
@@ -182,49 +182,63 @@ watch(() => props.fileList, (list) => {
         overflowX: 'hidden',
         height: '100%',
         display: 'flex',
-        flexDirection: 'column',
+        flexDirection: 'column'
       }"
     >
-    <div
-      v-if="isMobile"
-      :style="{
-        display: 'flex',
-        justifyContent: 'flex-end',
-        padding: '8px 12px',
-        borderBottom: `1px solid ${C.border}`,
-      }"
-    >
-      <span
+      <div
+        v-if="isMobile"
         :style="{
-          cursor: 'pointer',
-          color: C.fg,
-          fontSize: '20px',
-          lineHeight: '1',
-          padding: '4px 8px',
+          display: 'flex',
+          justifyContent: 'flex-end',
+          padding: '8px 12px',
+          borderBottom: `1px solid ${C.border}`
         }"
-        @click="emit('close')"
-      >✕</span>
-    </div>
-    <div :style="{ padding: '0 10px', color: C.comment, whiteSpace: 'pre' }"> " ==========================================</div>
-    <div :style="{ padding: '0 10px', color: C.comment, whiteSpace: 'pre' }"> "   rcepre / portfolio</div>
-    <div :style="{ padding: '0 10px', color: C.comment, whiteSpace: 'pre' }"> "   last release: 2025</div>
-    <div :style="{ padding: '0 10px', color: C.comment, whiteSpace: 'pre' }"> " ==========================================</div>
-    <div
-      v-for="node in flatTree"
-      :key="node.path"
-      :style="{
-        padding: '0 10px',
-        paddingLeft: '10px',
-        cursor: 'pointer',
-        whiteSpace: 'pre',
-        color: entryColor(node),
-        background: entryBg(node),
-        userSelect: 'none',
-      }"
-      @click="handleClick(node)"
-      @mouseenter="hoveredEntry = node.path"
-      @mouseleave="hoveredEntry = null"
-    ><span :style="{ color: C.gutter }">{{ indent(node) }}</span><span v-if="node.isDir">{{ expandedDirs[node.path] ? '▾ ' : '▸ ' }}</span><img v-if="!node.isDir && fileIcon(node.name)" :src="fileIcon(node.name)!" :style="{ width: '10px', height: '10px', marginRight: '4px', verticalAlign: 'middle', imageRendering: 'pixelated', display: 'inline-block' }">{{ node.name }}{{ node.isDir ? '/' : '' }}</div>
+      >
+        <span
+          :style="{
+            cursor: 'pointer',
+            color: C.fg,
+            fontSize: '20px',
+            lineHeight: '1',
+            padding: '4px 8px'
+          }"
+          @click="emit('close')"
+        >✕</span>
+      </div>
+      <div :style="{ padding: '0 10px', color: C.comment, whiteSpace: 'pre' }">
+        " ==========================================
+      </div>
+      <div :style="{ padding: '0 10px', color: C.comment, whiteSpace: 'pre' }">
+        "   rcepre / portfolio
+      </div>
+      <div :style="{ padding: '0 10px', color: C.comment, whiteSpace: 'pre' }">
+        "   last release: 2025
+      </div>
+      <div :style="{ padding: '0 10px', color: C.comment, whiteSpace: 'pre' }">
+        " ==========================================
+      </div>
+      <div
+        v-for="node in flatTree"
+        :key="node.path"
+        :style="{
+          padding: '0 10px',
+          paddingLeft: '10px',
+          cursor: 'pointer',
+          whiteSpace: 'pre',
+          color: entryColor(node),
+          background: entryBg(node),
+          userSelect: 'none'
+        }"
+        @click="handleClick(node)"
+        @mouseenter="hoveredEntry = node.path"
+        @mouseleave="hoveredEntry = null"
+      >
+        <span :style="{ color: C.gutter }">{{ indent(node) }}</span><span v-if="node.isDir">{{ expandedDirs[node.path] ? '▾ ' : '▸ ' }}</span><img
+          v-if="!node.isDir && fileIcon(node.name)"
+          :src="fileIcon(node.name)!"
+          :style="{ width: '10px', height: '10px', marginRight: '4px', verticalAlign: 'middle', imageRendering: 'pixelated', display: 'inline-block' }"
+        >{{ node.name }}{{ node.isDir ? '/' : '' }}
+      </div>
     </div>
     <!-- Resize handle -->
     <div
@@ -236,7 +250,7 @@ watch(() => props.fileList, (list) => {
         right: '-4px',
         width: '9px',
         height: '100%',
-        zIndex: 10,
+        zIndex: 10
       }"
       @mousedown="startResize"
     />

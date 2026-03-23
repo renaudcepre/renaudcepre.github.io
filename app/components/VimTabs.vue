@@ -23,7 +23,7 @@ const emit = defineEmits<{
       flexShrink: 0,
       fontFamily: FONT,
       fontSize: '12px',
-      overflowX: isMobile ? 'auto' : 'hidden',
+      overflowX: isMobile ? 'auto' : 'hidden'
     }"
   >
     <div
@@ -36,7 +36,7 @@ const emit = defineEmits<{
         color: tab === activeFile ? C.fg : C.comment,
         borderRight: `1px solid ${C.border}`,
         whiteSpace: 'nowrap',
-        flexShrink: 0,
+        flexShrink: 0
       }"
       @click="emit('tabClick', tab)"
     >

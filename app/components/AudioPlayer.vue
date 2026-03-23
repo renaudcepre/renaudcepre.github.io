@@ -69,12 +69,16 @@ watch(albumData, (a) => {
       fontSize: '13px',
       lineHeight: '21px',
       color: C.fg,
-      maxWidth: '700px',
+      maxWidth: '700px'
     }"
   >
     <!-- Header -->
-    <div :style="{ color: C.blue, marginBottom: '4px' }">╭─ <span :style="{ color: C.green, fontWeight: 700 }">{{ albumData.title }}</span> <span :style="{ color: C.comment }">─ {{ albumData.type }}, {{ albumData.year }}</span></div>
-    <div :style="{ color: C.blue }">│</div>
+    <div :style="{ color: C.blue, marginBottom: '4px' }">
+      ╭─ <span :style="{ color: C.green, fontWeight: 700 }">{{ albumData.title }}</span> <span :style="{ color: C.comment }">─ {{ albumData.type }}, {{ albumData.year }}</span>
+    </div>
+    <div :style="{ color: C.blue }">
+      │
+    </div>
 
     <!-- Tracks -->
     <div
@@ -85,24 +89,47 @@ watch(albumData, (a) => {
         alignItems: 'center',
         cursor: 'pointer',
         color: isActiveTrack(i) ? C.green : hoveredTrack === i ? C.fg : C.fg,
-        gap: '8px',
+        gap: '8px'
       }"
       @click="playTrack(albumData!, i)"
       @mouseenter="hoveredTrack = i"
       @mouseleave="hoveredTrack = -1"
     >
       <span :style="{ color: C.blue }">│</span>
-      <span data-no-scramble :style="{ width: '24px', textAlign: 'center', color: isActiveTrack(i) && playing ? C.green : hoveredTrack === i ? C.green : C.comment }">
+      <span
+        data-no-scramble
+        :style="{ width: '24px', textAlign: 'center', color: isActiveTrack(i) && playing ? C.green : hoveredTrack === i ? C.green : C.comment }"
+      >
         {{ isActiveTrack(i) && playing ? '⏸' : isActiveTrack(i) && !playing ? '▶' : hoveredTrack === i ? '▷' : '·' }}
       </span>
       <span :style="{ width: '24px', textAlign: 'right', color: C.gutter }">{{ String(i + 1).padStart(2, '0') }}</span>
-      <span :class="{ 'holo-text': isActiveTrack(i) && playing }" :style="{ flex: 1, color: isActiveTrack(i) ? C.green : hoveredTrack === i ? C.green : C.fg }">{{ track.title }}</span>
+      <span
+        :class="{ 'holo-text': isActiveTrack(i) && playing }"
+        :style="{ flex: 1, color: isActiveTrack(i) ? C.green : hoveredTrack === i ? C.green : C.fg }"
+      >{{ track.title }}</span>
       <span :style="{ color: C.gutter, minWidth: '40px', textAlign: 'right' }">{{ durations[i] ? formatTime(durations[i]) : '' }}</span>
     </div>
 
     <!-- Footer -->
-    <div :style="{ color: C.blue, marginTop: '4px' }">│</div>
-    <div v-if="albumData.link" :style="{ color: C.blue }">╰─ <a :href="albumData.link" target="_blank" rel="noopener" :style="{ color: C.cyan, textDecoration: 'none', borderBottom: '1px dashed ' + C.cyan + '55' }">{{ albumData.link.replace('https://', '') }}</a></div>
-    <div v-else :style="{ color: C.blue }">╰─</div>
+    <div :style="{ color: C.blue, marginTop: '4px' }">
+      │
+    </div>
+    <div
+      v-if="albumData.link"
+      :style="{ color: C.blue }"
+    >
+      ╰─ <a
+        :href="albumData.link"
+        target="_blank"
+        rel="noopener"
+        :style="{ color: C.cyan, textDecoration: 'none', borderBottom: '1px dashed ' + C.cyan + '55' }"
+      >{{ albumData.link.replace('https://', '') }}</a>
+    </div>
+    <div
+      v-else
+      :style="{ color: C.blue }"
+    >
+      ╰─
+    </div>
   </div>
 </template>
