@@ -2,6 +2,8 @@
 
 > Flashcard app for French middle school students preparing for the Brevet exam.
 
+![Status](https://img.shields.io/badge/status-Live-blue)
+
 ## Overview
 
 I built this for my daughter who's about to take the Brevet

@@ -15,9 +15,9 @@ export default defineNuxtConfig({
     buildAssetsDir: 'assets',
     head: {
       htmlAttrs: { lang: 'en' },
-      title: 'Renaud — Senior Python Developer',
+      title: 'Renaud — Python Developer',
       meta: [
-        { name: 'description', content: 'Portfolio — Neovim style' },
+        { name: 'description', content: 'Portfolio' },
         { name: 'theme-color', content: '#0e1019' }
       ]
     }
