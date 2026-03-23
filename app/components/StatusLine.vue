@@ -63,7 +63,7 @@ const langLabel = computed(() => LANG_LABELS[data.value?.lang ?? ''] ?? data.val
       <span :style="{ color: C.gutter }">│</span>
       <span><span :style="{ color: C.yellow }">^R</span> render</span>
       <span :style="{ color: C.gutter }">│</span>
-      <span><span :style="{ color: C.yellow }">^T</span> theme</span>
+      <span><span :style="{ color: C.yellow }">^;</span> theme</span>
     </div>
 
     <div :style="{ display: 'flex', alignItems: 'center', height: '100%' }">

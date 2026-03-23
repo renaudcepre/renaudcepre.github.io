@@ -84,7 +84,7 @@ onMounted(() => {
     <div :style="{ display: 'flex', alignItems: 'center', gap: '12px', padding: '0 8px' }">
       <span
         :style="{ cursor: 'pointer', opacity: 0.7 }"
-        :title="'Theme: ' + themeName + ' (Ctrl+T)'"
+        :title="'Theme: ' + themeName + ' (Ctrl+;)'"
         @click="emit('cycleTheme')"
       >{{ themeName }}</span>
       <ClientOnly>{{ currentTime }}</ClientOnly>

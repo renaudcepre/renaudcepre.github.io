@@ -30,7 +30,7 @@ export function useTheme() {
   }
 
   onMounted(() => { init() })
-  useKeyboardShortcuts({ 'Ctrl+KeyT': () => cycle() })
+  useKeyboardShortcuts({ 'Ctrl+Semicolon': () => cycle() })
 
   return { themeName, cycle }
 }
