@@ -80,7 +80,11 @@ const tree = computed<TreeNode[]>(() => {
 
 function flatten(nodes: TreeNode[]): TreeNode[] {
   const result: TreeNode[] = []
-  for (const node of nodes) {
+  const sorted = [...nodes].sort((a, b) => {
+    if (a.isDir !== b.isDir) return a.isDir ? -1 : 1
+    return a.name.localeCompare(b.name)
+  })
+  for (const node of sorted) {
     result.push(node)
     if (node.isDir && node.children && expandedDirs.value[node.path]) {
       result.push(...flatten(node.children))
@@ -129,7 +133,8 @@ function fileIcon(name: string): string | null {
     '.ansi': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><rect x="1" y="1" width="2" height="2" fill="#000"/><rect x="3" y="1" width="2" height="2" fill="#a0a0a0"/><rect x="5" y="1" width="2" height="2" fill="#000"/><rect x="7" y="1" width="2" height="2" fill="#a0a0a0"/><rect x="1" y="3" width="2" height="2" fill="#a0a0a0"/><rect x="3" y="3" width="2" height="2" fill="#000"/><rect x="5" y="3" width="2" height="2" fill="#a0a0a0"/><rect x="7" y="3" width="2" height="2" fill="#000"/><rect x="1" y="5" width="2" height="2" fill="#000"/><rect x="3" y="5" width="2" height="2" fill="#a0a0a0"/><rect x="5" y="5" width="2" height="2" fill="#000"/><rect x="7" y="5" width="2" height="2" fill="#a0a0a0"/><rect x="1" y="7" width="2" height="2" fill="#a0a0a0"/><rect x="3" y="7" width="2" height="2" fill="#000"/><rect x="5" y="7" width="2" height="2" fill="#a0a0a0"/><rect x="7" y="7" width="2" height="2" fill="#000"/></svg>`,
     '.antres': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><rect x="5" y="1" width="2" height="6" fill="#000"/><rect x="3" y="1" width="2" height="2" fill="#a0a0a0"/><rect x="7" y="1" width="2" height="2" fill="#a0a0a0"/><circle cx="4" cy="8" r="1.5" fill="#a0a0a0"/><circle cx="4" cy="8" r="1.5" stroke="#000" stroke-width="0.5" fill="#a0a0a0"/></svg>`,
     '.webp': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><rect x="1" y="1" width="8" height="8" fill="#a0a0a0" stroke="#000" stroke-width="0.5"/><polygon points="2,8 5,4 8,8" fill="#000"/><circle cx="7" cy="3" r="1" fill="#000"/></svg>`,
-    '.webm': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><rect x="1" y="2" width="8" height="6" fill="#a0a0a0" stroke="#000" stroke-width="0.5"/><polygon points="4,4 4,7 7,5.5" fill="#000"/></svg>`
+    '.webm': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><rect x="1" y="2" width="8" height="6" fill="#a0a0a0" stroke="#000" stroke-width="0.5"/><polygon points="4,4 4,7 7,5.5" fill="#000"/></svg>`,
+    '.html': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><polyline points="3,2 1,5 3,8" fill="none" stroke="#a0a0a0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><polyline points="7,2 9,5 7,8" fill="none" stroke="#a0a0a0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`
   }
   const svg = icons[ext]
   if (!svg) return null
