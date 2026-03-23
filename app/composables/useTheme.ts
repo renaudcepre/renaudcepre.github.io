@@ -27,18 +27,8 @@ export function useTheme() {
     root.style.setProperty('--c-gutter', C.gutter)
   }
 
-  onMounted(() => {
-    init()
-
-    const handler = (e: KeyboardEvent) => {
-      if (e.key === 't' && e.ctrlKey) {
-        e.preventDefault()
-        cycle()
-      }
-    }
-    window.addEventListener('keydown', handler)
-    onUnmounted(() => window.removeEventListener('keydown', handler))
-  })
+  onMounted(() => { init() })
+  useKeyboardShortcuts({ 'Ctrl+KeyT': () => cycle() })
 
   return { themeName, cycle }
 }

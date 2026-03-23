@@ -11,15 +11,9 @@ const { themeName, cycle: cycleTheme } = useTheme()
 const { togglePlay: audioToggle, album: audioAlbum } = useAudioPlayer()
 useScrambleHover()
 
-onMounted(() => {
-  const onKey = (e: KeyboardEvent) => {
-    if (e.code === 'Space' && audioAlbum.value && !['INPUT', 'TEXTAREA'].includes((e.target as HTMLElement)?.tagName)) {
-      e.preventDefault()
-      audioToggle()
-    }
-  }
-  window.addEventListener('keydown', onKey)
-  onUnmounted(() => window.removeEventListener('keydown', onKey))
+useKeyboardShortcuts({
+  'Space': () => { if (audioAlbum.value) audioToggle() },
+  'Ctrl+KeyE': () => { showNetrw.value = !showNetrw.value }
 })
 
 const fileFromRoute = computed(() => {
@@ -64,22 +58,7 @@ watch(isMobile, (val) => {
 
 if (isMobile.value) showNetrw.value = false
 
-onMounted(() => {
-  loaded.value = true
-
-  const handler = (e: KeyboardEvent) => {
-    if (e.key === 'e' && e.ctrlKey) {
-      e.preventDefault()
-      showNetrw.value = !showNetrw.value
-    }
-  }
-
-  window.addEventListener('keydown', handler)
-
-  onUnmounted(() => {
-    window.removeEventListener('keydown', handler)
-  })
-})
+onMounted(() => { loaded.value = true })
 </script>
 
 <template>

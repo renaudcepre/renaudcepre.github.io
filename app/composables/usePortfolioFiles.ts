@@ -1,7 +1,13 @@
 export function usePortfolioFiles() {
-  const { data } = useAsyncData('portfolio-files', () =>
+  const { data, error: fetchError } = useAsyncData('portfolio-files', () =>
     queryCollection('portfolio').order('order', 'ASC').all()
   )
+
+  if (import.meta.dev) {
+    watch(fetchError, (err) => {
+      if (err) console.error('[usePortfolioFiles] Failed to load portfolio collection:', err)
+    })
+  }
 
   const fileList = computed(() => data.value?.map(f => f.filename) ?? [])
 
@@ -23,8 +29,12 @@ export function usePortfolioFiles() {
       fileContents.value = { ...fileContents.value, [filename]: entry.path }
       return
     }
-    const content = await $fetch<string>(entry.path, { responseType: 'text' })
-    fileContents.value = { ...fileContents.value, [filename]: content }
+    try {
+      const content = await $fetch<string>(entry.path, { responseType: 'text' })
+      fileContents.value = { ...fileContents.value, [filename]: content }
+    } catch (err) {
+      console.error(`[usePortfolioFiles] Failed to load content for "${filename}":`, err)
+    }
   }
 
   return { fileList, filesMap, loadContent }

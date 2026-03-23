@@ -10,8 +10,8 @@
 ## Moyenne priorite
 
 - [x] **`portfolio.ts` monolithique** — Themes, tokenizers, types, font dans un seul fichier. Splitter en `utils/themes.ts`, `utils/tokenizers.ts`, `utils/types.ts`.
-- [ ] **Keyboard handlers dispersés** — Raccourcis dans 4 fichiers différents (`[...path].vue` x2, `EditorPane.vue`, `useTheme.ts`). Centraliser dans un composable `useKeyboardShortcuts`.
-- [ ] **Pas de gestion d'erreur data fetching** — `usePortfolioFiles.ts` ignore le `error` de `useAsyncData` et le `$fetch` n'a pas de try/catch.
+- [x] **Keyboard handlers dispersés** — Raccourcis dans 4 fichiers différents (`[...path].vue` x2, `EditorPane.vue`, `useTheme.ts`). Centraliser dans un composable `useKeyboardShortcuts`.
+- [x] **Pas de gestion d'erreur data fetching** — `usePortfolioFiles.ts` ignore le `error` de `useAsyncData` et le `$fetch` n'a pas de try/catch.
 - [ ] **Styles non-scopés `EditorPane.vue`** — `<style>` global au lieu de `<style scoped>`. Passer en scoped avec `:deep()` pour les sélecteurs `v-html`.
 - [ ] **Double `onMounted` dans `[...path].vue`** — Deux hooks séparés (lignes 14 et 67). Fusionner en un seul.
 - [ ] **Page `[...path].vue` trop chargée** — 135 lignes de logique (tabs, routing, shortcuts, sidebar, audio). Extraire dans un composable `useEditorLayout` ou `usePortfolioNavigation`.

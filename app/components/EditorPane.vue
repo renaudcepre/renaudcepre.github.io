@@ -128,15 +128,8 @@ function initRenderDefault(file: string) {
 watch(() => props.file, file => initRenderDefault(file), { immediate: true })
 watch(() => data.value?.lang, () => initRenderDefault(props.file))
 
-onMounted(() => {
-  const handler = (e: KeyboardEvent) => {
-    if (e.key === 'r' && e.ctrlKey && hasRenderMode.value) {
-      e.preventDefault()
-      renderedMode.value = !renderedMode.value
-    }
-  }
-  window.addEventListener('keydown', handler)
-  onUnmounted(() => window.removeEventListener('keydown', handler))
+useKeyboardShortcuts({
+  'Ctrl+KeyR': () => { if (hasRenderMode.value) renderedMode.value = !renderedMode.value }
 })
 
 watch(data, () => {
