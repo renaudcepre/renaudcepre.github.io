@@ -63,10 +63,48 @@ export const THEMES = {
       90: '#928374', 91: '#fb4934', 92: '#b8bb26', 93: '#fabd2f',
       94: '#83a598', 95: '#d3869b', 96: '#8ec07c', 97: '#ebdbb2'
     }
+  },
+  'light': {
+    bg: '#ffffff', fg: '#24292e', comment: '#6a737d', keyword: '#d73a49',
+    string: '#032f62', func: '#6f42c1', type: '#e36209', number: '#005cc5',
+    operator: '#d73a49', red: '#cb2431', green: '#22863a', yellow: '#b08800',
+    blue: '#005cc5', magenta: '#6f42c1', cyan: '#3192aa', white: '#24292e',
+    gray: '#959da5', gutter: '#e1e4e8', statusBg: '#f1f3f5', statusFg: '#586069',
+    visual: '#c8e1ff', cursor: '#005cc5', border: '#e1e4e8', netrw: '#f6f8fa',
+    tabBg: '#f1f3f5', tabActive: '#ffffff',
+    codeBg: '#f6f8fa', codeFg: '#24292e', codeBlockBg: '#f0f2f4',
+    codeBlockBorder: '#005cc544', bqBorder: '#3192aa', bqText: '#6a737d',
+    bullet: '#6f42c1', olNum: '#e36209', hr: '#e1e4e8',
+    thBg: '#f6f8fa', thFg: '#24292e', trEvenBg: '#f6f8fa',
+    ansi: {
+      30: '#24292e', 31: '#cb2431', 32: '#22863a', 33: '#b08800',
+      34: '#005cc5', 35: '#6f42c1', 36: '#3192aa', 37: '#586069',
+      90: '#959da5', 91: '#cb2431', 92: '#22863a', 93: '#b08800',
+      94: '#005cc5', 95: '#6f42c1', 96: '#3192aa', 97: '#24292e'
+    }
+  },
+  'hyperkitch': {
+    bg: '#120024', fg: '#fff01f', comment: '#ff69b4', keyword: '#ff0055',
+    string: '#00ff88', func: '#00e5ff', type: '#ffaa00', number: '#ff6fff',
+    operator: '#ff0055', red: '#ff0040', green: '#39ff14', yellow: '#fff01f',
+    blue: '#00bfff', magenta: '#ff00ff', cyan: '#00ffcc', white: '#ffffff',
+    gray: '#884499', gutter: '#2a0044', statusBg: '#ff00aa', statusFg: '#ffffff',
+    visual: '#44006688', cursor: '#ff0055', border: '#ff00ff55', netrw: '#0a0018',
+    tabBg: '#1a0033', tabActive: '#120024',
+    codeBg: '#0a0018', codeFg: '#39ff14', codeBlockBg: '#08001a',
+    codeBlockBorder: '#ff00ff66', bqBorder: '#00ffcc', bqText: '#ff69b4',
+    bullet: '#ff00ff', olNum: '#ffaa00', hr: '#ff00ff44',
+    thBg: '#1a0033', thFg: '#fff01f', trEvenBg: '#0f001f',
+    ansi: {
+      30: '#120024', 31: '#ff0040', 32: '#39ff14', 33: '#fff01f',
+      34: '#00bfff', 35: '#ff00ff', 36: '#00ffcc', 37: '#ffffff',
+      90: '#884499', 91: '#ff0040', 92: '#39ff14', 93: '#fff01f',
+      94: '#00bfff', 95: '#ff00ff', 96: '#00ffcc', 97: '#ffffff'
+    }
   }
 } as const
 
-const THEME_NAMES: ThemeName[] = ['one-dark', 'catppuccin', 'gruvbox']
+const THEME_NAMES: ThemeName[] = ['one-dark', 'catppuccin', 'gruvbox', 'light', 'hyperkitch']
 
 export const C: ThemeColors = reactive({ ...THEMES['catppuccin'] }) as ThemeColors
 

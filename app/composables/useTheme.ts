@@ -7,7 +7,7 @@ export function useTheme() {
 
   const init = () => {
     const saved = localStorage.getItem(STORAGE_KEY) as ThemeName | null
-    if (saved && ['one-dark', 'catppuccin', 'gruvbox'].includes(saved)) {
+    if (saved && ['one-dark', 'catppuccin', 'gruvbox', 'light', 'hyperkitch'].includes(saved)) {
       setTheme(saved)
       themeName.value = saved
     }
