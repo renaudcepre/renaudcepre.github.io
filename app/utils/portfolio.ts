@@ -162,10 +162,25 @@ export function tokAnsi(line: string): Token[] {
     let i = 0
     while (i < codes.length) {
       const code = codes[i]
-      if (code === 0 || Number.isNaN(code)) { fg = C.fg; bg = undefined; bold = false } else if (code === 1) bold = true
-      else if (code === 38 && codes[i + 1] === 5) { fg = ansi256(codes[i + 2] ?? 0); i += 2 } else if (code === 48 && codes[i + 1] === 5) { bg = ansi256(codes[i + 2] ?? 0); i += 2 } else if (code === 39) fg = C.fg
-      else if (code === 49) bg = undefined
-      else if (getAnsiFg()[code]) fg = getAnsiFg()[code]
+      if (code === 0 || Number.isNaN(code)) {
+        fg = C.fg
+        bg = undefined
+        bold = false
+      } else if (code === 1) {
+        bold = true
+      } else if (code === 38 && codes[i + 1] === 5) {
+        fg = ansi256(codes[i + 2] ?? 0)
+        i += 2
+      } else if (code === 48 && codes[i + 1] === 5) {
+        bg = ansi256(codes[i + 2] ?? 0)
+        i += 2
+      } else if (code === 39) {
+        fg = C.fg
+      } else if (code === 49) {
+        bg = undefined
+      } else if (getAnsiFg()[code]) {
+        fg = getAnsiFg()[code]
+      }
       i++
     }
     lastIdx = re.lastIndex
@@ -183,6 +198,7 @@ export function tokTxt(line: string): Token[] {
 
 export function tokJson(line: string): Token[] {
   const toks: Token[] = []
+  // eslint-disable-next-line no-useless-escape
   const re = /("(?:[^"\\]|\\.)*"\s*:\s*|"(?:[^"\\]|\\.)*"|\b(?:true|false|null)\b|-?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?|[{}\[\]:,]|\s+)/g
   let m
   while ((m = re.exec(line)) !== null) {
@@ -191,6 +207,7 @@ export function tokJson(line: string): Token[] {
     else if (t.startsWith('"')) toks.push({ t, c: C.string })
     else if (/^-?\d/.test(t)) toks.push({ t, c: C.number })
     else if (t === 'true' || t === 'false' || t === 'null') toks.push({ t, c: C.keyword })
+    // eslint-disable-next-line no-useless-escape
     else if (/^[{}\[\]]$/.test(t)) toks.push({ t, c: C.yellow })
     else toks.push({ t, c: C.fg })
   }
@@ -225,6 +242,7 @@ export function tokMd(line: string): Token[] {
     return parts.map(p => ({ t: p, c: p.startsWith('.') ? C.comment : C.func }))
   }
   const toks: Token[] = []
+  // eslint-disable-next-line no-useless-escape
   const re = /(!\[[^\]]*\]\([^)]*\)|\[([^\]]*)\]\(([^)]+)\)|`[^`]+`|[^`\[!]+|[!](?!\[)|[`\[])/g
   let mm
   while ((mm = re.exec(line)) !== null) {

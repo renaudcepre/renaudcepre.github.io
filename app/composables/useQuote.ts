@@ -32,7 +32,9 @@ export function useQuote() {
 
   function pickRandom(): string {
     let idx: number
-    do { idx = Math.floor(Math.random() * quotes.length) } while (idx === lastIndex && quotes.length > 1)
+    do {
+      idx = Math.floor(Math.random() * quotes.length)
+    } while (idx === lastIndex && quotes.length > 1)
     lastIndex = idx
     return formatQuote(quotes[idx])
   }

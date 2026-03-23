@@ -61,7 +61,7 @@ mdRenderer.link = function ({ href, tokens }) {
 }
 
 mdRenderer.list = function ({ items, ordered }) {
-  const body = items.map((item: any) => this.listitem(item)).join('')
+  const body = items.map((item: unknown) => this.listitem(item as Parameters<typeof this.listitem>[0])).join('')
   return `<div class="md-list ${ordered ? 'md-list-ordered' : ''}">${body}</div>`
 }
 

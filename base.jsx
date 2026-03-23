@@ -489,12 +489,20 @@ export default function Portfolio() {
   const [showTerm, setShowTerm] = useState(true)
   const [loaded, setLoaded] = useState(false)
 
-  useEffect(() => { setLoaded(true) }, [])
+  useEffect(() => {
+    setLoaded(true)
+  }, [])
 
   useEffect(() => {
     const handler = (e) => {
-      if (e.key === 'e' && e.ctrlKey) { e.preventDefault(); setShowNetrw(v => !v) }
-      if (e.key === '`' && e.ctrlKey) { e.preventDefault(); setShowTerm(v => !v) }
+      if (e.key === 'e' && e.ctrlKey) {
+        e.preventDefault()
+        setShowNetrw(v => !v)
+      }
+      if (e.key === '`' && e.ctrlKey) {
+        e.preventDefault()
+        setShowTerm(v => !v)
+      }
     }
     window.addEventListener('keydown', handler)
     return () => window.removeEventListener('keydown', handler)

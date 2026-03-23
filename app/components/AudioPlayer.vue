@@ -20,7 +20,11 @@ interface Album {
 
 const albumData = computed<Album | null>(() => {
   if (!props.content) return null
-  try { return JSON.parse(props.content) } catch { return null }
+  try {
+    return JSON.parse(props.content)
+  } catch {
+    return null
+  }
 })
 
 const { album: activeAlbum, trackIndex, playing, playTrack } = useAudioPlayer()
