@@ -7,6 +7,8 @@ interface Options {
 export function usePortfolioNavigation({ fileList, loadContent, isMobile }: Options) {
   const route = useRoute()
   const router = useRouter()
+  const { locale } = useI18n()
+  const localePath = useLocalePath()
 
   const fileFromRoute = computed(() => {
     const segments = route.params.path
@@ -25,7 +27,7 @@ export function usePortfolioNavigation({ fileList, loadContent, isMobile }: Opti
       openTabs.value = [...openTabs.value, name]
     }
     await loadContent(name)
-    router.replace('/' + name)
+    router.replace(localePath('/' + name))
     if (isMobile.value) showNetrw.value = false
   }
 
@@ -33,6 +35,14 @@ export function usePortfolioNavigation({ fileList, loadContent, isMobile }: Opti
   watch(fileFromRoute, async (name) => {
     if (name === activeFile.value) return
     await openFile(name)
+  })
+
+  // Reset state on locale change
+  watch(locale, async () => {
+    activeFile.value = 'hello-world.html'
+    openTabs.value = ['hello-world.html']
+    await loadContent('hello-world.html')
+    router.replace(localePath('/hello-world.html'))
   })
 
   // Initial load once file list is available

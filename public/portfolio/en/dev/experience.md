@@ -3,14 +3,17 @@
 ## Araiko
 **March 2025 → now**
 
-Backend for an AI-powered knowledge management platform.
+Python backend on an AI-powered knowledge management platform (Generic RAG).
+~110 merged PRs over the year, main backend contributor.
 
-- Built the full media conversion pipeline (Celery + Kubernetes HPA for auto-scaling workers)
-- Developed RAG pipelines and LLM integrations for knowledge extraction
-- Improved the hexagonal architecture for better maintainability
-- Rebuilt the logging system and set up unified monitoring dashboards in Grafana
+- Designed and built the full user tracking and analytics system from scratch
+- Deep refactoring: Pydantic Settings migration, modular Unit of Work dependency injection, unified business exception hierarchy
+- Kubernetes infra: production HPA setup, Celery tuning (prefork pool, concurrency, fresh DB connections per worker), PostgreSQL connection pooling
+- Full media pipeline: ordering, auto-naming, S3-first storage, audio conversion, file type validation
+- Migrated chatbot and vector store to Pydantic AI, built the LLM evaluation framework
+- Observability: Logfire integration, switch to standard Python logging, false positive cleanup
 
-`FastAPI` `Celery` `Kubernetes` `PostgreSQL` `RAG` `LLMs` `Grafana` `Docker`
+`FastAPI` `Celery` `Kubernetes` `PostgreSQL` `Pydantic AI` `LlamaIndex` `S3` `Logfire` `Docker`
 
 ---
 

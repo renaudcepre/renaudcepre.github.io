@@ -45,7 +45,7 @@ const langLabel = computed(() => LANG_LABELS[data.value?.lang ?? ''] ?? data.val
           display: 'flex',
           alignItems: 'center'
         }"
-      >NORMAL</span>
+      >{{ $t('status.normal') }}</span>
       <span
         :style="{
           background: C.visual,
@@ -59,11 +59,11 @@ const langLabel = computed(() => LANG_LABELS[data.value?.lang ?? ''] ?? data.val
       <span :style="{ color: C.comment, padding: '0 6px' }">[+]</span>
     </div>
     <div :style="{ display: 'flex', alignItems: 'center', height: '100%', gap: '4px', color: C.comment, padding: '0 8px' }">
-      <span><span :style="{ color: C.yellow }">^E</span> explorer</span>
+      <span><span :style="{ color: C.yellow }">^E</span> {{ $t('status.explorer') }}</span>
       <span :style="{ color: C.gutter }">│</span>
-      <span><span :style="{ color: C.yellow }">^R</span> render</span>
+      <span><span :style="{ color: C.yellow }">^R</span> {{ $t('status.render') }}</span>
       <span :style="{ color: C.gutter }">│</span>
-      <span><span :style="{ color: C.yellow }">^;</span> theme</span>
+      <span><span :style="{ color: C.yellow }">^;</span> {{ $t('status.theme') }}</span>
     </div>
 
     <div :style="{ display: 'flex', alignItems: 'center', height: '100%' }">

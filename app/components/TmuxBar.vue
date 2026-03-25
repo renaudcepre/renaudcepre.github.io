@@ -12,12 +12,14 @@ const emit = defineEmits<{
   cycleTheme: []
 }>()
 
+const { locale } = useI18n()
+const switchLocalePath = useSwitchLocalePath()
 const { quote } = useQuote()
 const currentTime = ref('')
 
 onMounted(() => {
   const update = () => {
-    currentTime.value = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })
+    currentTime.value = new Date().toLocaleTimeString(locale.value, { hour: '2-digit', minute: '2-digit' })
   }
   update()
   const interval = setInterval(update, 60_000)
@@ -82,9 +84,13 @@ onMounted(() => {
       }"
     >{{ quote }}</span>
     <div :style="{ display: 'flex', alignItems: 'center', gap: '12px', padding: '0 8px' }">
+      <NuxtLink
+        :to="switchLocalePath(locale === 'en' ? 'fr' : 'en')"
+        :style="{ cursor: 'pointer', opacity: 0.7, color: C.bg, textDecoration: 'none', fontWeight: 700 }"
+      >{{ locale === 'en' ? 'FR' : 'EN' }}</NuxtLink>
       <span
         :style="{ cursor: 'pointer', opacity: 0.7 }"
-        :title="'Theme: ' + themeName + ' (Ctrl+;)'"
+        :title="$t('tmux.themePrefix') + themeName + ' ' + $t('tmux.shortcut')"
         @click="emit('cycleTheme')"
       >{{ themeName }}</span>
       <ClientOnly>{{ currentTime }}</ClientOnly>

@@ -215,10 +215,10 @@ watch(() => props.fileList, (list) => {
         " ==========================================
       </div>
       <div :style="{ padding: '0 10px', color: C.comment, whiteSpace: 'pre' }">
-        "   rcepre / portfolio
+        "   {{ $t('netrw.title') }}
       </div>
       <div :style="{ padding: '0 10px', color: C.comment, whiteSpace: 'pre' }">
-        "   last release: 2025
+        "   {{ $t('netrw.release') }}
       </div>
       <div :style="{ padding: '0 10px', color: C.comment, whiteSpace: 'pre' }">
         " ==========================================

@@ -9,7 +9,8 @@ export default defineContentConfig({
         filename: z.string(),
         lang: z.enum(['py', 'md', 'img', 'ansi', 'txt', 'video', 'audio', 'html']),
         order: z.number(),
-        path: z.string()
+        path: z.string(),
+        locale: z.enum(['en', 'fr', '*']).default('*')
       })
     })
   }

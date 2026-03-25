@@ -151,9 +151,10 @@ const renderedHtml = computed(() => {
 })
 
 const router = useRouter()
+const localePath = useLocalePath()
 
 function resolveHref(href: string): string {
-  if (href.startsWith('/')) return href
+  if (href.startsWith('/')) return localePath(href)
 
   const dir = props.file.includes('/') ? props.file.split('/').slice(0, -1).join('/') : ''
   const raw = dir ? `${dir}/${href}` : href
@@ -169,10 +170,10 @@ function resolveHref(href: string): string {
   if (!props.filesMap[path]) {
     const last = resolved.pop()!
     const dotPath = [...resolved, '.' + last].join('/')
-    if (props.filesMap[dotPath]) return '/' + dotPath
+    if (props.filesMap[dotPath]) return localePath('/' + dotPath)
   }
 
-  return '/' + path
+  return localePath('/' + path)
 }
 
 function handleInternalClick(e: MouseEvent) {
@@ -225,7 +226,7 @@ function handleInternalClick(e: MouseEvent) {
           color: !renderedMode ? C.blue : C.bg
         }"
         @click="renderedMode = false"
-      >0:raw{{ !renderedMode ? '*' : '' }}</span>
+      >{{ $t('editor.raw') }}{{ !renderedMode ? '*' : '' }}</span>
       <span
         :style="{
           padding: '0 6px',
@@ -238,7 +239,7 @@ function handleInternalClick(e: MouseEvent) {
           color: renderedMode ? C.blue : C.bg
         }"
         @click="renderedMode = true"
-      >1:render{{ renderedMode ? '*' : '' }}</span>
+      >{{ $t('editor.render') }}{{ renderedMode ? '*' : '' }}</span>
     </div>
 
     <div :style="{ flex: 1, position: 'relative', overflow: 'hidden' }">

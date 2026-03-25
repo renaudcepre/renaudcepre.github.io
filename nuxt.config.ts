@@ -2,7 +2,8 @@ export default defineNuxtConfig({
   modules: [
     '@nuxt/eslint',
     '@nuxt/content',
-    '@nuxt/fonts'
+    '@nuxt/fonts',
+    '@nuxtjs/i18n'
   ],
 
   ssr: false,
@@ -11,13 +12,25 @@ export default defineNuxtConfig({
     enabled: false
   },
 
+  i18n: {
+    langDir: 'locales',
+    locales: [
+      { code: 'en', file: 'en.json', name: 'English' },
+      { code: 'fr', file: 'fr.json', name: 'Français' }
+    ],
+    defaultLocale: 'en',
+    strategy: 'prefix',
+    detectBrowserLanguage: {
+      useCookie: true,
+      cookieKey: 'i18n_locale',
+      redirectOn: 'root'
+    }
+  },
+
   app: {
     buildAssetsDir: 'assets',
     head: {
-      htmlAttrs: { lang: 'en' },
-      title: 'Renaud — Python Developer',
       meta: [
-        { name: 'description', content: 'Portfolio' },
         { name: 'theme-color', content: '#0e1019' }
       ]
     }

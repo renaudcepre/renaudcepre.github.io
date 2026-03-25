@@ -3,6 +3,14 @@ import { C } from '~/utils/portfolio'
 
 definePageMeta({ key: 'main' })
 
+const { t, locale } = useI18n()
+
+useHead({
+  htmlAttrs: { lang: locale.value },
+  title: () => t('meta.title'),
+  meta: [{ name: 'description', content: () => t('meta.description') }]
+})
+
 const { fileList, filesMap, loadContent } = usePortfolioFiles()
 const { isMobile } = useBreakpoint()
 const { themeName, cycle: cycleTheme } = useTheme()

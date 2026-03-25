@@ -1,0 +1,24 @@
+{
+  "meta": {
+    "title": "Renaud — Python Developer",
+    "description": "Portfolio"
+  },
+  "status": {
+    "normal": "NORMAL",
+    "explorer": "explorer",
+    "render": "render",
+    "theme": "theme"
+  },
+  "netrw": {
+    "title": "rcepre / portfolio",
+    "release": "last release: 2025"
+  },
+  "editor": {
+    "raw": "0:raw",
+    "render": "1:render"
+  },
+  "tmux": {
+    "themePrefix": "Theme: ",
+    "shortcut": "(Ctrl+;)"
+  }
+}
