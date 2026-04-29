@@ -1,7 +1,7 @@
 # ProTest
 
 > Framework de test async-first pour Python 3.10+
-> DI explicite, concurrence native, scoping intelligent.
+> DI explicite, concurrence native, scoping malin.
 
 ![Status](https://img.shields.io/badge/status-In_Development-brightgreen)
 
@@ -14,31 +14,27 @@ $ protest run tests:session -n 4
 
 ## Pourquoi
 
-Un collègue et moi, on n'arrêtait pas de parler du
-côté magique de pytest. On adore le framework,
-mais les fixtures résolues par nom, pas de types,
-pas de Ctrl+Click.
+Avec un collègue, on revenait tout le temps sur le côté
+magique de pytest. On adore le framework, mais les fixtures
+résolues par nom, pas de types, pas de Ctrl+Click — ça gratte.
 
-Je voulais quelque chose de plus déclaratif, plus proche
+Je voulais un truc plus déclaratif, dans l'esprit
 de ce que fait FastAPI avec la DI.
 
 ## Ce que j'ai appris
 
-Le projet a grossi vite. Thread pools,
-piles de sortie async, bus d'événements, scoping en arbre...
-Du async bas niveau qu'on ne touche jamais
-quand on construit des APIs.
+Le projet a pris de l'ampleur vite. Thread pools,
+exit stacks async, bus d'événements, scoping en arbre...
+Du async bas niveau qu'on touche jamais quand on fait des APIs.
 
 ## Benchmarks
 
-Pour valider l'approche, j'ai réécrit de larges portions des
-suites de tests de pydantic, httpx et starlette avec
-ProTest. Résultat : sur httpx et starlette,
-les tests tournent 20-30% plus vite que les suites
-officielles, grâce à l'async natif.
+Pour valider l'approche, j'ai réécrit de gros morceaux des
+suites de tests de pydantic, httpx et starlette avec ProTest.
+Résultat : sur httpx et starlette, les tests passent
+20-30% plus vite que les suites officielles, grâce à l'async natif.
 
 ## Statut
 
-v0.1.0 alpha. Architecture modulaire, système de
-plugins propre. En cours : un reporter WebSocket
-temps réel et un plugin PyCharm.
+v0.1.0 alpha. Archi modulaire, système de plugins propre.
+En cours : un reporter WebSocket temps réel et un plugin PyCharm.

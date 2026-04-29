@@ -6,18 +6,18 @@
 
 ## Aperçu
 
-J'ai construit ça pour ma fille qui va passer le Brevet
+J'ai fait ça pour ma fille qui passe le Brevet
 — l'examen de fin de collège.
-C'était censé être un petit truc. Mais j'ai tendance à m'emballer
-quand je m'amuse à construire quelque chose — du coup c'est devenu
-une vraie app déployée avec de vrais utilisateurs. Je me suis même
-surpris à l'utiliser régulièrement parce que c'est honnêtement
-un bon moyen de rafraîchir sa culture générale.
+C'était censé être un petit truc. Sauf que quand je m'amuse
+à construire un projet, j'ai tendance à m'emballer — résultat,
+c'est devenu une vraie app déployée avec de vrais utilisateurs.
+Je me suis même surpris à l'utiliser moi-même régulièrement,
+c'est honnêtement pas mal pour se rafraîchir la culture G.
 
-Outil d'apprentissage par répétition espacée couvrant toutes les matières du Brevet —
-Histoire, Géographie, Maths, Français, Sciences, EMC. Construit autour d'une philosophie
-« UI zen / textes savoureux » : interface minimaliste, textes piquants qui parlent
-aux ados sans être condescendants.
+Révisions par répétition espacée sur toutes les matières du Brevet —
+Histoire, Géo, Maths, Français, Sciences, EMC. Philosophie
+« UI zen / textes qui piquent » : interface épurée, formulations
+qui parlent aux ados sans les prendre de haut.
 
 ![](dashboard_screenshot.webp)
 
@@ -25,12 +25,12 @@ aux ados sans être condescendants.
 
 ## Fonctionnalités
 
-- **Répétition espacée** — algorithme SM-2, notation 4 boutons style Anki
-- **Mode Auto** — budget dynamique de cartes qui s'adapte au rythme d'apprentissage
-- **Gamification** — streaks, XP, niveaux de maîtrise, confettis sur les ratings "Facile"
-- **Clavier d'abord** — espace pour retourner, 1-4 pour noter
-- **PWA** — fonctionne hors-ligne, installable sur mobile
-- **Google OAuth** — progression synchronisée au backend par utilisateur
+- **Répétition espacée** — algo SM-2, notation 4 boutons à la Anki
+- **Mode Auto** — budget de cartes dynamique, s'adapte au rythme
+- **Gamification** — streaks, XP, niveaux de maîtrise, confettis sur les "Facile"
+- **Clavier first** — espace pour retourner, 1-4 pour noter
+- **PWA** — marche hors-ligne, installable sur mobile
+- **Google OAuth** — progression synchronisée par utilisateur
 
 ## Stack
 

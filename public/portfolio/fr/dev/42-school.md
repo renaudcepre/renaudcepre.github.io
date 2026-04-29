@@ -1,81 +1,76 @@
 # 42 School — Projets C / C++
 
-> Programmation bas niveau de mon passage à 42 Lyon.
-> Mémoire, graphes, VMs, sécurité, appels système — à la dure.
+> Du bas niveau, du vrai. Mémoire, graphes, VMs, sécu, appels système — à la dure.
 
 ![42](https://img.shields.io/badge/42-School-blue)
 
-Ce sont de vieux projets. Le code est probablement horrible.
-Mais ils m'ont appris comment les ordinateurs fonctionnent vraiment.
+C'est vieux. Le code est sûrement atroce.
+Mais c'est là que j'ai compris comment un ordi marche pour de vrai.
 
 ---
 
 ## malloc [![Gitlab](https://img.shields.io/badge/gitlab-repo-orange?logo=gitlab)](https://gitlab.com/rcepre/malloc)
 
 Réimplémentation de `malloc`, `realloc` et `free` en C.
-Tous les tests que j'ai écrits passent, ça marche sur beaucoup de programmes — mais
-les gros logiciels comme vim finissent par segfault. Honnêtement ça
-ne marche pas si bien que ça, mais le construire a été incroyablement
-formateur pour comprendre la gestion mémoire à bas niveau,
-et par extension chaque langage construit au-dessus du C.
+Mes tests passent, ça tourne sur pas mal de programmes — mais les gros
+logiciels comme vim finissent par segfault. Honnêtement c'est pas fou,
+mais le construire m'a énormément appris sur la gestion mémoire bas niveau,
+et par extension sur tous les langages qui reposent sur le C.
 
 ## Corewar [![Gitlab](https://img.shields.io/badge/gitlab-repo-orange?logo=gitlab)](https://gitlab.com/rcepre/corewar)
 
 *avec [rgermain](https://github.com/remigermain) & [loiberti](https://github.com/loiberti)*
 
 Une arène virtuelle où des champions (écrits en assembleur) se battent
-en écrasant la mémoire des autres. Projet de groupe — j'ai construit
-l'assembleur (avec des messages d'erreur style clang) et le
-visualiseur SDL. Première fois que je faisais du graphisme en C, et j'ai tout donné :
-le visualiseur est magnifique, a un mode plein écran années 80, et
-il est même **sonore**. Le code est probablement horrifiant mais les
-performances étaient super et le rendu incroyable.
+en écrasant la mémoire des autres. Projet de groupe — j'ai fait
+l'assembleur (messages d'erreur à la clang) et le visualiseur SDL.
+Ma première fois en graphisme C, et j'y suis allé à fond :
+le rendu est beau, y'a un mode plein écran années 80, et c'est
+même **sonore**. Le code doit être terrifiant, mais les perfs
+étaient au rendez-vous et visuellement c'était dingue.
 
 ## Snow Crash [![Gitlab](https://img.shields.io/badge/gitlab-repo-orange?logo=gitlab)](https://gitlab.com/rcepre/snow-crash)
 
-Projet de reverse engineering et sécurité. Exploitation de binaires,
+Reverse engineering et sécurité. Exploitation de binaires,
 shellcode, analyse ELF, debugging, assembleur, scripting Perl/Python/shell.
-Une introduction style CTF à la sécurité offensive.
+Du CTF en guise d'intro à la sécu offensive.
 
 ## Abstract VM [![Gitlab](https://img.shields.io/badge/gitlab-repo-orange?logo=gitlab)](https://gitlab.com/rcepre/abstract-vm)
 
-Mon premier projet en C++. Une machine virtuelle simple qui interprète
-des programmes écrits dans un langage assembleur basique — basé sur une pile,
-avec des opérandes typés (int8 à double), opérations arithmétiques,
-assertions, et une commande dump.
+Mon premier projet C++. Une VM simple qui interprète des programmes
+en langage assembleur basique — pile, opérandes typés (int8 à double),
+arithmétique, assertions, et une commande dump.
 
 ## ft_ls [![Gitlab](https://img.shields.io/badge/gitlab-repo-orange?logo=gitlab)](https://gitlab.com/rcepre/ft_ls)
 
-Réimplémentation de la commande `ls`. Premiers pas en programmation
-système — parcours de système de fichiers, appels stat, permissions Unix,
-tri, formatage. Basique mais fondateur.
+Réimplémentation de `ls`. Premiers pas en prog système — parcours
+de filesystem, appels stat, permissions Unix, tri, formatage.
+Basique mais fondateur.
 
 ## Lem-in [![Gitlab](https://img.shields.io/badge/gitlab-repo-orange?logo=gitlab)](https://gitlab.com/rcepre/lemin)
 
-Projet de parcours de graphes. Acheminer N fourmis d'une salle de départ
-à une salle d'arrivée à travers un graphe arbitraire en un minimum de tours,
-sachant que deux fourmis ne peuvent pas occuper la même salle en même temps.
-Le défi principal est de trouver la combinaison optimale de chemins
-nœud-disjoints — pas juste le plus court chemin, mais le meilleur ensemble
-de chemins non-chevauchants qui minimise le temps total de passage.
+Parcours de graphes. Faire passer N fourmis d'un point A à un point B
+dans un graphe arbitraire, en un minimum de tours — deux fourmis
+ne peuvent pas être dans la même salle en même temps. Le vrai défi :
+trouver la meilleure combinaison de chemins nœud-disjoints — pas juste
+le plus court, mais l'ensemble qui minimise le temps total de traversée.
 
 On précalcule une matrice de compatibilité : pour chaque paire de chemins,
-on vérifie s'ils partagent des salles intermédiaires, et on encode le
-résultat comme un seul bit dans un `__uint128_t`. Ensuite une recherche
-récursive explore les combinaisons valides en faisant des AND de bitmasks
-— une seule opération bit à bit élague des branches entières de l'espace
-de recherche. Chaque combinaison survivante est évaluée en simulant
-la distribution des fourmis sur ses chemins, et la meilleure gagne.
+on regarde s'ils partagent des salles, et on encode ça en un bit
+dans un `__uint128_t`. Ensuite une recherche récursive explore
+les combinaisons valides en ANDant des bitmasks — une seule opération
+bitwise élague des branches entières. Chaque combinaison survivante
+est scorée en simulant la répartition des fourmis, et la meilleure gagne.
 
-Celui-là a failli nous tuer. Je ne comprends plus une seule ligne du
-code qu'on a écrit à l'époque — des matrices de bitmasks 128 bits et
-des opérateurs bitwise partout. Expérience absolument fondante pour le cerveau.
+Celui-là a failli nous achever. Je comprends plus une seule ligne
+du code qu'on a pondu — des matrices de bitmasks 128 bits et du bitwise
+dans tous les sens. Expérience absolument crâne-fondante.
 
 ---
 
-Et beaucoup d'autres — ft_printf, libft (réimplémentation de la stdlib),
+Et plein d'autres — ft_printf, libft (réimplémentation de la stdlib),
 une réimplémentation partielle de la STL C++ (vector, array...),
-des projets réseau, et plus encore. Deux ans de C et C++ à la dure :) .
+des projets réseau, et j'en passe. Deux ans de C et C++ à la dure :) .
 
 ```
 # **************************************************************************** #

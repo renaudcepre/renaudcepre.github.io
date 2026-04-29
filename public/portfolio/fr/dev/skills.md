@@ -2,9 +2,9 @@
 
 ## Python, strictement
 
-Mon langage quotidien depuis 6+ ans. J'écris tout typé et je lance mypy en mode strict.
-J'aime Python quand il est traité comme un langage sérieux — type hints, dataclasses, protocols.
-Pas de magic imports ni de dicts non typés qui circulent partout.
+Mon langage du quotidien depuis 6+ ans. Tout est typé, mypy tourne en strict.
+J'aime Python quand on le prend au sérieux — type hints, dataclasses, protocols.
+Pas d'imports magiques, pas de dicts sans types qui se baladent partout.
 
 `Python` `mypy` `FastAPI` `Pydantic` `SQLAlchemy` `Celery` `Alembic`
 
@@ -12,9 +12,9 @@ Pas de magic imports ni de dicts non typés qui circulent partout.
 
 ## Tests
 
-Je vise une couverture élevée, pas comme métrique mais parce que je ne fais pas confiance
-au code qui n'est pas testé. C'est aussi pour ça que je construis [ProTest](/dev/projects/protest/README.md)
-— je voulais que la DI dans les tests soit explicite et typée, pas résolue par nom dans le noir.
+Je vise une couverture élevée, pas pour la métrique — j'ai juste pas confiance dans
+du code non testé. C'est d'ailleurs pour ça que je développe [ProTest](/dev/projects/protest/README.md)
+— je voulais de la DI explicite et typée dans les tests, pas de la résolution par nom à l'aveugle.
 
 `pytest` `ProTest`
 
@@ -22,12 +22,12 @@ au code qui n'est pas testé. C'est aussi pour ça que je construis [ProTest](/d
 
 ## Data & graphes
 
-PostgreSQL pour le relationnel, à l'aise en SQL brut quand les ORM deviennent un obstacle.
-Mais ce qui m'enthousiasme vraiment, ce sont les bases de données orientées graphe — pas juste
-comme alternative de stockage, mais pour ce qu'on peut en faire : plus court chemin, détection
-de communautés, et les algorithmes qui viennent quand on pense en graphes. J'explore actuellement
-les approches neuro-symboliques et les modèles du monde sur un projet personnel (Felix),
-où la structure de graphe rencontre l'extraction de scénarios.
+PostgreSQL pour le relationnel, à l'aise en SQL brut quand l'ORM gêne plus qu'il n'aide.
+Mais ce qui me passionne vraiment, ce sont les bases orientées graphe — pas juste
+comme alternative de stockage, mais pour ce qu'elles ouvrent : plus court chemin, détection
+de communautés, et tous les algos qui viennent quand on raisonne en graphes. En ce moment
+j'explore les approches neuro-symboliques et les modèles du monde sur un projet perso (Felix),
+à la croisée du graphe de connaissances et de l'extraction de scénarios.
 
 `PostgreSQL` `Neo4j` `Cypher` `Kuzu` `ChromaDB` `Weaviate`
 
@@ -35,8 +35,8 @@ où la structure de graphe rencontre l'extraction de scénarios.
 
 ## Infrastructure
 
-Docker pour tout en local, Kubernetes et AWS en production au travail.
-Mes projets perso restent simples — un front Nuxt statique et Supabase suffisent généralement.
+Docker pour tout en local, Kubernetes et AWS en prod au boulot.
+Mes projets perso restent simples — un front Nuxt statique et Supabase, ça suffit en général.
 
 `Docker` `Kubernetes` `AWS` `RabbitMQ` `GitHub Actions`
 
@@ -44,11 +44,11 @@ Mes projets perso restent simples — un front Nuxt statique et Supabase suffise
 
 ## IA & LLMs
 
-J'orchestre, je construis des agents, et je choisis le bon modèle pour la tâche — pipelines RAG,
-extraction structurée, bases de connaissances. Ce qui m'excite le plus en ce moment, c'est de faire
-tourner des systèmes d'IA sur un ordinateur normal : des modèles petits et ciblés avec des outils
-précis et beaucoup d'heuristiques derrière, plutôt que de tout balancer à un modèle géant.
-Ça me rappelle l'écriture en C — on ne peut pas forcer, il faut être malin.
+Orchestration, agents, choix du bon modèle pour le bon job — pipelines RAG,
+extraction structurée, bases de connaissances. Ce qui me branche le plus en ce moment,
+c'est de faire tourner de l'IA sur une machine normale : des petits modèles bien ciblés,
+des outils précis, et beaucoup d'heuristiques derrière — plutôt que de tout envoyer
+à un gros modèle en priant. Ça me rappelle le C — on peut pas bruteforcer, faut être malin.
 
 `vLLM` `Pydantic AI` `LM Studio`
 
@@ -56,12 +56,12 @@ précis et beaucoup d'heuristiques derrière, plutôt que de tout balancer à un
 
 ## Frontend
 
-J'aime pas. J'aime pas le JS, je comprends pas pourquoi quelqu'un voudrait le faire tourner
-en backend, et les couches de rétro-compatibilité m'agacent. Et pourtant — les technologies web
-fonctionnent remarquablement bien. L'écosystème est un vrai succès à plein de niveaux, et je
-le respecte. C'est là que je vibe-code : je veux un résultat, pas un voyage. L'inverse de
-comment j'aborde Python ou le C. J'essaie quand même de suivre les bonnes pratiques, même si
-parfois je finis par écrire des effets de scramble de texte sous le curseur de l'utilisateur.
+J'aime pas. Le JS me parle pas, je comprends pas l'envie de le mettre côté serveur,
+et les couches de rétro-compat m'agacent. Cela dit — le web marche remarquablement bien.
+L'écosystème est une vraie réussite, et je le respecte. C'est mon terrain de vibe-code :
+je veux le résultat, pas le voyage. L'exact inverse de mon approche Python ou C.
+J'essaie quand même de faire les choses proprement, même si parfois je finis
+par coder des effets de scramble sous le curseur de l'utilisateur.
 
 `TypeScript` `Vue` `Nuxt`
 
@@ -69,8 +69,8 @@ parfois je finis par écrire des effets de scramble de texte sous le curseur de 
 
 ## Le reste
 
-C et C++ de 42 — je ne les écris pas au quotidien mais ils ont façonné ma façon de penser
-la mémoire et la performance. À l'aise sous Linux. PyCharm pour tout ce qui est Python.
+C et C++ de 42 — j'en écris plus au quotidien, mais ça a forgé ma façon de penser
+la mémoire et la perf. À l'aise sous Linux. PyCharm pour tout ce qui est Python.
 
 `C` `C++` `Linux` `PyCharm`
 
@@ -78,8 +78,8 @@ la mémoire et la performance. À l'aise sous Linux. PyCharm pour tout ce qui es
 
 > **Envie de progresser sur**
 >
-> Bases de données orientées graphe — j'utilise Neo4j et Kuzu mais je veux écrire du Cypher plus couramment et aller plus loin.
-> Rust — j'ai envie de l'apprendre depuis un moment mais je n'ai jamais eu le bon projet.
-> Réseau et systèmes — je connais les bases mais c'est pas encore là que je suis efficace.
-> Les entrailles de l'IA — j'orchestre des modèles au quotidien mais je veux comprendre ce qui se passe sous le capot, les réseaux de neurones pour de vrai.
-> Et l'anglais — je peux l'écrire (avec un peu d'aide) mais je ne tiens pas une conversation confortablement. Objectif fin 2026.
+> Bases orientées graphe — j'utilise Neo4j et Kuzu mais je veux écrire du Cypher plus couramment, aller plus loin.
+> Rust — ça me tente depuis un moment, j'ai jamais trouvé le bon prétexte.
+> Réseau et systèmes — les bases sont là, mais c'est pas encore mon terrain de jeu.
+> Les entrailles de l'IA — j'orchestre des modèles tous les jours, mais je veux comprendre ce qu'il se passe dessous, les réseaux de neurones pour de vrai.
+> Et l'anglais — j'arrive à l'écrire (avec un coup de main) mais tenir une conversation, c'est pas encore ça. Objectif fin 2026.

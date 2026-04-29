@@ -1,41 +1,41 @@
 # Felix
 
-> Assistant de continuité propulsé par l'IA pour scénaristes travaillant sur des récits complexes multi-époques.
+> Assistant de continuité IA pour scénaristes qui bossent sur des récits complexes, multi-époques.
 
 ![Status](https://img.shields.io/badge/status-Prototype-orange) [![Github](https://img.shields.io/badge/github-repo-blue?logo=github)](https://github.com/renaudcepre/felix)
 
 ## Pourquoi
 
-Un ami écrit des scénarios — des thrillers complexes avec des timelines entrelacées,
-des dizaines de personnages, et des pièges de continuité partout. Il suivait tout
-dans des tableurs. Je me suis dit qu'une base de données orientée graphe + LLM pouvait
-faire mieux : parser le texte brut des scènes, construire un graphe de connaissances,
-et laisser le scénariste l'interroger en langage naturel.
+Un pote écrit des scénarios — des thrillers alambiqués avec des timelines entrelacées,
+des dizaines de personnages, et des pièges de continuité à chaque page. Il gérait tout
+dans des tableurs. Je me suis dit qu'un graphe de connaissances + LLM pouvait
+faire le taf : parser le texte brut des scènes, construire le graphe,
+et laisser le scénariste poser ses questions en langage naturel.
 
 ## Ce que ça fait
 
-Dépose des fichiers de scènes, Felix gère le reste :
+Tu déposes des fichiers de scènes, Felix s'occupe du reste :
 
-1. **Analyse** — Un agent LLM extrait les personnages, lieux, dates,
+1. **Analyse** — Un agent LLM extrait personnages, lieux, dates,
    ambiance et résumé du texte brut
-2. **Chargement** — Correspondance floue des entités avec le graphe existant,
-   fusion des nouvelles données dans Neo4j, embedding des chunks de scènes dans ChromaDB
-3. **Vérification** — Détecte les contradictions temporelles, les problèmes de bilocalisation
+2. **Chargement** — Matching flou des entités avec le graphe existant,
+   fusion dans Neo4j, embedding des chunks de scènes dans ChromaDB
+3. **Vérification** — Détecte les contradictions temporelles, la bilocalisation
    (même personnage à deux endroits en même temps), et les incohérences narratives
-4. **Profilage** — Construit et met à jour les profils de personnages, extrait
-   les relations entre les scènes
+4. **Profilage** — Construit et met à jour les fiches personnages, extrait
+   les relations entre scènes
 
-Ensuite pose n'importe quelle question : « Où était Marie en mars 1942 ? »,
+Ensuite tu demandes ce que tu veux : « Où était Marie en mars 1942 ? »,
 « Quelles scènes mentionnent la lettre ? », « Montre-moi l'arc de Paul. »
 
 ## Le défi
 
-La contrainte principale : tout doit tourner **localement sur un Mac M4**.
-Le seul modèle que j'ai trouvé qui gère la tâche et tient dans le hardware
-est **Qwen2.5-7B-Instruct** via LM Studio. C'est ce qui rend ce projet
-intéressant — avec Claude Sonnet ce serait beaucoup plus simple,
-mais moins fun comme prototype. Faire faire de l'extraction d'entités
-fiable et du raisonnement narratif à un modèle 7B, c'est là que se trouve le vrai travail.
+La contrainte : tout doit tourner **en local sur un Mac M4**.
+Le seul modèle qui tient la route et rentre dans le hardware,
+c'est **Qwen2.5-7B-Instruct** via LM Studio. C'est ce qui rend le projet
+intéressant — avec Claude Sonnet ce serait bien plus simple,
+mais bien moins fun comme prototype. Faire de l'extraction d'entités fiable
+et du raisonnement narratif avec un modèle 7B, c'est là qu'est le vrai boulot.
 
 ## Stack
 
@@ -48,25 +48,25 @@ fiable et du raisonnement narratif à un modèle 7B, c'est là que se trouve le 
 
 ## Ce que j'ai appris
 
-La modélisation de graphes pour des données narratives est étonnamment complexe —
-décider quand une mention de personnage est un nœud vs. une propriété,
-gérer la résolution floue d'entités entre des scènes écrites à des mois d'intervalle,
-et garder le LLM ancré (pas de points d'intrigue hallucinés).
+Modéliser un graphe pour des données narratives, c'est étonnamment tordu —
+quand est-ce qu'une mention de personnage est un nœud plutôt qu'une propriété ?
+Comment gérer la résolution floue d'entités entre des scènes écrites à des mois d'intervalle ?
+Et surtout, comment garder le LLM ancré sans qu'il invente des rebondissements.
 
-Le pipeline d'ingestion m'a beaucoup appris sur l'orchestration
-de multiples appels LLM avec un état partagé, des écritures idempotentes,
-et le streaming de progression vers le frontend via SSE.
+Le pipeline d'ingestion m'a appris pas mal de choses sur l'orchestration
+de multiples appels LLM avec état partagé, des écritures idempotentes,
+et du streaming de progression vers le front via SSE.
 
-Faire produire des sorties structurées et fiables à un modèle 7B
-a nécessité un prompt engineering soigneux et beaucoup de garde-fous
-dont un modèle plus gros n'aurait pas eu besoin.
+Tirer des sorties structurées et fiables d'un modèle 7B,
+ça demande du prompt engineering soigné et une tonne de garde-fous
+dont un plus gros modèle n'aurait pas eu besoin.
 
 ## Statut
 
-Prototype fonctionnel — utilisé sur un vrai scénario de 80+ scènes.
-Amélioration active de la suite d'éval (89 cas de test répartis
-sur 4 suites utilisant pydantic-evals).
+Prototype fonctionnel — testé sur un vrai scénario de 80+ scènes.
+En train d'améliorer la suite d'éval (89 cas de test répartis
+sur 4 suites, via pydantic-evals).
 
-Boss fight en cours : ingérer le scénario du Seigneur des Anneaux
-sans trop d'erreurs. Des centaines de personnages, des lieux répartis sur
-trois âges, et un modèle 7B qui essaie de tout garder en ordre.
+Boss fight en cours : ingérer le Seigneur des Anneaux
+sans trop de casse. Des centaines de personnages, des lieux étalés sur
+trois âges, et un modèle 7B qui essaie de pas perdre le fil.
