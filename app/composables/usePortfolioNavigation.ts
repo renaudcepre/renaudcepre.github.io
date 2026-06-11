@@ -7,7 +7,6 @@ interface Options {
 export function usePortfolioNavigation({ fileList, loadContent, isMobile }: Options) {
   const route = useRoute()
   const router = useRouter()
-  const { locale } = useI18n()
   const localePath = useLocalePath()
 
   const fileFromRoute = computed(() => {
@@ -31,26 +30,25 @@ export function usePortfolioNavigation({ fileList, loadContent, isMobile }: Opti
     if (isMobile.value) showNetrw.value = false
   }
 
-  // Sync from URL (external navigation, shared link)
+  // Sync from URL (external navigation, shared link, locale switch)
   watch(fileFromRoute, async (name) => {
     if (name === activeFile.value) return
     await openFile(name)
   })
 
-  // Reset state on locale change
-  watch(locale, async () => {
-    activeFile.value = 'hello-world.html'
-    openTabs.value = ['hello-world.html']
-    await loadContent('hello-world.html')
-    router.replace(localePath('/hello-world.html'))
-  })
-
-  // Initial load once file list is available
+  // Reload current file when locale changes (paths differ between locales)
+  // and fall back to hello-world.html if it doesn't exist in the new locale.
   watch(fileList, async (list) => {
     if (!list.length) return
-    const target = fileFromRoute.value
-    await loadContent(list.includes(target) ? target : 'hello-world.html')
-    if (!list.includes(target)) activeFile.value = 'hello-world.html'
+    const target = activeFile.value
+    if (list.includes(target)) {
+      await loadContent(target)
+    } else {
+      activeFile.value = 'hello-world.html'
+      openTabs.value = openTabs.value.map(t => list.includes(t) ? t : 'hello-world.html')
+      await loadContent('hello-world.html')
+      router.replace(localePath('/hello-world.html'))
+    }
   }, { immediate: true })
 
   // Restore sidebar when switching back to desktop

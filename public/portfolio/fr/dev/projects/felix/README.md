@@ -2,11 +2,11 @@
 
 > Assistant de continuité IA pour scénaristes qui bossent sur des récits complexes, multi-époques.
 
-![Status](https://img.shields.io/badge/status-Prototype-orange) [![Github](https://img.shields.io/badge/github-repo-blue?logo=github)](https://github.com/renaudcepre/felix)
+![Status](https://img.shields.io/badge/status-En_développement-brightgreen) [![Github](https://img.shields.io/badge/github-repo-blue?logo=github)](https://github.com/renaudcepre/felix)
 
 ## Pourquoi
 
-Un pote écrit des scénarios — des thrillers alambiqués avec des timelines entrelacées,
+Un pote écrit des scénarios — des thrillers tordus avec des timelines entrelacées,
 des dizaines de personnages, et des pièges de continuité à chaque page. Il gérait tout
 dans des tableurs. Je me suis dit qu'un graphe de connaissances + LLM pouvait
 faire le taf : parser le texte brut des scènes, construire le graphe,
@@ -14,59 +14,66 @@ et laisser le scénariste poser ses questions en langage naturel.
 
 ## Ce que ça fait
 
-Tu déposes des fichiers de scènes, Felix s'occupe du reste :
+Tu déposes du texte, Felix s'occupe du reste :
 
-1. **Analyse** — Un agent LLM extrait personnages, lieux, dates,
-   ambiance et résumé du texte brut
-2. **Chargement** — Matching flou des entités avec le graphe existant,
-   fusion dans Neo4j, embedding des chunks de scènes dans ChromaDB
-3. **Vérification** — Détecte les contradictions temporelles, la bilocalisation
-   (même personnage à deux endroits en même temps), et les incohérences narratives
-4. **Profilage** — Construit et met à jour les fiches personnages, extrait
-   les relations entre scènes
+1. **Extraction** — Des agents LLM extraient entités, relations et
+   événements du texte brut
+2. **Graphe** — Fusion floue dans Neo4j. Le schéma n'est pas figé :
+   un « profil » définit les types d'entités et le vocabulaire de
+   relations du domaine
+3. **Vérification** — Bilocalisation, contradictions temporelles
+   (« il agit deux scènes après sa mort ») détectées en raisonnant
+   sur la chronologie d'événements de chaque entité
+4. **Interrogation** — Questions en langage naturel, fiches d'entités
+   générées depuis le graphe
 
-Ensuite tu demandes ce que tu veux : « Où était Marie en mars 1942 ? »,
-« Quelles scènes mentionnent la lettre ? », « Montre-moi l'arc de Paul. »
+## Du 100 % local à l'API (le pivot)
 
-## Le défi
+Le projet est parti d'une contrainte dure : tout devait tourner en local
+sur un Mac M4, avec **Qwen2.5-7B** via LM Studio. L'extraction d'entités
+tenait à coups de garde-fous, mais le raisonnement narratif d'un 7B,
+non. Plutôt que de m'acharner contre le hardware, j'ai pivoté vers
+l'**API Mistral** (mistral-small) — en gardant la philosophie petit
+modèle + outils ciblés. Les garde-fous, eux, ont survécu au pivot :
+c'est eux le vrai produit.
 
-La contrainte : tout doit tourner **en local sur un Mac M4**.
-Le seul modèle qui tient la route et rentre dans le hardware,
-c'est **Qwen2.5-7B-Instruct** via LM Studio. C'est ce qui rend le projet
-intéressant — avec Claude Sonnet ce serait bien plus simple,
-mais bien moins fun comme prototype. Faire de l'extraction d'entités fiable
-et du raisonnement narratif avec un modèle 7B, c'est là qu'est le vrai boulot.
+## Le vrai défi : cadrer le LLM
+
+Un LLM qui écrit dans un graphe invente des entités, des relations,
+des rebondissements. Tout le travail consiste à l'en empêcher :
+
+- **Relations typées, vocabulaire dur** — appliqué à l'écriture dans le
+  graphe : un type de relation hors vocabulaire est refusé, pas stocké
+- **Les états bornés dans le temps sont des événements** — la mort, la
+  prison, un poste : des événements ordonnés, pas des propriétés. Le
+  checker de cohérence raisonne dessus de façon déterministe
+- **Eval-first** — chaque comportement du moteur a son éval rejouable
+  avec [ProTest](https://github.com/renaudcepre/protest) : unitaires,
+  sondes d'intégration, scénarios complets de bout en bout
 
 ## Stack
 
 - FastAPI + Neo4j 5 (async) + ChromaDB
-- Agents Pydantic AI + **Qwen2.5-7B-Instruct** (local, LM Studio)
-- sentence-transformers (BAAI/bge-m3) pour les embeddings
-- Nuxt 3 + Nuxt UI + Tailwind (dashboard web)
-- Rich + Typer (chat CLI)
+- Agents Pydantic AI + **API Mistral** (LM Studio reste branchable pour le local)
+- Nuxt 3 + Nuxt UI (front « papier »)
+- ProTest pour la suite d'évals
 - Python 3.12, mypy strict, Ruff
 
 ## Ce que j'ai appris
 
 Modéliser un graphe pour des données narratives, c'est étonnamment tordu —
-quand est-ce qu'une mention de personnage est un nœud plutôt qu'une propriété ?
-Comment gérer la résolution floue d'entités entre des scènes écrites à des mois d'intervalle ?
-Et surtout, comment garder le LLM ancré sans qu'il invente des rebondissements.
+à partir de quand une mention de personnage devient un nœud plutôt qu'une
+propriété ? Comment fusionner des entités entre des scènes écrites à des
+mois d'intervalle ?
 
-Le pipeline d'ingestion m'a appris pas mal de choses sur l'orchestration
-de multiples appels LLM avec état partagé, des écritures idempotentes,
-et du streaming de progression vers le front via SSE.
-
-Tirer des sorties structurées et fiables d'un modèle 7B,
-ça demande du prompt engineering soigné et une tonne de garde-fous
-dont un plus gros modèle n'aurait pas eu besoin.
+Un vocabulaire de relations laissé libre dérive **toujours** — le valider
+durement à l'écriture a éliminé une classe entière de bugs d'un coup.
+Et on ne pilote pas un agent LLM sans harnais d'évals : ici, chaque
+correction commence par une éval qui échoue.
 
 ## Statut
 
-Prototype fonctionnel — testé sur un vrai scénario de 80+ scènes.
-En train d'améliorer la suite d'éval (89 cas de test répartis
-sur 4 suites, via pydantic-evals).
-
-Boss fight en cours : ingérer le Seigneur des Anneaux
-sans trop de casse. Des centaines de personnages, des lieux étalés sur
-trois âges, et un modèle 7B qui essaie de pas perdre le fil.
+En développement actif, utilisé sur un vrai scénario. Le moteur se
+généralise : « scénario » n'est qu'un profil parmi d'autres (un profil
+« chantier » existe déjà) — Felix devient un copilote de modélisation
+en graphe dont le domaine se branche par configuration.

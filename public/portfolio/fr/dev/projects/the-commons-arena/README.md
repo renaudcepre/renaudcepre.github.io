@@ -9,8 +9,8 @@
 ## Pourquoi
 
 Un side project pour le fun — pas d'ambition de prouver quoi que ce soit,
-juste de la curiosité et le plaisir de regarder des algos et des LLMs
-essayer de se rouler dans une économie jouet.
+juste de la curiosité et l'envie de regarder des algos et des LLMs
+essayer de s'arnaquer dans une économie jouet.
 
 J'adore les jeux de société, surtout les semi-coopératifs où la confiance
 est une ressource. Je voulais voir ce que ça donne quand on balance
@@ -21,7 +21,7 @@ règles de redistribution, et une érosion endogène qui punit les
 passagers clandestins par l'économie elle-même — pas par des règles externes.
 
 Et puis j'ai collé des joueurs LLM (via pydantic-ai) pour voir
-ce qu'ils donnent face aux stratégies algorithmiques.
+ce que ça donne face aux stratégies algorithmiques.
 
 ## Comment ça marche
 
@@ -49,13 +49,13 @@ c'est de trouver les **conditions** où la coopération émerge : petits groupes
 répétition, tournois.
 
 Le lobbying s'est révélé être un piège à capital : les lobbyistes agressifs
-se saignent dans un bras de fer pendant que les passifs accumulent tranquillement.
+se saignent dans un bras de fer pendant que les passifs accumulent tranquilles.
 
 Le truc le plus intéressant, c'est les joueurs LLM. En one-shot,
 tous les modèles que j'ai testés (Mistral, GPT, etc.) coopèrent
 à fond — 100% de contribution, chaque tour, quoi qu'il arrive.
 Mais dès qu'on leur file une mémoire long terme (un fichier qu'ils écrivent
-après chaque partie avec ce qu'ils ont retenu sur leurs scores),
+après chaque partie avec ce qu'ils ont retenu de leurs scores),
 tout bascule. En 1 à 5 parties, chaque modèle converge vers la défection
 totale — zéro contribution, chaque tour, et l'économie s'effondre.
 De l'optimisme naïf au parasitisme assumé en quelques rounds.

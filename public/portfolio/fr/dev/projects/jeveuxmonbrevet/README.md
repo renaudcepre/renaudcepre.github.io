@@ -11,7 +11,7 @@ J'ai fait ça pour ma fille qui passe le Brevet
 C'était censé être un petit truc. Sauf que quand je m'amuse
 à construire un projet, j'ai tendance à m'emballer — résultat,
 c'est devenu une vraie app déployée avec de vrais utilisateurs.
-Je me suis même surpris à l'utiliser moi-même régulièrement,
+Je me surprends à l'utiliser moi-même régulièrement,
 c'est honnêtement pas mal pour se rafraîchir la culture G.
 
 Révisions par répétition espacée sur toutes les matières du Brevet —

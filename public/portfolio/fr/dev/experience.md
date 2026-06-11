@@ -4,13 +4,13 @@
 **Mars 2025 → aujourd'hui**
 
 Backend Python sur une plateforme de gestion de connaissances augmentée par IA (Generic RAG).
-~110 PRs mergées sur l'année, principal contributeur backend.
+~110 PRs mergées sur l'année, dev backend principal.
 
-- Conçu et monté le système complet de tracking et analytics utilisateurs
+- Monté le système complet de tracking et d'analytics utilisateurs
 - Gros refacto : migration Pydantic Settings, DI avec Unit of Work modulaire, hiérarchie d'exceptions métier unifiée
 - Infra Kubernetes : HPA en prod, tuning Celery (pool prefork, concurrency, connexions DB fraîches par worker), connection pooling PostgreSQL
 - Pipeline média de bout en bout : ordering, nommage auto, stockage S3-first, conversion audio, validation de types
-- Migration du chatbot et du vector store vers Pydantic AI, mise en place du framework d'evals LLM
+- Migration du chatbot et du vector store vers Pydantic AI, mise en place du framework d'évals LLM
 - Observabilité : intégration Logfire, passage au logging standard Python, nettoyage des faux positifs
 
 `FastAPI` `Celery` `Kubernetes` `PostgreSQL` `Pydantic AI` `LlamaIndex` `S3` `Logfire` `Docker`
@@ -20,8 +20,8 @@ Backend Python sur une plateforme de gestion de connaissances augmentée par IA 
 ## Autajon
 **Mai 2024 → Janvier 2025**
 
-Modernisation de legacy. Nouvelle architecture from scratch, couche d'abstraction propre
-par-dessus l'ERP existant — pour pouvoir développer de nouveaux services sans toucher au vieux code.
+Reprise d'un legacy. Nouvelle archi from scratch, couche d'abstraction propre
+par-dessus l'ERP existant — pour pouvoir bâtir de nouveaux services sans toucher au vieux code.
 
 `FastAPI` `Nuxt` `PostgreSQL` `Architecture hexagonale` `Docker`
 

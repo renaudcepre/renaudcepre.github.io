@@ -2,7 +2,7 @@
 
 > AI-powered continuity assistant for screenwriters working on complex, multi-era narratives.
 
-![Status](https://img.shields.io/badge/status-Prototype-orange) [![Github](https://img.shields.io/badge/github-repo-blue?logo=github)](https://github.com/renaudcepre/felix)
+![Status](https://img.shields.io/badge/status-In_Development-brightgreen) [![Github](https://img.shields.io/badge/github-repo-blue?logo=github)](https://github.com/renaudcepre/felix)
 
 ## Why
 
@@ -14,59 +14,65 @@ query it in natural language.
 
 ## What it does
 
-Drop scene files in, Felix handles the rest:
+Drop raw text in, Felix handles the rest:
 
-1. **Analyze** — An LLM agent extracts characters, locations, dates,
-   mood and summary from raw text
-2. **Load** — Fuzzy-matches entities against the existing graph,
-   merges new data into Neo4j, embeds scene chunks in ChromaDB
-3. **Check** — Detects timeline contradictions, bilocalization issues
-   (same character in two places at once), and narrative inconsistencies
-4. **Profile** — Builds and updates character profiles, extracts
-   relationships across scenes
+1. **Extract** — LLM agents pull entities, relationships and events
+   out of raw text
+2. **Graph** — Fuzzy-merges everything into Neo4j. The schema isn't
+   hardcoded: a "profile" defines the entity types and relation
+   vocabulary of the domain
+3. **Check** — Bilocalization and timeline contradictions ("he acts
+   two scenes after his death") detected by reasoning over each
+   entity's ordered event chronology
+4. **Query** — Natural language questions, entity sheets generated
+   straight from the graph
 
-Then ask anything: "Where was Marie in March 1942?",
-"Which scenes mention the letter?", "Show me Paul's character arc."
+## From 100% local to API (the pivot)
 
-## The challenge
+The project started with a hard constraint: everything had to run
+locally on a Mac M4, with **Qwen2.5-7B** via LM Studio. Entity
+extraction held up thanks to heavy guardrails — narrative reasoning
+on a 7B did not. Rather than keep fighting the hardware, I pivoted to
+the **Mistral API** (mistral-small), keeping the small-model-plus-
+targeted-tools philosophy. The guardrails survived the pivot: they
+turned out to be the real product.
 
-The main constraint: everything must run **locally on a Mac M4**.
-The only model I found that handles the task and fits the hardware
-is **Qwen2.5-7B-Instruct** via LM Studio. That's what makes this
-project interesting — with Claude Sonnet it would be much simpler,
-but less fun as a prototype. Making a 7B model do reliable entity
-extraction and narrative reasoning is where the real work is.
+## The real challenge: caging the LLM
+
+An LLM writing into a graph will invent entities, relationships,
+plot twists. The whole job is stopping it:
+
+- **Typed relations, hard vocabulary** — enforced at graph-write time:
+  a relation type outside the vocabulary is rejected, not stored
+- **Time-bounded states are events** — death, prison, a job: ordered
+  events, not properties. The consistency checker reasons over them
+  deterministically
+- **Eval-first** — every engine behavior has a replayable eval built
+  with [ProTest](https://github.com/renaudcepre/protest): unit-level,
+  integration probes, full end-to-end scenarios
 
 ## Stack
 
 - FastAPI + Neo4j 5 (async) + ChromaDB
-- Pydantic AI agents + **Qwen2.5-7B-Instruct** (local, LM Studio)
-- sentence-transformers (BAAI/bge-m3) for embeddings
-- Nuxt 3 + Nuxt UI + Tailwind (web dashboard)
-- Rich + Typer (CLI chat)
+- Pydantic AI agents + **Mistral API** (LM Studio still pluggable for local)
+- Nuxt 3 + Nuxt UI ("paper" front-end)
+- ProTest for the eval suite
 - Python 3.12, mypy strict, Ruff
 
 ## What I learned
 
-Graph modeling for narrative data is surprisingly tricky —
-deciding when a character mention is a node vs. a property,
-handling fuzzy entity resolution across scenes written months apart,
-and making the LLM stay grounded (no hallucinated plot points).
+Graph modeling for narrative data is surprisingly tricky — when does
+a character mention become a node rather than a property? How do you
+merge entities across scenes written months apart?
 
-The ingest pipeline taught me a lot about orchestrating
-multiple LLM calls with shared state, idempotent writes,
-and streaming progress to the frontend via SSE.
-
-Getting a 7B model to produce structured, reliable output
-required careful prompt engineering and a lot of guardrails
-that a bigger model wouldn't need.
+A free-form relation vocabulary **always** drifts — validating it hard
+at write time killed an entire class of bugs at once. And you can't
+steer an LLM agent without an eval harness: here, every fix starts
+with a failing eval.
 
 ## Status
 
-Working prototype — used on a real 80+ scene screenplay.
-Actively improving the eval suite (89 test cases across
-4 suites using pydantic-evals).
-
-Current boss fight: ingesting the Lord of the Rings screenplay
-without too many errors. Hundreds of characters, locations across
-three ages, and a 7B model trying to keep it all straight.
+Actively developed, used on a real screenplay. The engine is
+generalizing: "screenplay" is just one profile among others (a
+"construction site" profile already exists) — Felix is becoming a
+graph-modeling copilot whose domain is plugged in by configuration.

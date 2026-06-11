@@ -2,9 +2,9 @@
 
 ## Python, strictement
 
-Mon langage du quotidien depuis 6+ ans. Tout est typé, mypy tourne en strict.
+Mon langage de tous les jours depuis 6+ ans. Tout est typé, mypy en strict.
 J'aime Python quand on le prend au sérieux — type hints, dataclasses, protocols.
-Pas d'imports magiques, pas de dicts sans types qui se baladent partout.
+Pas d'imports magiques, pas de dicts sans types qui traînent partout.
 
 `Python` `mypy` `FastAPI` `Pydantic` `SQLAlchemy` `Celery` `Alembic`
 
@@ -12,7 +12,7 @@ Pas d'imports magiques, pas de dicts sans types qui se baladent partout.
 
 ## Tests
 
-Je vise une couverture élevée, pas pour la métrique — j'ai juste pas confiance dans
+Je vise une bonne couverture, pas pour la métrique — j'ai juste pas confiance dans
 du code non testé. C'est d'ailleurs pour ça que je développe [ProTest](/dev/projects/protest/README.md)
 — je voulais de la DI explicite et typée dans les tests, pas de la résolution par nom à l'aveugle.
 
@@ -56,10 +56,10 @@ des outils précis, et beaucoup d'heuristiques derrière — plutôt que de tout
 
 ## Frontend
 
-J'aime pas. Le JS me parle pas, je comprends pas l'envie de le mettre côté serveur,
-et les couches de rétro-compat m'agacent. Cela dit — le web marche remarquablement bien.
-L'écosystème est une vraie réussite, et je le respecte. C'est mon terrain de vibe-code :
-je veux le résultat, pas le voyage. L'exact inverse de mon approche Python ou C.
+J'aime pas trop. Le JS me parle pas, je comprends pas l'envie de le mettre côté serveur,
+et les couches de rétro-compat m'agacent. Cela dit — le web marche remarquablement bien,
+l'écosystème est une vraie réussite, et je respecte. C'est mon terrain de vibe-code :
+je veux le résultat, pas le voyage. Pile l'inverse de mon approche Python ou C.
 J'essaie quand même de faire les choses proprement, même si parfois je finis
 par coder des effets de scramble sous le curseur de l'utilisateur.
 
@@ -69,7 +69,7 @@ par coder des effets de scramble sous le curseur de l'utilisateur.
 
 ## Le reste
 
-C et C++ de 42 — j'en écris plus au quotidien, mais ça a forgé ma façon de penser
+C et C++ de 42 — j'en écris plus tous les jours, mais ça a forgé ma façon de penser
 la mémoire et la perf. À l'aise sous Linux. PyCharm pour tout ce qui est Python.
 
 `C` `C++` `Linux` `PyCharm`

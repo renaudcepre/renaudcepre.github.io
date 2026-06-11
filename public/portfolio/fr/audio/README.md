@@ -1,9 +1,9 @@
 # Antres 808
 
 Je fais de la musique électronique sous le nom Antres 808.
-Du bass music, surtout — mais ça part dans plein de directions
+Surtout du bass music — mais ça part dans plein de directions
 selon le jour. Du dub, de l'ambient,
-des trucs que je saurais pas trop catégoriser.
+des trucs que je saurais pas trop ranger.
 
 J'ai commencé par la guitare ado — punk, metal.
 Puis le rap, puis l'électro, et j'en suis jamais
@@ -14,7 +14,7 @@ façonné ce que j'essaie de faire.
 J'ai pas de grande vision artistique. J'ouvre Ableton,
 je pose des rythmes, je creuse, et à un moment
 le morceau me dit où il veut aller. Un peu comme
-sculpter — enlever tout ce qui est pas la chose.
+sculpter — enlever tout ce qui n'est pas la chose.
 Je passe beaucoup de temps à construire des palettes sonores
 avant d'écrire quoi que ce soit. Des fois je fais un faux morceau
 juste pour trouver la bonne couleur, puis je jette tout
@@ -41,8 +41,8 @@ J'ai tendance à pas finir les choses. J'y travaille.
 - Ableton Live
 - u-he Diva (mon synthé préféré, et de loin)
 - [RSO](https://lperron.com/projects/rso) — un synthé navigateur chaotique
-  fait par un pote. J'ai été le seul beta testeur pendant un moment
-  et j'ai décidé de faire un album entier avec RSO comme seule source
+  fait par un pote. J'ai été le seul beta testeur pendant un moment,
+  et je me suis lancé un album entier avec RSO pour seule source
   sonore — pas de samples, pas d'autres synthés, juste des effets
   par-dessus. Même les batteries. Un bon challenge de sound design.
   (album pas encore sorti)
@@ -56,7 +56,7 @@ acoustique, filtres, électricité, studio.
 Puis Reaktor m'a aspiré : patcher des synthés modulaires,
 tripoter des portes logiques, jusqu'au jour où la question
 c'était juste « comment une ligne de code produit un son ? »
-C'est cette question qui m'a mené à la [programmation](/dev/skills.html).
+C'est cette question qui m'a mené à la [programmation](/dev/skills.md).
 La musique est restée.
 
 ## Liens

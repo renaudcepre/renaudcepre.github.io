@@ -56,7 +56,7 @@ acoustics, filters, electricity, studio recording.
 Then Reaktor pulled me deeper: patching modular synths,
 manipulating logic gates, until one day the question
 was just "how does a line of code produce a sound?"
-That question led me to [programming](/dev/skills.html).
+That question led me to [programming](/dev/skills.md).
 The music stayed.
 
 ## Links

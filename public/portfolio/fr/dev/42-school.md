@@ -12,7 +12,7 @@ Mais c'est là que j'ai compris comment un ordi marche pour de vrai.
 ## malloc [![Gitlab](https://img.shields.io/badge/gitlab-repo-orange?logo=gitlab)](https://gitlab.com/rcepre/malloc)
 
 Réimplémentation de `malloc`, `realloc` et `free` en C.
-Mes tests passent, ça tourne sur pas mal de programmes — mais les gros
+Ça passe mes tests, ça tourne sur pas mal de programmes — mais les gros
 logiciels comme vim finissent par segfault. Honnêtement c'est pas fou,
 mais le construire m'a énormément appris sur la gestion mémoire bas niveau,
 et par extension sur tous les langages qui reposent sur le C.
@@ -25,7 +25,7 @@ Une arène virtuelle où des champions (écrits en assembleur) se battent
 en écrasant la mémoire des autres. Projet de groupe — j'ai fait
 l'assembleur (messages d'erreur à la clang) et le visualiseur SDL.
 Ma première fois en graphisme C, et j'y suis allé à fond :
-le rendu est beau, y'a un mode plein écran années 80, et c'est
+le rendu est propre, y'a un mode plein écran années 80, et c'est
 même **sonore**. Le code doit être terrifiant, mais les perfs
 étaient au rendez-vous et visuellement c'était dingue.
 
@@ -64,7 +64,7 @@ est scorée en simulant la répartition des fourmis, et la meilleure gagne.
 
 Celui-là a failli nous achever. Je comprends plus une seule ligne
 du code qu'on a pondu — des matrices de bitmasks 128 bits et du bitwise
-dans tous les sens. Expérience absolument crâne-fondante.
+dans tous les sens. Truc absolument crâne-fondant.
 
 ---
 
