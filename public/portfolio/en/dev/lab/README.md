@@ -1,35 +1,29 @@
 # The lab
 
-> Nothing in here is finished. That's kind of the point.
+> Nothing in here is finished.
 
-Next door, in `projects/`, there are things that work and that people
-use. This is the other half of the activity: explorations, simulations,
-open questions. Some active, some paused — a lab doesn't finish, it
-learns.
+`projects/` has the stuff that works and that people use. This is the
+rest: explorations, simulations, questions I keep dragging around.
 
 ## The bingo
 
-A friend of mine plays bingo whenever I say "I have an idea": *graph,
-hexagons, emergent, tests*. He's not wrong. But lay all these projects
-side by side and the real common thread shows up: graphs, hexagons and
-tests are the toolbox. **The subject is always emergence** — what
-appears when many agents interact under simple rules? The Game of
-Life, basically.
+A friend of mine has a bingo card for whenever I tell him "I have an
+idea": graph, hexagons, emergent, tests. He wins every time.
+
+That said, laying these projects side by side, the common thread is
+simpler than that. What keeps coming back is emergence: lots of
+agents, simple rules, and watching what happens.
 [The Commons Arena](https://github.com/renaudcepre/the-commons-arena)
-is the game-theory version, [hexmap](hexmap.md) the geophysical one,
-[lightfall](lightfall.md) the inhabited one.
+as the game-theory version, [hexmap](hexmap.md) as the weather
+version, [lightfall](lightfall.md) as the game version.
 
-## Working with an AI, honestly
+## The code is written with Claude
 
-These projects are built by piloting Claude — sometimes in domains I
-don't master at all (hexmap's geophysics, for instance). That raises a
-question I find more interesting than the impostor syndrome it
-triggers: when you can't write the code yourself, what keeps the
-result from being plausible mush?
+Some of these projects touch domains where I have zero background,
+hexmap's geophysics typically. The code is written by Claude. If I
+can't write the code, how do I know it isn't wrong?
 
-My answer, visible in each entry: **tested invariants**, **measurements**
-instead of impressions, and a **logbook** that records pivots and
-mistakes as much as solutions. The useful question isn't "can I write
-it?" but "can I tell when it's wrong?". The skill moves from execution
-to verification — the way sampling moved music from the instrument to
-the ear.
+My rule: being able to tell when it's wrong. Tested invariants (if a
+water total drifts in hexmap, a test fails), measurements instead of
+impressions, and a logbook that also records the mistakes and the
+pivots.

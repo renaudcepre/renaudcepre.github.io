@@ -36,7 +36,6 @@ j'explore les approches neuro-symboliques et les modèles du monde sur un projet
 ## Infrastructure
 
 Docker pour tout en local, Kubernetes et AWS en prod au boulot.
-Mes projets perso restent simples — un front Nuxt statique et Supabase, ça suffit en général.
 
 `Docker` `Kubernetes` `AWS` `RabbitMQ` `GitHub Actions`
 
@@ -48,7 +47,7 @@ Orchestration, agents, choix du bon modèle pour le bon job — pipelines RAG,
 extraction structurée, bases de connaissances. Ce qui me branche le plus en ce moment,
 c'est de faire tourner de l'IA sur une machine normale : des petits modèles bien ciblés,
 des outils précis, et beaucoup d'heuristiques derrière — plutôt que de tout envoyer
-à un gros modèle en priant. Ça me rappelle le C — on peut pas bruteforcer, faut être malin.
+à un gros modèle par reflexe. Ça me rappelle le C — on peut pas bruteforcer, faut être malin.
 
 `vLLM` `Pydantic AI` `LM Studio`
 
