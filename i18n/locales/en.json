@@ -17,6 +17,9 @@
     "raw": "0:raw",
     "render": "1:render"
   },
+  "audio": {
+    "noFilesAvailable": "No audio files available"
+  },
   "tmux": {
     "themePrefix": "Theme: ",
     "shortcut": "(Ctrl+;)"
