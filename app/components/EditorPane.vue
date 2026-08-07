@@ -261,10 +261,10 @@ function handleInternalClick(e: MouseEvent) {
         }"
       >
         <!-- Audio player mode (render) -->
-        <AudioPlayer
-          v-if="isAudio && renderedMode"
-          :content="data.content"
-        />
+        <!-- ClientOnly: probes track availability via new Audio(), a browser-only API -->
+        <ClientOnly v-if="isAudio && renderedMode">
+          <AudioPlayer :content="data.content" />
+        </ClientOnly>
 
         <!-- Video mode -->
         <div

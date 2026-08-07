@@ -1,9 +1,10 @@
 export function usePortfolioFiles() {
   const { locale } = useI18n()
 
-  const { data, error: fetchError } = useAsyncData('portfolio-files', () =>
+  const filesReady = useAsyncData('portfolio-files', () =>
     queryCollection('portfolio').order('order', 'ASC').all()
   )
+  const { data, error: fetchError } = filesReady
 
   if (import.meta.dev) {
     watch(fetchError, (err) => {
@@ -25,9 +26,14 @@ export function usePortfolioFiles() {
   })
 
   const filesMap = computed(() => {
-    const map: Record<string, { lang: string, content: string }> = {}
+    const map: Record<string, { lang: string, content: string, title?: string, description?: string }> = {}
     for (const f of localeData.value) {
-      map[f.filename] = { lang: f.lang, content: fileContents.value[f.filename] ?? '' }
+      map[f.filename] = {
+        lang: f.lang,
+        content: fileContents.value[f.filename] ?? '',
+        title: f.title,
+        description: f.description
+      }
     }
     return map
   })
@@ -41,12 +47,14 @@ export function usePortfolioFiles() {
       return
     }
     try {
-      const content = await $fetch<string>(entry.path, { responseType: 'text' })
+      const content = import.meta.server
+        ? await $fetch<string>('/portfolio-content', { query: { path: entry.path }, responseType: 'text' })
+        : await $fetch<string>(entry.path, { responseType: 'text' })
       fileContents.value = { ...fileContents.value, [filename]: content }
     } catch (err) {
       console.error(`[usePortfolioFiles] Failed to load content for "${filename}":`, err)
     }
   }
 
-  return { fileList, filesMap, loadContent }
+  return { fileList, filesMap, loadContent, filesReady }
 }

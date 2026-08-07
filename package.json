@@ -21,6 +21,7 @@
   },
   "devDependencies": {
     "@nuxt/eslint": "^1.13.0",
+    "@types/node": "^26.2.0",
     "typescript": "^5.9.3"
   },
   "packageManager": "pnpm@10.28.2",

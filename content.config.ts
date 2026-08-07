@@ -10,7 +10,9 @@ export default defineContentConfig({
         lang: z.enum(['py', 'md', 'img', 'ansi', 'txt', 'video', 'audio', 'html']),
         order: z.number(),
         path: z.string(),
-        locale: z.enum(['en', 'fr', '*']).default('*')
+        locale: z.enum(['en', 'fr', '*']).default('*'),
+        title: z.string().optional(),
+        description: z.string().optional()
       })
     })
   }

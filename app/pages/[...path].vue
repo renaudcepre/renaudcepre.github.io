@@ -4,18 +4,33 @@ import { C } from '~/utils/portfolio'
 definePageMeta({ key: 'main' })
 
 const { t, locale } = useI18n()
+const route = useRoute()
+const { public: { siteUrl } } = useRuntimeConfig()
 
-useHead({
-  htmlAttrs: { lang: () => locale.value },
-  title: () => t('meta.title'),
-  meta: [{ name: 'description', content: () => t('meta.description') }]
-})
-
-const { fileList, filesMap, loadContent } = usePortfolioFiles()
+const { fileList, filesMap, loadContent, filesReady } = usePortfolioFiles()
 const { isMobile } = useBreakpoint()
 const { themeName, cycle: cycleTheme } = useTheme()
 const { togglePlay: audioToggle, album: audioAlbum } = useAudioPlayer()
-const { activeFile, openTabs, showNetrw, loaded, openFile } = usePortfolioNavigation({ fileList, loadContent, isMobile })
+const { activeFile, openTabs, showNetrw, loaded, openFile } = usePortfolioNavigation({ fileList, loadContent, isMobile, filesReady })
+
+const activeMeta = computed(() => filesMap.value[activeFile.value])
+const pageTitle = computed(() => activeMeta.value?.title ? `${activeMeta.value.title} · ${t('meta.title')}` : t('meta.title'))
+const pageDescription = computed(() => activeMeta.value?.description ?? t('meta.description'))
+const canonicalUrl = computed(() => `${siteUrl}${route.path}`)
+
+useHead({
+  htmlAttrs: { lang: () => locale.value },
+  title: pageTitle,
+  meta: [
+    { name: 'description', content: pageDescription },
+    { property: 'og:title', content: pageTitle },
+    { property: 'og:description', content: pageDescription },
+    { property: 'og:type', content: () => activeMeta.value?.title ? 'article' : 'website' },
+    { property: 'og:url', content: canonicalUrl },
+    { name: 'twitter:card', content: 'summary' }
+  ],
+  link: [{ rel: 'canonical', href: canonicalUrl }]
+})
 useScrambleHover()
 
 useKeyboardShortcuts({

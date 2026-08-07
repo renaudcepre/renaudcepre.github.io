@@ -2,3 +2,5 @@ filename: blog/apte.md
 lang: md
 order: 18
 path: /portfolio/blog/apte.md
+title: "An eval is just a test that returns a value"
+description: "apte is an async-first test framework for Python where unit tests and LLM evals run in the same engine, sharing the same fixtures."

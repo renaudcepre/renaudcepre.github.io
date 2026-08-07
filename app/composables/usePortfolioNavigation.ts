@@ -2,9 +2,10 @@ interface Options {
   fileList: Readonly<Ref<string[]>>
   loadContent: (name: string) => Promise<void>
   isMobile: Readonly<Ref<boolean>>
+  filesReady?: Promise<unknown>
 }
 
-export function usePortfolioNavigation({ fileList, loadContent, isMobile }: Options) {
+export function usePortfolioNavigation({ fileList, loadContent, isMobile, filesReady }: Options) {
   const route = useRoute()
   const router = useRouter()
   const localePath = useLocalePath()
@@ -19,6 +20,16 @@ export function usePortfolioNavigation({ fileList, loadContent, isMobile }: Opti
   const openTabs = ref([fileFromRoute.value])
   const showNetrw = ref(!isMobile.value)
   const loaded = ref(false)
+
+  // Prerendering/SSR: the client-side watchers below never run server-side, so the
+  // active file's content would be missing from the static HTML. Piggyback on the
+  // same portfolio-files fetch and load the initial file before the server renders.
+  if (import.meta.server && filesReady) {
+    onServerPrefetch(async () => {
+      await filesReady
+      await loadContent(activeFile.value)
+    })
+  }
 
   async function openFile(name: string) {
     activeFile.value = name

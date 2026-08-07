@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://renaudcepre.github.io/sitemap.xml
