@@ -54,7 +54,7 @@ watch(albumData, (a) => {
     el.src = `${baseDir.value}/${track.file}`
     
     el.addEventListener('loadedmetadata', () => onMetadataLoaded(i, el))
-    el.addEventListener('error', () => onMetadataError(i, el))
+    el.addEventListener('error', () => onMetadataError(i))
     
     preloadElements.push(el)
   })
@@ -69,11 +69,9 @@ function onMetadataLoaded(index: number, el: HTMLAudioElement) {
   }
 }
 
-function onMetadataError(index: number, el: HTMLAudioElement) {
+function onMetadataError(index: number) {
   // File doesn't exist or can't be loaded - remove from available if present
   availableTracks.value = availableTracks.value.filter(i => i !== index)
-  // Clean up the failed element
-  el.src = ''
 }
 
 // Filter tracks to only show those with available files
