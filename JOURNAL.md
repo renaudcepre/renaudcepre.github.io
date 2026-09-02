@@ -1,3 +1,10 @@
+## 2026-09-02 — chore: fichier de validation Google Search Console
+
+Ajout de public/google34e621da30da2acf.html pour valider la propriété
+https://renaudcepre.github.io/ dans Search Console (compte Renaud). But :
+soumettre le sitemap de la doc apte (/apte/sitemap.xml), la propriété racine
+couvre les sous-chemins. Ne jamais supprimer ce fichier, Google revérifie.
+
 # Journal de bord
 
 ## 2026-08-08 — feat(seo): passage en SSG, le site n'était plus une coquille vide pour les robots
