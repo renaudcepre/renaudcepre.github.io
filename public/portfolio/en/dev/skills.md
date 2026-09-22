@@ -13,10 +13,10 @@ I don't do magic imports or untyped dicts passed around.
 ## Testing
 
 I aim for high coverage not as a metric but because I don't trust code that isn't tested.
-That's also why I'm building [ProTest](/dev/projects/protest/README.md) — I wanted DI in tests
+That's also why I built [apte](/dev/projects/apte/README.md) — I wanted DI in tests
 to be explicit and typed, not resolved by name in the dark.
 
-`pytest` `ProTest`
+`pytest` `apte`
 
 ---
 
@@ -25,8 +25,8 @@ to be explicit and typed, not resolved by name in the dark.
 PostgreSQL for relational work, comfortable with raw SQL when ORMs get in the way.
 But what really excites me is graph databases — not just as a storage alternative,
 but for what you can do with them: shortest path, community detection, and the algorithms
-that come with thinking in graphs. Currently exploring neuro-symbolic approaches and world models
-on a personal project (Felix), where graph structure meets scenario extraction.
+that come with thinking in graphs. On Felix, my graph-modeling copilot (paused), I explored
+neuro-symbolic approaches, where graph structure meets scenario extraction.
 
 `PostgreSQL` `Neo4j` `Cypher` `Kuzu` `ChromaDB` `Weaviate`
 
@@ -66,6 +66,17 @@ under the user's cursor.
 
 ---
 
+## Rust
+
+Level zero, in progress. Two personal projects run in Rust ([thalweg](/dev/lab/thalweg.md),
+[Lightfall](/dev/lab/lightfall.md)), around a hundred thousand lines, and Claude writes them.
+I learn in the background: I read the diffs, I keep clippy pedantic on `-D warnings`,
+I don't write a function on my own yet.
+
+`Rust` `cargo` `clippy`
+
+---
+
 ## The rest
 
 C and C++ from 42 — I don't write them daily but they shaped how I think about memory and performance.
@@ -78,7 +89,7 @@ Comfortable in Linux. PyCharm for everything Python.
 > **Want to get better at**
 >
 > Graph databases — I use Neo4j and Kuzu but I want to write Cypher more fluently and go deeper.
-> Rust — I've wanted to learn it for a while but never had the right project for it.
+> Rust — the project is there now, what's left is writing it myself.
 > Networking and systems — I know the basics but it's not where I'm efficient yet.
 > The internals of AI — I orchestrate models daily but I want to understand what happens under the hood, neural networks for real.
 > And English — I can write it (with some help) but I can't hold a conversation comfortably. Working on that by end of 2026.

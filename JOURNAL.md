@@ -1,3 +1,42 @@
+## 2026-09-22 — content: remise à jour des projets perso (apte, Anatole, thalweg, Lightfall, YTI)
+
+Dernier commit de contenu le 25/06, tout ce qui a bougé depuis juillet
+manquait. Audit fichier par fichier contre les repos (versions, tags,
+derniers commits, JOURNAL de chaque projet), pas contre la mémoire.
+
+**Renommages** (`git mv`, URLs cassées assumées, le site vient à peine
+d'être crawlable) : `projects/protest` → `projects/apte` (v0.3.1, clôturé
+06/2026, `example.py` réécrit sur l'API `apte`), `projects/jeveuxmonbrevet`
+→ `projects/anatole` (v2.3.0, app-anatole.fr, FSRS, Capacitor + notifs
+locales), `lab/hexmap.md` → `lab/thalweg.md` (miroir public MIT
+`renaudcepre/thalweg`, v0.13.0, WASM + three.js). Les YAML suivent, les
+routes prerender sont dérivées des YAML donc rien à toucher dans
+`nuxt.config.ts`. Screenshots Anatole gardés tels quels : ils datent de
+l'époque Brevet.
+
+**Réécrits** : Lightfall (pitch d'avant le pivot du 06/08, tout refait sur
+`the-target-world.md` + `tracker/FILE.md` : full-émergent, observatoire,
+machines nues, le monde meurt à 180 h) ; réécrit trois fois sur retours de Renaud (plus simple, sans lore, sans section statut), badge « en pause » demandé, Felix (badge en pause + section
+« Le mur » demandée par Renaud : petits modèles vs ce qu'il voulait
+faire), skills (section Rust niveau zéro assumé, apte, Felix en pause).
+
+**Ajouté** : `projects/yti/README.md` (Yorkshire Tech, projet à deux,
+thalweg embarqué). Une page `lab/ripost.md` a été écrite puis retirée le
+jour même : trop tôt, Renaud préfère attendre que le jeu existe. Le README
+du labo pointe vers les nouveaux noms. Felix et The Commons Arena passent de
+`projects/` à `lab/` (fichiers plats `lab/felix.md`, `lab/the-commons-arena.md`,
+screenshot déplacé) : « projects » ne garde que ce qui est en ligne avec
+quelqu'un au bout (apte, Anatole, YTI).
+
+**Pas fait** : le « projet d'escape game » demandé par Renaud. Aucun repo
+GitHub, aucun dossier local sous un nom évident, et `life/` note déjà le
+06/08 que le code n'a pas été localisé. À reprendre quand le dossier
+sera retrouvé.
+
+**Plan noté dans la page thalweg** : faire tourner le moteur WASM ici
+comme dans YTI (`npm run hexarium` côté TYS tire `dist.tar.gz` de la
+release publique). Chantier séparé.
+
 ## 2026-09-02 — chore: fichier de validation Google Search Console
 
 Ajout de public/google34e621da30da2acf.html pour valider la propriété

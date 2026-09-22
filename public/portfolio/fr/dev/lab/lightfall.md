@@ -1,36 +1,39 @@
 # Lightfall
 
-> Jeu spatial 2D pixel art, asynchrone et lent (5 min/jour suffisent).
-> Univers procédural, économie de NPC autonome.
+> Simulation spatiale full-émergente, 2D pixel art, lente. Pas de
+> joueur : des machines, et un spectateur.
 
-![Status](https://img.shields.io/badge/status-exploration_active-brightgreen) ![Repo](https://img.shields.io/badge/repo-privé-lightgrey)
+![Status](https://img.shields.io/badge/status-en_pause-yellow) ![Repo](https://img.shields.io/badge/repo-privé-lightgrey)
 
 ## Le truc
 
-Backend Rust autoritatif : axum, WebSocket binaire (Protobuf), event
-sourcing, architecture hexagonale. Front React + PixiJS. Les NPC
-passent par les systèmes joueurs : vrais astres générés, vraie
-déplétion des gisements, vrais cycles de minage. Des mineurs
-alimentent des dépôts, des convois circulent, des gisements
-s'épuisent.
+On lance des machines dans un univers procédural. Elles savent se
+déplacer, miner, raffiner, construire. Elles doivent survivre (le
+carburant, la chaleur, l'usure), avec comme but... d'en créer
+d'autres. Il n'y a rien d'autre à faire que regarder.
 
-## Le pivot
+![Le pont, vue d'un système](/portfolio/dev/lab/lightfall/bridge.webp)
 
-Pendant des semaines le code a dérivé vers la fidélité physique :
-relativité simulée, gravité, retard lumière. Au playtest, la gravité
-ajoutait de la friction et aucune décision de jeu. Tout est coupé
-(gravité off, light-time parqué) et la règle est notée dans le
-journal : avant d'ajouter de la sim, nommer la décision de jeu
-qu'elle crée.
+Au départ, chaque machine a une position, un vaisseau, un trousseau
+de clés vide. Pas de factions, pas de rôles, pas de territoires. Une
+machine peut miner, transporter ou attaquer selon ses modules, elle
+ne devient jamais « mineur » ou « pirate ». Les groupes se forment tout
+seuls, grâce à un système de clés d'échange et de communication :
+qui a la clé d'un dépôt en fait partie.
 
-## La question ouverte
+![Inspection d'une machine qui construit une usine](/portfolio/dev/lab/lightfall/inspection.webp)
 
-L'émergence demande du monde, et un jeu indie n'a pas de foule. Piste
-actuelle : gagner le solo d'abord, avec l'économie NPC comme monde
-vivant, façon Dwarf Fortress. Le multijoueur en gradient : traces
-asynchrones partagées d'abord, monde commun ensuite.
+Backend Rust, WebSocket binaire (Protobuf), front React + PixiJS. Le
+front est un observatoire, il n'envoie aucun ordre. Relativité
+restreinte simulée : chaque vaisseau a son temps propre, et les
+machines se voient avec le retard de la lumière.
 
-## Statut
+## Ce que ça donne pour l'instant
 
-Exploration active. ~16k lignes de Rust, clippy pedantic en
-`-D warnings`, journal tenu commit par commit.
+Le monde meurt. Mesuré sur un banc de dix univers : à 60 heures
+simulées il ne meurt plus, à 180 heures il meurt encore. Chaque tour
+de boucle est une mesure, pas un correctif : rejouer une seed, lire
+les compteurs (machines à sec, épaves, naissances), rouvrir l'issue.
+
+![Le pont en mouvement](/portfolio/dev/lab/lightfall/bridge.webm)
+

@@ -13,10 +13,10 @@ Pas d'imports magiques, pas de dicts sans types qui traînent partout.
 ## Tests
 
 Je vise une bonne couverture, pas pour la métrique — j'ai juste pas confiance dans
-du code non testé. C'est d'ailleurs pour ça que je développe [ProTest](/dev/projects/protest/README.md)
+du code non testé. C'est d'ailleurs pour ça que j'ai développé [apte](/dev/projects/apte/README.md)
 — je voulais de la DI explicite et typée dans les tests, pas de la résolution par nom à l'aveugle.
 
-`pytest` `ProTest`
+`pytest` `apte`
 
 ---
 
@@ -25,9 +25,9 @@ du code non testé. C'est d'ailleurs pour ça que je développe [ProTest](/dev/p
 PostgreSQL pour le relationnel, à l'aise en SQL brut quand l'ORM gêne plus qu'il n'aide.
 Mais ce qui me passionne vraiment, ce sont les bases orientées graphe — pas juste
 comme alternative de stockage, mais pour ce qu'elles ouvrent : plus court chemin, détection
-de communautés, et tous les algos qui viennent quand on raisonne en graphes. En ce moment
-j'explore les approches neuro-symboliques et les modèles du monde sur un projet perso (Felix),
-à la croisée du graphe de connaissances et de l'extraction de scénarios.
+de communautés, et tous les algos qui viennent quand on raisonne en graphes. Sur Felix, mon copilote de
+modélisation en graphe (en pause), j'ai exploré les approches neuro-symboliques, à la
+croisée du graphe de connaissances et de l'extraction de scénarios.
 
 `PostgreSQL` `Neo4j` `Cypher` `Kuzu` `ChromaDB` `Weaviate`
 
@@ -66,6 +66,17 @@ par coder des effets de scramble sous le curseur de l'utilisateur.
 
 ---
 
+## Rust
+
+Niveau zéro, en cours. Deux projets perso tournent en Rust ([thalweg](/dev/lab/thalweg.md),
+[Lightfall](/dev/lab/lightfall.md)), une centaine de milliers de lignes, et c'est Claude qui les écrit.
+Moi j'apprends en arrière-plan : je lis les diffs, je tiens clippy pedantic en `-D warnings`,
+j'écris pas encore une fonction seul.
+
+`Rust` `cargo` `clippy`
+
+---
+
 ## Le reste
 
 C et C++ de 42 — j'en écris plus tous les jours, mais ça a forgé ma façon de penser
@@ -78,7 +89,7 @@ la mémoire et la perf. À l'aise sous Linux. PyCharm pour tout ce qui est Pytho
 > **Envie de progresser sur**
 >
 > Bases orientées graphe — j'utilise Neo4j et Kuzu mais je veux écrire du Cypher plus couramment, aller plus loin.
-> Rust — ça me tente depuis un moment, j'ai jamais trouvé le bon prétexte.
+> Rust — le prétexte est là, reste à l'écrire moi-même.
 > Réseau et systèmes — les bases sont là, mais c'est pas encore mon terrain de jeu.
 > Les entrailles de l'IA — j'orchestre des modèles tous les jours, mais je veux comprendre ce qu'il se passe dessous, les réseaux de neurones pour de vrai.
 > Et l'anglais — j'arrive à l'écrire (avec un coup de main) mais tenir une conversation, c'est pas encore ça. Objectif fin 2026.

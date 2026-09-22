@@ -14,18 +14,18 @@ hexagones, émergent, tests. Il gagne à chaque fois.
 Cela dit, en posant ces projets côte à côte, le fil rouge est plus
 simple que ça. Ce qui revient tout le temps, c'est l'émergence : plein
 d'agents, des règles simples, et regarder ce qui se passe.
-[The Commons Arena](https://github.com/renaudcepre/the-commons-arena)
-en version théorie des jeux, [hexmap](hexmap.md) en version météo,
-[lightfall](lightfall.md) en version jeu.
+[The Commons Arena](the-commons-arena.md)
+en version théorie des jeux, [thalweg](thalweg.md) en version météo,
+[lightfall](lightfall.md) en version ruines.
 
 ## Le code est écrit avec Claude
 
 Une partie de ces projets touche des domaines où j'ai aucun bagage,
-la géophysique d'hexmap typiquement. Le code, c'est Claude qui
+la géophysique de thalweg typiquement. Le code, c'est Claude qui
 l'écrit. Si je sais pas écrire le code, comment je sais qu'il est
 pas faux ?
 
 Ma règle : pouvoir dire quand c'est faux. Des invariants testés (si
-un total d'eau dérive dans hexmap, un test échoue), des mesures
+un total d'eau dérive dans thalweg, un test échoue), des mesures
 plutôt que des impressions, et un journal de bord qui note aussi les
 erreurs et les pivots.

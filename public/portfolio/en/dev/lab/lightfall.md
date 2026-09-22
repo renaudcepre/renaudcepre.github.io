@@ -1,34 +1,38 @@
 # Lightfall
 
-> Slow, asynchronous 2D pixel-art space game (5 min/day is enough).
-> Procedural universe, autonomous NPC economy.
+> Full-emergent space simulation, 2D pixel art, slow. No player:
+> machines, and a spectator.
 
-![Status](https://img.shields.io/badge/status-active_exploration-brightgreen) ![Repo](https://img.shields.io/badge/repo-private-lightgrey)
+![Status](https://img.shields.io/badge/status-paused-yellow) ![Repo](https://img.shields.io/badge/repo-private-lightgrey)
 
 ## The thing
 
-Authoritative Rust backend: axum, binary WebSocket (Protobuf), event
-sourcing, hexagonal architecture. React + PixiJS front. NPCs go
-through the player systems: real generated bodies, real deposit
-depletion, real mining cycles. Miners feed depots, convoys run,
-deposits run dry.
+We drop machines into a procedural universe. They can move, mine,
+refine, build. They have to survive (fuel, heat, wear), with one
+goal... making more of themselves. There is nothing else to do but
+watch.
 
-## The pivot
+![The bridge, view of a system](/portfolio/dev/lab/lightfall/bridge.webp)
 
-For weeks the code drifted toward physical fidelity: simulated
-relativity, gravity, light delay. At playtest, gravity added friction
-and zero gameplay decisions. All of it got cut (gravity off,
-light-time shelved) and the rule went into the logbook: before adding
-simulation, name the game decision it creates.
+At the start, each machine has a position, a ship, an empty keyring.
+No factions, no roles, no territories. A machine can mine, haul or
+attack depending on its modules, it never becomes a "miner" or a
+"raider". Groups form on their own, through a system of exchange and
+communication keys: whoever holds a depot's key is part of it.
 
-## The open question
+![Inspecting a machine building a factory](/portfolio/dev/lab/lightfall/inspection.webp)
 
-Emergence needs people, and an indie game has no crowd. Current lead:
-win single-player first, with the NPC economy as the living world,
-Dwarf Fortress style. Multiplayer as a gradient: shared asynchronous
-traces first, a common world later.
+Rust backend, binary WebSocket (Protobuf), React + PixiJS front end.
+The front end is an observatory, it sends no orders. Simulated
+special relativity: each ship has its own proper time, and machines
+see each other with the light delay.
 
-## Status
+## Where it stands
 
-Active exploration. ~16k lines of Rust, clippy pedantic at
-`-D warnings`, logbook kept commit by commit.
+The world dies. Measured on a bench of ten universes: at 60 simulated
+hours it no longer dies, at 180 hours it still does. Every lap of the
+loop is a measurement, not a fix: replay a seed, read the counters
+(dry machines, wrecks, births), reopen the issue.
+
+![The bridge in motion](/portfolio/dev/lab/lightfall/bridge.webm)
+
