@@ -3,3 +3,5 @@ lang: md
 order: 13
 path: /portfolio/en/dev/projects/yti/README.md
 locale: en
+title: "Yorkshire Technologies Incorporated"
+description: "Retro showcase site, a 2004 web mockup and proud of it. Zero framework, zero rendering dependency. A two-person project."

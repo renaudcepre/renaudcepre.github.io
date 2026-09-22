@@ -3,3 +3,5 @@ lang: md
 order: 17
 path: /portfolio/en/dev/lab/lightfall.md
 locale: en
+title: "Lightfall"
+description: "Full-emergent space simulation, 2D pixel art, slow. No player: machines that mine, refine and build, and a spectator."

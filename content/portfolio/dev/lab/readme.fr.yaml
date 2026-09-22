@@ -3,3 +3,5 @@ lang: md
 order: 15
 path: /portfolio/fr/dev/lab/README.md
 locale: fr
+title: "Le laboratoire"
+description: "Explorations non finies : simulations émergentes, grilles hexagonales, graphes et agents. Rien ici n'est fini."

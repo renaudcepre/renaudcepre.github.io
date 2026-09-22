@@ -3,3 +3,5 @@ lang: md
 order: 16
 path: /portfolio/fr/dev/lab/thalweg.md
 locale: fr
+title: "thalweg"
+description: "Monde géophysique émergent sur grille hexagonale, en Rust. Des règles locales sur une cellule et ses six voisines, et des rivières et des lacs qui émergent."

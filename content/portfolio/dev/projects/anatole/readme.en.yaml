@@ -3,3 +3,5 @@ lang: md
 order: 11
 path: /portfolio/en/dev/projects/anatole/README.md
 locale: en
+title: "Anatole"
+description: "Spaced-repetition flashcards, live at app-anatole.fr. FSRS scheduling, Capacitor shell with local notifications. Formerly jeveuxmonbrevet."

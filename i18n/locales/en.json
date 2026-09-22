@@ -1,7 +1,8 @@
 {
   "meta": {
     "title": "Renaud — Python Developer",
-    "description": "Portfolio"
+    "description": "Portfolio of Renaud Cepre, Python developer: backend, testing and LLM evals, emergent simulations, electronic music.",
+    "ogImageAlt": "A terminal-style portfolio: Renaud Cepre, Python developer"
   },
   "status": {
     "normal": "NORMAL",

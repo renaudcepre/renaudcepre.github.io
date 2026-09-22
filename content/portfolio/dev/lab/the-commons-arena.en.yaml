@@ -3,3 +3,5 @@ lang: md
 order: 19
 path: /portfolio/en/dev/lab/the-commons-arena.md
 locale: en
+title: "The Commons Arena"
+description: "Game theory simulator: AI agents compete in a public goods game with dynamic economics."

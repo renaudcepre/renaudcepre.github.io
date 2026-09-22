@@ -118,7 +118,7 @@ onUnmounted(() => {
   >
     <!-- Header -->
     <div :style="{ color: C.blue, marginBottom: '4px' }">
-      ╭─ <span :style="{ color: C.green, fontWeight: 700 }">{{ albumData.title }}</span> <span :style="{ color: C.comment }">─ {{ albumData.type }}, {{ albumData.year }}</span>
+      ╭─ <h1 :style="{ display: 'inline', fontSize: 'inherit', color: C.green, fontWeight: 700 }">{{ albumData.title }}</h1> <span :style="{ color: C.comment }">─ {{ albumData.type }}, {{ albumData.year }}</span>
     </div>
     <div :style="{ color: C.blue }">
       │
@@ -193,7 +193,7 @@ onUnmounted(() => {
     }"
   >
     <div :style="{ color: C.blue, marginBottom: '4px' }">
-      ╭─ <span :style="{ color: C.green, fontWeight: 700 }">{{ albumData.title }}</span> <span :style="{ color: C.comment }">─ {{ albumData.type }}, {{ albumData.year }}</span>
+      ╭─ <h1 :style="{ display: 'inline', fontSize: 'inherit', color: C.green, fontWeight: 700 }">{{ albumData.title }}</h1> <span :style="{ color: C.comment }">─ {{ albumData.type }}, {{ albumData.year }}</span>
     </div>
     <div :style="{ color: C.blue }">
       │

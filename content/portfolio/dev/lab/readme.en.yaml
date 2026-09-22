@@ -3,3 +3,5 @@ lang: md
 order: 15
 path: /portfolio/en/dev/lab/README.md
 locale: en
+title: "The lab"
+description: "Unfinished explorations: emergent simulations, hex grids, graphs and agents. Nothing in here is done."

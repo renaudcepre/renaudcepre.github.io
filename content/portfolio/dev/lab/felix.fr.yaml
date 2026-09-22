@@ -3,3 +3,5 @@ lang: md
 order: 18
 path: /portfolio/fr/dev/lab/felix.md
 locale: fr
+title: "Felix"
+description: "Assistant de continuité IA pour scénaristes qui travaillent sur des récits complexes, multi-époques. Graphe de connaissances Neo4j, en pause."

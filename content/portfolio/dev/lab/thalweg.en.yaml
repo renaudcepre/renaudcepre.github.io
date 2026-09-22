@@ -3,3 +3,5 @@ lang: md
 order: 16
 path: /portfolio/en/dev/lab/thalweg.md
 locale: en
+title: "thalweg"
+description: "An emergent geophysical world on a hex grid, in Rust. Local rules over a cell and its six neighbours, and rivers, lakes and seasons that emerge."

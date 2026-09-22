@@ -1,3 +1,56 @@
+## 2026-09-22 — fix(seo): titres, headings, hreflang, racine cassée
+
+Passe SEO complète (issue #1), après une review a11y/SEO qui a ouvert trois
+issues. Tout mesuré sur le build prerendu, pas sur le code.
+
+**Le pire, trouvé en cours de route** : `/` était un meta-refresh vers `/en`,
+et `/en` n'était pas prerendu. Donc la racine du domaine renvoyait un 404
+GitHub Pages. Personne ne l'avait vu parce qu'on arrive toujours sur le site
+par une URL complète. Corrigé en trois temps : `/en` et `/fr` ajoutés au
+prerender, un hook `prerender:generate` qui remplace le `/index.html` d'i18n
+par un vrai document (titre, description, canonical, hreflang, deux liens
+visibles), et le canonical dérivé du fichier actif plutôt que de `route.path`
+pour que `/en` pointe sur `/en/hello-world.html`.
+
+**Headings** : le renderer markdown sortait `<div class="md-heading md-h1">`.
+Zéro `<h1>` sur 40 pages. Remplacé par de vrais `<h1>`–`<h6>`, le CSS cible
+déjà la classe donc le rendu est pixel pour pixel identique (vérifié en
+capture headless).
+
+**Titres et descriptions** : aucun YAML n'avait `title`/`description` sauf
+`blog/apte.yaml`, donc Nuxt Content inventait depuis le nom de fichier —
+`LightfallFr`, `SkillsEn`, et surtout `ReadmeEn` en titre de quatre pages EN
+différentes. 32 YAML remplis à la main depuis les README, plus `hreflang`
+alternates, `og:image`, `og:locale`, `og:site_name`, `twitter:card` en
+`summary_large_image`. Pour la home j'ai mis `title: ""` : vide est falsy,
+donc le titre retombe sur `meta.title` sans le suffixe redondant.
+
+**og:image** : générée en SVG puis `rsvg-convert`, source gardée dans
+`app/assets/og.svg` (hors `public/`, ce n'est pas un asset servi).
+
+**Pages album vides** : `AudioPlayer` est en `ClientOnly` (il sonde chaque
+piste avec `new Audio()`), donc les six pages `.antres` partaient à
+l'indexation sans un seul mot dans le HTML. Ajout d'un
+`AudioAlbumOutline.vue` en slot `#fallback` : titre en `<h1>`, tracklisting,
+lien. Il liste toutes les pistes de l'album alors que le client n'affiche que
+celles dont le fichier existe — 2 webm sur 11 sont dans le repo. Assumé, le
+tracklisting est factuel.
+
+**Sitemap** : regroupé par fichier avec les `xhtml:link` alternates, et les
+dotfiles (`.card.webm`, `.dashboard_screenshot.webp`) sortis du sitemap et
+passés en `noindex, follow` — quatre pages qui ne contiennent qu'un média.
+`/` sorti aussi, une redirection n'a rien à faire dans un sitemap. 36 URLs.
+Le helper `isHiddenFilename` vit dans `shared/utils/`, appelé des deux côtés
+(page Vue et route nitro) plutôt que dupliqué.
+
+**Pas fait, noté** : le prerender crache deux `ERROR EEXIST mkdir
+.output/public/{en,fr}/hello-world.html` — vérifié par `git stash` + build,
+l'erreur est antérieure à cette passe et le HTML sort quand même. Les lots
+a11y sont les issues #2 (landmarks, navigation clavier, tout est un
+`div @click`) et #3 (contraste sous AA, alt manquants, animation sans garde
+reduced-motion). `pnpm typecheck` sort trois erreurs, toutes préexistantes et
+dans des fichiers non touchés.
+
 ## 2026-09-22 — content: remise à jour des projets perso (apte, Anatole, thalweg, Lightfall, YTI)
 
 Dernier commit de contenu le 25/06, tout ce qui a bougé depuis juillet

@@ -3,3 +3,5 @@ lang: md
 order: 2
 path: /portfolio/fr/dev/skills.md
 locale: fr
+title: "Compétences"
+description: "Python en mode strict, tests et évals LLM, backends FastAPI et Celery, Kubernetes, et un niveau débutant en Rust."

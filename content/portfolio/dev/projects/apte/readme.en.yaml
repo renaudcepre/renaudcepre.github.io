@@ -3,3 +3,5 @@ lang: md
 order: 8
 path: /portfolio/en/dev/projects/apte/README.md
 locale: en
+title: "apte"
+description: "Tests and LLM evals in one async-first framework for Python 3.10+. Explicit DI, native concurrency, smart scoping. Formerly ProTest."

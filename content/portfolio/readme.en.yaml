@@ -3,3 +3,5 @@ lang: html
 order: 1
 path: /portfolio/en/hello-world.html
 locale: en
+title: ""
+description: "Python developer, strictly typed and test-oriented. Backend systems, LLM evals, and electronic music as Antres 808."

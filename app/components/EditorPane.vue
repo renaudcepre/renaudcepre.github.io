@@ -24,7 +24,9 @@ mdRenderer.heading = function ({ tokens, depth }) {
   const colors = [C.green, C.magenta, C.cyan, C.yellow, C.blue, C.func]
   const color = colors[depth - 1] || C.fg
   const content = this.parser.parseInline(tokens)
-  return `<div class="md-heading md-h${depth}" style="color:${color}">${content}</div>`
+  // Real heading tags: the .md-heading class keeps the flat look, but screen
+  // readers and crawlers get the document outline.
+  return `<h${depth} class="md-heading md-h${depth}" style="color:${color}">${content}</h${depth}>`
 }
 
 mdRenderer.image = function ({ href, text }) {
@@ -264,6 +266,9 @@ function handleInternalClick(e: MouseEvent) {
         <!-- ClientOnly: probes track availability via new Audio(), a browser-only API -->
         <ClientOnly v-if="isAudio && renderedMode">
           <AudioPlayer :content="data.content" />
+          <template #fallback>
+            <AudioAlbumOutline :content="data.content" />
+          </template>
         </ClientOnly>
 
         <!-- Video mode -->

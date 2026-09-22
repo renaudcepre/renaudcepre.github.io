@@ -2,3 +2,5 @@ filename: dev/projects/apte/example.py
 lang: py
 order: 9
 path: /portfolio/dev/projects/apte/example.py
+title: "apte, example.py"
+description: "A short apte test file: async tests, fixtures and an LLM eval running in the same engine."

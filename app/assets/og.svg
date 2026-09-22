@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#1e1e2e"/>
+  <rect x="0" y="0" width="1200" height="34" fill="#181825"/>
+  <rect x="0" y="0" width="340" height="34" fill="#1e1e2e"/>
+  <text x="20" y="23" font-family="Menlo, monospace" font-size="16" fill="#cdd6f4">1:hello-world.html</text>
+  <g font-family="Menlo, monospace" font-size="30" fill="#45475a">
+    <text x="64" y="470">~</text><text x="64" y="512">~</text><text x="64" y="554">~</text>
+  </g>
+  <text x="64" y="200" font-family="Menlo, monospace" font-size="70" font-weight="bold" fill="#a6e3a1">Renaud Cepre</text>
+  <text x="64" y="270" font-family="Menlo, monospace" font-size="30" fill="#6c7086">developer &#183; audio enthusiast</text>
+  <text x="64" y="360" font-family="Menlo, monospace" font-size="30" fill="#cdd6f4">Python backend, strictly typed, test-oriented.</text>
+  <text x="64" y="404" font-family="Menlo, monospace" font-size="30" fill="#cdd6f4">Emergent simulations. Electronic music as Antres 808.</text>
+  <rect x="0" y="596" width="1200" height="34" fill="#a6e3a1"/>
+  <text x="20" y="619" font-family="Menlo, monospace" font-size="17" fill="#1e1e2e">renaudcepre.github.io</text>
+</svg>

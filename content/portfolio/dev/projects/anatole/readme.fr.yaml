@@ -3,3 +3,5 @@ lang: md
 order: 11
 path: /portfolio/fr/dev/projects/anatole/README.md
 locale: fr
+title: "Anatole"
+description: "Flashcards à répétition espacée, en ligne sur app-anatole.fr. Planification FSRS, coque Capacitor avec notifications locales. Anciennement jeveuxmonbrevet."

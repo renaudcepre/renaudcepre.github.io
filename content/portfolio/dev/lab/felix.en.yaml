@@ -3,3 +3,5 @@ lang: md
 order: 18
 path: /portfolio/en/dev/lab/felix.md
 locale: en
+title: "Felix"
+description: "AI-powered continuity assistant for screenwriters working on complex, multi-era narratives. Neo4j knowledge graph, paused."

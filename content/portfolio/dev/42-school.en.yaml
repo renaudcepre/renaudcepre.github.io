@@ -3,3 +3,5 @@ lang: md
 order: 20
 path: /portfolio/en/dev/42-school.md
 locale: en
+title: "42 School, C and C++ projects"
+description: "Low-level projects from 42 Lyon: a malloc implementation, Corewar, an abstract VM, ft_ls, Lem-in and Snow Crash."

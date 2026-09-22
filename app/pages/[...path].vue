@@ -3,7 +3,7 @@ import { C } from '~/utils/portfolio'
 
 definePageMeta({ key: 'main' })
 
-const { t, locale } = useI18n()
+const { t, locale, locales } = useI18n()
 const route = useRoute()
 const { public: { siteUrl } } = useRuntimeConfig()
 
@@ -15,21 +15,42 @@ const { activeFile, openTabs, showNetrw, loaded, openFile } = usePortfolioNaviga
 
 const activeMeta = computed(() => filesMap.value[activeFile.value])
 const pageTitle = computed(() => activeMeta.value?.title ? `${activeMeta.value.title} · ${t('meta.title')}` : t('meta.title'))
-const pageDescription = computed(() => activeMeta.value?.description ?? t('meta.description'))
-const canonicalUrl = computed(() => `${siteUrl}${route.path}`)
+const pageDescription = computed(() => activeMeta.value?.description || t('meta.description'))
+const ogImage = `${siteUrl}/og.png`
+
+// Built from the active file rather than route.path: /en and /en/hello-world.html
+// serve the same page, and only the second one should be the canonical.
+const canonicalUrl = computed(() => `${siteUrl}/${locale.value}/${activeFile.value}`)
+const isHiddenFile = computed(() => isHiddenFilename(activeFile.value))
+
+const alternates = computed(() => {
+  const codes = locales.value.map(l => typeof l === 'string' ? l : l.code)
+  return [...codes, 'x-default'].map(code => ({
+    rel: 'alternate',
+    hreflang: code,
+    href: `${siteUrl}/${code === 'x-default' ? 'en' : code}/${activeFile.value}`
+  }))
+})
 
 useHead({
   htmlAttrs: { lang: () => locale.value },
   title: pageTitle,
   meta: [
     { name: 'description', content: pageDescription },
+    { name: 'robots', content: () => isHiddenFile.value ? 'noindex, follow' : 'index, follow' },
+    { property: 'og:site_name', content: () => t('meta.title') },
     { property: 'og:title', content: pageTitle },
     { property: 'og:description', content: pageDescription },
     { property: 'og:type', content: () => activeMeta.value?.title ? 'article' : 'website' },
     { property: 'og:url', content: canonicalUrl },
-    { name: 'twitter:card', content: 'summary' }
+    { property: 'og:locale', content: () => locale.value === 'fr' ? 'fr_FR' : 'en_US' },
+    { property: 'og:image', content: ogImage },
+    { property: 'og:image:width', content: '1200' },
+    { property: 'og:image:height', content: '630' },
+    { property: 'og:image:alt', content: () => t('meta.ogImageAlt') },
+    { name: 'twitter:card', content: 'summary_large_image' }
   ],
-  link: [{ rel: 'canonical', href: canonicalUrl }]
+  link: () => [{ rel: 'canonical', href: canonicalUrl.value }, ...alternates.value]
 })
 useScrambleHover()
 

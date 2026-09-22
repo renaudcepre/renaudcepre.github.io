@@ -3,3 +3,5 @@ lang: md
 order: 19
 path: /portfolio/fr/dev/lab/the-commons-arena.md
 locale: fr
+title: "The Commons Arena"
+description: "Simulateur de théorie des jeux : des agents IA s'affrontent dans un jeu de biens publics à économie dynamique."

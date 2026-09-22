@@ -3,3 +3,5 @@ lang: md
 order: 3
 path: /portfolio/fr/dev/experience.md
 locale: fr
+title: "Expérience"
+description: "Backend Python chez Araiko sur une plateforme de connaissances augmentée par IA : analytics, tuning Celery et Kubernetes, pipeline média, évals LLM."

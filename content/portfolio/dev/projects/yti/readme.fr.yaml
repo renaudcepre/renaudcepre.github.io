@@ -3,3 +3,5 @@ lang: md
 order: 13
 path: /portfolio/fr/dev/projects/yti/README.md
 locale: fr
+title: "Yorkshire Technologies Incorporated"
+description: "Site vitrine rétro, maquette web de 2004 assumée. Zéro framework, zéro dépendance de rendu. Un projet à deux."
