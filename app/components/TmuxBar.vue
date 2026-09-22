@@ -43,9 +43,14 @@ onMounted(() => {
     }"
   >
     <div :style="{ display: 'flex', alignItems: 'center', height: '100%' }">
-      <span
+      <button
         v-if="isMobile"
+        type="button"
+        :aria-label="$t('a11y.toggleExplorer')"
+        :aria-expanded="!!showNetrw"
         :style="{
+          border: 'none',
+          font: 'inherit',
           background: C.statusBg,
           color: C.green,
           padding: '0 12px',
@@ -57,7 +62,7 @@ onMounted(() => {
           cursor: 'pointer'
         }"
         @click="emit('toggleNetrw')"
-      >≡</span>
+      >≡</button>
       <a
         href="https://github.com/renaudcepre"
         target="_blank"
@@ -71,10 +76,10 @@ onMounted(() => {
     </div>
     <span
       v-if="!isMobile"
+      aria-hidden="true"
       :style="{
         color: C.bg,
         fontStyle: 'italic',
-        opacity: 0.7,
         overflow: 'hidden',
         textOverflow: 'ellipsis',
         whiteSpace: 'nowrap',
@@ -86,14 +91,26 @@ onMounted(() => {
     <div :style="{ display: 'flex', alignItems: 'center', gap: '12px', padding: '0 8px' }">
       <NuxtLink
         :to="switchLocalePath(locale === 'en' ? 'fr' : 'en')"
-        :style="{ cursor: 'pointer', opacity: 0.7, color: C.bg, textDecoration: 'none', fontWeight: 700 }"
+        :aria-label="$t('a11y.switchLanguage')"
+        :style="{ cursor: 'pointer', color: C.bg, textDecoration: 'none', fontWeight: 700 }"
       >{{ locale === 'en' ? 'FR' : 'EN' }}</NuxtLink>
-      <span
-        :style="{ cursor: 'pointer', opacity: 0.7 }"
+      <button
+        type="button"
+        :aria-label="$t('a11y.cycleTheme', { theme: themeName })"
+        :style="{
+          border: 'none',
+          font: 'inherit',
+          background: 'transparent',
+          color: C.bg,
+          padding: 0,
+          cursor: 'pointer'
+        }"
         :title="$t('tmux.themePrefix') + themeName + ' ' + $t('tmux.shortcut')"
         @click="emit('cycleTheme')"
-      >{{ themeName }}</span>
-      <ClientOnly>{{ currentTime }}</ClientOnly>
+      >{{ themeName }}</button>
+      <span aria-hidden="true">
+        <ClientOnly>{{ currentTime }}</ClientOnly>
+      </span>
     </div>
   </div>
 </template>

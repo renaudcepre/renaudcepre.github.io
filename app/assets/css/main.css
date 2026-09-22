@@ -16,11 +16,6 @@
 
 html { touch-action: manipulation; }
 
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
-}
-
 * {
   margin: 0;
   padding: 0;
@@ -51,7 +46,14 @@ html { touch-action: manipulation; }
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: holo-shift 6s linear infinite;
+}
+
+/* Keep the gradient/background-clip above unconditional: dropping the whole
+   rule under this query would make the text transparent (no fill) and disappear. */
+@media (prefers-reduced-motion: no-preference) {
+  .holo-text {
+    animation: holo-shift 6s linear infinite;
+  }
 }
 
 a, [style*="cursor: pointer"] {
@@ -60,4 +62,15 @@ a, [style*="cursor: pointer"] {
 
 [data-resize-handle] {
   cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='12' viewBox='0 0 16 12'%3E%3Cpath d='M0 4h2v2H0zM2 2h2v2H2zM4 0h2v2H4zM4 10h2v2H4zM2 8h2v2H2zM14 4h2v2h-2zM12 2h2v2h-2zM10 0h2v2h-2zM10 10h2v2h-2zM12 8h2v2h-2zM6 4h4v2H6z' fill='%23a0a0a0'/%3E%3Cpath d='M4 2h2v2H4zM4 8h2v2H4zM0 6h6v2H0zM10 2h2v2h-2zM10 8h2v2h-2zM10 6h6v2h-6z' fill='black'/%3E%3C/svg%3E") 8 6, col-resize !important;
+}
+
+button {
+  font-family: inherit;
+  cursor: inherit;
+}
+
+/* Inset so the outline stays within the 19-21px vim bars instead of clipping. */
+:focus-visible {
+  outline: 2px solid var(--c-cursor, #b4befe);
+  outline-offset: -2px;
 }

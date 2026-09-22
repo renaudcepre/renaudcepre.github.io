@@ -20,6 +20,41 @@ watch(playing, (val) => {
 
 const mdRenderer = new Renderer()
 
+// Values below come from static repo markdown, but they still land in an HTML
+// attribute string, so escape the characters that could break out of it.
+function escapeHtmlAttr(str: string): string {
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/"/g, '&quot;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+}
+
+// Shields.io badge URLs encode "<label>-<message>-<color>" in the path. The markdown
+// alt text for these is usually just "Status"/"Github"/etc, so derive a real alt from
+// the URL instead. A literal "-" in a segment is escaped as "--"; falls back to the
+// markdown alt when the URL isn't a recognizable shields.io badge or parsing fails.
+function shieldsBadgeAlt(href: string, fallback: string): string {
+  const match = /^https:\/\/img\.shields\.io\/badge\/([^?]+)/.exec(href)
+  const path = match?.[1]
+  if (!path) return escapeHtmlAttr(fallback)
+  try {
+    // Placeholder for an escaped "--" so splitting on "-" doesn't treat it as a
+    // segment separator; must run before the "_" (space) and % decoding below.
+    const ESCAPED_DASH = '\u0000'
+    const parts = path.replace(/--/g, ESCAPED_DASH).split('-')
+    if (parts.length < 3) return escapeHtmlAttr(fallback)
+    parts.pop() // color, unused in the alt text
+    const label = parts.shift()!
+    const message = parts.join('-')
+    const decode = (segment: string) =>
+      decodeURIComponent(segment.replace(/_/g, ' ')).replace(new RegExp(ESCAPED_DASH, 'g'), '-')
+    return escapeHtmlAttr(`${decode(label)}: ${decode(message)}`)
+  } catch {
+    return escapeHtmlAttr(fallback)
+  }
+}
+
 mdRenderer.heading = function ({ tokens, depth }) {
   const colors = [C.green, C.magenta, C.cyan, C.yellow, C.blue, C.func]
   const color = colors[depth - 1] || C.fg
@@ -31,13 +66,15 @@ mdRenderer.heading = function ({ tokens, depth }) {
 
 mdRenderer.image = function ({ href, text }) {
   if (/\.(webm|mp4|mov|ogg)$/i.test(href)) {
-    return `<video src="${href}" controls loop muted playsinline></video>`
+    // <video> has no alt attribute; carry the markdown text as aria-label instead.
+    const ariaLabel = text ? ` aria-label="${escapeHtmlAttr(text)}"` : ''
+    return `<video src="${href}" controls loop muted playsinline${ariaLabel}></video>`
   }
   const isBadge = /badge|shields\.io|codecov\.io.*badge|github\.com.*badge/i.test(href)
   if (isBadge) {
-    return `<img class="md-badge" src="${href}" alt="${text || ''}" />`
+    return `<img class="md-badge" src="${href}" alt="${shieldsBadgeAlt(href, text || '')}" />`
   }
-  return `<img src="${href}" alt="${text || ''}" />`
+  return `<img src="${href}" alt="${escapeHtmlAttr(text || '')}" />`
 }
 
 mdRenderer.blockquote = function ({ tokens }) {
@@ -94,10 +131,13 @@ mdRenderer.em = function ({ tokens }) {
 
 const props = defineProps<{
   file: string
-  filesMap: Record<string, { lang: string, content: string }>
+  filesMap: Record<string, { lang: string, content: string, title?: string, description?: string }>
 }>()
 
 const data = computed(() => props.filesMap[props.file])
+// The filename ("dev/projects/anatole/.dashboard_screenshot.webp") says nothing to a
+// screen reader; prefer the SEO description/title from the portfolio entry.
+const mediaAltText = computed(() => data.value?.description || data.value?.title || props.file)
 const isImage = computed(() => data.value?.lang === 'img')
 const isVideo = computed(() => data.value?.lang === 'video')
 const isAnsi = computed(() => data.value?.lang === 'ansi')
@@ -216,8 +256,12 @@ function handleInternalClick(e: MouseEvent) {
         userSelect: 'none'
       }"
     >
-      <span
+      <button
+        type="button"
+        :aria-pressed="!renderedMode"
         :style="{
+          border: 'none',
+          font: 'inherit',
           padding: '0 6px',
           height: '100%',
           display: 'flex',
@@ -228,9 +272,13 @@ function handleInternalClick(e: MouseEvent) {
           color: !renderedMode ? C.blue : C.bg
         }"
         @click="renderedMode = false"
-      >{{ $t('editor.raw') }}{{ !renderedMode ? '*' : '' }}</span>
-      <span
+      >{{ $t('editor.raw') }}{{ !renderedMode ? '*' : '' }}</button>
+      <button
+        type="button"
+        :aria-pressed="renderedMode"
         :style="{
+          border: 'none',
+          font: 'inherit',
           padding: '0 6px',
           height: '100%',
           display: 'flex',
@@ -241,7 +289,7 @@ function handleInternalClick(e: MouseEvent) {
           color: renderedMode ? C.blue : C.bg
         }"
         @click="renderedMode = true"
-      >{{ $t('editor.render') }}{{ renderedMode ? '*' : '' }}</span>
+      >{{ $t('editor.render') }}{{ renderedMode ? '*' : '' }}</button>
     </div>
 
     <div :style="{ flex: 1, position: 'relative', overflow: 'hidden' }">
@@ -286,6 +334,7 @@ function handleInternalClick(e: MouseEvent) {
             :src="data.content.trim()"
             controls
             loop
+            :aria-label="mediaAltText"
             :style="{ maxWidth: '100%', maxHeight: '100%', borderRadius: '4px' }"
           />
         </div>
@@ -303,7 +352,7 @@ function handleInternalClick(e: MouseEvent) {
         >
           <img
             :src="data.content.trim()"
-            :alt="file"
+            :alt="mediaAltText"
             :style="{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain', borderRadius: '4px' }"
           >
         </div>

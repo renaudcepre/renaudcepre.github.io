@@ -14,17 +14,17 @@ const progress = computed(() => {
   return (currentTime.value / duration.value) * 100
 })
 
-function onSeek(e: MouseEvent) {
-  const bar = e.currentTarget as HTMLElement
-  const rect = bar.getBoundingClientRect()
-  const ratio = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width))
-  seek(ratio)
+function onInputSeek(e: Event) {
+  const target = e.target as HTMLInputElement
+  seek(Number(target.value) / 100)
 }
 </script>
 
 <template>
   <div
     v-if="track"
+    role="region"
+    :aria-label="$t('a11y.audioPlayer')"
     :style="{
       height: '24px',
       background: C.statusBg,
@@ -51,21 +51,49 @@ function onSeek(e: MouseEvent) {
         gap: '6px'
       }"
     >
-      <span
+      <button
+        type="button"
         data-no-scramble
-        :style="{ cursor: 'pointer' }"
+        :aria-label="$t('a11y.previousTrack')"
+        :style="{
+          border: 'none',
+          font: 'inherit',
+          background: 'transparent',
+          color: C.bg,
+          padding: 0,
+          cursor: 'pointer'
+        }"
         @click="skipPrev"
-      >⏮</span>
-      <span
+      >⏮</button>
+      <button
+        type="button"
         data-no-scramble
-        :style="{ cursor: 'pointer', fontSize: '11px' }"
+        :aria-label="playing ? $t('a11y.pause') : $t('a11y.play')"
+        :style="{
+          border: 'none',
+          font: 'inherit',
+          fontSize: '11px',
+          background: 'transparent',
+          color: C.bg,
+          padding: 0,
+          cursor: 'pointer'
+        }"
         @click="togglePlay"
-      >{{ playing ? '⏸' : '▶' }}</span>
-      <span
+      >{{ playing ? '⏸' : '▶' }}</button>
+      <button
+        type="button"
         data-no-scramble
-        :style="{ cursor: 'pointer' }"
+        :aria-label="$t('a11y.nextTrack')"
+        :style="{
+          border: 'none',
+          font: 'inherit',
+          background: 'transparent',
+          color: C.bg,
+          padding: 0,
+          cursor: 'pointer'
+        }"
         @click="skipNext"
-      >⏭</span>
+      >⏭</button>
     </span>
 
     <!-- Track info -->
@@ -73,39 +101,50 @@ function onSeek(e: MouseEvent) {
       <span :style="{ color: C.green }">{{ track.title }}</span>
       <span
         v-if="album"
-        :style="{ color: C.comment }"
+        :style="{ color: C.statusFg }"
       > · {{ album.title }}</span>
     </span>
 
     <!-- Progress bar -->
-    <div
+    <input
+      type="range"
+      min="0"
+      max="100"
+      step="0.1"
+      class="player-seek"
+      :value="progress"
+      :aria-label="$t('a11y.seek')"
+      :aria-valuetext="formatTime(currentTime)"
       :style="{
+        appearance: 'none',
         flex: 1,
         height: '3px',
-        background: C.visual,
-        cursor: 'pointer',
-        position: 'relative',
         margin: '0 8px',
-        borderRadius: '1px'
+        borderRadius: '1px',
+        cursor: 'pointer',
+        background: `linear-gradient(to right, ${C.green} ${progress}%, ${C.visual} ${progress}%)`
       }"
-      @click="onSeek"
+      @input="onInputSeek"
     >
-      <div
-        :style="{
-          position: 'absolute',
-          left: 0,
-          top: 0,
-          height: '100%',
-          width: progress + '%',
-          background: C.green,
-          borderRadius: '1px'
-        }"
-      />
-    </div>
 
     <!-- Time -->
-    <span :style="{ color: C.comment, padding: '0 8px', whiteSpace: 'nowrap' }">
+    <span :style="{ color: C.statusFg, padding: '0 8px', whiteSpace: 'nowrap' }">
       {{ formatTime(currentTime) }} / {{ formatTime(duration) }}
     </span>
   </div>
 </template>
+
+<style scoped>
+/* Hide the native thumb so the range input reads as a plain 3px progress bar. */
+.player-seek::-webkit-slider-thumb {
+  appearance: none;
+  width: 0;
+  height: 0;
+}
+
+.player-seek::-moz-range-thumb {
+  width: 0;
+  height: 0;
+  border: none;
+}
+</style>

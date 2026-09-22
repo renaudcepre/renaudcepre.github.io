@@ -20,9 +20,9 @@ built on my actual usage.
 "Chill UI / Savage Copy" philosophy: minimal interface, copy that
 doesn't talk down to anyone.
 
-![](dashboard_screenshot.webp)
+![Anatole dashboard: card decks by subject, each showing its card count and how many are due for review](dashboard_screenshot.webp)
 
-![](card.webm)
+![A maths flashcard, question on the front, flipping over to reveal the answer](card.webm)
 
 ## Features
 

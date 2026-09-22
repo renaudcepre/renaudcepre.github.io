@@ -61,7 +61,11 @@ useKeyboardShortcuts({
 </script>
 
 <template>
+  <noscript>
+    <style>.app-root { opacity: 1 !important; }</style>
+  </noscript>
   <div
+    class="app-root"
     :style="{
       width: '100%',
       height: '100vh',
@@ -91,18 +95,19 @@ useKeyboardShortcuts({
         @close="showNetrw = false"
       />
 
-      <div :style="{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden' }">
+      <main :style="{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden' }">
         <EditorPane
           :file="activeFile"
           :files-map="filesMap"
         />
-      </div>
+      </main>
     </div>
     <PlayerBar />
     <StatusLine
       v-if="!isMobile"
       :file="activeFile"
       :files-map="filesMap"
+      aria-hidden="true"
     />
     <TmuxBar
       :is-mobile="isMobile"

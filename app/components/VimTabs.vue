@@ -13,7 +13,8 @@ const emit = defineEmits<{
 </script>
 
 <template>
-  <div
+  <nav
+    :aria-label="$t('a11y.openFiles')"
     :style="{
       display: 'flex',
       background: C.tabBg,
@@ -26,14 +27,20 @@ const emit = defineEmits<{
       overflowX: isMobile ? 'auto' : 'hidden'
     }"
   >
-    <div
+    <button
       v-for="(tab, i) in openTabs"
       :key="tab"
+      type="button"
+      :aria-current="tab === activeFile ? 'page' : undefined"
       :style="{
         padding: isMobile ? '4px 14px' : '2px 10px',
         cursor: 'pointer',
         background: tab === activeFile ? C.tabActive : C.tabBg,
         color: tab === activeFile ? C.fg : C.comment,
+        font: 'inherit',
+        fontSize: '12px',
+        lineHeight: 'inherit',
+        border: 'none',
         borderRight: `1px solid ${C.border}`,
         whiteSpace: 'nowrap',
         flexShrink: 0
@@ -41,7 +48,7 @@ const emit = defineEmits<{
       @click="emit('tabClick', tab)"
     >
       {{ i + 1 }}:{{ tab }}
-    </div>
+    </button>
     <div :style="{ flex: 1 }" />
-  </div>
+  </nav>
 </template>

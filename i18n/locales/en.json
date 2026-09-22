@@ -24,5 +24,20 @@
   "tmux": {
     "themePrefix": "Theme: ",
     "shortcut": "(Ctrl+;)"
+  },
+  "a11y": {
+    "openFiles": "Open files",
+    "fileExplorer": "File explorer",
+    "closeExplorer": "Close file explorer",
+    "toggleExplorer": "Toggle file explorer",
+    "cycleTheme": "Switch theme (current: {theme})",
+    "switchLanguage": "Switch language",
+    "previousTrack": "Previous track",
+    "nextTrack": "Next track",
+    "play": "Play",
+    "pause": "Pause",
+    "seek": "Seek position",
+    "audioPlayer": "Audio player",
+    "playTrack": "Play {title}"
   }
 }

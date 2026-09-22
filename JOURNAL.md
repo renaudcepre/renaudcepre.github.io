@@ -1,3 +1,69 @@
+## 2026-09-22 — fix(a11y): landmarks, clavier, contraste, alt
+
+Issues #2 et #3 traitées en une passe, en quatre lots pilotés en série
+(Opus conçoit, des Sonnet implémentent). Chaque lot vérifié à la mesure sur
+le build prerendu avant de lancer le suivant : greps sur le HTML, ratios
+recalculés de mon côté, et diff pixel des captures headless.
+
+**Lot 1, structure et clavier.** 15 `<button>` là où il n'y avait que des
+`div @click`, 2 `<nav>`, 1 `<main>`, `aria-current` sur l'onglet actif,
+`aria-expanded` sur les dossiers de l'arbre. `:focus-visible` global qui
+suit le thème (il n'y avait aucun style de focus). `opacity: 0` du fade
+d'hydratation neutralisé par un `<noscript>` plutôt que supprimé : le
+fondu masque un vrai reflow, seul le cas sans JS était cassé.
+
+**Lot 2, contraste.** `comment` et `bqText` remontés sur one-dark,
+catppuccin et gruvbox, `gutter` sur les cinq thèmes. Le cas que la review
+avait raté : sur hyperkitch, `statusBg` est un magenta vif et la status
+line y posait du `comment` rose, ratio 1.36. La cause n'était pas la
+couleur mais l'usage : `comment` est pensé pour le fond de l'éditeur et
+était réutilisé tel quel sur les barres. Correction à la source, la status
+line et la player bar passent sur `statusFg`. 30 assertions de contraste,
+30 PASS.
+
+**Lot 3, contrôles.** Bascule brut/rendu, menu mobile, thème, boutons du
+lecteur, lignes de pistes. La barre de progression devient un vrai
+`<input type="range">` avec le thumb à 0x0 et un gradient en fond :
+navigation clavier et annonce de position gratuites, visuel identique
+(vérifié en reconstruisant le markup dans une page de test isolée).
+
+**Lot 4, alt et animation.** Les 16 badges annonçaient "Status" sans
+jamais dire quel statut. Plutôt que de corriger 16 markdown à la main,
+l'alt est dérivé de l'URL shields.io (`badge/<label>-<message>-<color>`,
+avec le décodage des `_` et des `--`), fallback sur l'alt du markdown pour
+les badges codecov et GitHub Actions qui ont un autre format. Les `<video>`
+du markdown reçoivent un `aria-label` (une vidéo n'a pas d'`alt`). En mode
+plein écran, l'alt était le chemin du fichier, il vient maintenant de la
+`description` YAML. `.holo-text` passe sous `prefers-reduced-motion:
+no-preference`, en n'y mettant que la ligne `animation` : déplacer toute
+la règle aurait rendu le texte transparent pour ceux qui coupent les
+animations.
+
+**Trouvailles en marge.** Un `font: 'inherit'` placé après `fontSize` dans
+un objet de style JS écrase silencieusement la taille, l'ordre des clés
+vaut l'ordre CSS. `@keyframes blink` était mort depuis un moment,
+supprimé. Le chemin image non-badge du renderer n'échappait pas son alt
+alors que les deux autres le faisaient, aligné.
+
+**Constaté, pas corrigé.** Le sélecteur `a, [style*="cursor: pointer"]` de
+`main.css` ne matche jamais le HTML servi : Vue sérialise `cursor:pointer`
+sans espace en SSR. Le curseur custom ne tient qu'à la normalisation CSSOM
+du navigateur après hydratation. C'était déjà le cas avant cette passe,
+sur tous les éléments cliquables du site.
+
+**Mesures.** Diff pixel avant/après sur une page de référence, 1400x900 :
+5135 px dans les barres et 2368 px dans l'arbre (les changements de
+contraste voulus), 4726 px dans le corps du document, tous sur la barre de
+défilement, dont le thumb suit `gutter`. Le texte du document n'a pas
+bougé d'un pixel.
+
+**Pas fait, noté.** Les erreurs `EEXIST` sur `hello-world.html` pendant le
+prerender et la trentaine d'erreurs `pnpm typecheck` sont toujours là,
+toutes préexistantes, aucune introduite par cette passe. L'arbre de
+fichiers reste une liste de boutons et non un `role="tree"` : les rôles
+d'arbre imposent une gestion de focus complète (flèches, typeahead) qu'on
+ne fait pas ici, et une liste de boutons dans un `<nav>` est honnête.
+
 ## 2026-09-22 — fix(seo): titres, headings, hreflang, racine cassée
 
 Passe SEO complète (issue #1), après une review a11y/SEO qui a ouvert trois

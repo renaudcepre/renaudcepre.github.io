@@ -1,8 +1,10 @@
 export function useKeyboardShortcuts(shortcuts: Record<string, () => void>) {
   onMounted(() => {
     const handler = (e: KeyboardEvent) => {
-      const tag = (e.target as HTMLElement)?.tagName
-      if (tag === 'INPUT' || tag === 'TEXTAREA') return
+      // Buttons now exist (a11y pass): Space must not also fire a shortcut
+      // while it activates the focused control.
+      const target = e.target as HTMLElement
+      if (target?.closest?.('input, textarea, button, a, select, [contenteditable]')) return
 
       const parts: string[] = []
       if (e.ctrlKey) parts.push('Ctrl')

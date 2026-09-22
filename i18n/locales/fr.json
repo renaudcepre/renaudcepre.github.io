@@ -24,5 +24,20 @@
   "tmux": {
     "themePrefix": "Thème : ",
     "shortcut": "(Ctrl+;)"
+  },
+  "a11y": {
+    "openFiles": "Fichiers ouverts",
+    "fileExplorer": "Explorateur de fichiers",
+    "closeExplorer": "Fermer l'explorateur de fichiers",
+    "toggleExplorer": "Afficher ou masquer l'explorateur de fichiers",
+    "cycleTheme": "Changer de thème (actuel : {theme})",
+    "switchLanguage": "Changer de langue",
+    "previousTrack": "Piste précédente",
+    "nextTrack": "Piste suivante",
+    "play": "Lecture",
+    "pause": "Pause",
+    "seek": "Position de lecture",
+    "audioPlayer": "Lecteur audio",
+    "playTrack": "Lire {title}"
   }
 }

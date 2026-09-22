@@ -20,9 +20,9 @@ construit sur mon usage réel.
 Philosophie « UI zen / textes qui piquent » : interface épurée,
 formulations qui ne prennent personne de haut.
 
-![](dashboard_screenshot.webp)
+![Tableau de bord d'Anatole : des paquets de cartes par matière, chacun avec son nombre de cartes et le nombre à réviser](dashboard_screenshot.webp)
 
-![](card.webm)
+![Une carte de révision en maths, question au recto, qui se retourne pour montrer la réponse](card.webm)
 
 ## Fonctionnalités
 

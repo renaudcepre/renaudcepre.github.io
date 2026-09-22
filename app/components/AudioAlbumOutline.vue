@@ -31,9 +31,9 @@ const album = computed<Album | null>(() => {
     }"
   >
     <div :style="{ color: C.blue, marginBottom: '4px' }">
-      ╭─ <h1 :style="{ display: 'inline', fontSize: 'inherit', color: C.green, fontWeight: 700 }">{{ album.title }}</h1> <span :style="{ color: C.comment }">─ {{ album.type }}, {{ album.year }}</span>
+      <span aria-hidden="true">╭─</span> <h1 :style="{ display: 'inline', fontSize: 'inherit', color: C.green, fontWeight: 700 }">{{ album.title }}</h1> <span :style="{ color: C.comment }">─ {{ album.type }}, {{ album.year }}</span>
     </div>
-    <div :style="{ color: C.blue }">
+    <div aria-hidden="true" :style="{ color: C.blue }">
       │
     </div>
     <div
@@ -41,16 +41,16 @@ const album = computed<Album | null>(() => {
       :key="track.file"
       :style="{ display: 'flex', alignItems: 'center', gap: '8px' }"
     >
-      <span :style="{ color: C.blue }">│</span>
-      <span :style="{ width: '24px', textAlign: 'center', color: C.comment }">·</span>
+      <span aria-hidden="true" :style="{ color: C.blue }">│</span>
+      <span aria-hidden="true" :style="{ width: '24px', textAlign: 'center', color: C.comment }">·</span>
       <span :style="{ width: '24px', textAlign: 'right', color: C.gutter }">{{ String(i + 1).padStart(2, '0') }}</span>
       <span :style="{ flex: 1 }">{{ track.title }}</span>
     </div>
-    <div :style="{ color: C.blue, marginTop: '4px' }">
+    <div aria-hidden="true" :style="{ color: C.blue, marginTop: '4px' }">
       │
     </div>
     <div :style="{ color: C.blue }">
-      ╰─<template v-if="album.link"> <a
+      <span aria-hidden="true">╰─</span><template v-if="album.link"> <a
         :href="album.link"
         target="_blank"
         rel="noopener"

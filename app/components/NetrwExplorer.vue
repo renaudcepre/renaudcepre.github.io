@@ -155,8 +155,9 @@ watch(() => props.fileList, (list) => {
 </script>
 
 <template>
-  <div
+  <nav
     v-if="visible"
+    :aria-label="$t('a11y.fileExplorer')"
     :style="isMobile ? {
       position: 'fixed',
       top: '0',
@@ -200,32 +201,40 @@ watch(() => props.fileList, (list) => {
           borderBottom: `1px solid ${C.border}`
         }"
       >
-        <span
+        <button
+          type="button"
+          :aria-label="$t('a11y.closeExplorer')"
           :style="{
             cursor: 'pointer',
             color: C.fg,
+            font: 'inherit',
             fontSize: '20px',
             lineHeight: '1',
-            padding: '4px 8px'
+            padding: '4px 8px',
+            background: 'transparent',
+            border: 'none'
           }"
           @click="emit('close')"
-        >✕</span>
+        >✕</button>
       </div>
-      <div :style="{ padding: '0 10px', color: C.comment, whiteSpace: 'pre' }">
+      <div aria-hidden="true" :style="{ padding: '0 10px', color: C.comment, whiteSpace: 'pre' }">
         " ==========================================
       </div>
-      <div :style="{ padding: '0 10px', color: C.comment, whiteSpace: 'pre' }">
+      <div aria-hidden="true" :style="{ padding: '0 10px', color: C.comment, whiteSpace: 'pre' }">
         "   {{ $t('netrw.title') }}
       </div>
-      <div :style="{ padding: '0 10px', color: C.comment, whiteSpace: 'pre' }">
+      <div aria-hidden="true" :style="{ padding: '0 10px', color: C.comment, whiteSpace: 'pre' }">
         "   {{ $t('netrw.release') }}
       </div>
-      <div :style="{ padding: '0 10px', color: C.comment, whiteSpace: 'pre' }">
+      <div aria-hidden="true" :style="{ padding: '0 10px', color: C.comment, whiteSpace: 'pre' }">
         " ==========================================
       </div>
-      <div
+      <button
         v-for="node in flatTree"
         :key="node.path"
+        type="button"
+        :aria-expanded="node.isDir ? !!expandedDirs[node.path] : undefined"
+        :aria-current="!node.isDir && node.path === activeFile ? 'page' : undefined"
         :style="{
           padding: '0 10px',
           paddingLeft: '10px',
@@ -233,7 +242,12 @@ watch(() => props.fileList, (list) => {
           whiteSpace: 'pre',
           color: entryColor(node),
           background: entryBg(node),
-          userSelect: 'none'
+          userSelect: 'none',
+          border: 'none',
+          font: 'inherit',
+          textAlign: 'left',
+          width: '100%',
+          display: 'block'
         }"
         @click="handleClick(node)"
         @mouseenter="hoveredEntry = node.path"
@@ -245,12 +259,13 @@ watch(() => props.fileList, (list) => {
           :src="node.icon"
           :style="{ width: '10px', height: '10px', marginRight: '4px', verticalAlign: 'middle', imageRendering: 'pixelated', display: 'inline-block' }"
         >{{ node.name }}{{ node.isDir ? '/' : '' }}
-      </div>
+      </button>
     </div>
     <!-- Resize handle -->
     <div
       v-if="!isMobile"
       data-resize-handle
+      aria-hidden="true"
       :style="{
         position: 'absolute',
         top: 0,
@@ -261,5 +276,5 @@ watch(() => props.fileList, (list) => {
       }"
       @mousedown="startResize"
     />
-  </div>
+  </nav>
 </template>

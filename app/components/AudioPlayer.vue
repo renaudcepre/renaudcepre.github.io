@@ -118,17 +118,26 @@ onUnmounted(() => {
   >
     <!-- Header -->
     <div :style="{ color: C.blue, marginBottom: '4px' }">
-      ╭─ <h1 :style="{ display: 'inline', fontSize: 'inherit', color: C.green, fontWeight: 700 }">{{ albumData.title }}</h1> <span :style="{ color: C.comment }">─ {{ albumData.type }}, {{ albumData.year }}</span>
+      <span aria-hidden="true">╭─</span> <h1 :style="{ display: 'inline', fontSize: 'inherit', color: C.green, fontWeight: 700 }">{{ albumData.title }}</h1> <span :style="{ color: C.comment }">─ {{ albumData.type }}, {{ albumData.year }}</span>
     </div>
-    <div :style="{ color: C.blue }">
+    <div aria-hidden="true" :style="{ color: C.blue }">
       │
     </div>
 
     <!-- Tracks - only show available ones -->
-    <div
+    <button
       v-for="(track, filteredIndex) in filteredTracks"
       :key="filteredIndex"
+      type="button"
+      :aria-label="$t('a11y.playTrack', { title: track.title })"
+      :aria-current="isActiveTrack(getOriginalIndex(filteredIndex)) ? 'true' : undefined"
       :style="{
+        border: 'none',
+        font: 'inherit',
+        background: 'transparent',
+        textAlign: 'left',
+        width: '100%',
+        padding: 0,
         display: 'flex',
         alignItems: 'center',
         cursor: 'pointer',
@@ -142,9 +151,10 @@ onUnmounted(() => {
       @mouseenter="hoveredTrack = filteredIndex"
       @mouseleave="hoveredTrack = -1"
     >
-      <span :style="{ color: C.blue }">│</span>
+      <span aria-hidden="true" :style="{ color: C.blue }">│</span>
       <span
         data-no-scramble
+        aria-hidden="true"
         :style="{ width: '24px', textAlign: 'center', color: isActiveTrack(getOriginalIndex(filteredIndex)) && playing ? C.green : hoveredTrack === filteredIndex ? C.green : C.comment }"
       >
         {{ isActiveTrack(getOriginalIndex(filteredIndex)) && playing ? '⏸' : isActiveTrack(getOriginalIndex(filteredIndex)) && !playing ? '▶' : hoveredTrack === filteredIndex ? '▷' : '·' }}
@@ -155,17 +165,17 @@ onUnmounted(() => {
         :style="{ flex: 1, color: isActiveTrack(getOriginalIndex(filteredIndex)) ? C.green : hoveredTrack === filteredIndex ? C.green : C.fg }"
       >{{ track.title }}</span>
       <span :style="{ color: C.gutter, minWidth: '40px', textAlign: 'right' }">{{ durations[getOriginalIndex(filteredIndex)] ? formatTime(durations[getOriginalIndex(filteredIndex)]) : '' }}</span>
-    </div>
+    </button>
 
     <!-- Footer -->
-    <div :style="{ color: C.blue, marginTop: '4px' }">
+    <div aria-hidden="true" :style="{ color: C.blue, marginTop: '4px' }">
       │
     </div>
     <div
       v-if="albumData.link"
       :style="{ color: C.blue }"
     >
-      ╰─ <a
+      <span aria-hidden="true">╰─</span> <a
         :href="albumData.link"
         target="_blank"
         rel="noopener"
@@ -174,12 +184,13 @@ onUnmounted(() => {
     </div>
     <div
       v-else
+      aria-hidden="true"
       :style="{ color: C.blue }"
     >
       ╰─
     </div>
   </div>
-  
+
   <!-- Show message if album exists but has no available audio files -->
   <div
     v-else-if="albumData && !hasAvailableTracks"
@@ -193,22 +204,22 @@ onUnmounted(() => {
     }"
   >
     <div :style="{ color: C.blue, marginBottom: '4px' }">
-      ╭─ <h1 :style="{ display: 'inline', fontSize: 'inherit', color: C.green, fontWeight: 700 }">{{ albumData.title }}</h1> <span :style="{ color: C.comment }">─ {{ albumData.type }}, {{ albumData.year }}</span>
+      <span aria-hidden="true">╭─</span> <h1 :style="{ display: 'inline', fontSize: 'inherit', color: C.green, fontWeight: 700 }">{{ albumData.title }}</h1> <span :style="{ color: C.comment }">─ {{ albumData.type }}, {{ albumData.year }}</span>
     </div>
-    <div :style="{ color: C.blue }">
+    <div aria-hidden="true" :style="{ color: C.blue }">
       │
     </div>
     <div :style="{ color: C.comment, paddingLeft: '8px' }">
-      │ {{ t('audio.noFilesAvailable') }}
+      <span aria-hidden="true">│</span> {{ t('audio.noFilesAvailable') }}
     </div>
-    <div :style="{ color: C.blue, marginTop: '4px' }">
+    <div aria-hidden="true" :style="{ color: C.blue, marginTop: '4px' }">
       │
     </div>
     <div
       v-if="albumData.link"
       :style="{ color: C.blue }"
     >
-      ╰─ <a
+      <span aria-hidden="true">╰─</span> <a
         :href="albumData.link"
         target="_blank"
         rel="noopener"
@@ -217,6 +228,7 @@ onUnmounted(() => {
     </div>
     <div
       v-else
+      aria-hidden="true"
       :style="{ color: C.blue }"
     >
       ╰─

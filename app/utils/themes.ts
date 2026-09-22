@@ -8,15 +8,15 @@ export type ThemeName = keyof typeof THEMES
 
 export const THEMES = {
   'one-dark': {
-    bg: '#0e1019', fg: '#c8c8c8', comment: '#5c6370', keyword: '#c678dd',
+    bg: '#0e1019', fg: '#c8c8c8', comment: '#77808f', keyword: '#c678dd',
     string: '#98c379', func: '#61afef', type: '#e5c07b', number: '#d19a66',
     operator: '#56b6c2', red: '#e06c75', green: '#98c379', yellow: '#e5c07b',
     blue: '#61afef', magenta: '#c678dd', cyan: '#56b6c2', white: '#abb2bf',
-    gray: '#4b5263', gutter: '#3b4048', statusBg: '#21252b', statusFg: '#9da5b4',
+    gray: '#4b5263', gutter: '#5c6470', statusBg: '#21252b', statusFg: '#9da5b4',
     visual: '#3e4452', cursor: '#528bff', border: '#2c313a', netrw: '#13161e',
     tabBg: '#1a1d26', tabActive: '#0e1019',
     codeBg: '#181a24', codeFg: '#abb2bf', codeBlockBg: '#0a0c14',
-    codeBlockBorder: '#61afef44', bqBorder: '#56b6c2', bqText: '#5c6370',
+    codeBlockBorder: '#61afef44', bqBorder: '#56b6c2', bqText: '#77808f',
     bullet: '#c678dd', olNum: '#d19a66', hr: '#3e4452',
     thBg: '#181a24', thFg: '#e5c07b', trEvenBg: '#12141c',
     ansi: {
@@ -27,15 +27,15 @@ export const THEMES = {
     }
   },
   'catppuccin': {
-    bg: '#1e1e2e', fg: '#cdd6f4', comment: '#6c7086', keyword: '#cba6f7',
+    bg: '#1e1e2e', fg: '#cdd6f4', comment: '#82859a', keyword: '#cba6f7',
     string: '#a6e3a1', func: '#89b4fa', type: '#f9e2af', number: '#fab387',
     operator: '#94e2d5', red: '#f38ba8', green: '#a6e3a1', yellow: '#f9e2af',
     blue: '#89b4fa', magenta: '#cba6f7', cyan: '#94e2d5', white: '#bac2de',
-    gray: '#585b70', gutter: '#45475a', statusBg: '#181825', statusFg: '#a6adc8',
+    gray: '#585b70', gutter: '#656883', statusBg: '#181825', statusFg: '#a6adc8',
     visual: '#45475a', cursor: '#b4befe', border: '#313244', netrw: '#181825',
     tabBg: '#181825', tabActive: '#1e1e2e',
     codeBg: '#181825', codeFg: '#a6e3a1', codeBlockBg: '#11111b',
-    codeBlockBorder: '#89b4fa44', bqBorder: '#94e2d5', bqText: '#6c7086',
+    codeBlockBorder: '#89b4fa44', bqBorder: '#94e2d5', bqText: '#82859a',
     bullet: '#cba6f7', olNum: '#fab387', hr: '#45475a',
     thBg: '#181825', thFg: '#f9e2af', trEvenBg: '#181825',
     ansi: {
@@ -46,15 +46,15 @@ export const THEMES = {
     }
   },
   'gruvbox': {
-    bg: '#282828', fg: '#ebdbb2', comment: '#928374', keyword: '#fb4934',
+    bg: '#282828', fg: '#ebdbb2', comment: '#9a8c7e', keyword: '#fb4934',
     string: '#b8bb26', func: '#83a598', type: '#fabd2f', number: '#d3869b',
     operator: '#8ec07c', red: '#fb4934', green: '#b8bb26', yellow: '#fabd2f',
     blue: '#83a598', magenta: '#d3869b', cyan: '#8ec07c', white: '#ebdbb2',
-    gray: '#665c54', gutter: '#504945', statusBg: '#1d2021', statusFg: '#a89984',
+    gray: '#665c54', gutter: '#796f69', statusBg: '#1d2021', statusFg: '#a89984',
     visual: '#504945', cursor: '#fe8019', border: '#3c3836', netrw: '#1d2021',
     tabBg: '#1d2021', tabActive: '#282828',
     codeBg: '#1d2021', codeFg: '#b8bb26', codeBlockBg: '#1a1a1a',
-    codeBlockBorder: '#83a59844', bqBorder: '#8ec07c', bqText: '#928374',
+    codeBlockBorder: '#83a59844', bqBorder: '#8ec07c', bqText: '#9a8c7e',
     bullet: '#d3869b', olNum: '#fe8019', hr: '#504945',
     thBg: '#1d2021', thFg: '#fabd2f', trEvenBg: '#1d2021',
     ansi: {
@@ -69,7 +69,7 @@ export const THEMES = {
     string: '#032f62', func: '#6f42c1', type: '#e36209', number: '#005cc5',
     operator: '#d73a49', red: '#cb2431', green: '#22863a', yellow: '#b08800',
     blue: '#005cc5', magenta: '#6f42c1', cyan: '#3192aa', white: '#24292e',
-    gray: '#959da5', gutter: '#e1e4e8', statusBg: '#f1f3f5', statusFg: '#586069',
+    gray: '#959da5', gutter: '#8591a2', statusBg: '#f1f3f5', statusFg: '#586069',
     visual: '#c8e1ff', cursor: '#005cc5', border: '#e1e4e8', netrw: '#f6f8fa',
     tabBg: '#f1f3f5', tabActive: '#ffffff',
     codeBg: '#f6f8fa', codeFg: '#24292e', codeBlockBg: '#f0f2f4',
@@ -88,7 +88,7 @@ export const THEMES = {
     string: '#00ff88', func: '#00e5ff', type: '#ffaa00', number: '#ff6fff',
     operator: '#ff0055', red: '#ff0040', green: '#39ff14', yellow: '#fff01f',
     blue: '#00bfff', magenta: '#ff00ff', cyan: '#00ffcc', white: '#ffffff',
-    gray: '#884499', gutter: '#2a0044', statusBg: '#ff00aa', statusFg: '#ffffff',
+    gray: '#884499', gutter: '#8a00e0', statusBg: '#ff00aa', statusFg: '#120024',
     visual: '#44006688', cursor: '#ff0055', border: '#ff00ff55', netrw: '#0a0018',
     tabBg: '#1a0033', tabActive: '#120024',
     codeBg: '#0a0018', codeFg: '#39ff14', codeBlockBg: '#08001a',
