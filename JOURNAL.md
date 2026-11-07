@@ -1,3 +1,14 @@
+# Journal de bord
+
+## 2026-11-07 — feat(lab): fiche hospital-manager-tycoon
+
+Fiche FR + EN dans `dev/lab/` (order 18), trame de planning IADE par
+CP-SAT faite du 4 au 6 novembre 2026 et arrêtée : la direction a fait
+son canon à la main. Classée en lab et non en projects : repo privé
+(la doc contient les règles et citations d'une vraie équipe), zéro
+utilisateur. Même ton que hexmap : « l'aveu » que le code est écrit
+par Claude Code, et ce qui permet de dire quand c'est faux.
+
 ## 2026-09-22 — fix(a11y): landmarks, clavier, contraste, alt
 
 Issues #2 et #3 traitées en une passe, en quatre lots pilotés en série
@@ -162,8 +173,6 @@ Ajout de public/google34e621da30da2acf.html pour valider la propriété
 https://renaudcepre.github.io/ dans Search Console (compte Renaud). But :
 soumettre le sitemap de la doc apte (/apte/sitemap.xml), la propriété racine
 couvre les sous-chemins. Ne jamais supprimer ce fichier, Google revérifie.
-
-# Journal de bord
 
 ## 2026-08-08 — feat(seo): passage en SSG, le site n'était plus une coquille vide pour les robots
 
