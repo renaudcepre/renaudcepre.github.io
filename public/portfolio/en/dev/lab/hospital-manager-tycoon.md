@@ -24,6 +24,8 @@ Three days of work, 4 to 6 November 2026. The rules came in by voice
 message, photos of rosters and e-mails, in three batches that
 contradicted each other a little.
 
+![The 12-week roster, one row per person](/portfolio/dev/lab/hospital-manager-tycoon/roster.webp)
+
 ## The confession
 
 The code is written by Claude Code, driven by me. I could not
@@ -33,6 +35,8 @@ every solution, and an audit writes, for each rule, the tightest
 case as a calculation you can redo by hand. Tests with
 [apte](https://github.com/renaudcepre/apte), 100 % coverage on the pure
 modules, ty in strict mode.
+
+![The audit, rule by rule](/portfolio/dev/lab/hospital-manager-tycoon/audit.webp)
 
 ## What the solver settled
 

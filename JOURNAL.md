@@ -1,5 +1,19 @@
 # Journal de bord
 
+## 2026-11-08 — feat(lab): captures d'écran pour hospital-manager-tycoon
+
+Deux captures fournies par Renaud après coup (la fiche était partie
+sans) : la trame 12 semaines et l'audit règle par règle, converties en
+webp (cwebp q85, 126 et 173 Ko) dans
+`public/portfolio/dev/lab/hospital-manager-tycoon/`. Insérées FR + EN,
+la trame avant « L'aveu », l'audit juste après, puisque c'est lui que
+le texte décrit. Noms des agents fictifs (Big Bang Theory), rien à
+anonymiser.
+
+Au passage, le 08/11 : main local avait divergé d'origin (3 commits du
+22/09 faits depuis le clone `~/dev/renaudcepre-gh-site`). Rebase, conflit
+sur ce journal seulement, deux entrées gardées.
+
 ## 2026-11-07 — feat(lab): fiche hospital-manager-tycoon
 
 Fiche FR + EN dans `dev/lab/` (order 18), trame de planning IADE par

@@ -25,6 +25,8 @@ Trois jours de travail, du 4 au 6 novembre 2026. Les règles sont
 arrivées par vocaux, photos de planning et mails, en trois lots qui
 se contredisaient un peu.
 
+![La trame sur 12 semaines, une ligne par personne](/portfolio/dev/lab/hospital-manager-tycoon/roster.webp)
+
 ## L'aveu
 
 Le code est écrit par Claude Code, dirigé par moi. Je ne saurais pas
@@ -34,6 +36,8 @@ chaque règle sur chaque solution, et un audit écrit pour chaque règle
 le cas le plus serré comme un calcul à refaire à la main. Tests avec
 [apte](https://github.com/renaudcepre/apte), couverture 100 % sur les
 modules purs, ty en strict.
+
+![L'audit, règle par règle](/portfolio/dev/lab/hospital-manager-tycoon/audit.webp)
 
 ## Ce que le solveur a tranché
 
