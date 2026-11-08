@@ -27,7 +27,7 @@ avec un front three.js. Il est embarqué dans
 [le site de Yorkshire Tech](/dev/projects/yti/README.md). Le plan :
 le faire tourner ici aussi.
 
-## L'aveu
+## Comment j'ai bossé
 
 J'ai pas les compétences en physique pour écrire ça, ni en météo, ni
 en érosion. Le code est largement écrit par Claude, dirigé vers les

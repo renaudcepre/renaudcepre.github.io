@@ -26,7 +26,7 @@ a three.js front end. It's embedded in
 [the Yorkshire Tech site](/dev/projects/yti/README.md). The plan: run
 it here too.
 
-## The confession
+## How I worked
 
 I don't have the physics background to write this, nor weather, nor
 erosion. The code is largely written by Claude, steered toward the

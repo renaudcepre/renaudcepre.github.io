@@ -1,5 +1,20 @@
 # Journal de bord
 
+## 2026-11-08 — content(lab): hospital-manager-tycoon relu par Renaud
+
+Relecture de la fiche le jour même, quatre coupes FR + EN, toutes du
+même genre (phrases de couleur ou chutes que Renaud trouve « LLM like ») :
+« Je ne saurais pas réécrire le modèle » (faux : il ne l'a pas fait,
+nuance), « Ce que je sais faire, c'est dire quand c'est faux », « À la
+main, ça se fait en un mois et c'est faux quelque part », les règles
+« arrivées par vocaux », « Le vote devenait une question de
+préférence ». Ajouté à la place, avec ses mots : « J'ai fait les
+recherches et l'état de l'art » (vrai, `docs/etat_de_l_art.md` du
+06/11 côté projet).
+
+Titre « L'aveu » / « The confession » renommé « Comment j'ai bossé » /
+« How I worked », ici et dans thalweg : Renaud, « c'est pas "mal" ».
+
 ## 2026-11-08 — feat(lab): captures d'écran pour hospital-manager-tycoon
 
 Deux captures fournies par Renaud après coup (la fiche était partie
